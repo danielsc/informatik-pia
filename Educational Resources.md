@@ -1,6 +1,8 @@
 ## Python 
-This is the material we used at TEALS
+This is the material we used at TEALS:
+
 - https://tealsk12.github.io/2nd-semester-introduction-to-computer-science/curriculum_map.md.html
+
 [Here are some slides](./TEALS) I modified to match our setup at the school (we used Google Collab as a coding environment).
 ## How LLMs work
 - OpenAI video: https://www.youtube.com/watch?v=X-AWdfSFCHQ
