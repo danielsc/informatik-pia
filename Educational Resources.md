@@ -6,12 +6,13 @@ This is the material we used at TEALS
 - OpenAI video: https://www.youtube.com/watch?v=X-AWdfSFCHQ
 ## Microsoft Classroom Toolkit
 The whole thing is quite Microsoft-Product heavy (M365 Copilot, Edge-Browser), but the main takeaways/teaching goals are good (IMO):
-	- **What is Generative AI**
-	- **Prompt Engineering**
-	- **Fabrications**
-	- **Online Privacy**
-	- **Bias in AI**
-	- **AI Relationships & Mental Health**
+
+- **What is Generative AI**
+- **Prompt Engineering**
+- **Fabrications**
+- **Online Privacy**
+- **Bias in AI**
+- **AI Relationships & Mental Health**
 
 Introduction Video:  https://www.youtube.com/watch?v=dNfTI9HFhdA
 How to use the Toolkit: https://www.youtube.com/watch?v=5ojUY5O2EUI
