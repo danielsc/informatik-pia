@@ -8,7 +8,6 @@
 **Required workstations:** 35 student workstations + 3 spare sets = **38 hardware kits**
 
 ---
-
 # **1. Curriculum Overview**
 
 This curriculum adapts the programming-language content of the TEALS Introduction to Computer Science curriculum to physical computing with the Raspberry Pi Pico.
