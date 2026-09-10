@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Raspberry Pi Pico Active-Low Button and LED Wiring</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+    }
+    body { margin: 0; padding: 24px; color: #172033; background: #eef2f7; }
+    figure { max-width: 1600px; margin: 0 auto; }
+    svg {
+      display: block; width: 100%; height: auto; background: white;
+      border: 1px solid #cbd5e1; border-radius: 14px;
+      box-shadow: 0 8px 30px rgb(15 23 42 / 10%);
+    }
+    figcaption { max-width: 1320px; margin: 14px auto 0; line-height: 1.5; }
+    .netlist {
+      max-width: 1320px; margin: 18px auto 0; padding: 16px 20px;
+      background: white; border: 1px solid #cbd5e1; border-radius: 12px;
+    }
+    .netlist h2 { margin: 0 0 10px; font-size: 1.1rem; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px 10px; text-align: left; border-top: 1px solid #e2e8f0; }
+    th { color: #334155; }
+    code { padding: 0.1em 0.3em; background: #e2e8f0; border-radius: 4px; }
+    @media print {
+      body { padding: 0; background: white; }
+      svg { border: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <figure>
+    <svg viewBox="0 0 1280 760" role="img" aria-labelledby="title description">
+      <title id="title">Raspberry Pi Pico active-low button input and ordinary LED output breadboard wiring</title>
+      <desc id="description">A horizontal Raspberry Pi Pico reads an active-low four-leg tactile button on GP13 with a 10-kilohm pull-up and drives an ordinary red LED from GP15 through 220 ohms. The button straddles the centre channel with each permanent pair crossing it.</desc>
+      <defs>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.2"/>
+        </filter>
+        <filter id="small-shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-opacity="0.25"/>
+        </filter>
+        <pattern id="terminal-holes" width="26" height="27" patternUnits="userSpaceOnUse">
+          <circle cx="13" cy="13.5" r="4.5" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+          <circle cx="13" cy="13.5" r="1.8" fill="#64748b"/>
+        </pattern>
+        <pattern id="pico-pins" x="0" y="-1" width="26" height="27"
+          patternUnits="userSpaceOnUse">
+          <circle cx="13" cy="13.5" r="7" fill="#facc15"
+            stroke="#854d0e" stroke-width="1.5"/>
+          <circle cx="13" cy="13.5" r="3" fill="#1f2937"/>
+        </pattern>
+        <pattern id="gallery-pico-pads" x="0" y="-1" width="26" height="27"
+          patternUnits="userSpaceOnUse">
+          <circle cx="13" cy="13.5" r="7"
+            fill="#facc15" stroke="#854d0e" stroke-width="1.5"/>
+          <circle cx="13" cy="13.5" r="3" fill="#1f2937"/>
+        </pattern>
+        <linearGradient id="breadboard" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fffef9"/>
+          <stop offset="0.5" stop-color="#f8f5ec"/>
+          <stop offset="1" stop-color="#fffef9"/>
+        </linearGradient>
+        <linearGradient id="led-red-shell" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#fee2e2" stop-opacity="0.88"/>
+          <stop offset="0.28" stop-color="#ef4444" stop-opacity="0.9"/>
+          <stop offset="0.72" stop-color="#dc2626" stop-opacity="0.92"/>
+          <stop offset="1" stop-color="#7f1d1d" stop-opacity="0.96"/>
+        </linearGradient>
+        <clipPath id="pico-footprint-clip">
+          <rect x="78" y="195" width="520" height="192"/>
+        </clipPath>
+        <style>
+          .title { font: 700 28px Inter, sans-serif; fill: #0f172a; }
+          .subtitle { font: 400 15px Inter, sans-serif; fill: #475569; }
+          .label { font: 700 13px Inter, sans-serif; fill: #1e293b; }
+          .small { font: 400 12px Inter, sans-serif; fill: #475569; }
+          .tiny { font: 600 9px Inter, sans-serif; fill: #475569; }
+          .pico-label { font: 700 12px Arial, Helvetica, sans-serif; fill: #ffffff; }
+          .wire-red { fill: none; stroke: #dc2626; stroke-width: 7; stroke-linejoin: round; }
+          .wire-black { fill: none; stroke: #111827; stroke-width: 7; stroke-linejoin: round; }
+          .wire-yellow { fill: none; stroke: #ca8a04; stroke-width: 7; stroke-linejoin: round; }
+          .wire-violet { fill: none; stroke: #7c3aed; stroke-width: 7; stroke-linejoin: round; }
+          .wire-input { fill: none; stroke: #2563eb; stroke-width: 7; stroke-linejoin: round; }
+          .wire-output { fill: none; stroke: #16a34a; stroke-width: 7; stroke-linejoin: round; }
+          .component-lead { fill: none; stroke: #64748b; stroke-width: 4; stroke-linejoin: round; }
+          .callout { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; }
+          .part-label { font: 700 13px Inter, sans-serif; }
+          .pin-label { font: 700 10px Inter, sans-serif; fill: #334155; }
+          .part-note { font: 600 9px Inter, sans-serif; fill: #334155; }
+        </style>
+        <symbol id="component-pico" viewBox="78 195 520 192"
+          data-width="520" data-height="192" data-pin-count="40">
+          <rect x="78" y="195" width="520" height="175" rx="10"
+            fill="#087f5b" stroke="#065f46" stroke-width="4"/>
+          <rect x="78" y="251" width="39" height="58" rx="5"
+            fill="#b8c1cc" stroke="#64748b" stroke-width="2"/>
+          <rect x="101" y="240" width="51" height="82" rx="5"
+            fill="#d8dee5" stroke="#64748b" stroke-width="2"/>
+          <rect x="238" y="240" width="96" height="70" rx="5"
+            fill="#263238" stroke="#111827" stroke-width="2"/>
+          <rect x="141" y="252" width="27" height="24" rx="4"
+            fill="#e5e7eb" stroke="#64748b"/>
+          <text x="154" y="288" text-anchor="middle"
+            style="font:600 8px Inter,sans-serif;fill:#d1fae5">BOOTSEL</text>
+          <rect x="188" y="252" width="28" height="16" rx="2"
+            fill="#cbd5e1" stroke="#64748b"/>
+          <circle cx="198" cy="294" r="5" fill="#facc15"/>
+          <rect x="78" y="195" width="520" height="27"
+            fill="url(#gallery-pico-pads)"/>
+          <rect x="78" y="351" width="520" height="27"
+            fill="url(#gallery-pico-pads)"/>
+
+          <g aria-label="Top Pico header pins 40 through 21" text-anchor="end"
+            transform="matrix(0.9463601533 0 0 1 -80.256705 -7)">
+            <text class="pico-label" x="181" y="230" transform="rotate(-90 181 230)">VBUS</text>
+            <text class="pico-label" x="208" y="230" transform="rotate(-90 208 230)">VSYS</text>
+            <text class="pico-label" x="236" y="230" transform="rotate(-90 236 230)">GND</text>
+            <text class="pico-label" x="263" y="230" transform="rotate(-90 263 230)">3V3_EN</text>
+            <text class="pico-label" x="291" y="230" transform="rotate(-90 291 230)">3V3</text>
+            <text class="pico-label" x="318" y="230" transform="rotate(-90 318 230)">ADC_VREF</text>
+            <text class="pico-label" x="346" y="230" transform="rotate(-90 346 230)">28</text>
+            <text class="pico-label" x="373" y="230" transform="rotate(-90 373 230)">AGND</text>
+            <text class="pico-label" x="401" y="230" transform="rotate(-90 401 230)">27</text>
+            <text class="pico-label" x="428" y="230" transform="rotate(-90 428 230)">26</text>
+            <text class="pico-label" x="456" y="230" transform="rotate(-90 456 230)">RUN</text>
+            <text class="pico-label" x="483" y="230" transform="rotate(-90 483 230)">22</text>
+            <text class="pico-label" x="511" y="230" transform="rotate(-90 511 230)">GND</text>
+            <text class="pico-label" x="538" y="230" transform="rotate(-90 538 230)">21</text>
+            <text class="pico-label" x="566" y="230" transform="rotate(-90 566 230)">20</text>
+            <text class="pico-label" x="593" y="230" transform="rotate(-90 593 230)">19</text>
+            <text class="pico-label" x="621" y="230" transform="rotate(-90 621 230)">18</text>
+            <text class="pico-label" x="648" y="230" transform="rotate(-90 648 230)">GND</text>
+            <text class="pico-label" x="676" y="230" transform="rotate(-90 676 230)">17</text>
+            <text class="pico-label" x="703" y="230" transform="rotate(-90 703 230)">16</text>
+          </g>
+
+          <g aria-label="Bottom Pico header pins 1 through 20" text-anchor="start"
+            transform="matrix(0.9463601533 0 0 1 -80.256705 5)">
+            <text class="pico-label" x="181" y="343" transform="rotate(-90 181 343)">0</text>
+            <text class="pico-label" x="208" y="343" transform="rotate(-90 208 343)">1</text>
+            <text class="pico-label" x="236" y="343" transform="rotate(-90 236 343)">GND</text>
+            <text class="pico-label" x="263" y="343" transform="rotate(-90 263 343)">2</text>
+            <text class="pico-label" x="291" y="343" transform="rotate(-90 291 343)">3</text>
+            <text class="pico-label" x="318" y="343" transform="rotate(-90 318 343)">4</text>
+            <text class="pico-label" x="346" y="343" transform="rotate(-90 346 343)">5</text>
+            <text class="pico-label" x="373" y="343" transform="rotate(-90 373 343)">GND</text>
+            <text class="pico-label" x="401" y="343" transform="rotate(-90 401 343)">6</text>
+            <text class="pico-label" x="428" y="343" transform="rotate(-90 428 343)">7</text>
+            <text class="pico-label" x="456" y="343" transform="rotate(-90 456 343)">8</text>
+            <text class="pico-label" x="483" y="343" transform="rotate(-90 483 343)">9</text>
+            <text class="pico-label" x="511" y="343" transform="rotate(-90 511 343)">GND</text>
+            <text class="pico-label" x="538" y="343" transform="rotate(-90 538 343)">10</text>
+            <text class="pico-label" x="566" y="343" transform="rotate(-90 566 343)">11</text>
+            <text class="pico-label" x="593" y="343" transform="rotate(-90 593 343)">12</text>
+            <text class="pico-label" x="621" y="343" transform="rotate(-90 621 343)">13</text>
+            <text class="pico-label" x="648" y="343" transform="rotate(-90 648 343)">GND</text>
+            <text class="pico-label" x="676" y="343" transform="rotate(-90 676 343)">14</text>
+            <text class="pico-label" x="703" y="343" transform="rotate(-90 703 343)">15</text>
+          </g>
+        </symbol>
+        <symbol id="component-led-body-red" viewBox="0 0 100 90">
+          <path d="M22 82 V48 C22 20 34 6 50 6 C66 6 78 20 78 48 V82 Z"
+            fill="url(#led-red-shell)" stroke="#991b1b" stroke-width="3"/>
+          <rect x="16" y="76" width="68" height="12" rx="4"
+            fill="#b91c1c" stroke="#7f1d1d" stroke-width="2"/>
+          <path d="M30 42 Q34 20 48 15" fill="none" stroke="#fff"
+            stroke-width="5" stroke-linecap="round" opacity="0.72"/>
+          <path d="M31 62 H46 L53 54 V77 H31 Z" fill="#e5e7eb" opacity="0.72"/>
+          <path d="M62 53 H70 V77 H57 V61 Z" fill="#cbd5e1" opacity="0.72"/>
+          <line x1="78" y1="39" x2="78" y2="70"
+            stroke="#7f1d1d" stroke-width="3"/>
+        </symbol>
+        <symbol id="component-led-5mm-red" viewBox="0 0 100 145">
+          <use href="#component-led-body-red" x="0" y="0" width="100" height="90"/>
+          <line x1="38" y1="86" x2="38" y2="140"
+            stroke="#94a3b8" stroke-width="5"/>
+          <line x1="66" y1="86" x2="66" y2="124"
+            stroke="#94a3b8" stroke-width="5"/>
+          <text x="26" y="140" text-anchor="middle" class="part-note">A long</text>
+          <text x="76" y="140" text-anchor="middle" class="part-note">K short</text>
+        </symbol>
+        <symbol id="component-resistor-220" viewBox="0 0 104 24"
+          data-width="104" data-height="24" data-body-hole-span="2"
+          data-lead-hole-span="1" data-total-hole-span="4">
+          <line x1="0" y1="12" x2="104" y2="12" stroke="#a8b0ba" stroke-width="3"/>
+          <rect x="26" y="3" width="52" height="18" rx="8"
+            fill="#e7c98c" stroke="#8b6b32" stroke-width="2"/>
+          <path d="M38 5 V19 M47 5 V19" stroke="#dc2626" stroke-width="4"/>
+          <path d="M56 5 V19" stroke="#7c2d12" stroke-width="4"/>
+          <path d="M68 5 V19" stroke="#d4af37" stroke-width="3"/>
+        </symbol>
+        <symbol id="component-resistor-10k" viewBox="0 0 104 24"
+          data-width="104" data-height="24" data-body-hole-span="2"
+          data-lead-hole-span="1" data-total-hole-span="4">
+          <line x1="0" y1="12" x2="104" y2="12" stroke="#a8b0ba" stroke-width="3"/>
+          <rect x="26" y="3" width="52" height="18" rx="8"
+            fill="#e7c98c" stroke="#8b6b32" stroke-width="2"/>
+          <path d="M38 5 V19" stroke="#7c2d12" stroke-width="4"/>
+          <path d="M47 5 V19" stroke="#111827" stroke-width="4"/>
+          <path d="M56 5 V19" stroke="#f97316" stroke-width="4"/>
+          <path d="M68 5 V19" stroke="#d4af37" stroke-width="3"/>
+        </symbol>
+        <symbol id="component-button-6mm" viewBox="0 0 130 120">
+          <rect x="18" y="24" width="94" height="72" rx="11"
+            fill="#303846" stroke="#0f172a" stroke-width="4"/>
+          <circle cx="65" cy="60" r="23" fill="#8b5e4a"
+            stroke="#4a3028" stroke-width="4"/>
+          <circle cx="65" cy="60" r="14" fill="#a8735c"/>
+          <line x1="28" y1="12" x2="28" y2="108" stroke="#60a5fa" stroke-width="6"/>
+          <line x1="102" y1="12" x2="102" y2="108" stroke="#f87171" stroke-width="6"/>
+          <circle cx="28" cy="12" r="7" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+          <circle cx="28" cy="108" r="7" fill="#bfdbfe" stroke="#2563eb" stroke-width="2"/>
+          <circle cx="102" cy="12" r="7" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+          <circle cx="102" cy="108" r="7" fill="#fecaca" stroke="#dc2626" stroke-width="2"/>
+          <text x="39" y="66" class="part-label" fill="#bfdbfe">A</text>
+          <text x="91" y="66" text-anchor="end" class="part-label" fill="#fecaca">B</text>
+        </symbol>
+      </defs>
+      <rect width="1280" height="760" rx="14" fill="#ffffff"/>
+      <text class="title" x="42" y="48">Button and LED · active-low GP13 input</text>
+      <text class="subtitle" x="42" y="75">Exact physical circuit for code/day-2/01_button_decisions.py</text>
+      <g aria-label="Wire legend">
+        <line class="wire-red" x1="760" y1="42" x2="794" y2="42"/>
+        <text class="small" x="802" y="47">3.3 V</text>
+        <line class="wire-input" x1="880" y1="42" x2="914" y2="42"/>
+        <text class="small" x="922" y="47">GP13 input</text>
+        <line class="wire-output" x1="1030" y1="42" x2="1064" y2="42"/>
+        <text class="small" x="1072" y="47">GP15 output</text>
+        <line class="wire-black" x1="760" y1="68" x2="794" y2="68"/>
+        <text class="small" x="802" y="73">GND</text>
+      </g>
+      <g filter="url(#shadow)" aria-label="Full-size landscape breadboard">
+        <rect id="breadboard" x="38" y="96" width="1204" height="500" rx="14"
+          data-hole-origin-x="13" data-hole-origin-y="13.5"
+          data-hole-pitch-x="26" data-hole-pitch-y="27"
+          fill="url(#breadboard)" stroke="#94a3b8" stroke-width="2"/>
+        <rect id="top-power-rail-holes" data-breadboard-hole-field="true"
+          x="78" y="103" width="1120" height="67"
+          fill="url(#terminal-holes)" opacity="0.95"/>
+        <line id="top-rail-upper-stripe" x1="82" y1="108" x2="1198" y2="108"
+          stroke="#ef4444" stroke-width="3"/>
+        <line id="top-rail-lower-stripe" x1="82" y1="162" x2="1198" y2="162"
+          stroke="#3b82f6" stroke-width="3"/>
+        <text class="tiny" x="57" y="112" fill="#dc2626">+</text>
+        <text class="tiny" x="57" y="166" fill="#2563eb">−</text>
+        <text class="tiny" x="1104" y="103" fill="#dc2626">3.3 V</text>
+        <text class="tiny" x="1128" y="176" fill="#2563eb">GND</text>
+        <rect id="top-terminal-holes" data-breadboard-hole-field="true"
+          x="78" y="189" width="1120" height="135" fill="url(#terminal-holes)"/>
+        <text class="tiny" x="56" y="204">a</text>
+        <text class="tiny" x="56" y="231">b</text>
+        <text class="tiny" x="56" y="258">c</text>
+        <text class="tiny" x="56" y="285">d</text>
+        <text class="tiny" x="56" y="312">e</text>
+        <rect x="65" y="327" width="1150" height="30" rx="4"
+          fill="#e7e5df" stroke="#cbd5e1"/>
+        <line x1="78" y1="342" x2="1198" y2="342"
+          stroke="#cbd5e1" stroke-width="2" stroke-dasharray="8 8"/>
+        <text class="tiny" x="1090" y="338">CENTRE CHANNEL</text>
+        <rect id="bottom-terminal-holes" data-breadboard-hole-field="true"
+          x="78" y="364" width="1120" height="135" fill="url(#terminal-holes)"/>
+        <text class="tiny" x="56" y="379">f</text>
+        <text class="tiny" x="56" y="406">g</text>
+        <text class="tiny" x="56" y="433">h</text>
+        <text class="tiny" x="56" y="460">i</text>
+        <text class="tiny" x="56" y="487">j</text>
+        <rect id="bottom-power-rail-holes" data-breadboard-hole-field="true"
+          x="78" y="500" width="1120" height="67"
+          fill="url(#terminal-holes)" opacity="0.95"/>
+        <line id="bottom-rail-upper-stripe" x1="82" y1="513" x2="1198" y2="513"
+          stroke="#3b82f6" stroke-width="3"/>
+        <line id="bottom-rail-lower-stripe" x1="82" y1="567" x2="1198" y2="567"
+          stroke="#ef4444" stroke-width="3"/>
+        <text class="tiny" x="57" y="517" fill="#2563eb">−</text>
+        <text class="tiny" x="57" y="571" fill="#dc2626">+</text>
+        <text class="tiny" x="1128" y="508" fill="#2563eb">GND</text>
+        <text class="tiny" x="1104" y="580" fill="#dc2626">unused</text>
+      </g>
+      <g id="pico" filter="url(#shadow)" transform="translate(0 55)"
+        clip-path="url(#pico-footprint-clip)"
+        data-obscures-holes="78,250,598,433"
+        data-bounds-x="78" data-bounds-y="195"
+        data-bounds-width="520" data-bounds-height="192"
+        data-footprint-columns="20" data-footprint-row-pitches="6"
+        data-footprint-channel-height="30"
+        data-first-pin-x="91" data-pin-pitch="26" data-pin-count="20"
+        data-top-header-y="201.5" data-bottom-header-y="363.5"
+        aria-label="Canonical Raspberry Pi Pico with all forty pins labelled">
+        <use href="#component-pico" x="78" y="195" width="520" height="192"
+          data-obscures-holes="78,250,598,433"/>
+        <rect id="pico-board" x="78" y="195" width="520" height="175"
+          fill="none" stroke="none"/>
+        <rect id="pico-top-header" x="78" y="195" width="520" height="27"
+          fill="none" stroke="none"/>
+        <rect id="pico-bottom-header" x="78" y="351" width="520" height="27"
+          fill="none" stroke="none"/>
+      </g>
+      <g aria-label="Canonical ten kilohm pull-up resistor">
+        <use href="#component-resistor-10k" x="637" y="217.5" width="104" height="24"
+          data-obscures-holes="663,220,715,239"/>
+        <text class="tiny" x="689" y="214" text-anchor="middle">10 kΩ pull-up</text>
+      </g>
+      <g aria-label="Canonical four-leg tactile button spanning the centre channel">
+        <use href="#component-button-6mm" x="661" y="277" width="130" height="120"
+          data-obscures-holes="679,301,773,373"/>
+      </g>
+      <g aria-label="Canonical 220 ohm current-limiting resistor">
+        <use href="#component-resistor-220" x="819" y="433.5" width="104" height="24"
+          data-obscures-holes="845,436,897,455"/>
+        <text class="tiny" x="871" y="430" text-anchor="middle">220 Ω</text>
+      </g>
+      <g aria-label="Canonical ordinary red LED with long anode and short cathode">
+        <use href="#component-led-5mm-red" x="872" y="250" width="100" height="145"
+          data-obscures-holes="888,256,956,338"/>
+      </g>
+      <g id="circuit-connections" aria-label="Pixel-exact active-low button and LED wiring">
+        <line class="wire-red" x1="195" y1="229.5" x2="195" y2="121.5"
+          data-connection-kind="wire" data-breadboard-ends="both"/>
+        <line class="wire-black" x1="143" y1="229.5" x2="143" y2="148.5"
+          data-connection-kind="wire" data-breadboard-ends="both"/>
+        <line class="wire-red" x1="637" y1="121.5" x2="637" y2="202.5"
+          data-connection-kind="wire" data-breadboard-ends="both"/>
+        <line class="component-lead" x1="637" y1="229.5" x2="741" y2="229.5"
+          data-connection-kind="component" data-breadboard-ends="both"
+          data-contact-start-color="#dc2626" data-contact-end-color="#2563eb"/>
+        <line class="wire-input" x1="741" y1="202.5" x2="689" y2="202.5"
+          data-connection-kind="wire" data-breadboard-ends="both"/>
+        <line class="wire-black" x1="767" y1="202.5" x2="767" y2="148.5"
+          data-connection-kind="wire" data-breadboard-ends="both"/>
+        <line class="wire-input" x1="507" y1="445.5" x2="689" y2="445.5"
+          data-connection-kind="wire" data-breadboard-ends="both"/>
+        <line class="component-lead" x1="689" y1="289" x2="689" y2="283.5"
+          data-connection-kind="connector" data-breadboard-ends="end"
+          data-contact-end-color="#2563eb"/>
+        <polyline class="component-lead" points="763,289 767,289 767,283.5"
+          data-connection-kind="connector" data-breadboard-ends="end"
+          data-contact-end-color="#111827"/>
+        <line class="component-lead" x1="689" y1="385" x2="689" y2="391.5"
+          data-connection-kind="connector" data-breadboard-ends="end"
+          data-contact-end-color="#2563eb"/>
+        <polyline class="component-lead" points="763,385 767,385 767,391.5"
+          data-connection-kind="connector" data-breadboard-ends="end"
+          data-contact-end-color="#111827"/>
+        <line class="wire-black" x1="403" y1="445.5" x2="403" y2="526.5"
+          data-connection-kind="wire" data-breadboard-ends="both"/>
+        <line class="wire-output" x1="585" y1="472.5" x2="819" y2="472.5"
+          data-connection-kind="wire" data-breadboard-ends="both"/>
+        <line class="component-lead" x1="819" y1="445.5" x2="923" y2="445.5"
+          data-connection-kind="component" data-breadboard-ends="both"
+          data-contact-start-color="#16a34a" data-contact-end-color="#16a34a"/>
+        <polyline class="component-lead" points="910,390 910,404 923,404 923,418.5"
+          data-connection-kind="component" data-breadboard-ends="end"
+          data-contact-end-color="#16a34a"/>
+        <polyline class="component-lead" points="938,374 975,374 975,418.5"
+          data-connection-kind="component" data-breadboard-ends="end"
+          data-contact-end-color="#111827"/>
+        <line class="wire-black" x1="975" y1="445.5" x2="975" y2="526.5"
+          data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="195" cy="229.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="195" cy="121.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="143" cy="229.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="143" cy="148.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="637" cy="121.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="637" cy="202.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="637" cy="229.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="741" cy="229.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="741" cy="202.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="689" cy="202.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="767" cy="202.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="767" cy="148.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="507" cy="445.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="689" cy="445.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="689" cy="283.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="767" cy="283.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="689" cy="391.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="767" cy="391.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="403" cy="445.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="403" cy="526.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="585" cy="472.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="819" cy="472.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="819" cy="445.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="923" cy="445.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="923" cy="418.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="975" cy="418.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="975" cy="445.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="975" cy="526.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+      </g>
+      <text class="tiny" x="518" y="439">GP13 · physical pin 17 · active-low</text>
+      <text class="tiny" x="606" y="466">GP15 · physical pin 20</text>
+      <g aria-label="Button operation inset">
+        <rect class="callout" x="62" y="620" width="538" height="105" rx="12"/>
+        <text class="label" x="84" y="646">Button contacts</text>
+        <text class="small" x="84" y="672">Released: A and B are separate; GP13 is pulled high.</text>
+        <text class="small" x="84" y="698">Pressed: A joins B and GP13 reads low.</text>
+        <line x1="430" y1="657" x2="430" y2="704" stroke="#2563eb" stroke-width="4"/>
+        <line x1="500" y1="657" x2="500" y2="704" stroke="#111827" stroke-width="4"/>
+        <line x1="430" y1="681" x2="500" y2="681" stroke="#16a34a" stroke-width="4" stroke-dasharray="12 8"/>
+        <text class="tiny" x="465" y="718" text-anchor="middle">press joins A ↔ B</text>
+      </g>
+      <g aria-label="Safety and pre-power check inset">
+        <rect x="620" y="620" width="598" height="105" rx="12"
+          fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+        <text x="644" y="646" style="font:700 13px Inter,sans-serif;fill:#9a3412">Before connecting USB</text>
+        <text class="small" x="644" y="672">✓ Button spans the centre channel; each A/B pair crosses it.</text>
+        <text class="small" x="644" y="698">✓ 10 kΩ pull-up, 220 Ω LED resistor, polarity, and grounds checked.</text>
+      </g>
+    </svg>
+    <figcaption>
+      Original course artwork informed by the official Freenove Button &amp; LED lesson. It matches <code>code/day-2/01_button_decisions.py</code>, preserves the active-low GP13 circuit, and uses native canonical component artwork with exact breadboard contacts.
+    </figcaption>
+    <section class="netlist" aria-labelledby="connection-list-title">
+      <h2 id="connection-list-title">Exact connection list</h2>
+      <table>
+        <thead><tr><th>From</th><th>Through</th><th>To</th></tr></thead>
+        <tbody>
+          <tr><td>Pico 3V3(OUT), physical pin 36</td><td>top 3.3 V rail and 10 kΩ pull-up resistor</td><td>button terminal A and GP13, physical pin 17</td></tr>
+          <tr><td>button terminal B</td><td>black jumper and labelled top GND rail</td><td>Pico GND, physical pin 38</td></tr>
+          <tr><td>Pico GP15, physical pin 20</td><td>green jumper and 220 Ω resistor</td><td>LED long anode; short cathode returns through bottom GND rail to Pico GND pin 13</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </figure>
+</body>
+</html>

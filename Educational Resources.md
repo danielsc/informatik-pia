@@ -38,7 +38,8 @@ I find it provides a decent way to approach the issues of AI and mental health a
 Some of this is also addressed in the [[AI Activities]]
 
 ## AI Teaching Activities
-- https://saniavn.github.io/ (haven't looked at it in detail, yet)
+- https://saniavn.github.io/ 
+	- https://llm-probability.org/ (nice)
 - https://ai4k12.org/activities/ (too old)
 - [[AI Activities]] (proposed by Chat GPT)
 
@@ -48,4 +49,7 @@ Some of this is also addressed in the [[AI Activities]]
 - https://icommit.app/learn/llm-fundamentals
 - https://academy.claude.com/courses/ai-capabilities-and-limitations/intro-to-ai-capabilities-and-limitations
 - https://academy.claude.com/courses/ai-capabilities-and-limitations/try-it-out
-- 
+
+
+## Lehrplan Informatik Hamburg
+https://www.hamburg.de/resource/blob/798514/ad3c2fdfb3a32b9545a271dfceae5772/informatik-data.pdf

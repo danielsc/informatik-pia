@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>REPLACE: Circuit name</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      color: #172033;
+      background: #eef2f7;
+    }
+
+    figure,
+    .netlist {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgb(15 23 42 / 10%);
+    }
+
+    figcaption {
+      margin: 14px auto 0;
+      line-height: 1.5;
+    }
+
+    .netlist {
+      margin-top: 18px;
+      padding: 16px 20px;
+      background: white;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 8px 10px;
+      text-align: left;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: white;
+      }
+
+      svg {
+        border: 0;
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <figure>
+    <svg viewBox="0 0 1280 760" role="img"
+      aria-labelledby="diagram-title diagram-description">
+      <title id="diagram-title">REPLACE: concise diagram title</title>
+      <desc id="diagram-description">
+        REPLACE: complete text alternative naming the board, components, pins,
+        power, protection parts, and the purpose of the circuit.
+      </desc>
+
+      <defs>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.2"/>
+        </filter>
+        <pattern id="terminal-holes" width="26" height="27"
+          patternUnits="userSpaceOnUse">
+          <circle cx="13" cy="13.5" r="4.5"
+            fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+          <circle cx="13" cy="13.5" r="1.8" fill="#64748b"/>
+        </pattern>
+        <pattern id="pico-pins" x="0" y="-1" width="26" height="27"
+          patternUnits="userSpaceOnUse">
+          <circle cx="13" cy="13.5" r="7"
+            fill="#facc15" stroke="#854d0e" stroke-width="1.5"/>
+          <circle cx="13" cy="13.5" r="3" fill="#1f2937"/>
+        </pattern>
+        <linearGradient id="breadboard" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fffef9"/>
+          <stop offset="0.5" stop-color="#f8f5ec"/>
+          <stop offset="1" stop-color="#fffef9"/>
+        </linearGradient>
+        <clipPath id="pico-footprint-clip">
+          <rect x="78" y="195" width="520" height="192"/>
+        </clipPath>
+        <style>
+          .title { font: 700 28px Inter, sans-serif; fill: #0f172a; }
+          .label { font: 700 13px Inter, sans-serif; fill: #1e293b; }
+          .small { font: 400 12px Inter, sans-serif; fill: #475569; }
+          .tiny { font: 600 9px Inter, sans-serif; fill: #475569; }
+          .pico-label {
+            font: 700 12px Arial, Helvetica, sans-serif;
+            fill: #ffffff;
+          }
+          .wire-power { fill: none; stroke: #dc2626; stroke-width: 7; }
+          .wire-ground { fill: none; stroke: #111827; stroke-width: 7; }
+          .wire-input { fill: none; stroke: #2563eb; stroke-width: 7; }
+          .wire-output { fill: none; stroke: #16a34a; stroke-width: 7; }
+        </style>
+      </defs>
+
+      <rect width="1280" height="760" rx="14" fill="#ffffff"/>
+      <text class="title" x="42" y="48">REPLACE: Circuit title</text>
+
+      <!-- Draw the breadboard first, then board/modules, wires, components,
+           labels, legend, and safety inset. Remove every REPLACE marker. -->
+      <rect id="breadboard" x="38" y="96" width="1204" height="500" rx="14"
+        data-hole-origin-x="13" data-hole-origin-y="13.5"
+        data-hole-pitch-x="26" data-hole-pitch-y="27"
+        fill="url(#breadboard)" stroke="#94a3b8" stroke-width="2"/>
+
+      <!-- Power rails -->
+      <rect id="top-power-rail-holes" class="breadboard-hole-field"
+        data-breadboard-hole-field="true" x="78" y="103" width="1120" height="67"
+        fill="url(#terminal-holes)" opacity="0.95"/>
+      <line id="top-rail-upper-stripe" x1="82" y1="108" x2="1198" y2="108"
+        stroke="#ef4444" stroke-width="3"/>
+      <line id="top-rail-lower-stripe" x1="82" y1="162" x2="1198" y2="162"
+        stroke="#3b82f6" stroke-width="3"/>
+      <text class="tiny" x="57" y="112" fill="#dc2626">+</text>
+      <text class="tiny" x="57" y="166" fill="#2563eb">−</text>
+
+      <!-- Terminal fields and centre channel -->
+      <rect id="top-terminal-holes" class="breadboard-hole-field"
+        data-breadboard-hole-field="true" x="78" y="189" width="1120" height="135"
+        fill="url(#terminal-holes)"/>
+      <rect x="65" y="327" width="1150" height="30" rx="4"
+        fill="#e7e5df" stroke="#cbd5e1"/>
+      <line x1="78" y1="342" x2="1198" y2="342"
+        stroke="#cbd5e1" stroke-width="2" stroke-dasharray="8 8"/>
+      <text class="tiny" x="1090" y="338">CENTRE CHANNEL</text>
+      <rect id="bottom-terminal-holes" class="breadboard-hole-field"
+        data-breadboard-hole-field="true" x="78" y="364" width="1120" height="135"
+        fill="url(#terminal-holes)"/>
+
+      <text class="tiny" x="56" y="204">a</text>
+      <text class="tiny" x="56" y="231">b</text>
+      <text class="tiny" x="56" y="258">c</text>
+      <text class="tiny" x="56" y="285">d</text>
+      <text class="tiny" x="56" y="312">e</text>
+      <text class="tiny" x="56" y="379">f</text>
+      <text class="tiny" x="56" y="406">g</text>
+      <text class="tiny" x="56" y="433">h</text>
+      <text class="tiny" x="56" y="460">i</text>
+      <text class="tiny" x="56" y="487">j</text>
+
+      <rect id="bottom-power-rail-holes" class="breadboard-hole-field"
+        data-breadboard-hole-field="true" x="78" y="500" width="1120" height="67"
+        fill="url(#terminal-holes)" opacity="0.95"/>
+      <line id="bottom-rail-upper-stripe" x1="82" y1="513" x2="1198" y2="513"
+        stroke="#3b82f6" stroke-width="3"/>
+      <line id="bottom-rail-lower-stripe" x1="82" y1="567" x2="1198" y2="567"
+        stroke="#ef4444" stroke-width="3"/>
+      <text class="tiny" x="57" y="517" fill="#2563eb">−</text>
+      <text class="tiny" x="57" y="571" fill="#dc2626">+</text>
+
+      <!--
+        Canonical Pico placement. USB is on the left. The two header rows sit
+        in terminal strips on opposite sides of the centre channel.
+        Keep this group intact when starting a new circuit.
+      -->
+      <g id="pico" filter="url(#shadow)" transform="translate(0 55)"
+        clip-path="url(#pico-footprint-clip)"
+        data-bounds-x="78" data-bounds-y="195"
+        data-bounds-width="520" data-bounds-height="192"
+        data-footprint-columns="20" data-footprint-row-pitches="6"
+        data-footprint-channel-height="30"
+        data-first-pin-x="91" data-pin-pitch="26" data-pin-count="20"
+        data-top-header-y="201.5" data-bottom-header-y="363.5"
+        aria-label="Raspberry Pi Pico with all forty pins labelled">
+        <rect id="pico-board" x="78" y="195" width="520" height="175" rx="10"
+          fill="#087f5b" stroke="#065f46" stroke-width="3"/>
+
+        <!-- USB connector and representative board components -->
+        <rect x="78" y="251" width="39" height="58" rx="5"
+          fill="#b8c1cc" stroke="#64748b" stroke-width="2"/>
+        <rect x="101" y="240" width="51" height="82" rx="5"
+          fill="#d8dee5" stroke="#64748b" stroke-width="2"/>
+        <rect x="238" y="240" width="96" height="70" rx="5"
+          fill="#263238" stroke="#111827" stroke-width="2"/>
+        <rect x="141" y="252" width="27" height="24" rx="4"
+          fill="#e5e7eb" stroke="#64748b"/>
+        <text x="154" y="288" text-anchor="middle"
+          style="font:600 8px Inter,sans-serif;fill:#d1fae5">BOOTSEL</text>
+        <rect x="188" y="252" width="28" height="16" rx="2"
+          fill="#cbd5e1" stroke="#64748b"/>
+        <circle cx="198" cy="294" r="5" fill="#facc15"/>
+        <!-- Gold plated header rows -->
+        <rect id="pico-top-header" x="78" y="195"
+          width="520" height="27" fill="url(#pico-pins)"/>
+        <rect id="pico-bottom-header" x="78" y="351"
+          width="520" height="27" fill="url(#pico-pins)"/>
+
+        <!-- Top edge: physical pins 40 down to 21, left to right -->
+        <g aria-label="Top Pico header pins 40 through 21"
+          text-anchor="end"
+          transform="matrix(0.9463601533 0 0 1 -80.256705 -7)">
+          <text class="pico-label" x="181" y="230" transform="rotate(-90 181 230)">VBUS</text>
+          <text class="pico-label" x="208" y="230" transform="rotate(-90 208 230)">VSYS</text>
+          <text class="pico-label" x="236" y="230" transform="rotate(-90 236 230)">GND</text>
+          <text class="pico-label" x="263" y="230" transform="rotate(-90 263 230)">3V3_EN</text>
+          <text class="pico-label" x="291" y="230" transform="rotate(-90 291 230)">3V3</text>
+          <text class="pico-label" x="318" y="230" transform="rotate(-90 318 230)">ADC_VREF</text>
+          <text class="pico-label" x="346" y="230" transform="rotate(-90 346 230)">28</text>
+          <text class="pico-label" x="373" y="230" transform="rotate(-90 373 230)">AGND</text>
+          <text class="pico-label" x="401" y="230" transform="rotate(-90 401 230)">27</text>
+          <text class="pico-label" x="428" y="230" transform="rotate(-90 428 230)">26</text>
+          <text class="pico-label" x="456" y="230" transform="rotate(-90 456 230)">RUN</text>
+          <text class="pico-label" x="483" y="230" transform="rotate(-90 483 230)">22</text>
+          <text class="pico-label" x="511" y="230" transform="rotate(-90 511 230)">GND</text>
+          <text class="pico-label" x="538" y="230" transform="rotate(-90 538 230)">21</text>
+          <text class="pico-label" x="566" y="230" transform="rotate(-90 566 230)">20</text>
+          <text class="pico-label" x="593" y="230" transform="rotate(-90 593 230)">19</text>
+          <text class="pico-label" x="621" y="230" transform="rotate(-90 621 230)">18</text>
+          <text class="pico-label" x="648" y="230" transform="rotate(-90 648 230)">GND</text>
+          <text class="pico-label" x="676" y="230" transform="rotate(-90 676 230)">17</text>
+          <text class="pico-label" x="703" y="230" transform="rotate(-90 703 230)">16</text>
+        </g>
+
+        <!-- Bottom edge: physical pins 1 through 20, left to right -->
+        <g aria-label="Bottom Pico header pins 1 through 20"
+          text-anchor="start"
+          transform="matrix(0.9463601533 0 0 1 -80.256705 5)">
+          <text class="pico-label" x="181" y="343" transform="rotate(-90 181 343)">0</text>
+          <text class="pico-label" x="208" y="343" transform="rotate(-90 208 343)">1</text>
+          <text class="pico-label" x="236" y="343" transform="rotate(-90 236 343)">GND</text>
+          <text class="pico-label" x="263" y="343" transform="rotate(-90 263 343)">2</text>
+          <text class="pico-label" x="291" y="343" transform="rotate(-90 291 343)">3</text>
+          <text class="pico-label" x="318" y="343" transform="rotate(-90 318 343)">4</text>
+          <text class="pico-label" x="346" y="343" transform="rotate(-90 346 343)">5</text>
+          <text class="pico-label" x="373" y="343" transform="rotate(-90 373 343)">GND</text>
+          <text class="pico-label" x="401" y="343" transform="rotate(-90 401 343)">6</text>
+          <text class="pico-label" x="428" y="343" transform="rotate(-90 428 343)">7</text>
+          <text class="pico-label" x="456" y="343" transform="rotate(-90 456 343)">8</text>
+          <text class="pico-label" x="483" y="343" transform="rotate(-90 483 343)">9</text>
+          <text class="pico-label" x="511" y="343" transform="rotate(-90 511 343)">GND</text>
+          <text class="pico-label" x="538" y="343" transform="rotate(-90 538 343)">10</text>
+          <text class="pico-label" x="566" y="343" transform="rotate(-90 566 343)">11</text>
+          <text class="pico-label" x="593" y="343" transform="rotate(-90 593 343)">12</text>
+          <text class="pico-label" x="621" y="343" transform="rotate(-90 621 343)">13</text>
+          <text class="pico-label" x="648" y="343" transform="rotate(-90 648 343)">GND</text>
+          <text class="pico-label" x="676" y="343" transform="rotate(-90 676 343)">14</text>
+          <text class="pico-label" x="703" y="343" transform="rotate(-90 703 343)">15</text>
+        </g>
+      </g>
+
+      <!--
+        Add circuit wires and component leads here. Every breadboard-contacting
+        electrical SVG element must declare data-connection-kind and
+        data-breadboard-ends. Use line or polyline geometry so the endpoint
+        checker can compare rendered coordinates with actual hole centres.
+      -->
+      <g id="circuit-connections"
+        aria-label="Circuit wires, component leads, and connectors"></g>
+    </svg>
+
+    <figcaption>
+      REPLACE: State that this is original course artwork, identify the
+      corresponding program, link or name the factual source, and disclose
+      whether individual breadboard holes are illustrative.
+    </figcaption>
+  </figure>
+
+  <section class="netlist" aria-labelledby="connection-list-title">
+    <h2 id="connection-list-title">Exact connection list</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>From</th>
+          <th>Through</th>
+          <th>To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>REPLACE</td>
+          <td>REPLACE</td>
+          <td>REPLACE</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+</body>
+</html>
