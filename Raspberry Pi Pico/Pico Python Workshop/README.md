@@ -27,16 +27,20 @@ maintenance rules.
 | [`SOURCES_AND_IMAGES.md`](SOURCES_AND_IMAGES.md) | sources, licences, and image attribution |
 ## Wokwi fallback and teacher test
 
-The repository root contains a ready-to-run Wokwi project:
+The repository's [`wokwi/`](../../wokwi/) folder contains a ready-to-run
+Wokwi project:
 
-- [`wokwi.toml`](../../wokwi.toml) uses the pinned Pico MicroPython firmware;
-- [`diagram.json`](../../diagram.json) provides a Pico, potentiometer, and
+- [`wokwi.toml`](../../wokwi/wokwi.toml) uses the pinned Pico MicroPython
+  firmware;
+- [`diagram.json`](../../wokwi/diagram.json) provides a Pico, potentiometer, and
   eight-pixel NeoPixel ring;
 - the wiring matches GP26/ADC0 for the potentiometer and GP16 for pixel data.
 
-In VS Code, run **Wokwi: Start Simulator**. Keep its tab visible, then run the
-task **Wokwi: Run teacher pixel spinner** from **Tasks: Run Task**. The virtual
-ring stands in for the Freenove eight-pixel module.
+In VS Code, run **Wokwi: Select Config File**, choose
+`wokwi/wokwi.toml`, and then run **Wokwi: Start Simulator**. Keep its tab
+visible, then run the task **Wokwi: Run teacher pixel spinner** from
+**Tasks: Run Task**. The virtual ring stands in for the Freenove eight-pixel
+module.
 
 This simulation can also serve as a fallback if classroom hardware is
 unavailable.

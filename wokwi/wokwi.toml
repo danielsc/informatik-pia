@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = "../Raspberry Pi Pico/firmware/RPI_PICO-20260824-v1.29.0.uf2"
+rfc2217ServerPort = 4000
