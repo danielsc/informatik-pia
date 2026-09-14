@@ -57,7 +57,9 @@ This audit applies to every diagram below after the shared template correction.
 | Pico alignment and footprint | **4/4** | All 40 Pico pads retain `0.00 px` hole-alignment error, the Pico remains vertically centred, and the complete footprint retains `0.00 px` overflow. |
 
 **Outcome:** PASS. The shared breadboard geometry has no clipped partial rows,
-and all existing electrical endpoints remain on complete, visible holes.
+and all existing electrical endpoints remain on complete, visible holes. The
+automated endpoint and rail checks enforce this row-visibility contract for
+future diagrams.
 
 ## Audit: `button-and-led.html`
 
