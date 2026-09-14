@@ -25,21 +25,19 @@ maintenance rules.
 | [`slides/workshop-slides.css`](slides/workshop-slides.css) | shared presentation design |
 | [`slides/workshop-slides.js`](slides/workshop-slides.js) | shared Reveal.js configuration |
 | [`SOURCES_AND_IMAGES.md`](SOURCES_AND_IMAGES.md) | sources, licences, and image attribution |
-## Wokwi fallback and teacher tests
+## Teacher component tests
 
-The repository's [`wokwi/`](../../wokwi/) folder contains:
+The [`code/teacher-tests/`](code/teacher-tests/) folder contains one small
+physical-hardware test for every programmable workshop component. Its
+[component-test guide](code/teacher-tests/README.md) links each Python file to
+an exact breadboard diagram and a PNG preview.
 
-- seven individual component simulations for the onboard LED, ordinary LED,
-  button, potentiometer, RGB pixels, passive buzzer, and distance sensor;
-- one combined potentiometer/pixel spinner demonstration;
-- the matching pinned Pico MicroPython firmware configuration.
+Stop the program and disconnect USB before moving any wire or component. The
+passive buzzer test uses the transistor driver, and the HC-SR04 test uses the
+Echo voltage divider shown in their diagrams.
 
-Choose a circuit with **Wokwi: Select Config File**, start it with
-**Wokwi: Start Simulator**, and then run **Wokwi: Run component test** from
-**Tasks: Run Task**. See the
-[Wokwi test-bench instructions](../../wokwi/README.md) and the
-[teacher component tests](code/teacher-tests/README.md).
+## Optional Wokwi experiment
 
-These simulations can also serve as a fallback if classroom hardware is
-unavailable. The virtual RGB ring stands in for the Freenove eight-pixel
-module.
+The original combined potentiometer/pixel simulation remains parked in
+[`wokwi/`](../../wokwi/) as an optional experiment. It is not part of the
+physical component-test workflow.

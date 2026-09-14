@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Raspberry Pi Pico Freenove 8-RGB Module Wiring</title>
+  <title>Raspberry Pi Pico Potentiometer Wiring</title>
   <style>
     :root {
       color-scheme: light;
@@ -36,8 +36,8 @@
 <body>
   <figure>
     <svg viewBox="0 0 1280 760" role="img" aria-labelledby="title description">
-      <title id="title">Raspberry Pi Pico GP16 to Freenove square 8-RGB module IN header</title>
-      <desc id="description">A square eight-pixel RGB module connects at its IN header. Signal S goes to GP16, V goes to Pico 3.3 volts, and G goes to common ground.</desc>
+      <title id="title">Raspberry Pi Pico potentiometer on ADC0</title>
+      <desc id="description">A potentiometer uses 3.3 volts and ground with its centre wiper connected to GP26 ADC0.</desc>
       <defs>
         <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
           <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.2"/>
@@ -164,69 +164,59 @@
             <text class="pico-label" x="703" y="343" transform="rotate(-90 703 343)">15</text>
           </g>
         </symbol>
-        <symbol id="component-rgb-pixel" viewBox="0 0 34 34">
-          <rect x="2" y="2" width="30" height="30" rx="3"
-            fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
-          <circle cx="17" cy="17" r="11" fill="#dbeafe" stroke="#64748b" stroke-width="2"/>
-          <circle cx="17" cy="17" r="5" fill="#93c5fd"/>
-          <path d="M10 12 Q15 7 21 10" fill="none"
-            stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+        <symbol id="component-led-body-red" viewBox="0 0 100 90">
+          <path d="M22 82 V48 C22 20 34 6 50 6 C66 6 78 20 78 48 V82 Z"
+            fill="url(#led-red-shell)" stroke="#991b1b" stroke-width="3"/>
+          <rect x="16" y="76" width="68" height="12" rx="4"
+            fill="#b91c1c" stroke="#7f1d1d" stroke-width="2"/>
+          <path d="M30 42 Q34 20 48 15" fill="none" stroke="#fff"
+            stroke-width="5" stroke-linecap="round" opacity="0.72"/>
+          <path d="M31 62 H46 L53 54 V77 H31 Z" fill="#e5e7eb" opacity="0.72"/>
+          <path d="M62 53 H70 V77 H57 V61 Z" fill="#cbd5e1" opacity="0.72"/>
+          <line x1="78" y1="39" x2="78" y2="70"
+            stroke="#7f1d1d" stroke-width="3"/>
         </symbol>
-        <symbol id="component-rgb8-module" viewBox="0 0 220 220"
-          data-shape="square" data-pixel-count="8" data-mounting-holes="4"
-          data-headers="IN,OUT">
-          <rect x="10" y="10" width="200" height="200" rx="20"
-            fill="#171717" stroke="#020617" stroke-width="4"/>
-          <g fill="#f8fafc" stroke="#84a000" stroke-width="5">
-            <circle cx="30" cy="30" r="12"/><circle cx="190" cy="30" r="12"/>
-            <circle cx="30" cy="190" r="12"/><circle cx="190" cy="190" r="12"/>
-          </g>
-
-          <use href="#component-rgb-pixel" x="93" y="28" width="34" height="34"/>
-          <use href="#component-rgb-pixel" x="139" y="47" width="34" height="34"
-            transform="rotate(45 156 64)"/>
-          <use href="#component-rgb-pixel" x="158" y="93" width="34" height="34"
-            transform="rotate(90 175 110)"/>
-          <use href="#component-rgb-pixel" x="139" y="139" width="34" height="34"
-            transform="rotate(135 156 156)"/>
-          <use href="#component-rgb-pixel" x="93" y="158" width="34" height="34"/>
-          <use href="#component-rgb-pixel" x="47" y="139" width="34" height="34"
-            transform="rotate(45 64 156)"/>
-          <use href="#component-rgb-pixel" x="28" y="93" width="34" height="34"
-            transform="rotate(90 45 110)"/>
-          <use href="#component-rgb-pixel" x="47" y="47" width="34" height="34"
-            transform="rotate(135 64 64)"/>
-
-          <text x="110" y="112" text-anchor="middle"
-            style="font:700 16px Inter,sans-serif;fill:#f8fafc">8 RGB</text>
-          <text x="110" y="130" text-anchor="middle"
-            style="font:600 10px Inter,sans-serif;fill:#94a3b8">LED MODULE</text>
-
-          <g stroke="#94a3b8" stroke-width="4">
-            <line x1="92" y1="10" x2="92" y2="0"/>
-            <line x1="110" y1="10" x2="110" y2="0"/>
-            <line x1="128" y1="10" x2="128" y2="0"/>
-            <line x1="92" y1="210" x2="92" y2="220"/>
-            <line x1="110" y1="210" x2="110" y2="220"/>
-            <line x1="128" y1="210" x2="128" y2="220"/>
-          </g>
-          <g class="pin-label" fill="#fff" text-anchor="middle">
-            <text x="92" y="23">S</text><text x="110" y="23">V</text>
-            <text x="128" y="23">G</text>
-            <text x="92" y="205">S</text><text x="110" y="205">V</text>
-            <text x="128" y="205">G</text>
-          </g>
-          <text x="62" y="23" class="pin-label" fill="#fff">OUT</text>
-          <text x="62" y="205" class="pin-label" fill="#fff">IN</text>
+        <symbol id="component-led-5mm-red" viewBox="0 0 100 145">
+          <use href="#component-led-body-red" x="0" y="0" width="100" height="90"/>
+          <line x1="38" y1="86" x2="38" y2="140"
+            stroke="#94a3b8" stroke-width="5"/>
+          <line x1="66" y1="86" x2="66" y2="124"
+            stroke="#94a3b8" stroke-width="5"/>
+          <text x="26" y="140" text-anchor="middle" class="part-note">A long</text>
+          <text x="76" y="140" text-anchor="middle" class="part-note">K short</text>
+        </symbol>
+        <symbol id="component-resistor-220" viewBox="0 0 104 24"
+          data-width="104" data-height="24" data-body-hole-span="2"
+          data-lead-hole-span="1" data-total-hole-span="4">
+          <line x1="0" y1="12" x2="104" y2="12" stroke="#a8b0ba" stroke-width="3"/>
+          <rect x="26" y="3" width="52" height="18" rx="8"
+            fill="#e7c98c" stroke="#8b6b32" stroke-width="2"/>
+          <path d="M38 5 V19 M47 5 V19" stroke="#dc2626" stroke-width="4"/>
+          <path d="M56 5 V19" stroke="#7c2d12" stroke-width="4"/>
+          <path d="M68 5 V19" stroke="#d4af37" stroke-width="3"/>
+        </symbol>
+        <symbol id="component-potentiometer" viewBox="0 0 170 150">
+          <line x1="36" y1="112" x2="36" y2="145" stroke="#94a3b8" stroke-width="5"/>
+          <line x1="85" y1="112" x2="85" y2="145" stroke="#94a3b8" stroke-width="5"/>
+          <line x1="134" y1="112" x2="134" y2="145" stroke="#94a3b8" stroke-width="5"/>
+          <rect x="20" y="52" width="130" height="65" rx="8"
+            fill="#475569" stroke="#0f172a" stroke-width="4"/>
+          <rect x="51" y="14" width="68" height="60" rx="8"
+            fill="#94a3b8" stroke="#475569" stroke-width="4"/>
+          <circle cx="85" cy="45" r="24" fill="#cbd5e1" stroke="#64748b" stroke-width="3"/>
+          <line x1="85" y1="45" x2="85" y2="25" stroke="#475569" stroke-width="5"/>
+          <text x="36" y="107" text-anchor="middle" class="pin-label">3V3</text>
+          <text x="85" y="107" text-anchor="middle" class="pin-label">WIPER</text>
+          <text x="134" y="107" text-anchor="middle" class="pin-label">GND</text>
         </symbol>
       </defs>
       <rect width="1280" height="760" rx="14" fill="#ffffff"/>
-      <text class="title" x="42" y="48">Freenove 8-RGB module · use the IN header</text>
-      <text class="subtitle" x="42" y="75">Exact physical circuit for code/teacher-tests/05_rgb_pixels.py</text>
+      <text class="title" x="42" y="48">Potentiometer only · read GP26 / ADC0</text>
+      <text class="subtitle" x="42" y="75">Exact physical circuit for code/teacher-tests/04_potentiometer.py</text>
       <g aria-label="Wire legend">
-        <line class="wire-red" x1="790" y1="42" x2="830" y2="42"/><text class="small" x="840" y="47">3.3 V</text>
-        <line class="wire-output" x1="940" y1="42" x2="980" y2="42"/><text class="small" x="990" y="47">GP16 data</text>
-        <line class="wire-black" x1="1090" y1="42" x2="1130" y2="42"/><text class="small" x="1140" y="47">GND</text>
+        <line class="wire-red" x1="760" y1="42" x2="794" y2="42"/><text class="small" x="802" y="47">3.3 V</text>
+        <line class="wire-input" x1="890" y1="42" x2="924" y2="42"/><text class="small" x="932" y="47">GP26 / ADC0</text>
+        <line class="wire-black" x1="760" y1="68" x2="794" y2="68"/><text class="small" x="802" y="73">GND</text>
       </g>
       <g filter="url(#shadow)" aria-label="Full-size landscape breadboard">
         <rect id="breadboard" x="38" y="96" width="1204" height="500" rx="14"
@@ -273,7 +263,7 @@
         <text class="tiny" x="57" y="517" fill="#2563eb">−</text>
         <text class="tiny" x="57" y="571" fill="#dc2626">+</text>
         <text class="tiny" x="1128" y="508" fill="#2563eb">GND</text>
-        <text class="tiny" x="1104" y="580" fill="#dc2626">unused</text>
+        <text class="tiny" x="1104" y="580" fill="#dc2626">3.3 V</text>
       </g>
       <g id="pico" filter="url(#shadow)" transform="translate(0 55)"
         clip-path="url(#pico-footprint-clip)"
@@ -294,78 +284,84 @@
         <rect id="pico-bottom-header" x="78" y="351" width="520" height="27"
           fill="none" stroke="none"/>
       </g>
-      <g aria-label="Canonical square Freenove 8-RGB module with separate OUT and IN headers">
-        <use href="#component-rgb8-module" x="800" y="200" width="220" height="220"
-          data-obscures-holes="810,210,1010,410"/>
+      <g aria-label="Canonical rotary potentiometer with 3V3 wiper and GND pins">
+        <use href="#component-potentiometer" x="991" y="215" width="170" height="150"
+          data-obscures-holes="1011,267,1141,332"/>
       </g>
       <g id="circuit-connections" aria-label="Pixel-exact circuit wiring and physical contacts">
 
         <line class="wire-red" x1="195" y1="229.5" x2="195" y2="121.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
+        <polyline class="wire-red" points="1001,121.5 1001,553.5"
+          data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="wire-black" x1="403" y1="445.5" x2="403" y2="526.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
-        <polyline class="wire-output" points="585,202.5 637,202.5 637,472.5 897,472.5"
+        <polyline class="wire-input" points="325,202.5 975,202.5 975,605 1209,605 1209,418.5 1079,418.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
-        <polyline class="wire-red" points="1053,121.5 1053,418.5 923,418.5"
+        <line class="wire-red" x1="1027" y1="445.5" x2="1027" y2="553.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
-        <line class="wire-black" x1="949" y1="472.5" x2="949" y2="526.5"
+        <line class="wire-black" x1="1131" y1="445.5" x2="1131" y2="526.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
-        <polyline class="component-lead" points="892,420 892,438 897,438 897,445.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#16a34a"/>
-        <polyline class="component-lead" points="910,420 910,438 923,438 923,445.5"
+        <polyline class="component-lead" points="1027,360 1027,391.5"
           data-connection-kind="connector" data-breadboard-ends="end"
           data-contact-end-color="#dc2626"/>
-        <polyline class="component-lead" points="928,420 928,438 949,438 949,445.5"
+        <polyline class="component-lead" points="1076,360 1076,376 1079,376 1079,391.5"
+          data-connection-kind="connector" data-breadboard-ends="end"
+          data-contact-end-color="#2563eb"/>
+        <polyline class="component-lead" points="1125,360 1125,376 1131,376 1131,391.5"
           data-connection-kind="connector" data-breadboard-ends="end"
           data-contact-end-color="#111827"/>
         <circle data-contact-marker="true" cx="195" cy="229.5" r="6"
           fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="195" cy="121.5" r="6"
           fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="1001" cy="121.5" r="6"
+          fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="1001" cy="553.5" r="6"
+          fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="403" cy="445.5" r="6"
           fill="#111827" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="403" cy="526.5" r="6"
           fill="#111827" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="585" cy="202.5" r="6"
-          fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="897" cy="472.5" r="6"
-          fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="1053" cy="121.5" r="6"
+        <circle data-contact-marker="true" cx="325" cy="202.5" r="6"
+          fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="1079" cy="418.5" r="6"
+          fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="1027" cy="445.5" r="6"
           fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="923" cy="418.5" r="6"
+        <circle data-contact-marker="true" cx="1027" cy="553.5" r="6"
           fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="949" cy="472.5" r="6"
+        <circle data-contact-marker="true" cx="1131" cy="445.5" r="6"
           fill="#111827" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="949" cy="526.5" r="6"
+        <circle data-contact-marker="true" cx="1131" cy="526.5" r="6"
           fill="#111827" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="897" cy="445.5" r="6"
-          fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="923" cy="445.5" r="6"
+        <circle data-contact-marker="true" cx="1027" cy="391.5" r="6"
           fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="949" cy="445.5" r="6"
+        <circle data-contact-marker="true" cx="1079" cy="391.5" r="6"
+          fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="1131" cy="391.5" r="6"
           fill="#111827" stroke="#ffffff" stroke-width="2"/>
       </g>
-      <text class="tiny" x="606" y="194">GP16 · physical pin 21</text>
+      <text class="tiny" x="336" y="194">GP26 / ADC0 · physical pin 31</text>
       <g aria-label="Safety and pre-power check inset">
         <rect x="62" y="620" width="1156" height="105" rx="12"
           fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
         <text x="84" y="646" style="font:700 13px Inter,sans-serif;fill:#9a3412">Before connecting USB</text>
-        <text class="small" x="84" y="672">✓ Cable is on the module end marked IN, not OUT.</text>
-        <text class="small" x="84" y="698">✓ IN S → GP16; IN V → 3.3 V; IN G → common GND.</text>
-        <text class="small" x="680" y="672">✓ The module is not connected to VBUS / 5 V.</text>
-        <text class="small" x="680" y="698">✓ One contact per visible hole; partner checks the unpowered circuit.</text>
+        <text class="small" x="84" y="672">✓ Potentiometer outer pins use only 3.3 V and GND; centre wiper goes to GP26.</text>
+        <text class="small" x="84" y="698">✓ The centre wiper reaches GP26 / ADC0 and neither outer pin is reversed.</text>
+        <text class="small" x="760" y="672">✓ Both 3.3 V rails are visibly linked and sourced from pin 36.</text>
+        <text class="small" x="760" y="698">✓ One contact per visible hole; partner checks while USB is disconnected.</text>
       </g>
     </svg>
-    <figcaption>Original course artwork informed by the official Freenove NeoPixel lesson. It matches <code>code/teacher-tests/05_rgb_pixels.py</code>, uses MicroPython's built-in <code>neopixel</code> module, and connects the square module's IN header only.</figcaption>
+    <figcaption>Original course artwork informed by the official Freenove Potentiometer &amp; LED lesson. It matches <code>code/teacher-tests/04_potentiometer.py</code> and isolates the three-wire ADC0 potentiometer circuit.</figcaption>
     <section class="netlist" aria-labelledby="connection-list-title">
       <h2 id="connection-list-title">Exact connection list</h2>
       <table>
         <thead><tr><th>From</th><th>Through</th><th>To</th></tr></thead>
         <tbody>
-          <tr><td>Pico GP16, physical pin 21</td><td>green data jumper</td><td>8-RGB module IN S</td></tr>
-          <tr><td>Pico 3V3(OUT), physical pin 36</td><td>labelled top 3.3 V rail and red jumper</td><td>8-RGB module IN V</td></tr>
-          <tr><td>8-RGB module IN G</td><td>black jumper and labelled bottom GND rail</td><td>Pico GND, physical pin 13</td></tr>
+          <tr><td>Pico 3V3(OUT), physical pin 36</td><td>top 3.3 V rail and right-side bridge to bottom 3.3 V rail</td><td>potentiometer 3V3 outer pin</td></tr>
+          <tr><td>potentiometer centre wiper</td><td>blue analogue-input jumper</td><td>Pico GP26 / ADC0, physical pin 31</td></tr>
+          <tr><td>potentiometer GND outer pin</td><td>bottom GND rail</td><td>Pico GND, physical pin 13</td></tr>
         </tbody>
       </table>
     </section>

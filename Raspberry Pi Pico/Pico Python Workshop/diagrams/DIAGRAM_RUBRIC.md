@@ -81,6 +81,35 @@ Reviewed against the rendered HTML/SVG, the Day 2 program, and the wiring guide.
 **Outcome:** all ten categories pass, all four critical electrical/safety
 categories score 4, and no automatic-fail condition is present.
 
+## Audit: teacher-test diagrams
+
+The isolated teacher-test diagrams were reviewed against their numbered
+programs, the wiring guide, the rendered PNGs, and the same automatic geometry
+checks as the lesson diagrams.
+
+| Diagram | Physical reference | Electrical | Pico pins | Buildability | Components | Orientation | Readability | Safety | Accessibility | Independence |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| `onboard-led.html` | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 |
+| `button-only.html` | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 |
+| `potentiometer-only.html` | 4 | 4 | 4 | 3 | 4 | 4 | 3 | 4 | 4 | 4 |
+
+The onboard test intentionally has no external electrical contacts. The
+button-only circuit preserves the 10 kΩ active-low pull-up and centre-channel
+switch orientation. The potentiometer-only circuit preserves 3.3 V, common
+ground, and the GP26/ADC0 wiper; its long separated ADC route accounts for the
+honest 3/4 buildability and readability scores. All three have **4/4**
+electrical, pin, component, orientation, and safety scores.
+
+### Routing and rail audit: teacher-test diagrams
+
+| Diagram | Conductor separation | Power-rail use | Rail geometry | Endpoint error |
+|---|---:|---:|---:|---:|
+| `onboard-led.html` | 4/4 | 4/4 | 4/4 | no external endpoints |
+| `button-only.html` | 4/4 | 4/4 | 4/4 | 0.00 px |
+| `potentiometer-only.html` | 4/4 | 4/4 | 4/4 | 0.00 px |
+
+**Outcome:** PASS. No automatic-fail condition is present.
+
 ## Routing and rail audit
 
 | Category | Score | Evidence |

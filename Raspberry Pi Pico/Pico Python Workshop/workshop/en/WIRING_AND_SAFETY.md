@@ -68,6 +68,13 @@ GPIO numbers are the names used in Python. Physical pin numbers identify the
 positions around the board. Always use the exact pin named in the current
 diagram.
 
+## Onboard LED
+
+The Pico's onboard LED needs no external components or jumper wires. The
+[onboard-LED diagram](../../diagrams/onboard-led.html) highlights its location:
+
+[![Pico with its onboard LED highlighted](../../diagrams/onboard-led.png)](../../diagrams/onboard-led.html)
+
 ## Ordinary LED
 
 Build from the
@@ -87,6 +94,10 @@ resistor.
 Build from the
 [scalable button-and-LED diagram](../../diagrams/button-and-led.html) in
 [Day 2](day-2-make-it-decide.md#1-a-button-is-a-boolean-question).
+For the isolated teacher input test, use the
+[button-only diagram](../../diagrams/button-only.html):
+
+[![Button-only GP13 circuit](../../diagrams/button-only.png)](../../diagrams/button-only.html)
 
 A four-leg tactile button has only two electrical terminals. The two legs in
 terminal A are always connected; the two legs in terminal B are always
@@ -108,6 +119,10 @@ be connected while released; A and B should connect only while pressed.
 Build from the
 [scalable potentiometer-and-LED diagram](../../diagrams/potentiometer-and-led.html)
 in [Day 2](day-2-make-it-decide.md#2-from-analogue-world-to-numbers).
+For the isolated teacher ADC test, use the
+[potentiometer-only diagram](../../diagrams/potentiometer-only.html):
+
+[![Potentiometer-only GP26 ADC0 circuit](../../diagrams/potentiometer-only.png)](../../diagrams/potentiometer-only.html)
 
 | Part | Connection |
 |---|---|

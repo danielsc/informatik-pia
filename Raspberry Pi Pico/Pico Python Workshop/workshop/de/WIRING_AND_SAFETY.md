@@ -73,6 +73,15 @@ GPIO-Nummern sind die in Python verwendeten Namen. Physische Pin-Nummern
 bezeichnen die Positionen rund um die Platine. Verwendet immer genau den Pin,
 der im aktuellen Diagramm genannt wird.
 
+## Eingebaute LED
+
+Für die eingebaute LED des Pico werden keine externen Bauteile oder
+Jumper-Kabel benötigt. Das
+[Diagramm der eingebauten LED](../../diagrams/onboard-led.html) markiert ihre
+Position:
+
+[![Pico mit markierter eingebauter LED](../../diagrams/onboard-led.png)](../../diagrams/onboard-led.html)
+
 ## Normale LED
 
 Baut nach dem
@@ -92,6 +101,10 @@ LED-Bein zum Widerstand zeigt.
 Baut nach dem
 [skalierbaren Taster-und-LED-Diagramm](../../diagrams/button-and-led.html) in
 [Tag 2](day-2-make-it-decide.md#1-ein-taster-stellt-eine-boolean-frage).
+Verwendet für den einzelnen Eingangstest der Lehrkraft das
+[Nur-Taster-Diagramm](../../diagrams/button-only.html):
+
+[![Nur-Taster-Schaltung an GP13](../../diagrams/button-only.png)](../../diagrams/button-only.html)
 
 Ein vierbeiniger Kurzhubtaster besitzt nur zwei elektrische Anschlüsse. Die
 beiden Beine von Anschluss A sind immer verbunden; ebenso die beiden Beine von
@@ -114,6 +127,10 @@ und B dürfen nur beim Drücken verbunden sein.
 Baut nach dem
 [skalierbaren Potentiometer-und-LED-Diagramm](../../diagrams/potentiometer-and-led.html)
 in [Tag 2](day-2-make-it-decide.md#2-von-der-analogen-welt-zu-zahlen).
+Verwendet für den einzelnen ADC-Test der Lehrkraft das
+[Nur-Potentiometer-Diagramm](../../diagrams/potentiometer-only.html):
+
+[![Nur-Potentiometer-Schaltung an GP26 ADC0](../../diagrams/potentiometer-only.png)](../../diagrams/potentiometer-only.html)
 
 | Teil | Verbindung |
 |---|---|
