@@ -138,6 +138,25 @@ The slides never replace the diagram's HTML connection table.
   Give sibling boxes equal visual weight and keep arrows centred between them.
 - Shorten or restructure content instead of reducing the font until crowded
   material happens to fit.
+- Before putting a fixed number of cards, steps, or labels in one row, calculate
+  whether every item fits inside the slide's content width after subtracting
+  section padding, gaps, borders, and card padding. Include the intrinsic width
+  of non-wrapping content such as inline code; `minmax(0, 1fr)` alone does not
+  guarantee that grid children will fit.
+- Keep both outer edges safe. At the target render size, inspect the first and
+  last item in every fixed-count row and confirm that their complete border,
+  label, and padding remain inside the slide content area. A clipped or only
+  partially visible final item is an automatic formatting failure.
+- Use `min-width: 0` on grid or flex children when intrinsic sizing could force
+  a track wider than the available space. Do not use `overflow: hidden` to make
+  an oversized layout appear to pass.
+- As a default, place no more than four text-bearing cards in one projected row.
+  A denser row is allowed only for short, repeated labels and only after it has
+  been measured and rendered at 1280 × 720 in both English and German.
+- If a fixed-count layout does not fit, shorten repeated labels or restructure
+  it into balanced rows. Do not solve the problem by shrinking the deck's base
+  font, letting content scroll horizontally, clipping an edge, or pushing an
+  item outside the canvas.
 - Render and visually inspect every slide at 1280 × 720 in Chromium. Automated
   overflow checks are necessary but do not detect ugly wrapping, orphaned
   separators, unbalanced boxes, or badly chosen manual line breaks.
@@ -170,6 +189,8 @@ Before calling a deck complete:
   code;
 - render every slide in Chromium at 1280 × 720;
 - check that no content is clipped or hidden beneath controls;
+- inspect the first and last items in fixed-count rows; reject partial edge
+  visibility even when the page itself reports no horizontal overflow;
 - check headings and process flows for awkward wrapping, orphaned separators,
   split words, and visibly unbalanced labels;
 - check that student-facing text contains no undefined terms or teacher-only

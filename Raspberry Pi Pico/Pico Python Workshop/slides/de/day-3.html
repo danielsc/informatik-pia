@@ -12,12 +12,13 @@
     .pixel-strip {
       display: grid;
       grid-template-columns: repeat(8, minmax(0, 1fr));
-      gap: 0.45em;
+      gap: 0.3em;
       margin: 0.9em 0;
     }
 
     .pixel-strip .card {
-      padding: 0.45em 0.2em;
+      min-width: 0;
+      padding: 0.45em 0.08em;
       text-align: center;
     }
 
@@ -26,6 +27,17 @@
       color: var(--pico);
       font-size: 1.35em;
       line-height: 1;
+    }
+
+    .pixel-strip p {
+      margin: 0.35em 0 0;
+      font-size: 0.48em;
+      line-height: 1.1;
+    }
+
+    .pixel-strip code {
+      padding-inline: 0.1em;
+      white-space: nowrap;
     }
 
     .diagram-frame.layered {
