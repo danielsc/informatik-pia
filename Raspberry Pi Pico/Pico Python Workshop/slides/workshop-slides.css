@@ -306,6 +306,20 @@ body {
   font-weight: 900;
 }
 
+.flow.equal-flow .flow-box {
+  display: flex;
+  flex: 1 1 0;
+  align-self: stretch;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.flow.equal-flow .flow-arrow {
+  flex: 0 0 auto;
+  align-self: center;
+}
+
 .diagram-slide {
   padding-top: 18px !important;
 }

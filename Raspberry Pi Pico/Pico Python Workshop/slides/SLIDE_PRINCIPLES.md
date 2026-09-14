@@ -120,7 +120,21 @@ The slides never replace the diagram's HTML connection table.
 - Keep local workshop assets local. Pin any external Reveal.js dependency to a
   specific version.
 - Avoid text or links over diagrams. Put diagram links beside the heading.
-- Check every representative slide at 1280 × 720 in Chromium.
+- Keep headings to one short idea. Do not put a long arrow-separated sequence
+  in a heading when the same sequence is already shown below it.
+- Never allow an arrow, slash, colon, or other separator to sit alone at the
+  beginning or end of a line. Put process connectors in separate layout
+  elements rather than in wrapping heading text.
+- Do not use `<br>` to split a word or compound. Avoid manual line breaks in
+  ordinary prose; when a designed break is necessary, place it between complete
+  phrases and recheck it in every language.
+- In a process flow, use short, parallel step labels with comparable detail.
+  Give sibling boxes equal visual weight and keep arrows centred between them.
+- Shorten or restructure content instead of reducing the font until crowded
+  material happens to fit.
+- Render and visually inspect every slide at 1280 × 720 in Chromium. Automated
+  overflow checks are necessary but do not detect ugly wrapping, orphaned
+  separators, unbalanced boxes, or badly chosen manual line breaks.
 
 ## 9. Required structure
 
@@ -147,9 +161,10 @@ Before calling a deck complete:
 - confirm every circuit diagram appears directly before its build/test task;
 - compare displayed pins, thresholds, values, and filenames with lesson and
   code;
-- render the title, densest code slide, every circuit slide, and challenge
-  slide in Chromium at 1280 × 720;
+- render every slide in Chromium at 1280 × 720;
 - check that no content is clipped or hidden beneath controls;
+- check headings and process flows for awkward wrapping, orphaned separators,
+  split words, and visibly unbalanced labels;
 - check that student-facing text contains no undefined terms or teacher-only
   process language;
 - run `git diff --check`.

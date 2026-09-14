@@ -57,6 +57,12 @@ meaning in German around the code instead of creating a different program.
   `euch`, and direct imperatives.
 - Prefer short, concrete instructions over literal translations of English
   idioms.
+- Reflow the translated slide deliberately. Do not preserve English `<br>`
+  positions when German words or phrases have different lengths, and never
+  split a German compound with a manual `<br>`.
+- If translated text makes a heading or process step wrap awkwardly, shorten
+  or restructure the complete idea rather than shrinking the type or accepting
+  an orphaned word or separator.
 - Use established German classroom terms, but retain the English technical
   term where students see it in Thonny or Python. For example:
   - Editor, Shell, Files;
@@ -111,8 +117,9 @@ For each matching English/German pair:
    been translated.
 3. Confirm all local links resolve from the language subfolder.
 4. Confirm every image retains meaningful alternative text in that language.
-5. Render representative slides at 1280 × 720 and check that longer German
-   text does not clip or cover diagrams.
+5. Render every translated slide at 1280 × 720. Check not only clipping but
+   also awkward wraps, orphaned separators, split compounds, and uneven process
+   steps.
 6. Read sentence fragments together with the headings, labels, or prompts that
    introduce them; reject any combination that is not grammatically correct,
    natural German.
