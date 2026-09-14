@@ -7,8 +7,6 @@ Verbindet Sensorik, Entscheidungen, Licht und Ton zu einem testbaren Produkt.
 **Python:** Zerlegung, Dictionaries, Zustand, Integration, Grenzwerttests,
 Debugging, Aufräumen<br>
 **Hardware:** HC-SR04, Treiberschaltung für passiven Buzzer, 8-RGB-Modul<br>
-**TEALS-Bezug:** Unit 8 Final Project
-
 Dies ist ein Lernprototyp für den Tisch, **kein Sicherheitssystem für echte
 Fahrzeuge**.
 

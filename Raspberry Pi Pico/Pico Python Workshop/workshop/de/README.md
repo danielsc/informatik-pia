@@ -15,12 +15,9 @@ Welt reagiert.
 **Präsentationen für Lehrkräfte:** [öffnet die veröffentlichte
 Folien-Website][slides-site] — das Repository muss nicht geklont werden.
 
-Die Lernabfolge ist an die
-[Curriculum Map von TEALS Introduction to Computer Science][teals] angelehnt.
-Die EarSketch-Einheit wird bewusst ausgelassen. Die Hardware-Aktivitäten
-verwenden die [Python-Dokumentation zum Freenove FNK0063][freenove].
+Die Hardware-Aktivitäten verwenden die
+[Python-Dokumentation zum Freenove FNK0063][freenove].
 
-[teals]: https://tealsk12.github.io/2nd-semester-introduction-to-computer-science/curriculum_map.md.html
 [freenove]: https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python.html
 [slides-site]: https://danielsc.github.io/informatik-pia/
 

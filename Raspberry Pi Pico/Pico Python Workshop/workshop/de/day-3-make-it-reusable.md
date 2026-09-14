@@ -7,8 +7,6 @@ Ordnet wiederholten Code in Funktionen und erweckt acht RGB-Pixel zum Leben.
 **Python:** Importe, Funktionen, Parameter, Rückgabewerte, Listen, Tupel,
 `for`, `range`, Indizes, verschachtelte Schleifen, lokale Variablen<br>
 **Hardware:** Freenove-8-RGB-LED-Modul, Potentiometer<br>
-**TEALS-Bezug:** Einheit 3 „Funktionen“ und Einheit 4 „Verschachtelte Schleifen und Listen“
-
 ## 1. Lernt das RGB-Modul kennen
 
 Trennt die USB-Verbindung und folgt der

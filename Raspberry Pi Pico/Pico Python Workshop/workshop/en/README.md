@@ -14,12 +14,9 @@ colour, sound, games, and a parking assistant that reacts to the real world.
 **Teacher presentations:** [open the hosted slide website][slides-site] — no
 repository clone is required.
 
-The learning sequence is adapted from the
-[TEALS Introduction to Computer Science curriculum map][teals]. The EarSketch
-unit is intentionally omitted. Hardware activities use the
+Hardware activities use the
 [Freenove FNK0063 Python documentation][freenove].
 
-[teals]: https://tealsk12.github.io/2nd-semester-introduction-to-computer-science/curriculum_map.md.html
 [freenove]: https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python.html
 [slides-site]: https://danielsc.github.io/informatik-pia/
 

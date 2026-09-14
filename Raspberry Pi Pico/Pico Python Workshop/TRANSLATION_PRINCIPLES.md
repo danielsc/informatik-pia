@@ -22,6 +22,11 @@ Translate language used to teach, guide, or assess:
   describe the workshop;
 - student-visible labels around code and circuit diagrams.
 
+Do not surface the workshop's source-curriculum provenance in either language's
+student-facing lessons, slides, navigation, or handouts. In particular, do not
+name TEALS there. Preserve required attribution in shared source notes and
+teacher-facing guides rather than translating it into student material.
+
 Do not translate material whose exact spelling is part of the technical task:
 
 - Python and MicroPython code;

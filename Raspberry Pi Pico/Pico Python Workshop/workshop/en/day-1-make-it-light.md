@@ -7,8 +7,6 @@ By the end of today, your code will send a secret message using light.
 **Python:** interpreter, script, `print`, strings, integers, floats, variables,
 assignment, comments, imports, errors<br>
 **Hardware:** onboard LED, external LED, GPIO output<br>
-**TEALS connection:** Unit 1, Introduction to Python
-
 ## 1. Meet the interpreter
 
 In Thonny's Shell, type one line at a time:

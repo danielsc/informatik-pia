@@ -19,12 +19,17 @@ links, and extension work.
   grammatical in that language.
 - Do not expose planning language such as “teaching content,” “lab launch,”
   “concept gate,” “pause point,” “scaffolding,” or curriculum mapping.
+- Do not name TEALS or any other source curriculum in student-visible slides,
+  lessons, navigation, or handouts. Students need the learning activity, not
+  its curriculum provenance. Keep required attribution and adaptation notes in
+  `SOURCES_AND_IMAGES.md`, the teacher guide, or other clearly teacher-facing
+  repository documentation.
 - Do not use a technical term before defining it in student language.
 - Prefer a concrete action or example over an abstract teaching phrase.
   For example, say “Change only `pritn` to `print`, then run it again” rather
   than “make the smallest change that tests the hypothesis.”
 - Keep curriculum mapping, expected answers, pacing, and teacher checkpoints in
-  speaker notes or the final teacher-reference slide.
+  speaker notes or clearly teacher-facing documentation.
 
 ## 2. Make the classroom state explicit
 
@@ -63,7 +68,8 @@ instruction to run it.
 - Paraphrase and redesign the material; do not reproduce a TEALS presentation.
 - Replace TEALS console labs and projects with the workshop's Pico lab, wiring
   diagram, and coding task.
-- Keep a teacher-reference slide naming the source units or lessons.
+- Keep source-unit attribution in teacher-facing documentation, never on a
+  slide that students can encounter in the deck.
 
 ## 5. Introduce every circuit with its task
 
@@ -146,7 +152,8 @@ Each deck should contain:
 4. circuit-and-task introductions at the point of use;
 5. a concrete daily challenge launch;
 6. an exit ticket;
-7. a final teacher-reference/source slide.
+7. teacher references in speaker notes or separate teacher-facing
+   documentation, not as a visible slide.
 
 The number of sections and slides may vary. Clarity is more important than
 matching another day's slide count.
@@ -167,4 +174,5 @@ Before calling a deck complete:
   split words, and visibly unbalanced labels;
 - check that student-facing text contains no undefined terms or teacher-only
   process language;
+- confirm student-visible text does not name source curricula such as TEALS;
 - run `git diff --check`.

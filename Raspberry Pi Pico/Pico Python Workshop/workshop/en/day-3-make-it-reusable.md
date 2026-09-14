@@ -7,8 +7,6 @@ Organise repeated code into functions and bring eight RGB pixels to life.
 **Python:** imports, functions, parameters, return values, lists, tuples,
 `for`, `range`, indexes, nested loops, local variables<br>
 **Hardware:** Freenove 8-RGB LED module, potentiometer<br>
-**TEALS connection:** Unit 3 Functions and Unit 4 Nested Loops and Lists
-
 ## 1. Meet the RGB module
 
 Disconnect USB and follow the

@@ -8,8 +8,6 @@ Prototyp eines Alarms.
 **Python:** Sensorfunktionen, Rückgabewerte, `None`, Dictionaries, Timeouts,
 Anforderungen, Testfälle<br>
 **Hardware:** HC-SR04, passiver Buzzer und NPN-Treiber<br>
-**TEALS-Bezug:** Einheit 6 „Dictionaries“ und Einheit 8 „Projektplanung“
-
 ## Sicherheitskontrolle
 
 Der HC-SR04 arbeitet mit 5 V, aber die GPIO-Pins des Pico vertragen nur 3.3 V.

@@ -7,8 +7,6 @@ Turn physical input into decisions, then build a reaction-time challenge.
 **Python:** Boolean values, comparisons, casting, `if`/`elif`/`else`, `while`,
 lists, indexes, `append`, `len`<br>
 **Hardware:** button, ADC, potentiometer, PWM LED<br>
-**TEALS connection:** Unit 2, Data Types and Conditionals
-
 ## 1. A button is a Boolean question
 
 Disconnect USB. Gather the tactile button, one 10 kΩ resistor, one 220 Ω

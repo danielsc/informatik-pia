@@ -7,8 +7,6 @@ Am Ende des Tages sendet euer Code eine geheime Nachricht mit Licht.
 **Python:** Interpreter, Skript, `print`, Strings, Integer, Floats, Variablen,
 Zuweisung, Kommentare, Importe, Fehler<br>
 **Hardware:** eingebaute LED, externe LED, GPIO-Ausgang<br>
-**TEALS-Bezug:** Unit 1, Einführung in Python
-
 ## 1. Lernt den Interpreter kennen
 
 Gebt in Thonnys Shell jeweils eine Zeile ein:

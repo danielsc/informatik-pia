@@ -8,8 +8,6 @@ Reaktionszeit-Challenge.
 **Python:** Boolean-Werte, Vergleiche, Casting, `if`/`elif`/`else`, `while`,
 Listen, Indizes, `append`, `len`<br>
 **Hardware:** Taster, ADC, Potentiometer, PWM-LED<br>
-**TEALS-Bezug:** Unit 2, Datentypen und Bedingungen
-
 ## 1. Ein Taster stellt eine Boolean-Frage
 
 Trennt die USB-Verbindung. Holt den Taster, einen 10-kΩ-Widerstand, einen

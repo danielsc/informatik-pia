@@ -7,8 +7,6 @@ Measure distance safely, handle unreliable data, and prototype an alarm.
 **Python:** sensor functions, return values, `None`, dictionaries, timeouts,
 requirements, test cases<br>
 **Hardware:** HC-SR04, passive buzzer and NPN driver<br>
-**TEALS connection:** Unit 6 Dictionaries and Unit 8 project planning
-
 ## Safety gate
 
 The HC-SR04 is a 5 V device, but Pico GPIO is 3.3 V-only. You must add the

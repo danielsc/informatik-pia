@@ -7,8 +7,6 @@ Integrate sensing, decisions, light, and sound into one testable product.
 **Python:** decomposition, dictionaries, state, integration, boundary testing,
 debugging, cleanup<br>
 **Hardware:** HC-SR04, passive buzzer driver, 8-RGB module<br>
-**TEALS connection:** Unit 8 Final Project
-
 This is a table-top learning prototype, **not a real vehicle safety device**.
 
 ## 1. Build in layers
