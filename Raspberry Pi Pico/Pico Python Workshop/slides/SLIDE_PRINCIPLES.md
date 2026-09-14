@@ -104,7 +104,7 @@ The slides never replace the diagram's HTML connection table.
 ## 8. Presentation and accessibility
 
 - Use a 16:9, 1280 × 720 Reveal.js canvas.
-- Keep a persistent **Full screen** button; also support Reveal's `F` key.
+- Support Reveal's `F` key for fullscreen without adding a persistent control.
 - Include speaker notes on every slide and presenter-view instructions.
 - Use large, high-contrast type suitable for projection.
 - Do not rely on colour alone; pair colour with text labels.

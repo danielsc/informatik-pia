@@ -502,28 +502,6 @@
       box-shadow: 0 5px 15px rgb(15 23 42 / 10%);
     }
 
-    #fullscreen-button {
-      position: fixed;
-      top: 14px;
-      right: 16px;
-      z-index: 100;
-      border: 1px solid #94a3b8;
-      border-radius: 99px;
-      background: rgb(255 255 255 / 92%);
-      color: var(--ink);
-      padding: 8px 14px;
-      font: 700 14px/1 Inter, ui-sans-serif, system-ui, sans-serif;
-      cursor: pointer;
-      box-shadow: 0 5px 16px rgb(15 23 42 / 14%);
-      backdrop-filter: blur(8px);
-    }
-
-    #fullscreen-button:hover,
-    #fullscreen-button:focus-visible {
-      border-color: var(--pico);
-      outline: 3px solid rgb(8 127 91 / 20%);
-    }
-
     .tiny {
       color: var(--muted);
       font-size: 0.52em;
@@ -570,17 +548,13 @@
     }
 
     @media print {
-      .footer,
-      #fullscreen-button {
+      .footer {
         display: none;
       }
     }
   </style>
 </head>
 <body>
-  <button id="fullscreen-button" type="button" title="Enter fullscreen (F)">
-    Full screen
-  </button>
   <div class="reveal">
     <div class="slides">
       <section class="title-slide">
@@ -1312,25 +1286,6 @@ led.off()
       plugins: [RevealNotes, RevealHighlight]
     });
 
-    const fullscreenButton = document.querySelector("#fullscreen-button");
-
-    if (!document.fullscreenEnabled) {
-      fullscreenButton.hidden = true;
-    } else {
-      fullscreenButton.addEventListener("click", () => {
-        if (document.fullscreenElement) {
-          document.exitFullscreen();
-        } else {
-          document.documentElement.requestFullscreen();
-        }
-      });
-
-      document.addEventListener("fullscreenchange", () => {
-        const active = Boolean(document.fullscreenElement);
-        fullscreenButton.textContent = active ? "Exit full screen" : "Full screen";
-        fullscreenButton.title = active ? "Exit fullscreen (F)" : "Enter fullscreen (F)";
-      });
-    }
   </script>
 </body>
 </html>

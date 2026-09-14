@@ -394,28 +394,6 @@ body {
   font-size: 0.38em;
 }
 
-#fullscreen-button {
-  position: fixed;
-  top: 14px;
-  right: 16px;
-  z-index: 100;
-  border: 1px solid #94a3b8;
-  border-radius: 99px;
-  background: rgb(255 255 255 / 92%);
-  color: var(--ink);
-  padding: 8px 14px;
-  font: 700 14px/1 Inter, ui-sans-serif, system-ui, sans-serif;
-  cursor: pointer;
-  box-shadow: 0 5px 16px rgb(15 23 42 / 14%);
-  backdrop-filter: blur(8px);
-}
-
-#fullscreen-button:hover,
-#fullscreen-button:focus-visible {
-  border-color: var(--pico);
-  outline: 3px solid rgb(8 127 91 / 20%);
-}
-
 @media (max-width: 900px) {
   .reveal {
     font-size: 27px;
@@ -428,8 +406,7 @@ body {
 }
 
 @media print {
-  .footer,
-  #fullscreen-button {
+  .footer {
     display: none;
   }
 }

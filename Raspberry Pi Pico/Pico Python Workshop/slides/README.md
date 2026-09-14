@@ -35,7 +35,7 @@ Useful controls:
 |---|---|
 | arrow keys or Space | move through slides and reveals |
 | `S` | open the presenter view with speaker notes and timer |
-| `F` or the **Full screen** button | enter fullscreen |
+| `F` | enter fullscreen |
 | `O` or Esc | show the slide overview |
 | `?` | show Reveal.js keyboard help |
 
