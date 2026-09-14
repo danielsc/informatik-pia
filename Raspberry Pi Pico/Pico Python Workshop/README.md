@@ -25,3 +25,6 @@ maintenance rules.
 | [`slides/workshop-slides.css`](slides/workshop-slides.css) | shared presentation design |
 | [`slides/workshop-slides.js`](slides/workshop-slides.js) | shared Reveal.js configuration |
 | [`SOURCES_AND_IMAGES.md`](SOURCES_AND_IMAGES.md) | sources, licences, and image attribution |
+## Fallback
+
+Should the hardware fail on the students and are all backups used up, then students could use this simulator envionment: https://wokwi.com/pi-pico
