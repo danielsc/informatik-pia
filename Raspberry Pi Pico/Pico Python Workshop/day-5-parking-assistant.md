@@ -13,8 +13,8 @@ This is a table-top learning prototype, **not a real vehicle safety device**.
 
 ## 1. Build in layers
 
-Use the final pin plan in
-[Wiring and safety](WIRING_AND_SAFETY.md#final-parking-assistant-pin-plan).
+Use the combined pin plan in
+[Wiring and safety](WIRING_AND_SAFETY.md#combined-builds).
 Keep USB disconnected until an instructor has checked the HC-SR04 divider,
 5 V wiring, transistor orientation, and common grounds.
 
@@ -34,36 +34,21 @@ ultrasonic-ranging, buzzer, and NeoPixel lessons.
 | passive buzzer driver | GP15 through 1 kΩ to NPN base | 5 V and GND |
 | 8-RGB module IN | GP16 | 3.3 V and GND |
 
-```text
-Complete parking assistant
+Do not wire everything and immediately run the final endless loop. Build and
+test one layer at a time:
 
-                       ┌──────── HC-SR04 ────────┐
-Pico VBUS / 5 V ──────>│ VCC                     │
-Pico GP19 ────────────>│ Trig                    │
-Pico GP18 <──●── 1 kΩ ─│ Echo                    │
-             │         │ GND ───────────────┐    │
-            2 kΩ       └────────────────────│────┘
-             │                              │
-Pico GND ────┴──────────────────────────────┴──────── common GND
-
-Pico GP15 ── 1 kΩ ──> NPN base
-Pico VBUS ──> passive buzzer ──> NPN collector
-Pico GND ──────────────────────> NPN emitter
-
-Pico GP16 ─────────────────────> RGB module S (IN)
-Pico 3.3 V ────────────────────> RGB module V
-Pico GND ──────────────────────> RGB module G
-```
-
-Do not begin with the final endless loop. Test in this order:
-
-1. Run Day 4's distance test.
-2. Run Day 4's buzzer test.
-3. Run Day 3's RGB colour test.
-4. Test `classify_distance()` with fixed numbers.
-5. Combine measurement and visual state with sound muted.
-6. Add short buzzer feedback.
-7. Test invalid input by pointing the sensor away from useful targets.
+1. With USB disconnected, build the HC-SR04 and Echo-divider part of the final
+   diagram. Get an instructor check, then run Day 4's distance test.
+2. Stop the program, disconnect USB, and add the transistor-driven buzzer.
+   Reconnect only after checking `E/B/C`, then run Day 4's buzzer test.
+3. Stop, disconnect, and add the RGB module's `IN` header on 3.3 V. Run Day 3's
+   RGB colour test.
+4. Stop and compare the whole build with the final HTML connection table. Get
+   one final instructor check of 5 V, 3.3 V, the divider, and common ground.
+5. Test `classify_distance()` with fixed numbers before using live readings.
+6. Combine measurement and RGB output with sound muted.
+7. Add short buzzer feedback, then test invalid input by pointing the sensor
+   away from useful targets.
 
 ## 2. Agree on requirements
 
@@ -94,6 +79,10 @@ Start from
 [`code/day-5/parking_assistant_starter.py`](code/day-5/parking_assistant_starter.py).
 Use [`code/day-5/parking_assistant.py`](code/day-5/parking_assistant.py) only
 for comparison, recovery, or teacher demonstration.
+
+The starter deliberately supplies imports, pin setup, cleanup, and function
+names. Students complete logic using concepts already taught: conditions,
+functions, return values, loops, and dictionary lookups.
 
 ## 4. Required behaviour
 

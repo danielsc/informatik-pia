@@ -25,13 +25,14 @@ unit is intentionally omitted. Hardware activities use the
 |---|---|---|---|---|
 | [1](day-1-make-it-light.md) | How does code make something happen? | scripts, `print`, values, variables, errors | onboard and external LEDs | Secret Signal Machine |
 | [2](day-2-make-it-decide.md) | How does a computer react? | input, Booleans, comparisons, conditionals, `while`, lists | button, potentiometer, LED, PWM | Reaction-Time Challenge |
-| [3](day-3-make-it-reusable.md) | How do we avoid repeating ourselves? | imports, functions, parameters, returns, `for`, `range`, indexes | 8-RGB LED module, potentiometer | Pixel Pet |
+| [3](day-3-make-it-reusable.md) | How do we avoid repeating ourselves? | functions, parameters, returns, `for`, `range`, indexes | 8-RGB LED module, potentiometer | Pixel Pet |
 | [4](day-4-make-it-sense.md) | How can code measure the world? | sensor values, dictionaries, timeouts, decomposition, testing | HC-SR04 and passive buzzer | Proximity Alarm Prototype |
 | [5](day-5-parking-assistant.md) | How do separate parts become a product? | integration, state, debugging, requirements, test cases | distance, sound, RGB display | Parking Assistant |
 
 ## Start here
 
-1. Read [Wiring and safety](WIRING_AND_SAFETY.md) before connecting components.
+1. Read the [shared wiring and safety reference](WIRING_AND_SAFETY.md), then
+   build only from the rendered diagram in the current day's lesson.
 2. Open Thonny and select **MicroPython (Raspberry Pi Pico)** at the lower right.
 3. Work in pairs: one **driver** types and one **navigator** checks the circuit
    and explains the code. Swap roles every 20 minutes.
@@ -42,6 +43,28 @@ unit is intentionally omitted. Hardware activities use the
 
 The examples are deliberately small. Type them, run them, change them, predict
 what will happen, and only then move to the challenge.
+
+Some supplied programs contain a `try`/`except`/`finally` safety wrapper so
+`Ctrl+C` turns outputs off. You are not expected to write that wrapper from
+memory. Focus on the new code identified in the lesson; the wrapper is provided
+scaffolding.
+
+## Python learning progression
+
+Each idea is taught before a challenge requires students to use it:
+
+| Day | New student-owned ideas | Earlier ideas practised again |
+|---|---|---|
+| 1 | values, types, variables, assignment, scripts, errors | none |
+| 2 | casting, Booleans, comparisons, `if`/`elif`/`else`, lists, `while` | variables and debugging |
+| 3 | function calls, parameters, `return`, `for`, `range`, indexes, nested loops | conditionals and lists |
+| 4 | `None`, dictionaries, sensor functions, timeouts | functions, loops, and conditionals |
+| 5 | requirements, integration, boundary tests, state configuration | all earlier ideas |
+
+Library-specific setup such as `Pin`, `PWM`, `NeoPixel`, and
+`time_pulse_us` is supplied and explained as hardware vocabulary. Students are
+expected to modify the Python logic only after the corresponding concept has
+been introduced.
 
 ## What success looks like
 
@@ -63,7 +86,8 @@ By Friday, you should be able to:
 | File | Purpose |
 |---|---|
 | [Teacher guide](TEACHER_GUIDE.md) | preparation, pacing, assessment, differentiation, and answers |
-| [Wiring and safety](WIRING_AND_SAFETY.md) | reusable pin tables and safe final circuit |
+| [Teacher slides](slides/README.md) | Reveal.js teaching decks with presenter notes |
+| [Wiring and safety](WIRING_AND_SAFETY.md) | shared safety rules, diagram-reading routine, and reusable pin reference |
 | [Sources and images](SOURCES_AND_IMAGES.md) | official visual references and attribution |
 | [`code/`](code/) | runnable examples, challenge starters, and solutions |
 
@@ -71,4 +95,3 @@ By Friday, you should be able to:
 
 This is a learning prototype, **not a safety device**. Never use the parking
 assistant to guide a real vehicle or protect people or property.
-

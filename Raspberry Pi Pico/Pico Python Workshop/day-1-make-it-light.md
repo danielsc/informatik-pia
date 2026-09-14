@@ -74,22 +74,20 @@ Change only these values:
 
 ```python
 message = "Team Comet"
-flash_count = 6
 on_time = 0.15
 off_time = 0.35
 ```
 
-Which changes affect text, repetition, and timing? Why is `flash_count` an
-integer while `on_time` is a float?
+Which change affects text, and which changes affect timing? Why are the timing
+values floats rather than strings?
+
+The file repeats three similar blocks of code on purpose. Do not worry about
+shortening them yet. On Day 3, you will learn loops and functions that remove
+this kind of repetition.
 
 ## 4. Build an external LED
 
 Disconnect USB first.
-
-![Freenove external LED connection](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter01_20.png)
-
-Use the [official Freenove LED lesson](https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python/1_LED_%28Important%29.html)
-and the [course wiring table](WIRING_AND_SAFETY.md#ordinary-led).
 
 Open the
 [scalable, accessible ordinary-LED diagram](diagrams/ordinary-led.html) and
@@ -103,7 +101,9 @@ Reconnect only after both partners check:
 - the LED's long and short legs are correctly oriented;
 - GND and GP15 are not directly connected.
 
-Replace `Pin("LED", Pin.OUT)` with `Pin(15, Pin.OUT)`.
+Make a copy of `code/day-1/02_variable_blink.py`. In the copy, replace
+`Pin("LED", Pin.OUT)` with `Pin(15, Pin.OUT)`, then run the smallest external
+LED test before changing the pattern.
 
 ## 5. Debugging relay
 
@@ -126,7 +126,7 @@ Invent a signal with:
 - a printed team name;
 - at least two named timing variables;
 - short and long flashes;
-- a pause between letters or symbols;
+- a clear pause between groups of flashes;
 - comments explaining the message;
 - a clean final `off` state.
 
@@ -139,7 +139,7 @@ Morse-code initials.
 
 ### Demo checklist
 
-- Can another team recognise where one symbol ends?
+- Can another team tell where one group of flashes ends and the next begins?
 - Can you change speed by editing only variables?
 - Can you explain the difference between the program and the output?
 

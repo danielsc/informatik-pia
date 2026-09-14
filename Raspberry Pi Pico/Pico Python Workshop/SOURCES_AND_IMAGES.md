@@ -15,6 +15,20 @@ The source repository is archived and no longer maintained. This workshop
 adapts the concept sequence, omits EarSketch, and replaces screen-only examples
 with physical computing activities.
 
+The [teacher Reveal.js decks](slides/README.md) were developed from the actual
+TEALS slide decks and lesson documents:
+
+- Day 1: Unit 1 lessons 1.01-1.05;
+- Day 2: Unit 2 lessons 2.01-2.06;
+- Day 3: Unit 3 lessons 3.01-3.04 and Unit 4 lessons 4.01-4.04;
+- Day 4: Unit 3 return-value material, Unit 6 dictionary lessons, and Unit 8
+  planning material;
+- Day 5: Unit 8 lesson documents, final-project organizer, development plan,
+  and rubric.
+
+The workshop decks paraphrase and reorganise the teaching sequence. They do
+not copy the original TEALS slides, and their Pico labs replace the TEALS labs.
+
 [teals-map]: https://tealsk12.github.io/2nd-semester-introduction-to-computer-science/curriculum_map.md.html
 [teals-repo]: https://github.com/TEALSK12/2nd-semester-introduction-to-computer-science
 
@@ -55,4 +69,3 @@ HC-SR04 Echo is a 5 V signal and RP2040 GPIO is 3.3 V-only. See
 If this workshop is distributed as an adaptation of TEALS or Freenove
 materials, preserve the relevant attribution, non-commercial, and share-alike
 terms. This note is practical attribution guidance, not legal advice.
-

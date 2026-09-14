@@ -20,8 +20,6 @@ the module header marked `IN`.
 
 ![Freenove square 8-RGB module IN header wired to GP16](diagrams/rgb8-module.png)
 
-![Freenove 8-RGB module connection](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter06_05.png)
-
 The official
 [Freenove NeoPixel lesson](https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python/6_NeoPixel.html)
 uses a custom library. Our code uses MicroPython's built-in `neopixel` module,
@@ -38,8 +36,53 @@ BLUE = (0, 0, 30)
 ```
 
 Keep values low; `255, 255, 255` is unnecessarily bright.
+The first program repeats the same fill-write-print-sleep pattern for each
+colour. Leave that repetition visible for now; the next sections show how
+functions and loops improve it.
 
-## 2. A `for` loop visits each index
+## 2. Functions name reusable jobs
+
+You have already called built-in and hardware functions such as `print(...)`,
+`sleep_ms(...)`, and `pixels.fill(...)`. An **argument** is a value supplied
+inside the parentheses.
+
+A user-defined function starts with `def`:
+
+```python
+def level_to_colour(percent):
+    if percent < 33:
+        return (0, 0, 25)
+    return (0, 25, 0)
+
+colour = level_to_colour(20)
+```
+
+`percent` is a parameter: the local name that receives an argument. `return`
+sends a value back to the calling code. It does not print the value.
+
+Try this smaller function in the Shell before editing an animation:
+
+```python
+def doubled(number):
+    return number * 2
+
+print(doubled(4))
+```
+
+## 3. A `for` loop visits each item or index
+
+First print a known sequence:
+
+```python
+for index in range(8):
+    print(index)
+```
+
+`range(8)` produces 0 through 7. The indented line runs once for each value,
+and `index` stores the current value. Those are exactly the valid pixel
+indexes.
+
+Now apply that loop to the hardware:
 
 ```python
 for index in range(8):
@@ -47,8 +90,7 @@ for index in range(8):
     pixels.write()
 ```
 
-`range(8)` produces 0 through 7, exactly the valid pixel indexes. What error do
-you predict for `pixels[8]`?
+What error do you predict for `pixels[8]`?
 
 Run [`code/day-3/02_pixel_functions.py`](code/day-3/02_pixel_functions.py).
 Find:
@@ -61,7 +103,11 @@ Find:
 
 Explain why returning a colour is more reusable than printing a colour.
 
-## 3. Write functions before animations
+The final two loops in that file are nested: the inner loop finishes all its
+work for each value chosen by the outer loop. Trace a two-item example on
+paper before changing it.
+
+## 4. Write one function at a time
 
 Implement and test these one at a time:
 
@@ -83,6 +129,18 @@ A function is a promise: given suitable inputs, it performs one named job.
 Keep the RGB module on GP16. Add the potentiometer on GP26 using 3.3 V and GND.
 There is no ordinary LED in this build.
 
+Keep the three RGB connections from the Day 3 diagram, then add:
+
+| Potentiometer pin | Connection |
+|---|---|
+| `3V3` outer pin | the same powered 3.3 V rail as RGB `IN V` |
+| centre `WIPER` | GP26 / ADC0 |
+| `GND` outer pin | the same common GND rail as RGB `IN G` |
+
+Stop the RGB test and disconnect USB before adding the potentiometer. Partner
+check the three new contacts, reconnect, and print raw ADC values before
+starting the Pixel Pet.
+
 Start from [`code/day-3/03_pixel_pet_starter.py`](code/day-3/03_pixel_pet_starter.py).
 The knob controls the pet's “energy”:
 
@@ -98,6 +156,9 @@ Requirements:
 - at least one `for` loop visits all pixels;
 - at least one animation uses a pixel index;
 - the loop prints energy and state for debugging.
+
+The supplied `try`/`finally` block turns all pixels off when the program stops.
+You do not need to write that safety wrapper yourself.
 
 ### Stretch ideas
 

@@ -11,8 +11,8 @@ lists, indexes, `append`, `len`
 
 ## 1. A button is a Boolean question
 
-Disconnect USB and build the
-[button circuit](WIRING_AND_SAFETY.md#button).
+Disconnect USB. Gather the tactile button, one 10 kΩ resistor, one 220 Ω
+resistor, one red LED, and jumper wires.
 
 [Open the course's scalable HTML wiring diagram](diagrams/button-and-led.html).
 It shows the Pico connections, breadboard orientation, internal button
@@ -20,41 +20,17 @@ contacts, and pre-power checks.
 
 ![Button and LED breadboard wiring](diagrams/button-and-led.png)
 
-![Freenove Button & LED connection](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter02_04.png)
+Build in this order:
 
-The picture does not make the button's orientation obvious. A four-leg tactile
-button contains only two electrical terminals. The two legs in terminal A are
-always connected to each other, and the two legs in terminal B are always
-connected to each other. Pressing the button joins A to B.
+1. Match the Pico's USB-left orientation.
+2. Place the button across the centre channel exactly as shown.
+3. Add the 10 kΩ pull-up and 220 Ω LED resistor.
+4. Add power, ground, GP13, and GP15 wires.
+5. Read the HTML connection table aloud while a partner points to each hole.
 
-```text
-Released                              Pressed
-
-A1 o────o A2       B1 o────o B2       A1 o────o A2
-   one terminal       one terminal        │
-                                          │
-                                      B1 o────o B2
-
-A and B are separate.                 A and B are connected.
-```
-
-Place the button across the breadboard's centre channel so each permanent pair
-crosses the channel. Terminal A is the left pair and terminal B is the right
-pair:
-
-```text
-      terminal A       terminal B
-          │                │
- top     A1 o            o B1
-             ╔════════╗
- channel     ║ button ║
-             ╚════════╝
- bottom  A2 o            o B2
-          │                │
-          └ always joined  └ always joined
-
-Pressing joins terminal A to terminal B.
-```
+A four-leg tactile button contains only two electrical terminals. The two blue
+legs marked A in the diagram are always connected, and the two red legs marked
+B are always connected. Pressing joins A to B.
 
 Before connecting USB, use a multimeter in continuity mode if available:
 
@@ -78,6 +54,10 @@ else:
     led.off()
 ```
 
+`if` chooses one path when its Boolean condition is `True`; `else` chooses the
+other path. The supplied `while True` keeps asking the button question until
+you press Stop or `Ctrl+C`.
+
 The 10 kΩ pull-up resistor makes GP13 read `1` while the button is released.
 Pressing connects GP13 to ground, making it read `0`. `not` converts that
 active-low electrical signal into a natural Python value: `pressed` is `True`
@@ -97,12 +77,6 @@ pressed or time_is_up
 A digital input has two states. A potentiometer can produce many values.
 Disconnect USB and build the circuit below.
 
-![Freenove potentiometer and LED connection](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter10_01.png)
-
-Follow the
-[Freenove Potentiometer & LED page](https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python/10_Potentiometer_%26_LED.html)
-and [course wiring instructions](WIRING_AND_SAFETY.md#potentiometer-and-pwm-led).
-
 Open the
 [scalable, accessible potentiometer-and-LED diagram](diagrams/potentiometer-and-led.html)
 for exact breadboard contacts and the connection table.
@@ -120,6 +94,26 @@ percent = int(raw_value / 65535 * 100)
 
 Here `int(...)` casts a float to an integer. Record values near 0%, 25%, 50%,
 75%, and 100%. Real measurements will not be exact.
+
+PWM brightness uses a value from 0 to 65535:
+
+```python
+led.duty_u16(0)      # off
+led.duty_u16(20000)  # dim
+led.duty_u16(65535)  # full brightness
+```
+
+An `elif` adds another possible path. Python runs only the first branch whose
+condition is true:
+
+```python
+if points >= 10:
+    print("gold")
+elif points >= 5:
+    print("silver")
+else:
+    print("bronze")
+```
 
 ### Threshold challenge
 
@@ -145,35 +139,145 @@ print(min(times))
 
 Indexes start at zero. Predict what `times[-1]` returns.
 
+## 4. A `while` loop repeats while a condition is true
+
+A game must keep checking the button while it waits:
+
+```python
+while button.value():
+    sleep_ms(1)
+```
+
+Read this as: “while the button is released, wait 1 ms and check again.” The
+loop stops when `button.value()` becomes `0`. Unlike `while True`, this loop
+has a condition that can become false.
+
+The opposite wait uses `not`:
+
+```python
+while not button.value():
+    sleep_ms(10)
+```
+
+Read this as: “while the button is pressed, wait until it is released.” Test
+both loops with print statements before putting them inside the game.
+
+Predict which loop is suitable for each job:
+
+- keep the whole game running;
+- wait until the button is pressed;
+- repeat until five scores have been stored.
+
+The reaction-game file also uses supplied timing tools such as `randint()` and
+`ticks_ms()`. You may call those tools without knowing how they are built.
+
+### Ready check before the game
+
+Everything students must write in the baseline has now been practised:
+
+| Game code | Where it was introduced |
+|---|---|
+| variables and assignment | Day 1 |
+| active-low `button.value()` | Day 2, section 1 |
+| `if`/`else` and comparisons | Day 2, sections 1 and 2 |
+| `scores = []`, `append`, `len`, and `min` | Day 2, section 3 |
+| `while` with a condition | Day 2, section 4 |
+| calling supplied tools such as `sleep_ms()` | examples since Day 1 |
+
+The baseline does **not** require `for`, `range`, `def`, dictionaries, or an
+endless `while True` loop. Those ideas are either taught later or remain inside
+provided scaffolding. `randint()`, `ticks_ms()`, and `ticks_diff()` are supplied
+timing tools; students only use the call patterns listed below.
+
 ## Daily build: Reaction-Time Challenge
 
-Rebuild the button and LED circuit. Run
-[`code/day-2/03_reaction_game.py`](code/day-2/03_reaction_game.py).
+Rebuild the button and LED circuit. Start from
+[`code/day-2/03_reaction_game_starter.py`](code/day-2/03_reaction_game_starter.py).
+The starter supplies imports, pin setup, an empty `scores` list, and safe LED
+cleanup. **You write the game.**
 
-Game flow:
+The first version is deliberately smaller than a commercial reaction game:
+three rounds, no false-start detector, and two result categories.
 
-1. Release the button.
-2. Pico waits for a random interval.
-3. Pressing too early is a false start.
-4. The LED turns on.
-5. Pico measures milliseconds until the press.
-6. An `if` statement classifies the result.
-7. Five scores are stored in a list.
+### Step 1: write the plan as comments
 
-### Your modifications
+Put these ideas in the correct order before writing Python:
 
-Complete at least two:
+- repeat until the score list contains three results;
+- wait until the button is released;
+- wait a random amount of time;
+- turn on the LED and remember the start time;
+- wait while the button is released;
+- calculate the elapsed time and turn off the LED;
+- add the result to the list;
+- classify and print the result.
 
-- choose your own result categories;
-- make the onboard LED celebrate a personal best;
+### Step 2: build one working round
+
+Use the supplied tools:
+
+- `randint(1000, 3000)` chooses the wait in milliseconds;
+- `sleep_ms(wait_ms)` performs that wait;
+- `ticks_ms()` records a clock reading;
+- `ticks_diff(end, start)` calculates elapsed milliseconds.
+
+Write and test one round before adding the outer game loop. The LED must turn
+off after the press, and the Shell must print a believable reaction time.
+Remember that this active-low button reads `1` when released and `0` when
+pressed; use one `while` loop to wait for release and another to wait for the
+press.
+
+### Step 3: add a decision
+
+Write your own `if`/`else`:
+
+- below 350 ms prints `Quick!`;
+- 350 ms or more prints `Keep practising!`.
+
+Change the boundary after the first successful test and predict which results
+will be classified differently.
+
+### Step 4: turn one round into three
+
+Wrap the working round in:
+
+```python
+while len(scores) < ROUNDS:
+    # your tested one-round code goes here
+```
+
+This is a bounded loop, not an endless loop. It stops as soon as the list
+contains three scores. The button-wait loops stop when the button changes
+state.
+
+Append each `reaction_ms` to `scores`. When the loop finishes, print the whole
+list and the fastest result with `min(scores)`.
+
+The supplied `try`/`except`/`finally` wrapper is safety scaffolding, not syntax
+you must write today. Use
+[`code/day-2/03_reaction_game_solution.py`](code/day-2/03_reaction_game_solution.py)
+only for recovery or comparison after your three-round version works.
+
+### Extensions
+
+Choose one only after the baseline works:
+
+- detect a press before the LED and report a false start;
 - calculate the average with `sum(scores) / len(scores)`;
-- add a sixth “championship” round;
-- make false starts add a penalty;
+- add a third result category with `elif`;
+- celebrate a personal best;
+- increase the game to five rounds;
 - create a two-player version.
+
+The optional
+[`code/day-2/03_reaction_game_extension.py`](code/day-2/03_reaction_game_extension.py)
+shows one possible false-start implementation after students have designed
+their own.
 
 ### Demo checklist
 
-- Show one false start.
+- Show one complete timed round.
+- Show all three stored scores.
 - Explain why the main program needs a `while` loop.
 - Point to the Boolean expression that ends a wait.
 - Explain why each score is an integer.

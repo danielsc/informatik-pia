@@ -16,6 +16,10 @@ The rhythm for each activity is:
 5. **Change** one thing and predict again.
 6. **Challenge** students to combine ideas without copying a full solution.
 
+Use the [teacher Reveal.js slides](slides/README.md) for the explicit teaching
+and guided-practice portion. The daily Markdown lesson remains the student lab
+sheet with wiring diagrams, code links, and build criteria.
+
 ## Before the week
 
 - Install current Thonny and MicroPython firmware on every Pico.
@@ -57,6 +61,38 @@ debugging is often more valuable than a polished lecture.
 | Day 4 | Unit 6 and Unit 8 preparation | dictionaries as configuration, decomposition, requirements, testing |
 | Day 5 | Unit 8: Final Project | integration, scope, iterative implementation, test evidence |
 
+## Concept gates
+
+The TEALS source course spends several class periods on each unit. This
+five-day workshop compresses that sequence, so every day needs a short,
+explicit teach-practise-apply cycle. Do not treat syntax found only in supplied
+scaffolding as already learned.
+
+| Before students are asked to use... | Teach and practise first |
+|---|---|
+| variables in the Day 1 signal | values, types, assignment, and changing one value |
+| conditions in the Day 2 challenge | Boolean expressions followed by `if`/`elif`/`else` |
+| lists in the reaction game | creation, index 0, `append`, `len`, and `min` |
+| `while` in the reaction game | a visible condition that changes from true to false |
+| user-defined functions on Day 3 | calls, arguments, parameters, and `return` |
+| `for` and `range` on Day 3 | print 0-7 before using those indexes on pixels |
+| nested loops in animations | trace a tiny two-by-two example on paper |
+| dictionaries on Day 4 | create, access, and update one flat dictionary |
+| integrated Day 5 logic | rerun one known-working test for each hardware layer |
+
+The TEALS progression teaches Unit 1 fundamentals, Unit 2
+Booleans/conditionals/lists/`while`, Unit 3 functions, Unit 4 `for` and nested
+loops, Unit 6 dictionaries, and Unit 8 project planning. This workshop keeps
+that dependency order even though several units share a single workshop day.
+
+`try`/`except`/`finally`, hardware constructors, and timing-library details are
+provided safety scaffolds. Point out what they accomplish, but do not assess
+students on reproducing them.
+
+Day 1 deliberately leaves repeated flash blocks visible. Day 3 should refer
+back to that code when functions and loops are introduced: students first see
+the problem, then learn the abstraction that solves it.
+
 ## Formative assessment
 
 Use these prompts while circulating:
@@ -86,12 +122,26 @@ Daily exit tickets:
 
 Minimum: a named message, at least two timing variables, and a recognisable LED
 pattern. Strong work adds an external LED and comments that explain intent.
+Present [`slides/day-1.html`](slides/day-1.html) before launching the lab. Its
+speaker notes include questions, demonstrations, expected answers, circuit
+safety reminders, and suggested transition points.
 
 ### Day 2: Reaction-Time Challenge
 
-Minimum: random wait, early-press detection, measured reaction time, and a
-classification using `if`/`elif`/`else`. Strong work stores five scores in a
-list and reports the fastest.
+Minimum: students write a random wait, measure one button press, classify it
+with `if`/`else`, repeat for three rounds with `while`, append each score, and
+report the fastest. Strong work adds `elif`, an average, or false-start
+detection. Do not require students to reproduce the supplied hardware setup or
+cleanup wrapper.
+
+Before releasing the starter, check that students can explain
+`while len(scores) < ROUNDS` and both button-state wait loops. None is endless:
+the score loop stops at three items, and each button loop stops when the input
+changes. `randint`, `ticks_ms`, and `ticks_diff` are provided APIs, not
+implementation objectives.
+
+Present [`slides/day-2.html`](slides/day-2.html) before and between the button,
+potentiometer, and reaction-game tasks.
 
 ### Day 3: Pixel Pet
 
@@ -99,13 +149,23 @@ Minimum: three states selected by potentiometer input and displayed by
 functions on the RGB module. Strong work gives each state a short animation
 using indexed pixels.
 
+Present [`slides/day-3.html`](slides/day-3.html) before the RGB build and use
+its function, loop, and Pixel Pet sections as the corresponding tasks begin.
+
 ### Day 4: Proximity Alarm Prototype
 
 Minimum: valid distance measurement, safe/caution/stop classification, and
 different buzzer behaviour. Strong work handles no echo without freezing and
 records calibration evidence.
 
+Present [`slides/day-4.html`](slides/day-4.html) in sections so each safety
+diagram immediately precedes the sensor, buzzer, or combined build.
+
 ### Day 5: Parking Assistant
+
+Present [`slides/day-5.html`](slides/day-5.html) while students move through
+requirements, layered hardware integration, function-by-function
+implementation, testing, and demonstration.
 
 Minimum acceptance criteria:
 
@@ -167,7 +227,7 @@ At the end of each day:
 - stop the running script;
 - turn off PWM and RGB LEDs;
 - unplug USB;
-- keep Day 2's potentiometer circuit for Day 3 if space permits;
+- keep Day 2's potentiometer and its 3.3 V/GND wiring for Day 3 if space
+  permits, but remove the ordinary LED before adding the RGB module;
 - dismantle the Day 3 circuit before the Day 4 high-voltage build;
 - count components and store resistors separately by value.
-

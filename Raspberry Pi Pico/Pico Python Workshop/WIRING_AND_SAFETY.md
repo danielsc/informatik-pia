@@ -1,33 +1,54 @@
-# Wiring and Safety
+# Wiring and Safety Reference
 
-Original course diagrams are evaluated with the
-[Wiring Diagram Quality Rubric](diagrams/DIAGRAM_RUBRIC.md). Critical
-electrical, pin, component, switch, and safety categories must score 4/4.
+Use this file as a shared safety and pin reference. It is **not** a second set
+of build instructions. For each activity, follow the rendered diagram in that
+day's lesson and use the exact connection table below the scalable HTML
+diagram.
 
 ## Rules for every build
 
-1. Disconnect USB before adding, removing, or moving wires.
-2. Ask a partner to compare the circuit with the pin table.
-3. Use a resistor in series with every ordinary LED.
-4. Never connect VBUS (5 V) to a GPIO or directly to GND.
-5. Make all grounds common when circuits use both 3.3 V and 5 V.
-6. Keep drinks away from the work area.
-7. Stop immediately if anything becomes hot or smells unusual.
-8. Do not hold a buzzer near an ear. Use short, low-duty sounds.
+1. Stop the program and disconnect USB before changing any wire or component.
+2. Build only from the course diagram for the current activity.
+3. Put one wire or component lead in each breadboard hole.
+4. Ask a partner to compare every connection with the diagram's table.
+5. Use a resistor in series with every ordinary LED.
+6. Never connect VBUS (5 V) to a GPIO or directly to GND.
+7. Make all grounds common when a circuit uses both 3.3 V and 5 V.
+8. Stop immediately if anything becomes hot or smells unusual.
+9. Do not hold a buzzer near an ear. Use short, quiet sounds.
 
 The Pico's GPIO pins use **3.3 V logic and are not 5 V tolerant**.
 
-```text
-Safe power overview
+## How to build from a course diagram
 
-USB ──> Pico
-         │
-         ├── VBUS (5 V) ─────> only components that require 5 V
-         ├── 3V3(OUT) ───────> 3.3 V components and pull-up resistors
-         ├── GPIO ────────────> signals only; never connect to 5 V
-         └── GND ─────┬──────> every component ground
-                      └───────> one shared reference for the circuit
-```
+Each coloured dot in a diagram marks the centre of one real breadboard hole.
+A wire or component lead ends in that hole; two physical contacts never share
+one hole.
+
+1. **Gather parts.** Check resistor values and component names before placing
+   anything.
+2. **Orient the Pico.** Match the USB-left Pico shown in the course diagram.
+3. **Place component bodies.** Put the sensor, button, LED, module, or
+   transistor in the shown orientation before adding wires.
+4. **Connect power and ground.** A coloured rail is not powered until a wire
+   visibly connects it to Pico `3V3(OUT)`, `VBUS`, or `GND`.
+5. **Add signal wires and resistors.** Follow each coloured route from one dot
+   to the next. Use the HTML connection table when a route is hard to see.
+6. **Check polarity and direction.** Look for LED `A/K`, transistor `E/B/C`,
+   sensor pin names, and the RGB module's `IN` header.
+7. **Partner-check while unplugged.** Read the connection table aloud while a
+   partner points to each physical contact.
+8. **Connect USB and run the smallest test.** Stop and unplug again before
+   correcting wiring.
+
+## Power and signal quick reference
+
+| Pico connection | Voltage or role | Safe use |
+|---|---|---|
+| `VBUS` | about 5 V from USB | HC-SR04 and buzzer supply only |
+| `3V3(OUT)` | regulated 3.3 V | potentiometer, RGB module, pull-up resistors |
+| GPIO | 3.3 V signal | input or output named by the program |
+| `GND` | 0 V reference | shared return for every part of the circuit |
 
 ## Pico pins used in this course
 
@@ -41,324 +62,134 @@ USB ──> Pico
 | potentiometer analogue input | GP26 / ADC0 | 31 |
 | 3.3 V | 3V3(OUT) | 36 |
 | USB 5 V | VBUS | 40 |
-| diagram ground connections | GND | 13, 23, or 38 (use the pin named in the diagram) |
+| diagram ground connections | GND | 13, 23, or 38 |
 
-Check the printed labels on the Pico. **GPIO numbers are not physical pin
-numbers.**
-
-```text
-Simplified course pin map -- USB connector at the top
-
-                    ┌───────────────┐
-                    │      USB      │
-                    │               │
- buzzer/LED  GP15 20├               ├21 GP16  RGB data
- shared GND  GND  23├               ├24 GP18  Echo input
- trigger     GP19 25├               │
-                    │               ├31 GP26  potentiometer
-                    │               ├36 3V3   3.3 V power
-                    │               ├40 VBUS  USB 5 V
-                    └───────────────┘
-
-The physical pin number is the number beside the board edge.
-The GPIO number is the GP label used in Python.
-```
+GPIO numbers are the names used in Python. Physical pin numbers identify the
+positions around the board. Always use the exact pin named in the current
+diagram.
 
 ## Ordinary LED
 
-Open the
-[scalable, accessible ordinary-LED diagram](diagrams/ordinary-led.html) for
-the exact GP15 breadboard contacts, LED polarity, and connection table.
-
-![Ordinary red LED on GP15 through a 220 ohm resistor](diagrams/ordinary-led.png)
-
-Use the official Freenove
-[LED hardware picture](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter01_20.png).
-The local diagram is original course artwork informed by that source.
+Build from the
+[scalable ordinary-LED diagram](diagrams/ordinary-led.html) in
+[Day 1](day-1-make-it-light.md#4-build-an-external-led).
 
 | From | Through | To |
 |---|---|---|
-| GP15 | 220 Ω resistor, then LED long leg | LED short leg to GND |
+| GP15 | 220 Ω resistor | LED long anode leg |
+| LED short cathode leg / flat edge | bottom GND rail | Pico GND |
 
-```text
-GP15 ─── 220 Ω ─── anode |>| cathode ─── GND
-                         LED
-                    long leg   short leg / flat edge
-
-Conventional current flows from the long anode leg to the short cathode leg.
-```
-
-If it does not light, disconnect USB and check LED orientation.
+Before power: confirm the resistor is present and the long LED leg faces the
+resistor.
 
 ## Button
 
-Open the original
-[browser-rendered scalable wiring diagram](diagrams/button-and-led.html) for a
-larger breadboard view, wire colours, button internals, and a pre-power
-checklist.
+Build from the
+[scalable button-and-LED diagram](diagrams/button-and-led.html) in
+[Day 2](day-2-make-it-decide.md#1-a-button-is-a-boolean-question).
 
-![Button and LED breadboard wiring](diagrams/button-and-led.png)
-
-Use the official Freenove
-[Button & LED hardware picture](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter02_04.png).
-The course follows the Freenove active-low circuit.
-
-The four legs are not four separate contacts. Two legs form terminal **A** and
-are permanently connected. The other two form terminal **B** and are
-permanently connected. Releasing the button leaves A and B separate; pressing
-it bridges A to B, at which point all four legs are electrically connected.
-
-```text
-Button viewed from above
-
-       terminal A                          terminal B
-    A1 o───────o A2                    B1 o───────o B2
-       always connected                   always connected
-                  \                       /
-                   \____ press joins ____/
-
-Released: A1=A2       A is not connected to B       B1=B2
-Pressed:  A1=A2=B1=B2
-```
-
-The button must straddle the breadboard's centre channel. In the correct
-orientation, **each permanent pair crosses the channel**: terminal A occupies
-the two holes on the left, and terminal B occupies the two holes on the right.
-The switch keeps the left and right pairs separate until pressed.
-
-```text
-Correct breadboard orientation -- top view
-
-      terminal A       terminal B
-          │                │
- top     A1 o            o B1
-             ╔════════╗
- channel     ║ button ║
-             ╚════════╝
- bottom  A2 o            o B2
-          │                │
-          └ always joined  └ always joined
-
-Pressing joins terminal A to terminal B.
-
-Do not rotate the button 90 degrees in the same four breadboard holes. That can
-place A and B into connected breadboard strips and make the input appear
-permanently pressed.
-```
-
-Identify the pairs before power is connected:
-
-1. Put a multimeter in continuity mode.
-2. Find two legs that beep while the button is released; they are one terminal.
-3. Verify that one A leg and one B leg do not beep when released.
-4. Press the button and verify that A and B now beep.
+A four-leg tactile button has only two electrical terminals. The two legs in
+terminal A are always connected; the two legs in terminal B are always
+connected. Pressing joins A to B. The button must straddle the breadboard
+centre channel in the orientation shown.
 
 | Part | Connection |
 |---|---|
 | button signal | GP13 |
 | pull-up | 10 kΩ from GP13 to 3.3 V |
-| button other side | GND |
+| button other terminal | GND |
 | external LED | GP15 through 220 Ω to LED, then GND |
 
-```text
-Active-low button and LED circuit
-
-3.3 V ─── 10 kΩ ───┬──── GP13 input
-                    │
-               terminal A
-                  [ button ]    open when released
-               terminal B      closed when pressed
-                    │
-                   GND
-
-GP15 ─── 220 Ω ─── |>| ─── GND
-                    LED
-```
-
-When released, the 10 kΩ resistor weakly pulls GP13 up to 3.3 V, so the input
-reads `1`. When pressed, the button provides a path to ground, so the input
-reads `0`. The 10 kΩ resistor limits current; the button does not short 3.3 V
-directly to ground. Code therefore uses `if not button.value():`.
+Before power: use continuity mode if available. A pair in one terminal should
+be connected while released; A and B should connect only while pressed.
 
 ## Potentiometer and PWM LED
 
-Open the
-[scalable, accessible potentiometer-and-LED diagram](diagrams/potentiometer-and-led.html)
-for the exact ADC0, PWM, 3.3 V, ground, and LED contacts.
-
-![Potentiometer on ADC0 and PWM LED on GP15](diagrams/potentiometer-and-led.png)
-
-![Freenove potentiometer and LED circuit](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter10_01.png)
-
-Source: [Freenove Potentiometer & LED lesson](https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python/10_Potentiometer_%26_LED.html)
-The local diagram is original course artwork informed by that source.
+Build from the
+[scalable potentiometer-and-LED diagram](diagrams/potentiometer-and-led.html)
+in [Day 2](day-2-make-it-decide.md#2-from-analogue-world-to-numbers).
 
 | Part | Connection |
 |---|---|
-| potentiometer outer pin | 3.3 V |
-| potentiometer centre pin | GP26 / ADC0 |
-| potentiometer other outer pin | GND |
+| potentiometer `3V3` outer pin | 3.3 V |
+| potentiometer centre `WIPER` | GP26 / ADC0 |
+| potentiometer `GND` outer pin | GND |
 | LED | GP15 through 220 Ω to LED, then GND |
 
-```text
-Potentiometer input                      PWM output
-
-3.3 V ─────/\/\/\/\/\/\/───── GND
-              resistor track
-                    ▲
-                    │ movable centre wiper
-                    └──────────────> GP26 / ADC0
-
-GP15 / PWM ─── 220 Ω ─── |>| ─── GND
-                          LED
-
-Turning the shaft moves the wiper between 0 V and 3.3 V.
-```
-
-Use only 3.3 V across the potentiometer.
+Use only 3.3 V across the potentiometer. Turning the shaft moves the centre
+wiper between 0 V and 3.3 V.
 
 ## Freenove 8-RGB LED module
 
-Open the
-[scalable, accessible 8-RGB module diagram](diagrams/rgb8-module.html) for the
-exact `IN` header contacts and the separate 3.3 V, ground, and GP16 routes.
+Build from the
+[scalable 8-RGB module diagram](diagrams/rgb8-module.html) in
+[Day 3](day-3-make-it-reusable.md#1-meet-the-rgb-module).
 
-![Freenove square 8-RGB module IN header wired to GP16](diagrams/rgb8-module.png)
-
-![Freenove 8-RGB module connection](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter06_05.png)
-
-Source: [Freenove NeoPixel lesson](https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python/6_NeoPixel.html)
-The local diagram is original course artwork informed by that source.
-
-Connect the **IN** end, not OUT:
+Connect the header marked **IN**, not OUT:
 
 | Module pin | Pico |
 |---|---|
-| `S` | GP16 |
-| `V` | 3.3 V |
-| `G` | GND |
+| `IN S` | GP16 |
+| `IN V` | 3.3 V |
+| `IN G` | GND |
 
-```text
-Pico                         Freenove 8-RGB module
-
-GP16  ─────────────────────> S   IN
-3.3 V ─────────────────────> V
-GND   ─────────────────────> G
-
-                              [0][1][2][3][4][5][6][7]
-
-Connect the end marked IN. The OUT end is only for another module.
-```
-
-The examples use deliberately low RGB values to reduce glare and current.
+The examples deliberately use low RGB values to reduce glare and current.
 
 ## Passive buzzer with transistor driver
 
-Open the
-[scalable, accessible passive-buzzer diagram](diagrams/passive-buzzer.html)
-for exact breadboard contacts, the flat-face S8050 `E/B/C` orientation, and
-the complete connection table.
+Build from the
+[scalable passive-buzzer diagram](diagrams/passive-buzzer.html) in
+[Day 4](day-4-make-it-sense.md#3-test-the-passive-buzzer).
 
-![Passive buzzer and S8050 transistor-driver breadboard wiring](diagrams/passive-buzzer.png)
+| From | Through | To |
+|---|---|---|
+| GP15 | 1 kΩ resistor | S8050 base `B` |
+| VBUS / 5 V | passive buzzer | S8050 collector `C` |
+| S8050 emitter `E` | GND rail | Pico GND |
 
-Source: [Freenove Buzzer lesson](https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python/7_Buzzer.html)
-and the official
-[Freenove passive-buzzer circuit](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter07_11.png).
-The local diagram is original course artwork informed by those sources.
-
-Do not drive the buzzer directly from a GPIO. Follow the Freenove passive-buzzer
-circuit using the NPN transistor marked `8050` and the 1 kΩ base resistor.
-The control signal is GP15. The buzzer supply is VBUS (5 V).
-
-```text
-                              VBUS / 5 V
-                                  │
-                            passive buzzer
-                                  │
-                                  C
-GP15 ─── 1 kΩ ─────────────── B  Q1  NPN 8050
-                                  E
-                                  │
-                                 GND
-
-GP15 controls a small base current.
-The transistor switches the larger buzzer current; GPIO does not supply it.
-```
-
-Check the 8050 transistor's flat face and pin order against the kit
-documentation before inserting it. Transistor pin order is not universal.
+Do not drive the buzzer directly from a GPIO. Check the flat face and `E/B/C`
+order shown in the diagram before inserting the transistor.
 
 ## HC-SR04 distance sensor: safer Echo connection
 
-The HC-SR04 requires 5 V. Its Echo output can rise to 5 V, which is unsafe for
-a Pico GPIO. The official Freenove picture shows a direct Echo connection; this
-course **intentionally replaces that one wire with a voltage divider**.
+Build from the
+[scalable safe HC-SR04 diagram](diagrams/distance-sensor.html) in
+[Day 4](day-4-make-it-sense.md#safety-gate).
 
-Open the
-[scalable, accessible safe HC-SR04 diagram](diagrams/distance-sensor.html) for
-exact breadboard contacts and the complete connection table.
-
-![Safe HC-SR04 breadboard wiring with a protected Echo input](diagrams/distance-sensor.png)
-
-Source: [Freenove Ultrasonic Ranging lesson](https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python/22_Ultrasonic_Ranging.html)
-and the official
-[Freenove HC-SR04 layout](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter22_06.png).
-The local diagram is original course artwork informed by those sources.
+The HC-SR04 uses 5 V, so Echo can rise close to 5 V. This course intentionally
+replaces the official direct Echo wire with a voltage divider:
 
 | HC-SR04 pin | Connection |
 |---|---|
 | VCC | VBUS / 5 V, physical pin 40 |
 | Trig | GP19, physical pin 25 |
-| Echo | through **1 kΩ** to a junction; junction to GP18 |
-| divider junction | through **2 kΩ** to GND |
+| Echo | through **1 kΩ** to the divider junction |
+| divider junction | GP18 and **2 kΩ** to GND |
 | GND | Pico GND |
 
-```text
-Pico                                     HC-SR04
+The divider produces approximately `5 V × 2/(1+2) = 3.33 V`. An instructor
+should inspect every unpowered sensor circuit before USB is connected.
 
-VBUS / 5 V ─────────────────────────────> VCC
-GP19 ───────────────────────────────────> Trig
-GND ────────────────────────────────────> GND
+## Combined builds
 
-                                          Echo
-                                            │  about 5 V
-                                            │
-                                           1 kΩ
-                                            │
-                         GP18 <─────────────●  divider junction
-                                            │
-                                           2 kΩ
-                                            │
-                                           GND
-
-The 1 kΩ resistor must be between Echo and the junction.
-The 2 kΩ resistor must be between the junction and GND.
-```
-
-The divider produces approximately `5 V × 2/(1+2) = 3.33 V`.
-
-Do not substitute the 10 kΩ button wiring for this divider. An instructor
-should inspect every sensor circuit before USB is connected.
-
-## Final parking-assistant pin plan
-
-The Day 4 prototype combines the sensor and buzzer safely before the RGB
-module is added. Open the
-[scalable, accessible combined diagram](diagrams/proximity-alarm.html).
-
-![Combined HC-SR04 and passive-buzzer proximity alarm wiring](diagrams/proximity-alarm.png)
-
-This original course diagram is informed by the official Freenove ultrasonic
-and buzzer lessons. It uses the Pico's onboard LED only; no external LED is
-part of the Day 4 circuit.
-
-The complete build diagram, exact connection table, and assembly sequence are
-kept together in [Day 5: Build a Parking Assistant](day-5-parking-assistant.md).
+The [Day 4 proximity-alarm diagram](diagrams/proximity-alarm.html) combines
+the protected sensor and transistor-driven buzzer. The
+[Day 5 parking-assistant lesson](day-5-parking-assistant.md) adds the 8-RGB
+module on GP16 and keeps its 3.3 V supply separate from the 5 V sensor and
+buzzer supply.
 
 | Component | Signal | Power |
 |---|---|---|
-| HC-SR04 | Trig GP19; Echo via divider to GP18 | 5 V and GND |
-| passive buzzer driver | GP15 through 1 kΩ to NPN base | 5 V and GND |
-| 8-RGB module IN | GP16 | 3.3 V and GND |
+| HC-SR04 | Trig GP19; divided Echo to GP18 | 5 V and GND |
+| passive buzzer driver | GP15 through 1 kΩ to base | 5 V and GND |
+| 8-RGB module `IN` | GP16 | 3.3 V and GND |
 
 There are no GPIO conflicts in this plan.
+
+## Source note
+
+The course diagrams are original vector artwork informed by the official
+Freenove lessons. Source links and attribution are collected in
+[Sources, Images, and Attribution](SOURCES_AND_IMAGES.md). The official
+HC-SR04 image is a factual reference only; students must use the safer course
+diagram with the Echo divider.

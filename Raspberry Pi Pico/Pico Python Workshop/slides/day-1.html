@@ -1,0 +1,1336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day 1: Make It Light — Teacher Slides</title>
+  <meta
+    name="description"
+    content="Teacher presentation for Day 1 of the Raspberry Pi Pico Python workshop."
+  >
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/monokai.css">
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #475569;
+      --paper: #f8fafc;
+      --panel: #ffffff;
+      --pico: #087f5b;
+      --pico-dark: #065f46;
+      --cyan: #0891b2;
+      --amber: #f59e0b;
+      --red: #dc2626;
+      --green: #16a34a;
+      --line: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 12% 18%, rgb(8 145 178 / 10%), transparent 24rem),
+        radial-gradient(circle at 88% 82%, rgb(8 127 91 / 12%), transparent 28rem),
+        var(--paper);
+    }
+
+    .reveal {
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      font-size: 34px;
+    }
+
+    .reveal .slides {
+      text-align: left;
+    }
+
+    .reveal .slides section {
+      padding: 28px 42px;
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3 {
+      color: var(--ink);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      text-transform: none;
+    }
+
+    .reveal h1 {
+      font-size: 2.4em;
+      line-height: 1;
+    }
+
+    .reveal h2 {
+      font-size: 1.65em;
+      line-height: 1.05;
+      margin: 0 0 0.5em;
+    }
+
+    .reveal h3 {
+      font-size: 1em;
+      letter-spacing: -0.01em;
+    }
+
+    .reveal p,
+    .reveal li {
+      line-height: 1.35;
+    }
+
+    .reveal code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    }
+
+    .reveal :not(pre) > code {
+      border: 1px solid #bae6fd;
+      border-radius: 0.25em;
+      background: #ecfeff;
+      color: #155e75;
+      padding: 0.04em 0.22em;
+    }
+
+    .reveal pre {
+      width: 100%;
+      margin: 0.55em 0;
+      border: 1px solid #1e293b;
+      border-radius: 0.45em;
+      box-shadow: 0 14px 35px rgb(15 23 42 / 16%);
+      font-size: 0.64em;
+    }
+
+    .reveal pre code {
+      max-height: 510px;
+      padding: 0.9em 1em;
+      line-height: 1.4;
+    }
+
+    .reveal ul,
+    .reveal ol {
+      margin-left: 1.1em;
+    }
+
+    .reveal .progress {
+      color: var(--pico);
+      height: 6px;
+    }
+
+    .reveal .controls {
+      color: var(--pico);
+    }
+
+    .eyebrow {
+      margin: 0 0 0.6em;
+      color: var(--pico-dark);
+      font-size: 0.52em;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .lede {
+      max-width: 22em;
+      color: var(--muted);
+      font-size: 0.92em;
+    }
+
+    .title-slide {
+      min-height: 610px;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .title-slide h1 {
+      max-width: 9em;
+      margin: 0.12em 0 0.3em;
+    }
+
+    .pico-art {
+      position: absolute;
+      right: 48px;
+      bottom: 88px;
+      width: 230px;
+      height: 112px;
+      border: 10px solid var(--pico);
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 26px 22px, #fbbf24 0 7px, transparent 8px),
+        radial-gradient(circle at 64px 22px, #fbbf24 0 7px, transparent 8px),
+        radial-gradient(circle at 102px 22px, #fbbf24 0 7px, transparent 8px),
+        radial-gradient(circle at 140px 22px, #fbbf24 0 7px, transparent 8px),
+        radial-gradient(circle at 178px 22px, #fbbf24 0 7px, transparent 8px),
+        radial-gradient(circle at 26px 90px, #fbbf24 0 7px, transparent 8px),
+        radial-gradient(circle at 64px 90px, #fbbf24 0 7px, transparent 8px),
+        radial-gradient(circle at 102px 90px, #fbbf24 0 7px, transparent 8px),
+        radial-gradient(circle at 140px 90px, #fbbf24 0 7px, transparent 8px),
+        radial-gradient(circle at 178px 90px, #fbbf24 0 7px, transparent 8px),
+        linear-gradient(135deg, #0b9668, #05634a);
+      box-shadow: 0 22px 50px rgb(6 95 70 / 24%);
+      transform: rotate(-5deg);
+    }
+
+    .pico-art::before {
+      content: "";
+      position: absolute;
+      top: 28px;
+      left: -42px;
+      width: 42px;
+      height: 56px;
+      border: 5px solid #94a3b8;
+      border-right: 0;
+      border-radius: 8px 0 0 8px;
+      background: linear-gradient(90deg, #dbe4ee, #94a3b8);
+    }
+
+    .pico-art::after {
+      content: "PICO";
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      color: rgb(255 255 255 / 75%);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+    }
+
+    .section-slide {
+      min-height: 610px;
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      border-left: 18px solid var(--pico);
+    }
+
+    .section-slide h2 {
+      max-width: 12em;
+      font-size: 2.2em;
+    }
+
+    .section-number {
+      color: var(--pico);
+      font-size: 2.8em;
+      font-weight: 900;
+      line-height: 1;
+      opacity: 0.18;
+    }
+
+    .grid-2,
+    .grid-3 {
+      display: grid;
+      gap: 0.7em;
+      align-items: stretch;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 0.5em;
+      background: rgb(255 255 255 / 90%);
+      padding: 0.65em 0.75em;
+      box-shadow: 0 8px 22px rgb(15 23 42 / 7%);
+    }
+
+    .card h3 {
+      margin: 0 0 0.3em;
+      color: var(--pico-dark);
+    }
+
+    .card p,
+    .card li {
+      font-size: 0.74em;
+    }
+
+    .card p:last-child,
+    .card ul:last-child {
+      margin-bottom: 0;
+    }
+
+    .number-card strong {
+      display: block;
+      margin-bottom: 0.18em;
+      color: var(--pico);
+      font-size: 1.6em;
+    }
+
+    .callout {
+      border-left: 8px solid var(--cyan);
+      border-radius: 0.25em;
+      background: #ecfeff;
+      padding: 0.55em 0.75em;
+    }
+
+    .callout.warning {
+      border-left-color: var(--amber);
+      background: #fffbeb;
+    }
+
+    .callout.danger {
+      border-left-color: var(--red);
+      background: #fef2f2;
+    }
+
+    .callout.success {
+      border-left-color: var(--green);
+      background: #f0fdf4;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 0.8em;
+    }
+
+    .big-question {
+      max-width: 18em;
+      margin: 0.25em 0;
+      color: var(--pico-dark);
+      font-size: 1.5em;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .predict {
+      display: inline-block;
+      border-radius: 99px;
+      background: var(--amber);
+      color: #422006;
+      padding: 0.18em 0.55em;
+      font-size: 0.62em;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .activity {
+      display: inline-flex;
+      gap: 0.35em;
+      align-items: center;
+      margin: 0 0 0.55em;
+      border: 1px solid #99f6e4;
+      border-radius: 99px;
+      background: #f0fdfa;
+      color: var(--pico-dark);
+      padding: 0.22em 0.6em;
+      font-size: 0.58em;
+      font-weight: 850;
+      letter-spacing: 0.035em;
+    }
+
+    .activity.watch {
+      border-color: #bfdbfe;
+      background: #eff6ff;
+      color: #1e40af;
+    }
+
+    .activity.build {
+      border-color: #fed7aa;
+      background: #fff7ed;
+      color: #9a3412;
+    }
+
+    .type-chip {
+      display: inline-block;
+      min-width: 5em;
+      margin: 0.1em;
+      border-radius: 99px;
+      padding: 0.22em 0.55em;
+      color: white;
+      font-size: 0.68em;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .string {
+      background: #7c3aed;
+    }
+
+    .integer {
+      background: #0369a1;
+    }
+
+    .float {
+      background: #c2410c;
+    }
+
+    .flow {
+      display: flex;
+      gap: 0.4em;
+      align-items: center;
+      justify-content: center;
+      margin: 1em 0;
+    }
+
+    .flow-box {
+      min-width: 6.5em;
+      border: 2px solid var(--line);
+      border-radius: 0.45em;
+      background: white;
+      padding: 0.65em;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .flow-arrow {
+      color: var(--pico);
+      font-size: 1.5em;
+      font-weight: 900;
+    }
+
+    .thonny {
+      display: grid;
+      grid-template-columns: 1fr 0.72fr;
+      grid-template-rows: 1fr 0.55fr;
+      min-height: 430px;
+      overflow: hidden;
+      border: 3px solid #64748b;
+      border-radius: 0.5em;
+      background: white;
+      box-shadow: 0 18px 35px rgb(15 23 42 / 15%);
+    }
+
+    .thonny-bar {
+      grid-column: 1 / 3;
+      height: 46px;
+      background: #e2e8f0;
+      padding: 0.3em 0.6em;
+      font-size: 0.55em;
+      font-weight: 800;
+    }
+
+    .thonny-editor,
+    .thonny-files,
+    .thonny-shell {
+      padding: 0.7em;
+      font-family: "SFMono-Regular", Consolas, monospace;
+      font-size: 0.53em;
+    }
+
+    .thonny-editor {
+      border-right: 2px solid #cbd5e1;
+    }
+
+    .thonny-files {
+      color: var(--muted);
+    }
+
+    .thonny-shell {
+      grid-column: 1 / 3;
+      border-top: 2px solid #cbd5e1;
+      background: #f8fafc;
+    }
+
+    .label {
+      display: inline-block;
+      margin-bottom: 0.35em;
+      border-radius: 99px;
+      background: var(--pico);
+      color: white;
+      padding: 0.12em 0.45em;
+      font-family: Inter, sans-serif;
+      font-size: 0.78em;
+      font-weight: 800;
+    }
+
+    .diagram-frame {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 0.4em;
+      background: white;
+      box-shadow: 0 12px 28px rgb(15 23 42 / 12%);
+    }
+
+    .diagram-frame img {
+      display: block;
+      width: 100%;
+      max-height: 470px;
+      margin: 0;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .diagram-slide {
+      padding-top: 18px !important;
+    }
+
+    .diagram-slide h2 {
+      margin-bottom: 0.3em;
+      font-size: 1.45em;
+    }
+
+    .diagram-header {
+      display: flex;
+      gap: 1em;
+      align-items: end;
+      justify-content: space-between;
+    }
+
+    .diagram-slide .diagram-frame {
+      width: 880px;
+      height: 520px;
+      margin: 0 auto;
+    }
+
+    .diagram-slide .diagram-frame img {
+      height: 520px;
+      max-height: none;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .corner-link {
+      flex: none;
+      margin-bottom: 0.65em;
+      border: 1px solid #99f6e4;
+      border-radius: 99px;
+      background: rgb(240 253 250 / 96%);
+      color: var(--pico-dark) !important;
+      padding: 0.3em 0.65em;
+      font-size: 0.48em;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 5px 15px rgb(15 23 42 / 10%);
+    }
+
+    #fullscreen-button {
+      position: fixed;
+      top: 14px;
+      right: 16px;
+      z-index: 100;
+      border: 1px solid #94a3b8;
+      border-radius: 99px;
+      background: rgb(255 255 255 / 92%);
+      color: var(--ink);
+      padding: 8px 14px;
+      font: 700 14px/1 Inter, ui-sans-serif, system-ui, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 5px 16px rgb(15 23 42 / 14%);
+      backdrop-filter: blur(8px);
+    }
+
+    #fullscreen-button:hover,
+    #fullscreen-button:focus-visible {
+      border-color: var(--pico);
+      outline: 3px solid rgb(8 127 91 / 20%);
+    }
+
+    .tiny {
+      color: var(--muted);
+      font-size: 0.52em;
+    }
+
+    .footer {
+      position: absolute;
+      right: 42px;
+      bottom: 18px;
+      left: 42px;
+      display: flex;
+      justify-content: space-between;
+      color: #64748b;
+      font-size: 0.38em;
+      letter-spacing: 0.02em;
+    }
+
+    .pulse-dot {
+      display: inline-block;
+      width: 0.72em;
+      height: 0.72em;
+      margin-right: 0.3em;
+      border-radius: 50%;
+      background: #ef4444;
+      box-shadow: 0 0 0 0.24em rgb(239 68 68 / 18%);
+    }
+
+    .reveal .slide-number {
+      right: 18px;
+      bottom: 14px;
+      color: var(--muted);
+      background: transparent;
+      font-size: 15px;
+    }
+
+    @media (max-width: 900px) {
+      .reveal {
+        font-size: 27px;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .footer,
+      #fullscreen-button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button id="fullscreen-button" type="button" title="Enter fullscreen (F)">
+    Full screen
+  </button>
+  <div class="reveal">
+    <div class="slides">
+      <section class="title-slide">
+        <p class="eyebrow">Python in the physical world · Day 1</p>
+        <h1>Make it light</h1>
+        <p class="lede">
+          Today, one line of Python will leave the screen and change the real world.
+        </p>
+        <div class="callout success" style="max-width: 19em; margin-top: 1em;">
+          <p><strong>Mission:</strong> send a secret message using light.</p>
+        </div>
+        <div class="pico-art" aria-hidden="true"></div>
+        <div class="footer">
+          <span>Teacher slides</span>
+          <span>Press S for speaker notes · F for fullscreen</span>
+        </div>
+        <aside class="notes">
+          Hold up a Pico before showing any code. Ask: “How could words typed here
+          possibly make this tiny light change?” Accept guesses; do not explain yet.
+          The lab begins later—the first part explicitly teaches the Python needed.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Learning goals</p>
+        <h2>By the end, you can…</h2>
+        <div class="grid-3">
+          <div class="card number-card fragment">
+            <strong>01</strong>
+            <p>Use Thonny’s Shell and editor for two different jobs.</p>
+          </div>
+          <div class="card number-card fragment">
+            <strong>02</strong>
+            <p>Recognise strings, integers, floats, expressions, and variables.</p>
+          </div>
+          <div class="card number-card fragment">
+            <strong>03</strong>
+            <p>Read errors and trace a script one line at a time.</p>
+          </div>
+          <div class="card number-card fragment">
+            <strong>04</strong>
+            <p>Explain how Python changes an LED output.</p>
+          </div>
+          <div class="card number-card fragment">
+            <strong>05</strong>
+            <p>Build an LED circuit safely with a resistor.</p>
+          </div>
+          <div class="card number-card fragment">
+            <strong>06</strong>
+            <p>Create a recognisable light signal using named values.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Read only the bold ideas, not every card. Ask students to choose which goal
+          sounds most familiar and which sounds newest.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Today’s route</p>
+        <h2>Teach → practise → build</h2>
+        <div class="flow">
+          <div class="flow-box">Meet<br>Python</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">Read<br>code</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">Control<br>light</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">Build a<br>signal</div>
+        </div>
+        <div class="callout">
+          <p>
+            During teaching: <strong>predict before Run</strong>. During the lab:
+            <strong>change one thing at a time</strong>.
+          </p>
+        </div>
+        <aside class="notes">
+          Establish the lesson rhythm. Students should not open the project solution
+          during teaching. Pair roles: driver types, navigator predicts and checks.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">01</span>
+        <p class="eyebrow">Part 1 · Your tools</p>
+        <h2>Meet Python and Thonny</h2>
+        <p class="lede">First understand the tools. Then use them to control hardware.</p>
+        <aside class="notes">
+          This section adapts the teaching progression in TEALS Unit 1 lessons
+          1.01–1.02 to Thonny and MicroPython.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">A computing system</p>
+        <h2>Input → process → output</h2>
+        <p class="activity watch">Watch and discuss · Thonny stays closed for now</p>
+        <div class="flow">
+          <div class="flow-box">Your code<br><span class="tiny">input</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">MicroPython<br><span class="tiny">process</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">Text + light<br><span class="tiny">output</span></div>
+        </div>
+        <p class="big-question">What is different about a physical output?</p>
+        <aside class="notes">
+          Expected answer: it changes something outside the computer screen. Clarify
+          that the keyboard is an input to Thonny; today’s hardware is output-only.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Our IDE</p>
+        <h2>Thonny gives us two workspaces</h2>
+        <p class="activity">Do now · Open Thonny and follow along</p>
+        <div class="thonny" aria-label="Simplified diagram of the Thonny interface">
+          <div class="thonny-bar">▶ Run &nbsp;&nbsp; ■ Stop &nbsp;&nbsp; day_1.py</div>
+          <div class="thonny-editor">
+            <span class="label">Editor</span><br>
+            print("Hello, Pico!")<br>
+            <br>
+            <span style="color:#64748b;"># Save a script here</span>
+          </div>
+          <div class="thonny-files">
+            <span class="label">Files</span><br>
+            This computer<br>
+            Raspberry Pi Pico
+          </div>
+          <div class="thonny-shell">
+            <span class="label">Shell</span><br>
+            &gt;&gt;&gt; 2 + 3<br>
+            5<br>
+            &gt;&gt;&gt;
+          </div>
+        </div>
+        <aside class="notes">
+          Point to the real Thonny window while revealing each area. IDE means
+          integrated development environment: one application to create, edit, save,
+          run, and inspect programs. Confirm the interpreter selector says
+          “MicroPython (Raspberry Pi Pico).”
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Interactive mode</p>
+        <h2>The Shell answers one line now</h2>
+        <p class="activity">Try in Thonny · Type each line after predicting</p>
+        <pre><code class="language-python" data-trim data-noescape>
+&gt;&gt;&gt; print("Hello, Pico!")
+<span class="fragment">Hello, Pico!</span>
+&gt;&gt;&gt; 2 + 3
+<span class="fragment">5</span>
+&gt;&gt;&gt; type(0.5)
+<span class="fragment">&lt;class 'float'&gt;</span>
+        </code></pre>
+        <div class="callout">
+          <p>
+            The <strong>interpreter</strong> reads Python, evaluates it, and shows
+            the result.
+          </p>
+        </div>
+        <aside class="notes">
+          Have students type each line, but require a spoken or written prediction
+          before Enter. Explain that the >>> prompt belongs to the Shell and should
+          not be typed into a script.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Values and types</p>
+        <h2>Python asks: “What kind of value is this?”</h2>
+        <p class="activity watch">Discuss · Keep Thonny open, but do not type yet</p>
+        <div class="grid-3">
+          <div class="card">
+            <h3><span class="type-chip string">string</span></h3>
+            <p><code>"Pico"</code></p>
+            <p>Text inside quotes.</p>
+          </div>
+          <div class="card">
+            <h3><span class="type-chip integer">integer</span></h3>
+            <p><code>42</code></p>
+            <p>A whole number.</p>
+          </div>
+          <div class="card">
+            <h3><span class="type-chip float">float</span></h3>
+            <p><code>0.5</code></p>
+            <p>A number with a decimal point.</p>
+          </div>
+        </div>
+        <p class="big-question fragment">Why is <code>"42"</code> not an integer?</p>
+        <aside class="notes">
+          Ask students to hold up 1, 2, or 3 fingers for string, integer, or float as
+          you call out examples. Quotes make "42" text. Do not introduce casting yet;
+          that belongs to Day 2.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Expressions</p>
+        <h2>An expression produces a value</h2>
+        <p class="activity">Try in Thonny · Predict, then test all three</p>
+        <div class="grid-2">
+          <div>
+            <pre><code class="language-python" data-trim>
+2 + 3
+10 / 2
+"Pi" + "co"
+            </code></pre>
+          </div>
+          <div class="card">
+            <h3>Think like the interpreter</h3>
+            <ol>
+              <li class="fragment">Read the values.</li>
+              <li class="fragment">Apply the operator.</li>
+              <li class="fragment">Produce one result.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="callout warning fragment">
+          <p><strong>Predict:</strong> Which result is a float? Which is a string?</p>
+        </div>
+        <aside class="notes">
+          Run the three examples in the Shell. 10 / 2 produces 5.0 in Python 3 and
+          MicroPython. “Pi” + “co” joins strings. Avoid broad arithmetic coverage;
+          the goal is values and evaluation.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Errors are evidence</p>
+        <h2>Read the last line first</h2>
+        <p class="activity">Try in Thonny · Make this typo on purpose</p>
+        <pre><code class="language-python" data-trim>
+&gt;&gt;&gt; pritn("Hello")
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1
+NameError: name 'pritn' isn't defined
+        </code></pre>
+        <div class="grid-3">
+          <div class="card fragment">
+            <h3>1 · Name it</h3>
+            <p><code>NameError</code></p>
+          </div>
+          <div class="card fragment">
+            <h3>2 · Locate it</h3>
+            <p>Line 1</p>
+          </div>
+          <div class="card fragment">
+            <h3>3 · Compare it</h3>
+            <p><code>pritn</code> versus <code>print</code></p>
+          </div>
+        </div>
+        <div class="callout success fragment" style="margin-top: 0.65em;">
+          <p>
+            Change only <code>pritn</code> to <code>print</code>, then run it again.
+            If it works, the misspelling caused the error.
+          </p>
+        </div>
+        <aside class="notes">
+          Create the typo live. Model calm debugging language: symptom, evidence,
+          suspected cause, one change, rerun. Ask why changing only one thing gives
+          clearer evidence. If useful, also show a missing quote. Do not use 10 / 0
+          as the first error because the typo is easier to act on.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">02</span>
+        <p class="eyebrow">Part 2 · Saved programs</p>
+        <h2>From one line to a script</h2>
+        <p class="lede">A saved program lets us plan a sequence and run it again.</p>
+        <aside class="notes">
+          This section adapts TEALS Unit 1 lessons 1.03–1.05: scripts, variables,
+          comments, and systematic debugging.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Script mode</p>
+        <h2>The editor stores a sequence</h2>
+        <p class="activity">Try in Thonny · Type, save, predict, then Run</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Shell</h3>
+            <p>Runs one instruction immediately.</p>
+            <p>Best for a tiny experiment.</p>
+          </div>
+          <div class="card">
+            <h3>Script</h3>
+            <p>Saves instructions in a <code>.py</code> file.</p>
+            <p>Runs from top to bottom.</p>
+          </div>
+        </div>
+        <pre><code class="language-python" data-trim data-line-numbers>
+print("Three...")
+print("Two...")
+print("One...")
+print("Hello, physical world!")
+        </code></pre>
+        <div class="callout">
+          <p>The program is the instructions. The output is what happens when they run.</p>
+        </div>
+        <aside class="notes">
+          Ask students to point to the program and then the output. Run the script and
+          compare the Shell output order with the editor order.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Read line by line</p>
+        <h2>Trace before you press Run</h2>
+        <p class="activity watch">Watch · Point to each line; do not run it yet</p>
+        <pre><code class="language-python" data-trim data-line-numbers="1-3|5|6|7|8|9">
+from machine import Pin
+from time import sleep
+led = Pin("LED", Pin.OUT)
+
+print("Light on")
+led.on()
+sleep(1)
+led.off()
+print("Finished")
+        </code></pre>
+        <div class="grid-3">
+          <div class="card fragment">
+            <h3>Screen</h3>
+            <p>Which words appear?</p>
+          </div>
+          <div class="card fragment">
+            <h3>Pico</h3>
+            <p>When is the LED on?</p>
+          </div>
+          <div class="card fragment">
+            <h3>Time</h3>
+            <p>Where does it pause?</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Use Reveal’s line highlights as a trace. Students narrate each line. Clarify
+          that from/import and Pin setup are supplied hardware vocabulary today;
+          students need to recognise their purpose, not memorise them.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Hardware vocabulary</p>
+        <h2>Three lines connect Python to the Pico</h2>
+        <p class="activity">Try together · Open and Run <code>01_hello_pico.py</code></p>
+        <div class="grid-3">
+          <div class="card">
+            <h3><code>Pin</code></h3>
+            <p>Gives Python access to a Pico pin.</p>
+          </div>
+          <div class="card">
+            <h3><code>"LED"</code></h3>
+            <p>Names the onboard LED.</p>
+          </div>
+          <div class="card">
+            <h3><code>Pin.OUT</code></h3>
+            <p>Says the pin sends a signal out.</p>
+          </div>
+        </div>
+        <pre><code class="language-python" data-trim>
+from machine import Pin
+led = Pin("LED", Pin.OUT)
+led.on()
+        </code></pre>
+        <div class="callout warning">
+          <p>
+            Today you may reuse this setup. Your job is to explain what it achieves,
+            not reproduce it from memory.
+          </p>
+        </div>
+        <aside class="notes">
+          Avoid teaching object-oriented vocabulary. “led is our useful name for the
+          output” is enough. Demonstrate led.on() and led.off() in the Shell if the
+          connection is stable.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Variables</p>
+        <h2>A useful name that refers to a value</h2>
+        <p class="activity watch">Discuss · Identify names and values before running</p>
+        <pre><code class="language-python" data-trim>
+message = "Team Comet"
+on_time = 0.15
+off_time = 0.35
+        </code></pre>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Left of <code>=</code></h3>
+            <p>The variable name.</p>
+          </div>
+          <div class="card">
+            <h3>Right of <code>=</code></h3>
+            <p>The value stored under that name.</p>
+          </div>
+        </div>
+        <p class="big-question fragment">
+          Which variable changes text? Which variables change time?
+        </p>
+        <aside class="notes">
+          State explicitly: = means assignment today, not “is equal to” as in maths.
+          Comparison == is taught on Day 2. Have pairs identify each value’s type.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Why names matter</p>
+        <h2>One edit can change every use</h2>
+        <p class="activity">
+          Try in Thonny · Open <code>02_variable_blink.py</code> and Run it once
+        </p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+on_time = 0.15
+
+led.on()
+sleep(on_time)
+led.off()
+          </code></pre>
+          <div>
+            <div class="card">
+              <h3>Experiment</h3>
+              <p>Change <code>0.15</code> to <code>1.5</code>.</p>
+            </div>
+            <div class="callout warning fragment" style="margin-top: 0.6em;">
+              <p><strong>Predict:</strong> What changes? What stays unchanged?</p>
+            </div>
+          </div>
+        </div>
+        <p class="fragment">
+          <code>sleep(on_time)</code> uses the value stored in <code>on_time</code>.
+          Change that value once, and all three ON pauses change.
+        </p>
+        <aside class="notes">
+          Students run the unmodified file first. Then they change only on_time from
+          0.15 to 1.5, predict, and rerun. Ask what changed and what did not. Point
+          out that 1.5 is a float, not a string.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Comments</p>
+        <h2>Notes for humans, ignored by Python</h2>
+        <p class="activity watch">Discuss · Which comment helps a reader more?</p>
+        <pre><code class="language-python" data-trim>
+# First group: three short flashes
+led.on()
+sleep(short_flash)
+led.off()
+        </code></pre>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Useful comment</h3>
+            <p>Explains the intention: what does this block mean?</p>
+          </div>
+          <div class="card">
+            <h3>Not useful</h3>
+            <p><code># turn LED on</code> merely repeats <code>led.on()</code>.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Comments are adapted from TEALS lesson 1.04, but input() is deliberately
+          postponed because the Day 1 physical project does not require it.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">03</span>
+        <p class="eyebrow">Part 3 · From code to circuit</p>
+        <h2>Make the physical output safe</h2>
+        <p class="lede">Code can be corrected with Run. Wiring must be checked before power.</p>
+        <aside class="notes">
+          Stop the program and unplug USB before distributing circuit parts.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Safety gate</p>
+        <h2>Unplug → build → partner-check → power</h2>
+        <p class="activity build">Get ready to build · Stop the program and unplug USB</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3><span class="pulse-dot"></span>Before touching wires</h3>
+            <p>Stop the program and disconnect USB.</p>
+          </div>
+          <div class="card">
+            <h3>One contact per hole</h3>
+            <p>Every coloured endpoint dot represents one real breadboard hole.</p>
+          </div>
+          <div class="card">
+            <h3>Use the resistor</h3>
+            <p>GP15 must reach the ordinary LED through <strong>220 Ω</strong>.</p>
+          </div>
+          <div class="card">
+            <h3>Check orientation</h3>
+            <p>Long leg/anode toward the resistor; short leg/flat edge toward GND.</p>
+          </div>
+        </div>
+        <div class="callout danger fragment" style="margin-top: 0.6em;">
+          <p>Never connect a GPIO directly to GND. Stop if anything becomes hot.</p>
+        </div>
+        <aside class="notes">
+          Hold up the 220 ohm resistor and compare its bands with the kit reference.
+          Students should point out the LED’s long leg and flat edge on a real part.
+        </aside>
+      </section>
+
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div>
+            <p class="eyebrow">Ordinary LED · GP15</p>
+            <h2>Follow the route, not just the colour</h2>
+          </div>
+          <a class="corner-link" href="../diagrams/ordinary-led.html">
+            Exact diagram + table
+          </a>
+        </div>
+        <div class="diagram-frame">
+          <img
+            src="../diagrams/ordinary-led.png"
+            alt="Day 1 breadboard diagram: GP15 through a 220 ohm resistor to the LED anode, with the cathode connected to GND."
+          >
+        </div>
+        <aside class="notes">
+          Trace aloud: GP15, green jumper, 220 ohm resistor, LED long leg, LED short
+          leg, black jumper, ground rail, Pico GND. The top rails are visibly unused.
+          Open the linked HTML if students need the exact table or a zoomable view.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">What ON and OFF mean</p>
+        <h2>Why the LED lights</h2>
+        <p class="activity watch">Discuss · Trace the complete circuit</p>
+        <div class="flow">
+          <div class="flow-box"><code>led.on()</code><br><span class="tiny">GP15 becomes 3.3 V</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">Current flows<br><span class="tiny">resistor protects LED</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">LED lights<br><span class="tiny">then current reaches GND</span></div>
+        </div>
+        <div class="flow">
+          <div class="flow-box"><code>led.off()</code><br><span class="tiny">GP15 becomes 0 V</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">No voltage difference<br><span class="tiny">current stops</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">LED is dark</div>
+        </div>
+        <div class="callout success">
+          <p>
+            In the copied program, change only
+            <code>Pin("LED", Pin.OUT)</code> to <code>Pin(15, Pin.OUT)</code>.
+          </p>
+        </div>
+        <aside class="notes">
+          This is conceptual, not a full electricity lesson. ON makes GP15 high,
+          creating a voltage difference between GP15 and GND. Conventional current
+          flows through the resistor and correctly oriented LED. OFF brings GP15
+          close to GND, so there is no useful voltage difference. Ask why the
+          resistor is still necessary and what a reversed LED would do.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Debugging physical systems</p>
+        <h2>Code, circuit, or assumption?</h2>
+        <p class="activity">Discuss · Choose one exact check for each column</p>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Code</h3>
+            <p>Wrong pin? Misspelled name? Program still running?</p>
+          </div>
+          <div class="card">
+            <h3>Circuit</h3>
+            <p>LED reversed? Wire one row away? Missing resistor?</p>
+          </div>
+          <div class="card">
+            <h3>Assumption</h3>
+            <p>Did we predict the wrong output or inspect the wrong LED?</p>
+          </div>
+        </div>
+        <div class="callout fragment" style="margin-top: 0.65em;">
+          <p>
+            <strong>If the external LED stays dark:</strong> first run the known-working
+            onboard-LED file. If that works, run the supplied GP15 ON/OFF test. If
+            GP15 still does not light the LED, stop, unplug USB, and check the circuit
+            against the diagram.
+          </p>
+        </div>
+        <aside class="notes">
+          Walk through the decision sequence. If the onboard LED file fails, inspect
+          the Thonny interpreter, USB connection, and running program before touching
+          the circuit. If the known GP15 test fails after the onboard test succeeds,
+          stop and unplug before checking LED orientation, resistor placement, GP15,
+          and GND. Do not change code and wiring simultaneously.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">04</span>
+        <p class="eyebrow">Part 4 · Your challenge</p>
+        <h2>Secret Signal Machine</h2>
+        <p class="lede">Now apply the teaching. The challenge is yours; the setup is supplied.</p>
+        <aside class="notes">
+          Transition to the student lesson and starter file. This is the lab portion,
+          analogous to the TEALS Unit 1 project but adapted to a physical output.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Your build</p>
+        <h2>Create a message made of light</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Must include</h3>
+            <ul>
+              <li>a printed team name;</li>
+              <li>short and long flashes;</li>
+              <li>at least two timing variables;</li>
+              <li>a clear pause between groups of flashes;</li>
+              <li>a final <code>off</code> state.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Build it in this order</h3>
+            <ol>
+              <li>Run the starter: check its one short flash.</li>
+              <li>Add two short flashes to finish the first group.</li>
+              <li>Change <code>short_flash</code>; check all three.</li>
+              <li>Add a pause, then a group using <code>long_flash</code>.</li>
+              <li>Hide the code and ask a partner to decode it.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="callout warning" style="margin-top: 0.6em;">
+          <p>
+            Start with
+            <a href="../code/day-1/03_secret_signal_starter.py"><code>03_secret_signal_starter.py</code></a>.
+            Do not open the solution until your own signal works.
+          </p>
+        </div>
+        <aside class="notes">
+          Keep solution files hidden or teacher-controlled. Minimum success can use
+          the onboard LED. Strong work moves the same logic to the checked GP15
+          circuit. Day 1 repetition is intentional; loops arrive on Day 3. While
+          circulating, first check that one flash works and ends off. Later, ask
+          students to demonstrate what changes when they edit one timing variable,
+          and ask both partners to explain the lines they added. Swap driver and
+          navigator after the first working flash or after 20 minutes.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Exit ticket</p>
+        <h2>Complete the explanation</h2>
+        <div class="callout" style="margin: 1.2em 0;">
+          <p style="font-size: 1em;">
+            “When Python runs <code>led.on()</code>, the output is ________,
+            and when Python runs <code>print()</code>, the output is ________.”
+          </p>
+        </div>
+        <p class="big-question fragment">What evidence today changed how you think code works?</p>
+        <div class="footer">
+          <span>Day 1 complete</span>
+          <span>Stop program · unplug USB · return components</span>
+        </div>
+        <aside class="notes">
+          Expected distinction: physical light versus text in the Shell. Collect a
+          response from every student, not only each pair. End with shutdown: stop,
+          ensure LEDs are off, unplug USB, and inventory components.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Teacher reference</p>
+        <h2>Teaching sequence and sources</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Adapted teaching sequence</h3>
+            <p>
+              TEALS Unit 1 lessons 1.01–1.05: IDE, interpreter, values and types,
+              expressions, scripts, variables, comments, and debugging.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Physical-computing adaptation</h3>
+            <p>
+              Thonny with MicroPython, onboard LED, GP15 ordinary LED circuit, and
+              the Secret Signal Machine lab.
+            </p>
+          </div>
+        </div>
+        <p class="tiny" style="margin-top: 2em;">
+          Source curriculum:
+          <a href="https://github.com/TEALSK12/2nd-semester-introduction-to-computer-science/tree/master/units/1_unit/slidedecks">
+            TEALS Introduction to Computer Science, Unit 1 slide decks
+          </a>.
+          Course circuit artwork is original and documented in the workshop source notes.
+        </p>
+        <aside class="notes">
+          This slide is for teacher reference and attribution; it need not be shown
+          during class. The deck paraphrases and reorganises the concepts rather than
+          reproducing the TEALS slides.
+        </aside>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      history: true,
+      controlsTutorial: false,
+      progress: true,
+      slideNumber: "c/t",
+      transition: "slide",
+      backgroundTransition: "fade",
+      pdfSeparateFragments: false,
+      center: false,
+      width: 1280,
+      height: 720,
+      margin: 0.04,
+      plugins: [RevealNotes, RevealHighlight]
+    });
+
+    const fullscreenButton = document.querySelector("#fullscreen-button");
+
+    if (!document.fullscreenEnabled) {
+      fullscreenButton.hidden = true;
+    } else {
+      fullscreenButton.addEventListener("click", () => {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          document.documentElement.requestFullscreen();
+        }
+      });
+
+      document.addEventListener("fullscreenchange", () => {
+        const active = Boolean(document.fullscreenElement);
+        fullscreenButton.textContent = active ? "Exit full screen" : "Full screen";
+        fullscreenButton.title = active ? "Exit fullscreen (F)" : "Enter fullscreen (F)";
+      });
+    }
+  </script>
+</body>
+</html>

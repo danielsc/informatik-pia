@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Day 3: Make It Reusable — Teacher Slides</title>
+  <meta name="description" content="Teacher presentation for Day 3 of the Raspberry Pi Pico Python workshop.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="workshop-slides.css">
+  <style>
+    .pixel-strip {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 0.45em;
+      margin: 0.9em 0;
+    }
+
+    .pixel-strip .card {
+      padding: 0.45em 0.2em;
+      text-align: center;
+    }
+
+    .pixel-strip strong {
+      display: block;
+      color: var(--pico);
+      font-size: 1.35em;
+      line-height: 1;
+    }
+
+    .diagram-frame.layered {
+      width: 100%;
+      height: 300px;
+    }
+
+    .diagram-frame.layered img {
+      height: 300px;
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.6em;
+      align-items: stretch;
+      margin-top: 0.7em;
+    }
+
+    .state-grid .card p,
+    .state-grid .card li {
+      font-size: 0.68em;
+    }
+
+    .tight li {
+      margin: 0.18em 0;
+    }
+  </style>
+</head>
+<body>
+  <button id="fullscreen-button" type="button" title="Enter fullscreen (F)">Full screen</button>
+  <div class="reveal">
+    <div class="slides">
+      <section class="title-slide">
+        <p class="eyebrow">Python in the physical world · Day 3</p>
+        <h1>Make it reusable</h1>
+        <p class="lede">Name repeated jobs with functions, control eight RGB pixels, and build a Pixel Pet that reacts to a knob.</p>
+        <div class="callout success" style="max-width: 24em; margin-top: 1em;">
+          <p><strong>Mission:</strong> turn repeated steps into named tools you can call again.</p>
+        </div>
+        <div class="footer"><span>Teacher slides</span><span>Press S for notes · F for fullscreen</span></div>
+        <aside class="notes">
+          Open with the RGB module and a potentiometer in hand. Ask students where they
+          have already seen functions: print, sleep, led.on, button.value. State that
+          imports, hardware setup, and the final cleanup block are supplied today.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Learning goals</p>
+        <h2>By the end, you can…</h2>
+        <div class="grid-3">
+          <div class="card"><h3>Recognise calls</h3><p>Name a function call and its argument.</p></div>
+          <div class="card"><h3>Write functions</h3><p>Define and call your own function with <code>def</code>.</p></div>
+          <div class="card"><h3>Explain values</h3><p>Explain parameters, returned values, and inside-only names (local variables).</p></div>
+          <div class="card"><h3>Visit positions</h3><p>Use <code>range(8)</code> to visit pixel positions 0 through 7.</p></div>
+          <div class="card"><h3>Trace loops</h3><p>Follow the order of a small nested loop.</p></div>
+          <div class="card"><h3>Build safely</h3><p>Test the RGB module first, then add the knob layer for Pixel Pet.</p></div>
+        </div>
+        <aside class="notes">
+          Emphasise that today's new ideas come before the build. Students should hear
+          and try the Python patterns before the Pixel Pet depends on them.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Today’s route</p>
+        <h2>Call → define → loop → light → build the pet</h2>
+        <div class="flow">
+          <div class="flow-box">Familiar calls<br><span class="tiny">and arguments</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">Your own<br>functions</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box"><code>for</code>, <code>range</code>,<br>positions 0-7</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">RGB test,<br>then Pixel Pet</div>
+        </div>
+        <div class="callout warning"><p>First learn the pattern in small code. Then use it with live hardware.</p></div>
+        <aside class="notes">
+          This deck adapts TEALS Unit 3 lessons 3.01-3.04, then Unit 4 lessons 4.01-
+          4.03, before the workshop's own RGB and potentiometer tasks.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">01</span>
+        <p class="eyebrow">Part 1 · Functions name jobs</p>
+        <h2>Start with function calls you already know</h2>
+        <p class="lede">You have called functions before writing your own.</p>
+        <aside class="notes">
+          Keep this opening concrete. The goal is familiarity before new syntax.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Familiar calls</p>
+        <h2>A call uses parentheses to do a job now</h2>
+        <p class="activity watch">Watch and discuss · Name the function and the argument</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+print("Ready")
+sleep_ms(500)
+print("Go!")
+          </code></pre>
+          <div>
+            <div class="card">
+              <h3>Function name</h3>
+              <p>The useful name before the parentheses, such as <code>print</code>.</p>
+            </div>
+            <div class="card" style="margin-top: 0.6em;">
+              <h3>Argument</h3>
+              <p>The value inside the parentheses, such as <code>"Ready"</code> or <code>500</code>.</p>
+            </div>
+          </div>
+        </div>
+        <div class="callout"><p>Today the timing tools are supplied. Your job is to recognise what each call asks Python to do.</p></div>
+        <aside class="notes">
+          Connect to TEALS 3.01 built-in functions. If students ask about sleep_ms,
+          say it pauses for milliseconds and was imported for them.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Define, then call</p>
+        <h2><code>def</code> gives a repeated job a new name</h2>
+        <p class="activity">Try in Thonny · Type this smaller example and run it</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+def cheer():
+    print("Go, Pico!")
+
+cheer()
+cheer()
+          </code></pre>
+          <div>
+            <div class="card"><h3><code>def cheer():</code></h3><p>Defines the job and gives it the name <code>cheer</code>.</p></div>
+            <div class="card" style="margin-top: 0.6em;"><h3><code>cheer()</code></h3><p>Calls the job. The body runs only when Python reaches the call.</p></div>
+          </div>
+        </div>
+        <div class="callout success"><p>One name can replace many repeated lines.</p></div>
+        <aside class="notes">
+          This adapts TEALS 3.02. Stress that the indented line is the function body.
+          Ask what would happen if the file defined cheer but never called it.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Parameters and colour data</p>
+        <h2>One grouped RGB value can be passed into a function</h2>
+        <p class="activity">Try in Thonny · Print the grouped value before we use hardware</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+GREEN = (0, 30, 0)
+
+def show_colour(colour):
+    print("Colour:", colour)
+
+show_colour(GREEN)
+          </code></pre>
+          <div>
+            <div class="card">
+              <h3>Workshop RGB tuple</h3>
+              <p><code>(red, green, blue)</code> is one grouped colour value for this workshop.</p>
+            </div>
+            <div class="card" style="margin-top: 0.6em;">
+              <h3>Parameter and argument</h3>
+              <p><code>colour</code> is the parameter. <code>GREEN</code> is the argument sent into the call.</p>
+            </div>
+          </div>
+        </div>
+        <div class="callout warning"><p>Keep RGB numbers low, such as <code>30</code>, so the pixels are bright enough to see without glare.</p></div>
+        <aside class="notes">
+          Explicitly introduce the tuple here because TEALS does not assume students
+          already know tuple vocabulary. Treat it as one grouped colour packet.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Return versus print</p>
+        <h2><code>print</code> shows a value; <code>return</code> hands it back</h2>
+        <p class="activity watch">Watch and discuss · Which line helps later code make a decision?</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+def doubled(number):
+    return number * 2
+
+print(doubled(4))
+answer = doubled(4)
+          </code></pre>
+          <div>
+            <div class="card"><h3><code>print(...)</code></h3><p>Displays a value now.</p></div>
+            <div class="card" style="margin-top: 0.6em;"><h3><code>return ...</code></h3><p>Sends a value back so other code can store it, compare it, or pass it on.</p></div>
+          </div>
+        </div>
+        <div class="callout danger"><p>If a function only prints a colour, another function cannot use that colour to choose an animation.</p></div>
+        <aside class="notes">
+          This is the TEALS 3.03 contrast. Ask students why answer = doubled(4) is
+          possible only because the function returns a value.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Inside-only names</p>
+        <h2>A local variable exists only during that function call</h2>
+        <p class="activity watch">Watch and discuss · Which name disappears after the call ends?</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+def make_blue():
+    intensity = 25
+    return (0, 0, intensity)
+          </code></pre>
+          <div>
+            <table class="compact-table">
+              <thead><tr><th>Name</th><th>What it means here</th></tr></thead>
+              <tbody>
+                <tr><td><code>make_blue</code></td><td>the function name</td></tr>
+                <tr><td><code>intensity</code></td><td>a local variable used only inside this call</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="callout success"><p>Outside the function, Python can use the returned tuple. It cannot use the inside-only name <code>intensity</code>.</p></div>
+        <aside class="notes">
+          Connect to TEALS 3.04 scope. Students do not need aliasing today; they do
+          need the idea that parameters and variables inside a function are local.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">02</span>
+        <p class="eyebrow">Part 2 · Loops and positions</p>
+        <h2>Repeat a pattern without copying the line eight times</h2>
+        <p class="lede">Loops let one block of code visit every pixel position.</p>
+        <aside class="notes">
+          Transition from functions to repetition. Students already know repeated code
+          from Day 1, so the motivation should feel obvious.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">A <code>for</code> loop</p>
+        <h2><code>range(8)</code> produces 0 through 7</h2>
+        <p class="activity">Try in Thonny · Predict all eight lines before you press Run</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+for index in range(8):
+    print(index)
+          </code></pre>
+          <div>
+            <div class="card"><h3><code>range(8)</code></h3><p>Creates the counting values <code>0, 1, 2, 3, 4, 5, 6, 7</code>.</p></div>
+            <div class="card" style="margin-top: 0.6em;"><h3>Loop body</h3><p>The indented line runs once for each value, with <code>index</code> holding the current value.</p></div>
+          </div>
+        </div>
+        <div class="callout"><p>An <strong>index</strong> is a position number. Our eight pixels use index positions 0 through 7.</p></div>
+        <aside class="notes">
+          This combines TEALS 4.01 and 4.02. Ask what would change if range(3) were
+          used instead. Keep the word index tied to position number.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Pixel positions</p>
+        <h2>Valid indexes on this module are 0 through 7</h2>
+        <p class="activity paper">On paper · Mark the first position, the last position, and the one that is out of range</p>
+        <div class="pixel-strip" aria-label="Eight pixel positions numbered zero through seven">
+          <div class="card"><strong>0</strong><p><code>pixels[0]</code></p></div>
+          <div class="card"><strong>1</strong><p><code>pixels[1]</code></p></div>
+          <div class="card"><strong>2</strong><p><code>pixels[2]</code></p></div>
+          <div class="card"><strong>3</strong><p><code>pixels[3]</code></p></div>
+          <div class="card"><strong>4</strong><p><code>pixels[4]</code></p></div>
+          <div class="card"><strong>5</strong><p><code>pixels[5]</code></p></div>
+          <div class="card"><strong>6</strong><p><code>pixels[6]</code></p></div>
+          <div class="card"><strong>7</strong><p><code>pixels[7]</code></p></div>
+        </div>
+        <pre><code class="language-python" data-trim>
+for index in range(8):
+    pixels[index] = (0, 0, 20)
+        </code></pre>
+        <div class="callout danger"><p><strong>Predict:</strong> <code>pixels[8]</code> asks for a ninth position that this module does not have.</p></div>
+        <aside class="notes">
+          The physical module is arranged in a loop, but the code still numbers eight
+          positions from 0 to 7. Ask which index is first, last, and invalid.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Nested loops</p>
+        <h2>For each outer turn, the inner loop finishes completely</h2>
+        <p class="activity paper">On paper · Trace the order before anyone runs it</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+for lap in range(2):
+    for colour in ["red", "green"]:
+        print(lap, colour)
+          </code></pre>
+          <table class="compact-table">
+            <thead><tr><th>Step</th><th><code>lap</code></th><th><code>colour</code></th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>0</td><td>red</td></tr>
+              <tr><td>2</td><td>0</td><td>green</td></tr>
+              <tr><td>3</td><td>1</td><td>red</td></tr>
+              <tr><td>4</td><td>1</td><td>green</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout"><p>This is the same pattern you will see at the end of <a href="../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a>, just with a smaller trace.</p></div>
+        <aside class="notes">
+          This directly mirrors TEALS 4.03 nested loop tracing. Have students narrate
+          step 2 to step 3 carefully: the inner loop restarts only after lap changes.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">03</span>
+        <p class="eyebrow">Part 3 · First hardware layer</p>
+        <h2>Build and test the RGB module before the bigger project</h2>
+        <p class="lede">One known-working layer makes the next layer safer and easier to debug.</p>
+        <aside class="notes">
+          Stop any running program before parts come out. The next two slides must be
+          contiguous because the circuit introduction belongs immediately before use.
+        </aside>
+      </section>
+
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div>
+            <p class="eyebrow">Build while unplugged · Task 1</p>
+            <h2>8-RGB module on GP16</h2>
+          </div>
+          <a class="diagram-link" href="../diagrams/rgb8-module.html">Exact diagram + table</a>
+        </div>
+        <div class="diagram-frame">
+          <img src="../diagrams/rgb8-module.png" alt="Complete square Freenove 8-RGB module diagram wired from the IN header to Pico GP16, 3.3 volts, and ground.">
+        </div>
+        <aside class="notes">
+          This slide introduces the exact circuit immediately before students build it.
+          It supports 01_neopixel_colours.py. USB stays disconnected. Use the header
+          marked IN: IN S to GP16, IN V to 3.3 V, and IN G to GND. Require a partner
+          check against the HTML table, not only the PNG.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Test the RGB module · Task 1</p>
+        <h2>Reconnect and run the colour file</h2>
+        <p class="activity">Test the circuit · Run the smallest check before changing any code</p>
+        <div class="grid-2">
+          <div>
+            <div class="card">
+              <h3>Run</h3>
+              <p><a href="../code/day-3/01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a></p>
+              <ol class="tight">
+                <li>Reconnect only after the partner check.</li>
+                <li>Watch for red, green, blue, amber, then off.</li>
+                <li>Read each printed tuple aloud as it appears.</li>
+              </ol>
+            </div>
+          </div>
+          <div>
+            <pre><code class="language-python" data-trim>
+RED = (30, 0, 0)
+GREEN = (0, 30, 0)
+BLUE = (0, 0, 30)
+AMBER = (20, 10, 0)
+            </code></pre>
+          </div>
+        </div>
+        <div class="callout success"><p>An RGB tuple groups one colour as <code>(red, green, blue)</code>. Amber mixes red and green. Stop this test and unplug again before the next build.</p></div>
+        <aside class="notes">
+          Tie the seen colours to the tuples. If nothing lights, students stop, unplug,
+          and re-check IN versus OUT, GP16, 3.3 V, and GND.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">See reuse in working code</p>
+        <h2><code>02_pixel_functions.py</code> names three jobs clearly</h2>
+        <p class="activity">Try in Thonny · Run the file, then answer the prompts</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+def show_colour(colour):
+    pixels.fill(colour)
+    pixels.write()
+
+def chase(colour, delay_ms):
+    for index in range(PIXEL_COUNT):
+        ...
+
+def level_to_colour(percent):
+    ...
+          </code></pre>
+          <div>
+            <div class="card">
+              <h3>Find and explain</h3>
+              <ul class="tight">
+                <li>a function with one parameter;</li>
+                <li>the function with two parameters;</li>
+                <li>the returned colour value;</li>
+                <li>the nested loops at the end.</li>
+              </ul>
+            </div>
+            <div class="card" style="margin-top: 0.6em;">
+              <h3>Big idea</h3>
+              <p>Returning a colour is more reusable than printing a colour because later code can still use the value.</p>
+            </div>
+          </div>
+        </div>
+        <div class="callout"><p>Open <a href="../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a> and match each function name to its one job.</p></div>
+        <aside class="notes">
+          Keep the prompt concrete. Students are reading a finished example to prepare
+          for the starter, not editing this file into something new.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">04</span>
+        <p class="eyebrow">Part 4 · Daily challenge</p>
+        <h2>Build the Pixel Pet as a layered system</h2>
+        <p class="lede">Keep the working RGB layer, then add the knob layer and code one function at a time.</p>
+        <aside class="notes">
+          The next slide must stay directly before the starter-file launch because it
+          introduces the combined build sequence at the point of use.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Build while unplugged · Task 2</p>
+        <h2>Keep the RGB base, then add the potentiometer</h2>
+        <a class="diagram-link" href="../diagrams/rgb8-module.html" style="margin-bottom: 0.8em;">RGB base diagram + table</a>
+        <div class="grid-2">
+          <div>
+            <div class="diagram-frame layered">
+              <img src="../diagrams/rgb8-module.png" alt="Retained RGB base diagram showing the 8-RGB module still connected from the IN header to GP16, 3.3 volts, and ground.">
+            </div>
+          </div>
+          <div>
+            <table class="compact-table">
+              <thead><tr><th>Potentiometer pin</th><th>Connection</th></tr></thead>
+              <tbody>
+                <tr><td><code>3V3</code> outer pin</td><td>the same powered 3.3 V rail as RGB <code>IN V</code></td></tr>
+                <tr><td>centre <code>WIPER</code></td><td>GP26 / ADC0</td></tr>
+                <tr><td><code>GND</code> outer pin</td><td>the same common GND rail as RGB <code>IN G</code></td></tr>
+              </tbody>
+            </table>
+            <div class="callout warning" style="margin-top: 0.7em;">
+              <p>Stop the RGB test, unplug USB, keep its three working wires, add these three knob wires, then partner-check all six connections.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Make students say which three connections are unchanged and which three are
+          new. If anyone wants to rewire the RGB module, stop and reset to the tested
+          base before adding the potentiometer.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Open the starter</p>
+        <h2>First read the knob and choose a state</h2>
+        <p class="activity">Test the circuit · Open <code>03_pixel_pet_starter.py</code></p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Already supplied</h3>
+            <ul class="tight">
+              <li><code>pixels</code> and <code>knob</code> are already created.</li>
+              <li>The endless loop already reads, prints, and chooses a state.</li>
+              <li>The <code>finally</code> block already turns the pixels off safely.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Complete these first</h3>
+            <ol class="tight">
+              <li>In <code>read_energy_percent()</code>, briefly print <code>raw_value</code> and turn the knob to confirm changing numbers, then return 0-100.</li>
+              <li>In <code>choose_state()</code>, return <code>"sleepy"</code>, <code>"curious"</code>, or <code>"excited"</code>.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="callout success" style="margin-top: 0.7em;"><p>Turn the knob through all three ranges. Check the printed energy and state before writing an animation.</p></div>
+        <aside class="notes">
+          Reconnect only after the unplugged partner check. First prove the input and
+          decision functions using Shell output. The supplied endless loop, hardware
+          setup, and finally cleanup stay in place.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Complete the displays</p>
+        <h2>Add one state animation at a time</h2>
+        <p class="activity">Try in Thonny · Test each function before adding the next</p>
+        <div class="state-grid">
+          <div class="card"><h3>0-32%</h3><p><strong>sleepy</strong><br>slow blue pulse</p></div>
+          <div class="card"><h3>33-65%</h3><p><strong>curious</strong><br>green moving pixel</p></div>
+          <div class="card"><h3>66-100%</h3><p><strong>excited</strong><br>quick colourful sparkle</p></div>
+        </div>
+        <ol>
+          <li>Complete <code>show_sleepy()</code> and test it directly.</li>
+          <li>Complete <code>show_curious()</code> using indexes 0-7 and test it.</li>
+          <li>Complete <code>show_excited()</code> with low RGB values and test it.</li>
+          <li>Run the whole program and turn the knob through every range.</li>
+        </ol>
+        <aside class="notes">
+          Keep each function small and observable. Ask students to call a display
+          function directly if state selection works but the pixels do not. Students
+          remain in 03_pixel_pet_starter.py and keep its printed energy and state lines
+          as debugging evidence.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Exit ticket</p>
+        <h2>Which one can another function use?</h2>
+        <p class="activity paper">On paper · Answer before cleanup</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+print(energy)
+return energy
+          </code></pre>
+          <div class="card">
+            <h3>Explain the difference</h3>
+            <p>One line shows a value now. The other line sends a value back so another function can make a decision with it.</p>
+            <p style="margin-top: 0.7em;"><strong>Your answer:</strong> Which line lets <code>choose_state(...)</code> use the value?</p>
+          </div>
+        </div>
+        <div class="footer"><span>Day 3 complete</span><span>Stop program · pixels off · unplug USB · return module and knob</span></div>
+        <aside class="notes">
+          Expected answer: return energy. Collect one answer per student. Finish with
+          shutdown and unplugging, even if some pairs are still debugging.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Teacher reference</p>
+        <h2>Teaching sequence and source materials</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>TEALS sequence adapted here</h3>
+            <p>Unit 3 lessons 3.01-3.04: built-in function calls and arguments, user-defined functions, return versus print, and local scope.</p>
+            <p>Unit 4 lessons 4.01-4.03: <code>for</code> loops, <code>range</code>, indexes, and nested-loop tracing.</p>
+          </div>
+          <div class="card">
+            <h3>Workshop sources used here</h3>
+            <p><code>day-3-make-it-reusable.md</code>, <code>WIRING_AND_SAFETY.md</code>, <code>rgb8-module.html</code>, <code>rgb8-module.png</code>, <code>01_neopixel_colours.py</code>, <code>02_pixel_functions.py</code>, and <code>03_pixel_pet_starter.py</code>.</p>
+          </div>
+        </div>
+        <p class="tiny" style="margin-top: 2em;">
+          TEALS source repositories:
+          <a href="https://github.com/TEALSK12/2nd-semester-introduction-to-computer-science/tree/master/units/3_unit/slidedecks">Unit 3 slide decks</a>
+          and
+          <a href="https://github.com/TEALSK12/2nd-semester-introduction-to-computer-science/tree/master/units/4_unit/slidedecks">Unit 4 slide decks</a>.
+        </p>
+        <aside class="notes">
+          This slide is for attribution and planning, not for student projection. The
+          deck paraphrases the TEALS sequence while replacing console labs with the
+          workshop's RGB and Pixel Pet tasks.
+        </aside>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script src="workshop-slides.js"></script>
+</body>
+</html>
