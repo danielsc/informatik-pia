@@ -4,6 +4,11 @@ Every electrical contact made by a jumper wire, component lead, or module
 connector must land pixel-exactly on the centre of a visible breadboard hole.
 This applies to power rails and both terminal fields.
 
+Every displayed hole must also be complete. A hole-field clipping rectangle
+must not reveal a partial row at any edge. The lower terminal field therefore
+starts above the first complete `f` row, while each power-rail field is clipped
+exactly between its upper and lower colour stripes.
+
 ## One physical contact per hole
 
 A breadboard hole accepts only one component lead, jumper end, or connector
@@ -105,7 +110,7 @@ alone cannot satisfy this rubric.
 | 1 | over 1.00 through 2.00 px | Major revision |
 | 0 | over 2.00 px or outside a visible hole field | Not connected |
 
-Every finished diagram requires **4/4**. One missing declaration, unsupported
+Every finished diagram requires **4/4**. A clipped partial hole row, one missing declaration, unsupported
 electrical shape, off-grid endpoint, endpoint outside a visible hole field, or
 hole occupied by more than one declared contact, or contact beneath a component
 body, missing connector/cable dot, off-centre dot, or dot with the wrong colour

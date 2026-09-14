@@ -82,6 +82,18 @@ def main():
                 raise ValueError(f"{bank.title()} rail must contain two hole rows")
             upper_y = number(document.stripes[f"{bank}-rail-upper-stripe"], "y1")
             lower_y = number(document.stripes[f"{bank}-rail-lower-stripe"], "y1")
+            field_y = number(
+                document.fields[f"{bank}-power-rail-holes"], "y"
+            )
+            field_end = field_y + number(
+                document.fields[f"{bank}-power-rail-holes"], "height"
+            )
+            if not math.isclose(field_y, upper_y, abs_tol=1e-9) or not math.isclose(
+                field_end, lower_y, abs_tol=1e-9
+            ):
+                raise ValueError(
+                    f"{bank.title()} rail hole field must end at its two stripes"
+                )
             if not math.isclose(
                 upper_y,
                 number(document.stripes[f"{bank}-rail-upper-stripe"], "y2"),

@@ -51,8 +51,9 @@ lower stripe
 
 With the canonical 27 px vertical hole pitch, both stripe-to-pin distances
 must be exactly `13.5 px`. The top and bottom banks must use identical
-geometry. This category requires **4/4** and fails for any non-zero alignment
-error.
+geometry. Each rail hole field begins at its upper stripe and ends at its lower
+stripe so no third, clipped hole row can appear. This category requires
+**4/4** and fails for any non-zero alignment error or clipped row.
 
 ## Automatic failures
 

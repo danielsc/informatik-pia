@@ -30,6 +30,8 @@ diagram whose components force a small layout adjustment.
 The template also fails if:
 
 - USB is not on the left;
+- either terminal field exposes a clipped partial row of holes;
+- either two-row power bank exposes a third clipped row;
 - the Pico does not begin at the leftmost usable terminal-field hole;
 - the Pico is not horizontal;
 - the upper and lower header rows do not occupy opposite breadboard terminal
@@ -43,6 +45,8 @@ The template also fails if:
 |---|---:|
 | Breadboard bounds | `y=96`, `height=500` |
 | Breadboard centre | `346 px` |
+| Lower terminal rows | Five complete rows; no clipped row below the channel |
+| Power-rail rows | Exactly two complete rows per bank |
 | Pico local bounds | `x=78`, `y=195`, `width=520`, `height=192` |
 | Green PCB bounds | `x=78`, `y=195`, `width=520`, `height=175` |
 | Pico translation | `55 px` |

@@ -209,7 +209,14 @@ makes power distribution easier to understand:
 Draw each power-rail bank with its colour stripes outside the two hole rows:
 the upper stripe sits half a row pitch above the first row and the lower stripe
 sits half a row pitch below the second. Use the same distance for the top and
-bottom rail banks.
+bottom rail banks. Clip each rail hole field at those stripe lines so exactly
+two complete rows are visible; never expose a partial third row.
+
+Every terminal-field hole must be fully visible unless an opaque component
+body covers it in the top view. In particular, the first row below the centre
+channel must not be clipped by its hole-field boundary. A Pico-mounted row is
+covered by the Pico artwork and pads rather than showing breadboard holes
+through the board.
 
 Every electrical element that contacts the breadboard must be in
 `#circuit-connections` and declare:

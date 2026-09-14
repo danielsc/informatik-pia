@@ -46,6 +46,19 @@ A diagram fails regardless of its numerical scores if it:
   end, or gives a dot a colour that does not match its declared net;
 - claims that illustrative breadboard holes are an exact placement plan.
 
+## Shared breadboard-template geometry audit
+
+This audit applies to every diagram below after the shared template correction.
+
+| Category | Score | Evidence |
+|---|---:|---|
+| Lower terminal-field visibility | **4/4** | Rows `f` through `j` render as five complete rows. The first row below the centre channel is no longer clipped; the Pico-covered `h` row remains hidden beneath the top-view board and pads. |
+| Power-rail row count | **4/4** | Each power bank renders exactly two complete hole rows. Its hole field begins at the upper stripe and ends at the lower stripe, so no partial third row is visible. |
+| Pico alignment and footprint | **4/4** | All 40 Pico pads retain `0.00 px` hole-alignment error, the Pico remains vertically centred, and the complete footprint retains `0.00 px` overflow. |
+
+**Outcome:** PASS. The shared breadboard geometry has no clipped partial rows,
+and all existing electrical endpoints remain on complete, visible holes.
+
 ## Audit: `button-and-led.html`
 
 Reviewed against the rendered HTML/SVG, the Day 2 program, and the wiring guide.

@@ -31,6 +31,8 @@ class EndpointParser(HTMLParser):
         self.component_dimensions = {}
         self.component_uses = []
         self._defs_depth = 0
+        self._in_terminal_pattern = False
+        self.terminal_hole_radius = None
         self.structure_errors = []
 
     def handle_starttag(self, tag, attrs):
@@ -38,6 +40,14 @@ class EndpointParser(HTMLParser):
         element_id = attributes.get("id")
         if tag == "defs":
             self._defs_depth += 1
+        if tag == "pattern" and element_id == "terminal-holes":
+            self._in_terminal_pattern = True
+        elif (
+            tag == "circle"
+            and self._in_terminal_pattern
+            and self.terminal_hole_radius is None
+        ):
+            self.terminal_hole_radius = attributes.get("r")
         if tag == "rect" and element_id == "breadboard":
             self.breadboard = attributes
         if tag == "rect" and attributes.get("data-breadboard-hole-field") == "true":
@@ -95,6 +105,8 @@ class EndpointParser(HTMLParser):
             self._connections_depth += 1
 
     def handle_endtag(self, tag):
+        if tag == "pattern" and self._in_terminal_pattern:
+            self._in_terminal_pattern = False
         if tag == "g" and self._connections_depth > 0:
             self._connections_depth -= 1
         if tag == "defs" and self._defs_depth > 0:
@@ -251,6 +263,22 @@ def hole_at(point, fields, origin_x, origin_y, pitch_x, pitch_y):
     return hole_x, hole_y, in_field
 
 
+def clipped_hole_rows(fields, origin_y, pitch_y, radius):
+    clipped = []
+    for field in fields:
+        start = number(field, "y")
+        end = start + number(field, "height")
+        first = math.floor((start - radius - origin_y) / pitch_y)
+        last = math.ceil((end + radius - origin_y) / pitch_y)
+        for row in range(first, last + 1):
+            centre = origin_y + row * pitch_y
+            intersects = centre + radius > start and centre - radius < end
+            contained = centre - radius >= start and centre + radius <= end
+            if intersects and not contained:
+                clipped.append((field.get("id", "unnamed field"), centre))
+    return clipped
+
+
 def score_error(error):
     if math.isclose(error, 0.0, abs_tol=1e-9):
         return 4
@@ -275,7 +303,11 @@ def main():
     document.feed(source)
     document.structure_errors.extend(component_size_errors(document))
 
-    if document.breadboard is None or len(document.fields) != 4:
+    if (
+        document.breadboard is None
+        or len(document.fields) != 4
+        or document.terminal_hole_radius is None
+    ):
         print("Expected breadboard geometry and four visible hole fields.", file=sys.stderr)
         return 1
     if not document.connections_layer:
@@ -290,6 +322,15 @@ def main():
         origin_y = number(document.breadboard, "data-hole-origin-y")
         pitch_x = number(document.breadboard, "data-hole-pitch-x")
         pitch_y = number(document.breadboard, "data-hole-pitch-y")
+        hole_radius = float(document.terminal_hole_radius)
+        clipped_rows = clipped_hole_rows(
+            document.fields, origin_y, pitch_y, hole_radius
+        )
+        if clipped_rows:
+            field_id, centre = clipped_rows[0]
+            raise ValueError(
+                f"{field_id} clips the hole row centred at y={centre:g}"
+            )
         obstructions = parse_obstructions(document.obstructions)
         endpoints = []
         contact_requirements_by_element = []
