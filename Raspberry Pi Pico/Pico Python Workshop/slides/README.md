@@ -10,7 +10,8 @@ Open the hosted workshop at:
 
 <https://danielsc.github.io/informatik-pia/>
 
-The site is served from the repository's `gh-pages` branch.
+The site is deployed automatically from `master` by GitHub Actions whenever
+the workshop materials or deployment workflow change.
 
 ## Present a deck
 
