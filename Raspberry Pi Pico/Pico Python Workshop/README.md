@@ -25,6 +25,18 @@ maintenance rules.
 | [`slides/workshop-slides.css`](slides/workshop-slides.css) | shared presentation design |
 | [`slides/workshop-slides.js`](slides/workshop-slides.js) | shared Reveal.js configuration |
 | [`SOURCES_AND_IMAGES.md`](SOURCES_AND_IMAGES.md) | sources, licences, and image attribution |
-## Fallback
+## Wokwi fallback and teacher test
 
-Should the hardware fail on the students and are all backups used up, then students could use this simulator envionment: https://wokwi.com/pi-pico
+The repository root contains a ready-to-run Wokwi project:
+
+- [`wokwi.toml`](../../wokwi.toml) uses the pinned Pico MicroPython firmware;
+- [`diagram.json`](../../diagram.json) provides a Pico, potentiometer, and
+  eight-pixel NeoPixel ring;
+- the wiring matches GP26/ADC0 for the potentiometer and GP16 for pixel data.
+
+In VS Code, run **Wokwi: Start Simulator**. Keep its tab visible, then run the
+task **Wokwi: Run teacher pixel spinner** from **Tasks: Run Task**. The virtual
+ring stands in for the Freenove eight-pixel module.
+
+This simulation can also serve as a fallback if classroom hardware is
+unavailable.

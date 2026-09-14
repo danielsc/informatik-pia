@@ -1,0 +1,17 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Wokwi: Run teacher pixel spinner",
+      "type": "process",
+      "command": "${env:HOME}/.local/bin/mpremote",
+      "args": [
+        "connect",
+        "port:rfc2217://localhost:4000",
+        "run",
+        "${workspaceFolder}/Raspberry Pi Pico/Pico Python Workshop/code/teacher-tests/potentiometer_pixel_spinner.py"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}
