@@ -41,6 +41,18 @@ meaning in German around the code instead of creating a different program.
 
 - Use clear, age-appropriate standard German suitable for eighth-grade
   students.
+- Translate each complete semantic unit, not isolated text boxes. A heading,
+  lead-in, card, bullet, label, or fragment may form one sentence with nearby
+  text even when the HTML stores the pieces separately.
+- Read every heading-plus-item combination aloud as a complete German
+  sentence. Check grammar, case, number, verb position, and register across the
+  visual boundary.
+- When a heading supplies a modal frame such as `Am Ende könnt ihr …`, every
+  item must complete it with an infinitive construction: `… Werte
+  unterscheiden`, not the imperative `… Unterscheidet Werte`.
+- If parallel items cannot all complete the same sentence naturally, rewrite
+  the heading as a standalone label such as `Das lernt ihr heute` instead of
+  forcing a literal translation.
 - Address students consistently with informal plural forms such as `ihr`,
   `euch`, and direct imperatives.
 - Prefer short, concrete instructions over literal translations of English
@@ -101,5 +113,8 @@ For each matching English/German pair:
 4. Confirm every image retains meaningful alternative text in that language.
 5. Render representative slides at 1280 × 720 and check that longer German
    text does not clip or cover diagrams.
-6. Confirm speaker notes exist for every slide in both languages.
-7. Recheck safety wording and electrical values independently of prose quality.
+6. Read sentence fragments together with the headings, labels, or prompts that
+   introduce them; reject any combination that is not grammatically correct,
+   natural German.
+7. Confirm speaker notes exist for every slide in both languages.
+8. Recheck safety wording and electrical values independently of prose quality.

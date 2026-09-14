@@ -14,6 +14,9 @@ links, and extension work.
 
 - Every visible heading, label, question, and instruction must make sense to a
   student seeing it for the first time.
+- Treat a heading and the cards, bullets, or fragments beneath it as complete
+  semantic units. Read each combination as one sentence and ensure it is
+  grammatical in that language.
 - Do not expose planning language such as “teaching content,” “lab launch,”
   “concept gate,” “pause point,” “scaffolding,” or curriculum mapping.
 - Do not use a technical term before defining it in student language.
