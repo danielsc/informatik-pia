@@ -387,47 +387,38 @@
       font-weight: 900;
     }
 
-    .thonny {
+    .thonny-layout {
       display: grid;
-      grid-template-columns: 1fr 0.72fr;
-      grid-template-rows: 1fr 0.55fr;
-      min-height: 430px;
-      overflow: hidden;
-      border: 3px solid #64748b;
-      border-radius: 0.5em;
-      background: white;
-      box-shadow: 0 18px 35px rgb(15 23 42 / 15%);
+      grid-template-columns: 560px minmax(0, 1fr);
+      gap: 0.7em;
+      align-items: center;
     }
 
-    .thonny-bar {
-      grid-column: 1 / 3;
-      height: 46px;
-      background: #e2e8f0;
-      padding: 0.3em 0.6em;
-      font-size: 0.55em;
-      font-weight: 800;
+    .thonny-screenshot {
+      display: block;
+      width: 100%;
+      border: 2px solid #94a3b8;
+      border-radius: 0.35em;
+      box-shadow: 0 14px 30px rgb(15 23 42 / 14%);
     }
 
-    .thonny-editor,
-    .thonny-files,
-    .thonny-shell {
-      padding: 0.7em;
-      font-family: "SFMono-Regular", Consolas, monospace;
-      font-size: 0.53em;
+    .thonny-parts {
+      display: grid;
+      gap: 0.45em;
     }
 
-    .thonny-editor {
-      border-right: 2px solid #cbd5e1;
+    .thonny-parts .card {
+      padding: 0.4em 0.55em;
     }
 
-    .thonny-files {
-      color: var(--muted);
+    .thonny-parts .card h3 {
+      margin-bottom: 0.12em;
+      font-size: 0.72em;
     }
 
-    .thonny-shell {
-      grid-column: 1 / 3;
-      border-top: 2px solid #cbd5e1;
-      background: #f8fafc;
+    .thonny-parts .card p {
+      font-size: 0.52em;
+      line-height: 1.35;
     }
 
     .label {
@@ -668,33 +659,32 @@
 
       <section>
         <p class="eyebrow">Our IDE</p>
-        <h2>Thonny gives us two workspaces</h2>
+        <h2>Find the Files, Editor, and Shell</h2>
         <p class="activity">Do now · Open Thonny and follow along</p>
-        <div class="thonny" aria-label="Simplified diagram of the Thonny interface">
-          <div class="thonny-bar">▶ Run &nbsp;&nbsp; ■ Stop &nbsp;&nbsp; day_1.py</div>
-          <div class="thonny-editor">
-            <span class="label">Editor</span><br>
-            print("Hello, Pico!")<br>
-            <br>
-            <span style="color:#64748b;"># Save a script here</span>
-          </div>
-          <div class="thonny-files">
-            <span class="label">Files</span><br>
-            This computer<br>
-            Raspberry Pi Pico
-          </div>
-          <div class="thonny-shell">
-            <span class="label">Shell</span><br>
-            &gt;&gt;&gt; 2 + 3<br>
-            5<br>
-            &gt;&gt;&gt;
+        <div class="thonny-layout">
+          <img class="thonny-screenshot" src="assets/thonny-pico-interface.png" alt="Real Thonny window connected to a Raspberry Pi Pico. Files on this computer and the Pico are on the left, the Python editor is upper right, the Shell is lower right, and the status bar says MicroPython Raspberry Pi Pico.">
+          <div class="thonny-parts">
+            <div class="card">
+              <h3>Files</h3>
+              <p>Choose a saved program on this computer or the Pico.</p>
+            </div>
+            <div class="card">
+              <h3>Editor</h3>
+              <p>Write, change, and save a complete program.</p>
+            </div>
+            <div class="card">
+              <h3>Shell</h3>
+              <p>Try one line now and read program output or errors.</p>
+            </div>
+            <p class="tiny">Your colours and toolbar may differ, but these three areas do the same jobs.</p>
           </div>
         </div>
         <aside class="notes">
-          Point to the real Thonny window while revealing each area. IDE means
-          integrated development environment: one application to create, edit, save,
-          run, and inspect programs. Confirm the interpreter selector says
-          “MicroPython (Raspberry Pi Pico).”
+          Point to the students' real Thonny window while naming each area. Do not
+          discuss the advanced MQTT code shown in the screenshot; only identify Files,
+          Editor, Shell, and the interpreter status. IDE means integrated development
+          environment: one application to create, edit, save, run, and inspect programs.
+          Confirm the interpreter selector says “MicroPython (Raspberry Pi Pico).”
         </aside>
       </section>
 

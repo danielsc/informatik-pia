@@ -46,6 +46,12 @@ endorsement.
 [freenove-docs]: https://docs.freenove.com/projects/fnk0063/en/latest/
 [freenove-repo]: https://github.com/Freenove/Freenove_Super_Starter_Kit_for_Raspberry_Pi_Pico
 
+The Day 1 Thonny interface slide uses the
+[Thonny/Pico screenshot](https://www.schaerens.ch/wp-content/uploads/2022/07/Thonny01.png)
+provided by schaerens.ch. A local copy is stored at
+`slides/assets/thonny-pico-interface.png` so the classroom deck does not depend
+on a network request for the image.
+
 ## Visual reference index
 
 | Topic | Lesson | Schematic | Hardware image |
