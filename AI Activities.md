@@ -144,7 +144,7 @@ Some claims true, some false, some misleading.
 
 Teams have 15 minutes to classify:
 
-**✅ Supported** **❌ False** **⚠️ Misleading / cannot establish**
+**✅ Supported****❌ False****⚠️ Misleading / cannot establish**
 
 But they must provide evidence.
 
@@ -274,7 +274,7 @@ Compare the end with the beginning.
 
 Students highlight:
 
-**lost information** **changed information** **invented information**
+**lost information****changed information****invented information**
 
 Then ask:
 
@@ -306,7 +306,7 @@ Which Harry Potter character am I most like?
 
 Have them classify:
 
-**Probably knowable** **Requires external/current information** **Prediction** **Requires private information** **Subjective** **Impossible to know**
+**Probably knowable****Requires external/current information****Prediction****Requires private information****Subjective****Impossible to know**
 
 Then query the AI.
 
@@ -398,7 +398,7 @@ That seems much stronger pedagogically than simply saying “don’t treat AI li
 
 Instead of:
 
-**Monday: LLMs** **Tuesday: prompting** **Wednesday: hallucinations…**
+**Monday: LLMs****Tuesday: prompting****Wednesday: hallucinations…**
 
 I’d make the students **AI Investigators**.
 
