@@ -4,6 +4,14 @@ These Reveal.js decks contain the explicit teaching and guided-practice portion
 of each workshop day. The daily Markdown lessons contain the student lab,
 wiring diagrams, and coding tasks.
 
+## View online
+
+Open the hosted workshop at:
+
+<https://danielsc.github.io/informatik-pia/>
+
+The site is served from the repository's `gh-pages` branch.
+
 ## Present a deck
 
 Choose the deck for the current day:

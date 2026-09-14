@@ -11,6 +11,9 @@ colour, sound, games, and a parking assistant that reacts to the real world.
 **Hardware:** Raspberry Pi Pico and Freenove FNK0063 Super Starter Kit  
 **Editor:** Thonny
 
+**Teacher presentations:** [open the hosted slide website][slides-site] — no
+repository clone is required.
+
 The learning sequence is adapted from the
 [TEALS Introduction to Computer Science curriculum map][teals]. The EarSketch
 unit is intentionally omitted. Hardware activities use the
@@ -18,6 +21,7 @@ unit is intentionally omitted. Hardware activities use the
 
 [teals]: https://tealsk12.github.io/2nd-semester-introduction-to-computer-science/curriculum_map.md.html
 [freenove]: https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python.html
+[slides-site]: https://danielsc.github.io/informatik-pia/
 
 ## The week at a glance
 
@@ -81,15 +85,21 @@ By Friday, you should be able to:
 - diagnose whether a problem is in code, wiring, or assumptions;
 - demonstrate a parking assistant against written test cases.
 
-## Course files
+## Course file inventory
 
-| File | Purpose |
+| Location | Purpose |
 |---|---|
+| [Hosted slides][slides-site] | open and present any daily deck directly in a browser |
 | [Teacher guide](TEACHER_GUIDE.md) | preparation, pacing, assessment, differentiation, and answers |
-| [Teacher slides](slides/README.md) | Reveal.js teaching decks with presenter notes |
+| [`slides/`](slides/) | Reveal.js source decks, presenter notes, shared styles, and authoring principles |
+| [`diagrams/`](diagrams/) | exact HTML/SVG wiring diagrams and their PNG previews |
+| [`code/day-1/`](code/day-1/) | first scripts, variable blink, and Secret Signal starter/solution |
+| [`code/day-2/`](code/day-2/) | button and potentiometer examples plus Reaction Game starter/solution/extension |
+| [`code/day-3/`](code/day-3/) | RGB and function examples plus Pixel Pet starter/solution |
+| [`code/day-4/`](code/day-4/) | distance sensor, buzzer test, and Proximity Alarm |
+| [`code/day-5/`](code/day-5/) | Parking Assistant starter and completed reference implementation |
 | [Wiring and safety](WIRING_AND_SAFETY.md) | shared safety rules, diagram-reading routine, and reusable pin reference |
-| [Sources and images](SOURCES_AND_IMAGES.md) | official visual references and attribution |
-| [`code/`](code/) | runnable examples, challenge starters, and solutions |
+| [Sources and images](SOURCES_AND_IMAGES.md) | official references, teaching-source mapping, and attribution |
 
 ## Important limitation
 
