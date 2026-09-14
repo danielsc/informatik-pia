@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "author": "Pico Python Workshop",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-pi-pico",
+      "id": "pico",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "distance-sensor",
+      "top": -110,
+      "left": 280,
+      "attrs": {
+        "distance": "100"
+      }
+    }
+  ],
+  "connections": [
+    ["distance-sensor:VCC", "pico:3V3", "red", []],
+    ["distance-sensor:GND", "pico:GND.3", "black", []],
+    ["distance-sensor:TRIG", "pico:GP19", "green", []],
+    ["distance-sensor:ECHO", "pico:GP18", "violet", []]
+  ],
+  "dependencies": {}
+}

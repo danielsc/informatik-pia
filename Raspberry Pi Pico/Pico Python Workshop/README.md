@@ -25,22 +25,21 @@ maintenance rules.
 | [`slides/workshop-slides.css`](slides/workshop-slides.css) | shared presentation design |
 | [`slides/workshop-slides.js`](slides/workshop-slides.js) | shared Reveal.js configuration |
 | [`SOURCES_AND_IMAGES.md`](SOURCES_AND_IMAGES.md) | sources, licences, and image attribution |
-## Wokwi fallback and teacher test
+## Wokwi fallback and teacher tests
 
-The repository's [`wokwi/`](../../wokwi/) folder contains a ready-to-run
-Wokwi project:
+The repository's [`wokwi/`](../../wokwi/) folder contains:
 
-- [`wokwi.toml`](../../wokwi/wokwi.toml) uses the pinned Pico MicroPython
-  firmware;
-- [`diagram.json`](../../wokwi/diagram.json) provides a Pico, potentiometer, and
-  eight-pixel NeoPixel ring;
-- the wiring matches GP26/ADC0 for the potentiometer and GP16 for pixel data.
+- seven individual component simulations for the onboard LED, ordinary LED,
+  button, potentiometer, RGB pixels, passive buzzer, and distance sensor;
+- one combined potentiometer/pixel spinner demonstration;
+- the matching pinned Pico MicroPython firmware configuration.
 
-In VS Code, run **Wokwi: Select Config File**, choose
-`wokwi/wokwi.toml`, and then run **Wokwi: Start Simulator**. Keep its tab
-visible, then run the task **Wokwi: Run teacher pixel spinner** from
-**Tasks: Run Task**. The virtual ring stands in for the Freenove eight-pixel
+Choose a circuit with **Wokwi: Select Config File**, start it with
+**Wokwi: Start Simulator**, and then run **Wokwi: Run component test** from
+**Tasks: Run Task**. See the
+[Wokwi test-bench instructions](../../wokwi/README.md) and the
+[teacher component tests](code/teacher-tests/README.md).
+
+These simulations can also serve as a fallback if classroom hardware is
+unavailable. The virtual RGB ring stands in for the Freenove eight-pixel
 module.
-
-This simulation can also serve as a fallback if classroom hardware is
-unavailable.

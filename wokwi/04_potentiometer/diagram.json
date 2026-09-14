@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "author": "Pico Python Workshop",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-pi-pico",
+      "id": "pico",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-potentiometer",
+      "id": "potentiometer",
+      "top": 10,
+      "left": -190,
+      "attrs": {
+        "value": "512"
+      }
+    }
+  ],
+  "connections": [
+    ["potentiometer:VCC", "pico:3V3", "red", []],
+    ["potentiometer:GND", "pico:GND.8", "black", []],
+    ["potentiometer:SIG", "pico:GP26", "blue", []]
+  ],
+  "dependencies": {}
+}

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "author": "Pico Python Workshop",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-pi-pico",
+      "id": "pico",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "led-resistor",
+      "top": -55,
+      "left": 245,
+      "rotate": 90,
+      "attrs": {
+        "value": "220"
+      }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led",
+      "top": -130,
+      "left": 240,
+      "attrs": {
+        "color": "red",
+        "label": "GP15 LED"
+      }
+    }
+  ],
+  "connections": [
+    ["pico:GP15", "led-resistor:1", "green", []],
+    ["led-resistor:2", "led:A", "green", []],
+    ["led:C", "pico:GND.3", "black", []]
+  ],
+  "dependencies": {}
+}

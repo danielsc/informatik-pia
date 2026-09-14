@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "author": "Pico Python Workshop",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-pi-pico",
+      "id": "pico",
+      "top": 0,
+      "left": 0,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "button",
+      "top": -35,
+      "left": 255,
+      "attrs": {
+        "color": "blue",
+        "label": "GP13 button",
+        "key": "B"
+      }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "pull-up",
+      "top": 95,
+      "left": 260,
+      "rotate": 90,
+      "attrs": {
+        "value": "10000"
+      }
+    }
+  ],
+  "connections": [
+    ["pico:GP13", "button:1.l", "blue", []],
+    ["button:2.l", "pico:GND.3", "black", []],
+    ["pico:GP13", "pull-up:1", "blue", []],
+    ["pull-up:2", "pico:3V3", "red", []]
+  ],
+  "dependencies": {}
+}

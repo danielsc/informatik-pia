@@ -2,6 +2,18 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Wokwi: Run component test",
+      "type": "process",
+      "command": "${env:HOME}/.local/bin/mpremote",
+      "args": [
+        "connect",
+        "port:rfc2217://localhost:4000",
+        "run",
+        "${workspaceFolder}/Raspberry Pi Pico/Pico Python Workshop/code/teacher-tests/${input:componentTest}"
+      ],
+      "problemMatcher": []
+    },
+    {
       "label": "Wokwi: Run teacher pixel spinner",
       "type": "process",
       "command": "${env:HOME}/.local/bin/mpremote",
@@ -12,6 +24,23 @@
         "${workspaceFolder}/Raspberry Pi Pico/Pico Python Workshop/code/teacher-tests/potentiometer_pixel_spinner.py"
       ],
       "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "componentTest",
+      "type": "pickString",
+      "description": "Choose the test that matches the selected Wokwi circuit",
+      "options": [
+        "01_onboard_led.py",
+        "02_external_led.py",
+        "03_button.py",
+        "04_potentiometer.py",
+        "05_rgb_pixels.py",
+        "06_passive_buzzer.py",
+        "07_distance_sensor.py"
+      ],
+      "default": "06_passive_buzzer.py"
     }
   ]
 }
