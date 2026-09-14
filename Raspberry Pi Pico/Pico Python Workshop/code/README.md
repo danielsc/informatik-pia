@@ -1,5 +1,9 @@
 # Workshop Code
 
+These code files are shared by the
+[English](../workshop/en/) and [German](../workshop/de/) workshop materials.
+Python identifiers and comments remain in English in both versions.
+
 Open these files in Thonny and run them with the interpreter set to
 **MicroPython (Raspberry Pi Pico)**.
 
@@ -13,4 +17,3 @@ Open these files in Thonny and run them with the interpreter set to
 
 Stop endless loops with Thonny's red **Stop** button or `Ctrl+C`. Programs that
 use PWM or RGB LEDs include cleanup code so outputs are left off.
-

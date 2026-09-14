@@ -5,8 +5,8 @@
 Organise repeated code into functions and bring eight RGB pixels to life.
 
 **Python:** imports, functions, parameters, return values, lists, tuples,
-`for`, `range`, indexes, nested loops, local variables  
-**Hardware:** Freenove 8-RGB LED module, potentiometer  
+`for`, `range`, indexes, nested loops, local variables<br>
+**Hardware:** Freenove 8-RGB LED module, potentiometer<br>
 **TEALS connection:** Unit 3 Functions and Unit 4 Nested Loops and Lists
 
 ## 1. Meet the RGB module
@@ -15,17 +15,17 @@ Disconnect USB and follow the
 [8-RGB wiring table](WIRING_AND_SAFETY.md#freenove-8-rgb-led-module).
 
 Open the
-[scalable, accessible 8-RGB module diagram](diagrams/rgb8-module.html) and use
+[scalable, accessible 8-RGB module diagram](../../diagrams/rgb8-module.html) and use
 the module header marked `IN`.
 
-![Freenove square 8-RGB module IN header wired to GP16](diagrams/rgb8-module.png)
+![Freenove square 8-RGB module IN header wired to GP16](../../diagrams/rgb8-module.png)
 
 The official
 [Freenove NeoPixel lesson](https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python/6_NeoPixel.html)
 uses a custom library. Our code uses MicroPython's built-in `neopixel` module,
 so no extra file is required.
 
-Run [`code/day-3/01_neopixel_colours.py`](code/day-3/01_neopixel_colours.py).
+Run [`code/day-3/01_neopixel_colours.py`](../../code/day-3/01_neopixel_colours.py).
 
 An RGB colour is a tuple of red, green, and blue values:
 
@@ -92,7 +92,7 @@ for index in range(8):
 
 What error do you predict for `pixels[8]`?
 
-Run [`code/day-3/02_pixel_functions.py`](code/day-3/02_pixel_functions.py).
+Run [`code/day-3/02_pixel_functions.py`](../../code/day-3/02_pixel_functions.py).
 Find:
 
 - a function with no parameter;
@@ -141,7 +141,7 @@ Stop the RGB test and disconnect USB before adding the potentiometer. Partner
 check the three new contacts, reconnect, and print raw ADC values before
 starting the Pixel Pet.
 
-Start from [`code/day-3/03_pixel_pet_starter.py`](code/day-3/03_pixel_pet_starter.py).
+Start from [`code/day-3/03_pixel_pet_starter.py`](../../code/day-3/03_pixel_pet_starter.py).
 The knob controls the pet's “energy”:
 
 - 0-32%: sleepy, slow blue pulse;

@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tag 4: Sensoren nutzen — Unterrichtsfolien</title>
+  <meta name="description" content="Unterrichtspräsentation für Tag 4 des Raspberry-Pi-Pico-Python-Workshops.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../workshop-slides.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class="title-slide">
+        <p class="eyebrow">Python in der physischen Welt · Tag 4</p>
+        <h1>Sensoren nutzen</h1>
+        <p class="lede">Messt Entfernungen, behandelt fehlende Daten und macht aus Messwerten einen Alarm.</p>
+        <div class="callout danger" style="max-width: 24em; margin-top: 1em;">
+          <p><strong>Sicherheitskontrolle:</strong> Der Sensor nutzt 5 V, aber Pico-GPIO verträgt nur 3.3 V.</p>
+        </div>
+        <div class="footer"><span>Unterrichtsfolien</span><span>S für Notizen · F für Vollbild</span></div>
+        <aside class="notes">
+          Zeigt HC-SR04, beide Widerstände, Buzzer und Transistor. Niemand verbindet USB mit einer Schaltung von Tag 4, bevor sie geprüft wurde.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Lernziele</p>
+        <h2>Am Ende könnt ihr …</h2>
+        <div class="grid-3">
+          <div class="card"><h3>Messen</h3><p>Erklären, wie aus der Impulszeit eine Entfernung wird.</p></div>
+          <div class="card"><h3>Fehler behandeln</h3><p><code>None</code> nutzen, wenn kein brauchbares Echo zurückkommt.</p></div>
+          <div class="card"><h3>Konfigurieren</h3><p>Einstellungen aus einem Dictionary lesen.</p></div>
+          <div class="card"><h3>Sicher aufbauen</h3><p>GP18 schützen und den Buzzer über einen Transistor ansteuern.</p></div>
+          <div class="card"><h3>Festlegen</h3><p>Genaue Entfernungsregeln und erwartete Ausgaben notieren.</p></div>
+          <div class="card"><h3>Testen</h3><p>Messwerte sammeln, bevor ihr Schaltungen kombiniert.</p></div>
+        </div>
+        <aside class="notes">
+          Betont, dass Sensorwerte fehlen oder unzuverlässig sein können. Heute verbinden sich Python, sorgfältige Messungen und zwei einzeln getestete Schaltungen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Heutiger Weg</p>
+        <h2>Messen → prüfen → entscheiden → warnen</h2>
+        <div class="flow">
+          <div class="flow-box">Baut den<br>Sensor sicher</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Entfernung<br>messen</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Testet den<br>Buzzer</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Kombinieren<br>und einordnen</div>
+        </div>
+        <div class="callout warning"><p>Jede Schaltung muss einzeln funktionieren, bevor sie Teil des Näherungsalarms wird.</p></div>
+        <aside class="notes">
+          Erklärt, dass schichtweises Testen zur Programmiermethode gehört und nicht nur eine Vorsichtsmaßnahme beim Verdrahten ist.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">01</span>
+        <p class="eyebrow">Teil 1 · Entfernung</p>
+        <h2>Baut einen geschützten Sensoreingang</h2>
+        <p class="lede">Zuerst kommt die elektrische Sicherheit, erst dann wird gemessen.</p>
+        <aside class="notes">
+          USB bleibt getrennt. Gebt jedem Team einen 1-kΩ- und einen 2-kΩ-Widerstand.
+        </aside>
+      </section>
+
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div><p class="eyebrow">Ohne USB bauen · Aufgabe 1</p><h2>HC-SR04-Entfernungssensor</h2></div>
+          <a class="diagram-link" href="../../diagrams/distance-sensor.html">Genauer Schaltplan + Tabelle</a>
+        </div>
+        <div class="diagram-frame">
+          <img src="../../diagrams/distance-sensor.png" alt="Sichere HC-SR04-Schaltung mit VBUS, Trigger an GP19 und einem Echo-Spannungsteiler aus 1 kΩ und 2 kΩ zum Schutz von GP18.">
+        </div>
+        <aside class="notes">
+          Dieser Schaltplan gehört zu 01_distance_sensor.py. Verfolgt VBUS zu VCC, GP19 zu Trigger, Echo über 1 kΩ zum GP18-Knotenpunkt, von dort 2 kΩ zu GND und Sensor-GND zu gemeinsamer Masse. Prüfung vor USB.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Warum zwei Widerstände an Echo?</p>
+        <h2>Etwa 5 V auf etwa 3.3 V senken</h2>
+        <p class="activity watch">Anschauen und besprechen · USB bleibt getrennt</p>
+        <div class="flow">
+          <div class="flow-box">Echo<br><span class="tiny">bis etwa 5 V</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">1 kΩ<br><span class="tiny">oberer Widerstand</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">GP18-Knotenpunkt<br><span class="tiny">etwa 3.3 V</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">2 kΩ an GND</div>
+        </div>
+        <div class="callout danger"><p>Verbindet Echo des HC-SR04 nie direkt mit einem Pico-GPIO.</p></div>
+        <aside class="notes">
+          Die Rechnung 5 × 2/(1+2) ≈ 3.33 V ist nur eine Erklärung für Lehrkräfte. Die Klasse muss Widerstandspositionen und den geschützten GP18-Knotenpunkt erkennen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">So funktioniert die Messung</p>
+        <h2>Der Schall legt Hin- und Rückweg zurück</h2>
+        <p class="activity watch">Anschauen und besprechen · Verfolgt den Weg</p>
+        <div class="flow">
+          <div class="flow-box">Trigger sendet<br>einen kurzen Impuls</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Schall breitet sich<br>zum Gegenstand aus</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Echo kehrt<br>zum Sensor zurück</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Pico misst<br>die Impulszeit</div>
+        </div>
+        <pre><code class="language-python" data-trim>
+distance_cm = pulse_us * 0.0343 / 2
+        </code></pre>
+        <div class="callout"><p>Teilt durch 2, weil die gemessene Zeit Hin- und Rückweg enthält.</p></div>
+        <aside class="notes">
+          Fragt, warum durch zwei geteilt wird. Die Geschwindigkeitskonstante rechnet Mikrosekunden Laufzeit in Zentimeter um.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Sensor testen · Aufgabe 1</p>
+        <h2>Messt, bevor ihr vertraut</h2>
+        <p class="activity">Schaltung testen · Erst Prüfung durch Lehrkraft, dann USB verbinden</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Ausführen</h3>
+            <p><a href="../../code/day-4/01_distance_sensor.py"><code>01_distance_sensor.py</code></a></p>
+            <p>Messt einen flachen Gegenstand bei 10, 20, 40, 60 und 100 cm.</p>
+          </div>
+          <div class="card">
+            <h3>Vergleichen</h3>
+            <p>Nehmt an jeder Position drei Messwerte auf. Notiert die Abweichung vom Abstand am Lineal.</p>
+          </div>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;">
+          <p>Probiert danach einen weichen und einen schrägen Gegenstand. Beschreibt die Änderungen; „repariert“ den Code noch nicht.</p>
+        </div>
+        <aside class="notes">
+          Zuerst Messwerte sammeln. Weiche und schräge Flächen können schwache oder umgelenkte Echos liefern. Das bereitet den ungültigen Zustand vor.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Fehlende Daten</p>
+        <h2><code>None</code> bedeutet „keine brauchbare Messung“</h2>
+        <p class="activity">In Thonny ausprobieren · Sagt beide Wege voraus</p>
+        <pre><code class="language-python" data-trim>
+distance = measure_distance_cm()
+
+if distance is None:
+    print("No echo")
+else:
+    print(distance)
+        </code></pre>
+        <div class="callout danger"><p>Wenn bei einem Fehler <code>0</code> verwendet wird, bedeutet das fälschlich: „Der Gegenstand berührt den Sensor.“</p></div>
+        <aside class="notes">
+          TEALS führt None mit Funktionsrückgaben ein. Vergleicht „kein Wert“ mit der gültigen Zahl null und lasst beide Zweige zeigen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Timeouts</p>
+        <h2>Warten braucht eine Grenze</h2>
+        <p class="activity watch">Besprechen · Was passiert, wenn nie ein Echo zurückkommt?</p>
+        <pre><code class="language-python" data-trim>
+pulse_us = time_pulse_us(echo, 1, ECHO_TIMEOUT_US)
+
+if pulse_us < 0:
+    return None
+        </code></pre>
+        <div class="callout success"><p>Der Timeout lässt das Programm einen Fehler melden und weiterlaufen, statt ewig zu warten.</p></div>
+        <aside class="notes">
+          time_pulse_us ist eine vorgegebene API. Die Klasse soll das Verhalten erklären, aber die Implementierung nicht nachbauen.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">02</span>
+        <p class="eyebrow">Teil 2 · Ton</p>
+        <h2>Steuert den Buzzer sicher an</h2>
+        <p class="lede">Der Pico steuert den Transistor; der Transistor schaltet den Buzzer.</p>
+        <aside class="notes">
+          Stoppt das Sensorprogramm und trennt USB, bevor die Schaltung verändert wird.
+        </aside>
+      </section>
+
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div><p class="eyebrow">Ohne USB bauen · Aufgabe 2</p><h2>Passiver Buzzer mit Transistor</h2></div>
+          <a class="diagram-link" href="../../diagrams/passive-buzzer.html">Genauer Schaltplan + Tabelle</a>
+        </div>
+        <div class="diagram-frame">
+          <img src="../../diagrams/passive-buzzer.png" alt="Passiver Buzzer an VBUS, geschaltet durch einen S8050-Transistor; dessen Basis ist über 1 kΩ mit GP15 verbunden.">
+        </div>
+        <aside class="notes">
+          Dieser Schaltplan gehört zu 02_buzzer_test.py. Lasst Plusmarkierung und flache Transistorseite finden. E, B und C immer mit dem Kursschaltplan prüfen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Warum ein Transistor?</p>
+        <h2>GP15 steuert, versorgt den Buzzer aber nicht</h2>
+        <p class="activity watch">Anschauen und besprechen · Zeigt beide Wege im Schaltplan</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Steuerweg</h3>
+            <p>GP15 → 1-kΩ-Widerstand → Transistorbasis <code>B</code></p>
+          </div>
+          <div class="card">
+            <h3>Stromweg</h3>
+            <p>VBUS → Buzzer → Kollektor <code>C</code> → Emitter <code>E</code> → GND</p>
+          </div>
+        </div>
+        <div class="callout danger" style="margin-top: 0.7em;"><p>Verbindet den Buzzer nicht direkt mit GP15.</p></div>
+        <aside class="notes">
+          Der Transistor ist ein elektronischer Schalter. Mehr Transistorphysik ist für den sicheren Aufbau nicht nötig.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Buzzer testen · Aufgabe 2</p>
+        <h2>Beginnt kurz und leise</h2>
+        <p class="activity">Schaltung testen · E/B/C zu zweit prüfen, dann USB verbinden</p>
+        <div class="grid-2">
+          <div class="card"><h3>Ausführen</h3><p><a href="../../code/day-4/02_buzzer_test.py"><code>02_buzzer_test.py</code></a></p></div>
+          <div class="card"><h3>Beobachten</h3><p>Drei kurze Töne: 1200 Hz, 1600 Hz und 2000 Hz.</p></div>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Haltet den Buzzer von Ohren fern. Eine Teilnahme nur mit visuellen Signalen ist immer möglich.</p></div>
+        <aside class="notes">
+          beep-Funktion und PWM-Setup sind vorgegeben. Fragt, was sich zwischen den Tönen ändert und was gleich bleibt.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">03</span>
+        <p class="eyebrow">Teil 3 · Konfiguration</p>
+        <h2>Speichert Einstellungen in einem Dictionary</h2>
+        <p class="lede">Ein Zustandsname führt zu allen Einstellungen dieses Zustands.</p>
+        <aside class="notes">
+          Folgt TEALS Einheit 6: Schlüssel-Wert-Paare, Zugriff und Änderung vor verschachtelten Strukturen. Beginnt mit einem flachen Dictionary.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Schlüssel-Wert-Paare</p>
+        <h2>Ein Dictionary beschriftet jeden Wert</h2>
+        <p class="activity">In Thonny ausprobieren · Verwendet die Shell</p>
+        <pre><code class="language-python" data-trim>
+zone = {"colour": "amber", "pause_ms": 600}
+
+print(zone["colour"])
+print(zone["pause_ms"])
+        </code></pre>
+        <div class="grid-2">
+          <div class="card"><h3>Schlüssel</h3><p><code>"colour"</code> ist die Bezeichnung, mit der ein Wert gefunden wird.</p></div>
+          <div class="card"><h3>Wert</h3><p><code>"amber"</code> ist die unter diesem Schlüssel gespeicherte Einstellung.</p></div>
+        </div>
+        <aside class="notes">
+          Lasst beide Schlüssel und Werte benennen. Die eckigen Klammern dienen hier dem Zugriff und sind kein Listenindex.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Eine Einstellung ändern</p>
+        <h2>Ersetzt den Wert über denselben Schlüssel</h2>
+        <p class="activity">In Thonny ausprobieren · Sagt das fertige Dictionary voraus</p>
+        <pre><code class="language-python" data-trim>
+zone = {"colour": "amber", "pause_ms": 600}
+zone["pause_ms"] = 400
+print(zone)
+        </code></pre>
+        <div class="callout"><p>Der Schlüssel bleibt <code>"pause_ms"</code>; sein Wert ändert sich von <code>600</code> zu <code>400</code>.</p></div>
+        <aside class="notes">
+          TEALS behandelt weitere Methoden; diese kurze Lektion braucht nur Zugriff und Änderung. Überladet die Klasse nicht.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Mehrere Alarmzustände</p>
+        <h2>Ein Zustand wählt ein Einstellungs-Dictionary</h2>
+        <p class="activity watch">Anschauen und besprechen · Lest von außen nach innen</p>
+        <pre><code class="language-python" data-trim>
+ZONE_CONFIG = {
+    "safe": {"beep_ms": 0, "pause_ms": 300},
+    "caution": {"beep_ms": 80, "pause_ms": 520},
+    "stop": {"beep_ms": 80, "pause_ms": 120},
+}
+
+pause = ZONE_CONFIG["caution"]["pause_ms"]
+        </code></pre>
+        <div class="callout success"><p>Wählt zuerst <code>"caution"</code> und lest dann <code>"pause_ms"</code> aus: <code>520</code>.</p></div>
+        <aside class="notes">
+          Verschachtelte Dictionaries sind eine Workshop-Erweiterung. Verfolgt genau einen Zugriff, bevor ihr den Alarmcode zeigt.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">04</span>
+        <p class="eyebrow">Teil 4 · Kombinieren</p>
+        <h2>Baut einen Näherungsalarm</h2>
+        <p class="lede">Verwendet die zwei getesteten Schaltungen und ordnet jeder Entfernung einen Zustand zu.</p>
+        <aside class="notes">
+          Beide Einzelschaltungen sollten vor diesem Abschnitt bestanden haben.
+        </aside>
+      </section>
+
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div><p class="eyebrow">Ohne USB bauen · Tagesaufgabe</p><h2>Sensor und Buzzer gemeinsam</h2></div>
+          <a class="diagram-link" href="../../diagrams/proximity-alarm.html">Genauer Schaltplan + Tabelle</a>
+        </div>
+        <div class="diagram-frame">
+          <img src="../../diagrams/proximity-alarm.png" alt="Kombinierter Näherungsalarm mit geschütztem HC-SR04 an GP18 und GP19 sowie transistorbetriebenem passivem Buzzer an GP15.">
+        </div>
+        <aside class="notes">
+          Dieser Schaltplan gehört zu 03_proximity_alarm.py. Der geprüfte Spannungsteiler bleibt, die geprüfte Buzzer-Schaltung kommt hinzu. Die eingebaute LED liefert die sichtbare Ausgabe.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Schichtweiser Aufbau · Tagesaufgabe</p>
+        <h2>Vor dem Kombinieren erneut testen</h2>
+        <p class="activity build">Ohne USB bauen · Prüfung durch Lehrkraft vor USB</p>
+        <ol>
+          <li>Lasst den geprüften Sensor und Echo-Spannungsteiler liegen.</li>
+          <li>Ergänzt Buzzer, Transistor und 1-kΩ-Basiswiderstand nach dem kombinierten Schaltplan.</li>
+          <li>Prüft 5 V, gemeinsame Masse, Spannungsteiler-Knotenpunkt und Transistor <code>E/B/C</code>.</li>
+          <li>Verbindet USB wieder und führt den Entfernungstest erneut aus.</li>
+          <li>Führt den Buzzer-Test erneut aus.</li>
+          <li>Öffnet erst danach <a href="../../code/day-4/03_proximity_alarm.py"><code>03_proximity_alarm.py</code></a>.</li>
+        </ol>
+        <aside class="notes">
+          Fällt ein Komponententest aus, stoppt und repariert diese Schicht. Das kombinierte Programm dient nicht zur Diagnose zweier ungeprüfter Schaltungen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Eine Aufgabe pro Funktion</p>
+        <h2>Messen → einordnen → warnen</h2>
+        <p class="activity watch">Anschauen und besprechen · Verfolgt eine Entfernung durch das Programm</p>
+        <pre><code class="language-python" data-trim>
+distance = measure_distance_cm()
+zone = classify_distance(distance)
+alert_once(zone)
+        </code></pre>
+        <div class="grid-3">
+          <div class="card"><h3>Messen</h3><p>Gibt eine Zahl oder <code>None</code>.</p></div>
+          <div class="card"><h3>Einordnen</h3><p>Gibt <code>"safe"</code>, <code>"caution"</code>, <code>"stop"</code> oder <code>"invalid"</code> zurück.</p></div>
+          <div class="card"><h3>Warnen</h3><p>Steuert mit dem Zustand Licht und Ton.</p></div>
+        </div>
+        <aside class="notes">
+          Greift die Rückgabewerte von Tag 3 auf. Fragt, was jede Funktion erhält und zurückgibt.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Schreibt zuerst die Regeln</p>
+        <h2>Jede Entfernung braucht einen erwarteten Zustand</h2>
+        <p class="activity paper">Auf Papier · Einigt euch vor jeder Codeänderung</p>
+        <table class="compact-table">
+          <thead><tr><th>Zustand</th><th>Entfernungsregel</th><th>Licht</th><th>Ton</th></tr></thead>
+          <tbody>
+            <tr><td>safe</td><td>über 60 cm</td><td>dauerhaft</td><td>stumm</td></tr>
+            <tr><td>caution</td><td>über 25 bis 60 cm</td><td>langsames Blinken</td><td>langsamer Piepton</td></tr>
+            <tr><td>stop</td><td>höchstens 25 cm</td><td>schnelles Blinken</td><td>schneller Piepton</td></tr>
+            <tr><td>invalid</td><td><code>None</code></td><td>aus</td><td>stumm</td></tr>
+          </tbody>
+        </table>
+        <aside class="notes">
+          Dies sind die vorgegebenen Ausgangsregeln. Spätere Kalibrierung ist möglich, aber neue Grenzwerte müssen dokumentiert werden und invalid bleibt stumm.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Grenzwerttests</p>
+        <h2>Testet Grenzwerte, nicht nur einfache Beispiele</h2>
+        <p class="activity paper">Auf Papier · Sagt jedes Ergebnis voraus</p>
+        <div class="grid-4">
+          <div class="card"><h3>61 cm</h3><p>safe</p></div>
+          <div class="card"><h3>60 cm</h3><p>caution</p></div>
+          <div class="card"><h3>25 cm</h3><p>stop</p></div>
+          <div class="card"><h3><code>None</code></h3><p>invalid</p></div>
+        </div>
+        <div class="callout" style="margin-top: 0.7em;"><p>Eine Anforderung sagt, was geschehen muss. Ein Testfall nennt Eingabe und erwartetes Ergebnis.</p></div>
+        <aside class="notes">
+          Anpassung der Szenarien und Spezifikationen aus TEALS Einheit 8. Fragt, welche Vergleichsoperatoren die vier Vorhersagen erfüllen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Tagesaufgabe</p>
+        <h2>Prototyp eines Näherungsalarms</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Code prüfen</h3>
+            <ol>
+              <li>Verfolgt <code>None</code> durch alle drei Funktionen.</li>
+              <li>Findet jeden Grenzwertvergleich.</li>
+              <li>Findet den Dictionary-Zugriff.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Verhalten prüfen</h3>
+            <ol>
+              <li>Zeigt safe, caution und stop.</li>
+              <li>Richtet den Sensor weg, um invalid zu erzeugen.</li>
+              <li>Drückt Stop und prüft, ob Licht und Ton ausgehen.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Ungültige Eingaben dürfen nie einen Daueralarm auslösen.</p></div>
+        <aside class="notes">
+          Heute wird das vollständige Programm verwendet. Schwerpunkte sind Nachverfolgen, Konfiguration, sichere Integration, Kalibrierungsdaten und Anforderungen für morgen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Abschlussfrage</p>
+        <h2>Warum ist ein Timeout nötig?</h2>
+        <div class="callout" style="margin: 1.1em 0;"><p>Erklärt, was das Programm ohne Echo tun soll und warum die Rückgabe von <code>None</code> besser ist als die Rückgabe von <code>0</code>.</p></div>
+        <div class="footer"><span>Tag 4 geschafft</span><span>Ausgaben stoppen · USB trennen · geprüfte Schichten beschriftet lassen</span></div>
+        <aside class="notes">
+          Eine gute Antwort: Der Timeout verhindert endloses Warten, lässt das Programm weiterlaufen und stellt eine fehlgeschlagene Messung mit None statt einer falschen Entfernung null dar.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Hinweise für Lehrkräfte</p>
+        <h2>Unterrichtsfolge und Quellen</h2>
+        <div class="grid-2">
+          <div class="card"><h3>TEALS-Anpassung</h3><p>Einheit 3: Rückgabewerte und <code>None</code>; Einheit 6: Schlüssel-Wert-Zugriff und Änderungen; Einheit 8: Szenarien, Anforderungen und Spezifikationen.</p></div>
+          <div class="card"><h3>Workshop-Anpassung</h3><p>HC-SR04-Zeitmessung und Timeout, geschützter Echo-Eingang, transistorbetriebener Buzzer, schichtweiser Aufbau und Grenzwerttests.</p></div>
+        </div>
+        <p class="tiny">Quellen: Unterrichtsmaterialien der TEALS-Einheiten 3, 6 und 8. Die Hardwareaufgaben verwenden eigene Kursschaltpläne und verlinkte Freenove-Quellenangaben.</p>
+        <aside class="notes">
+          Diese Quellenfolie ist für Lehrkräfte und muss nicht gezeigt werden. Verschachtelte Dictionaries und Sensor-APIs sind Workshop-Erweiterungen.
+        </aside>
+      </section>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script src="../workshop-slides.js"></script>
+</body>
+</html>

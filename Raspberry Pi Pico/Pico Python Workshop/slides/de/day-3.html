@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tag 3: Wiederverwendbar machen — Unterrichtsfolien</title>
+  <meta name="description" content="Unterrichtspräsentation für Tag 3 des Raspberry-Pi-Pico-Python-Workshops.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../workshop-slides.css">
+  <style>
+    .pixel-strip {
+      display: grid;
+      grid-template-columns: repeat(8, minmax(0, 1fr));
+      gap: 0.45em;
+      margin: 0.9em 0;
+    }
+
+    .pixel-strip .card {
+      padding: 0.45em 0.2em;
+      text-align: center;
+    }
+
+    .pixel-strip strong {
+      display: block;
+      color: var(--pico);
+      font-size: 1.35em;
+      line-height: 1;
+    }
+
+    .diagram-frame.layered {
+      width: 100%;
+      height: 300px;
+    }
+
+    .diagram-frame.layered img {
+      height: 300px;
+    }
+
+    .state-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.6em;
+      align-items: stretch;
+      margin-top: 0.7em;
+    }
+
+    .state-grid .card p,
+    .state-grid .card li {
+      font-size: 0.68em;
+    }
+
+    .tight li {
+      margin: 0.18em 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class="title-slide">
+        <p class="eyebrow">Python in der physischen Welt · Tag 3</p>
+        <h1>Wiederverwendbar machen</h1>
+        <p class="lede">Benennt wiederholte Aufgaben mit Funktionen, steuert acht RGB-Pixel und baut ein Pixel Pet, das auf einen Drehknopf reagiert.</p>
+        <div class="callout success" style="max-width: 24em; margin-top: 1em;">
+          <p><strong>Mission:</strong> Macht aus wiederholten Schritten benannte Werkzeuge, die ihr erneut aufrufen könnt.</p>
+        </div>
+        <div class="footer"><span>Unterrichtsfolien</span><span>S für Notizen · F für Vollbild</span></div>
+        <aside class="notes">
+          Beginnt mit RGB-Modul und Potentiometer in der Hand. Fragt, wo die Klasse bereits Funktionen gesehen hat: print, sleep, led.on, button.value. Importe, Hardware-Setup und der abschließende Aufräumblock sind heute vorgegeben.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Lernziele</p>
+        <h2>Am Ende könnt ihr …</h2>
+        <div class="grid-3">
+          <div class="card"><h3>Aufrufe erkennen</h3><p>Einen Funktionsaufruf und sein Argument benennen.</p></div>
+          <div class="card"><h3>Funktionen schreiben</h3><p>Eine eigene Funktion mit <code>def</code> definieren und aufrufen.</p></div>
+          <div class="card"><h3>Werte erklären</h3><p>Parameter, Rückgabewerte und nur intern gültige Namen (lokale Variablen) erklären.</p></div>
+          <div class="card"><h3>Positionen besuchen</h3><p>Mit <code>range(8)</code> die Pixelpositionen 0 bis 7 besuchen.</p></div>
+          <div class="card"><h3>Schleifen verfolgen</h3><p>Die Reihenfolge einer kleinen verschachtelten Schleife verfolgen.</p></div>
+          <div class="card"><h3>Sicher aufbauen</h3><p>Zuerst das RGB-Modul testen, dann den Drehknopf für das Pixel Pet ergänzen.</p></div>
+        </div>
+        <aside class="notes">
+          Betont, dass die neuen Ideen vor dem Aufbau kommen. Die Klasse soll die Python-Muster hören und ausprobieren, bevor das Pixel Pet sie benötigt.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Heutiger Weg</p>
+        <h2>Aufrufen → definieren → wiederholen → leuchten → Tier bauen</h2>
+        <div class="flow">
+          <div class="flow-box">Bekannte Aufrufe<br><span class="tiny">und Argumente</span></div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">Eigene<br>Funktionen</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box"><code>for</code>, <code>range</code>,<br>Positionen 0-7</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-box">RGB-Test,<br>dann Pixel Pet</div>
+        </div>
+        <div class="callout warning"><p>Lernt das Muster zuerst mit kurzem Code. Nutzt es danach mit echter Hardware.</p></div>
+        <aside class="notes">
+          Dieser Foliensatz passt TEALS Einheit 3, Lektionen 3.01-3.04, und danach Einheit 4, Lektionen 4.01-4.03, an die RGB- und Potentiometer-Aufgaben des Workshops an.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">01</span>
+        <p class="eyebrow">Teil 1 · Funktionen geben Aufgaben einen Namen</p>
+        <h2>Beginnt mit bekannten Funktionsaufrufen</h2>
+        <p class="lede">Ihr habt schon Funktionen aufgerufen, bevor ihr eigene geschrieben habt.</p>
+        <aside class="notes">
+          Bleibt konkret. Ziel ist Vertrautheit, bevor neue Syntax folgt.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Bekannte Aufrufe</p>
+        <h2>Ein Aufruf führt mit Klammern jetzt eine Aufgabe aus</h2>
+        <p class="activity watch">Anschauen und besprechen · Benennt Funktion und Argument</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+print("Ready")
+sleep_ms(500)
+print("Go!")
+          </code></pre>
+          <div>
+            <div class="card">
+              <h3>Funktionsname</h3>
+              <p>Der Name vor den Klammern, zum Beispiel <code>print</code>.</p>
+            </div>
+            <div class="card" style="margin-top: 0.6em;">
+              <h3>Argument</h3>
+              <p>Der Wert in den Klammern, zum Beispiel <code>"Ready"</code> oder <code>500</code>.</p>
+            </div>
+          </div>
+        </div>
+        <div class="callout"><p>Die Zeitfunktionen sind vorgegeben. Erkennt, was Python bei jedem Aufruf tun soll.</p></div>
+        <aside class="notes">
+          Verknüpft dies mit den eingebauten Funktionen aus TEALS 3.01. sleep_ms pausiert für Millisekunden und wurde bereits importiert.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Definieren, dann aufrufen</p>
+        <h2><code>def</code> gibt einer wiederholten Aufgabe einen Namen</h2>
+        <p class="activity">In Thonny ausprobieren · Tippt das kurze Beispiel ab und führt es aus</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+def cheer():
+    print("Go, Pico!")
+
+cheer()
+cheer()
+          </code></pre>
+          <div>
+            <div class="card"><h3><code>def cheer():</code></h3><p>Definiert die Aufgabe und nennt sie <code>cheer</code>.</p></div>
+            <div class="card" style="margin-top: 0.6em;"><h3><code>cheer()</code></h3><p>Ruft die Aufgabe auf. Der Funktionskörper läuft erst, wenn Python den Aufruf erreicht.</p></div>
+          </div>
+        </div>
+        <div class="callout success"><p>Ein Name kann viele wiederholte Zeilen ersetzen.</p></div>
+        <aside class="notes">
+          Anpassung von TEALS 3.02. Betont den eingerückten Funktionskörper. Fragt, was ohne Aufruf von cheer geschieht.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Parameter und Farbdaten</p>
+        <h2>Ein gebündelter RGB-Wert kann an eine Funktion übergeben werden</h2>
+        <p class="activity">In Thonny ausprobieren · Gebt den Wert vor dem Hardwareeinsatz aus</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+GREEN = (0, 30, 0)
+
+def show_colour(colour):
+    print("Colour:", colour)
+
+show_colour(GREEN)
+          </code></pre>
+          <div>
+            <div class="card">
+              <h3>RGB-Tupel im Workshop</h3>
+              <p><code>(red, green, blue)</code> ist in diesem Workshop ein gebündelter Farbwert.</p>
+            </div>
+            <div class="card" style="margin-top: 0.6em;">
+              <h3>Parameter und Argument</h3>
+              <p><code>colour</code> ist der Parameter. <code>GREEN</code> ist das beim Aufruf übergebene Argument.</p>
+            </div>
+          </div>
+        </div>
+        <div class="callout warning"><p>Haltet RGB-Werte niedrig, zum Beispiel <code>30</code>. So sind die Pixel sichtbar, ohne zu blenden.</p></div>
+        <aside class="notes">
+          Führt das Tupel ausdrücklich als gebündeltes Farbpaket ein; Vorkenntnisse werden nicht vorausgesetzt.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Rückgabe oder Ausgabe</p>
+        <h2><code>print</code> zeigt einen Wert; <code>return</code> gibt ihn zurück</h2>
+        <p class="activity watch">Anschauen und besprechen · Mit welcher Zeile kann späterer Code entscheiden?</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+def doubled(number):
+    return number * 2
+
+print(doubled(4))
+answer = doubled(4)
+          </code></pre>
+          <div>
+            <div class="card"><h3><code>print(...)</code></h3><p>Zeigt jetzt einen Wert an.</p></div>
+            <div class="card" style="margin-top: 0.6em;"><h3><code>return ...</code></h3><p>Gibt einen Wert zurück, damit anderer Code ihn speichern, vergleichen oder weitergeben kann.</p></div>
+          </div>
+        </div>
+        <div class="callout danger"><p>Gibt eine Funktion eine Farbe nur aus, kann keine andere Funktion damit eine Animation wählen.</p></div>
+        <aside class="notes">
+          Vergleicht wie in TEALS 3.03 return und print. answer = doubled(4) funktioniert nur wegen des Rückgabewerts.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Nur intern gültige Namen</p>
+        <h2>Eine lokale Variable existiert nur während dieses Funktionsaufrufs</h2>
+        <p class="activity watch">Anschauen und besprechen · Welcher Name verschwindet nach dem Aufruf?</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+def make_blue():
+    intensity = 25
+    return (0, 0, intensity)
+          </code></pre>
+          <div>
+            <table class="compact-table">
+              <thead><tr><th>Name</th><th>Bedeutung an dieser Stelle</th></tr></thead>
+              <tbody>
+                <tr><td><code>make_blue</code></td><td>der Funktionsname</td></tr>
+                <tr><td><code>intensity</code></td><td>eine lokale Variable nur für diesen Aufruf</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="callout success"><p>Außerhalb der Funktion kann Python das zurückgegebene Tupel verwenden, aber nicht den nur intern gültigen Namen <code>intensity</code>.</p></div>
+        <aside class="notes">
+          Verknüpft dies mit dem Gültigkeitsbereich aus TEALS 3.04. Wichtig ist: Parameter und Variablen in einer Funktion sind lokal.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">02</span>
+        <p class="eyebrow">Teil 2 · Schleifen und Positionen</p>
+        <h2>Wiederholt ein Muster, ohne die Zeile achtmal zu kopieren</h2>
+        <p class="lede">Mit Schleifen besucht ein Codeblock jede Pixelposition.</p>
+        <aside class="notes">
+          Leitet von Funktionen zur Wiederholung über. Wiederholten Code kennt die Klasse seit Tag 1.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Eine <code>for</code>-Schleife</p>
+        <h2><code>range(8)</code> erzeugt 0 bis 7</h2>
+        <p class="activity">In Thonny ausprobieren · Sagt alle acht Zeilen voraus, bevor ihr Run drückt</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+for index in range(8):
+    print(index)
+          </code></pre>
+          <div>
+            <div class="card"><h3><code>range(8)</code></h3><p>Erzeugt die Zählwerte <code>0, 1, 2, 3, 4, 5, 6, 7</code>.</p></div>
+            <div class="card" style="margin-top: 0.6em;"><h3>Schleifenkörper</h3><p>Die eingerückte Zeile läuft einmal pro Wert; <code>index</code> enthält dabei den aktuellen Wert.</p></div>
+          </div>
+        </div>
+        <div class="callout"><p>Ein <strong>Index</strong> ist eine Positionsnummer. Unsere acht Pixel haben die Indizes 0 bis 7.</p></div>
+        <aside class="notes">
+          Verbindet TEALS 4.01 und 4.02. Fragt nach range(3). Bindet den Begriff Index an eine Positionsnummer.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Pixelpositionen</p>
+        <h2>Gültige Indizes dieses Moduls sind 0 bis 7</h2>
+        <p class="activity paper">Auf Papier · Markiert die erste, letzte und ungültige Position</p>
+        <div class="pixel-strip" aria-label="Acht Pixelpositionen, nummeriert von null bis sieben">
+          <div class="card"><strong>0</strong><p><code>pixels[0]</code></p></div>
+          <div class="card"><strong>1</strong><p><code>pixels[1]</code></p></div>
+          <div class="card"><strong>2</strong><p><code>pixels[2]</code></p></div>
+          <div class="card"><strong>3</strong><p><code>pixels[3]</code></p></div>
+          <div class="card"><strong>4</strong><p><code>pixels[4]</code></p></div>
+          <div class="card"><strong>5</strong><p><code>pixels[5]</code></p></div>
+          <div class="card"><strong>6</strong><p><code>pixels[6]</code></p></div>
+          <div class="card"><strong>7</strong><p><code>pixels[7]</code></p></div>
+        </div>
+        <pre><code class="language-python" data-trim>
+for index in range(8):
+    pixels[index] = (0, 0, 20)
+        </code></pre>
+        <div class="callout danger"><p><strong>Vorhersage:</strong> <code>pixels[8]</code> fragt nach einer neunten Position, die dieses Modul nicht hat.</p></div>
+        <aside class="notes">
+          Das Modul ist ringförmig, der Code nummeriert trotzdem von 0 bis 7. Fragt nach erstem, letztem und ungültigem Index.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Verschachtelte Schleifen</p>
+        <h2>Bei jedem äußeren Durchlauf läuft die innere Schleife vollständig</h2>
+        <p class="activity paper">Auf Papier · Verfolgt die Reihenfolge vor dem Ausführen</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+for lap in range(2):
+    for colour in ["red", "green"]:
+        print(lap, colour)
+          </code></pre>
+          <table class="compact-table">
+            <thead><tr><th>Schritt</th><th><code>lap</code></th><th><code>colour</code></th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>0</td><td>red</td></tr>
+              <tr><td>2</td><td>0</td><td>green</td></tr>
+              <tr><td>3</td><td>1</td><td>red</td></tr>
+              <tr><td>4</td><td>1</td><td>green</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout"><p>Dasselbe Muster seht ihr am Ende von <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a>, hier nur als kürzeres Beispiel.</p></div>
+        <aside class="notes">
+          Wie beim Verfolgen verschachtelter Schleifen in TEALS 4.03. Lasst Schritt 2 zu 3 genau erklären: Die innere Schleife beginnt erst nach dem Wechsel von lap neu.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">03</span>
+        <p class="eyebrow">Teil 3 · Erste Hardware-Schicht</p>
+        <h2>Baut und testet das RGB-Modul vor dem größeren Projekt</h2>
+        <p class="lede">Eine geprüfte Schicht macht die nächste sicherer und leichter zu debuggen.</p>
+        <aside class="notes">
+          Stoppt laufende Programme, bevor Bauteile ausgegeben werden. Die nächsten Folien gehören direkt zusammen.
+        </aside>
+      </section>
+
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div>
+            <p class="eyebrow">Ohne USB bauen · Aufgabe 1</p>
+            <h2>8-RGB-Modul an GP16</h2>
+          </div>
+          <a class="diagram-link" href="../../diagrams/rgb8-module.html">Genauer Schaltplan + Tabelle</a>
+        </div>
+        <div class="diagram-frame">
+          <img src="../../diagrams/rgb8-module.png" alt="Vollständiger Schaltplan des quadratischen Freenove-8-RGB-Moduls: IN ist mit Pico GP16, 3.3 V und GND verbunden.">
+        </div>
+        <aside class="notes">
+          Die Folie führt die Schaltung für 01_neopixel_colours.py ein. USB bleibt getrennt: IN S an GP16, IN V an 3.3 V, IN G an GND. Kontrolle zu zweit mit der HTML-Tabelle.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">RGB-Modul testen · Aufgabe 1</p>
+        <h2>Verbindet USB wieder und startet die Farbdatei</h2>
+        <p class="activity">Schaltung testen · Führt vor jeder Codeänderung den kleinsten Test aus</p>
+        <div class="grid-2">
+          <div>
+            <div class="card">
+              <h3>Ausführen</h3>
+              <p><a href="../../code/day-3/01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a></p>
+              <ol class="tight">
+                <li>Verbindet USB erst nach der Kontrolle zu zweit.</li>
+                <li>Achtet auf Rot, Grün, Blau, Amber und danach Aus.</li>
+                <li>Lest jedes ausgegebene Tupel laut vor.</li>
+              </ol>
+            </div>
+          </div>
+          <div>
+            <pre><code class="language-python" data-trim>
+RED = (30, 0, 0)
+GREEN = (0, 30, 0)
+BLUE = (0, 0, 30)
+AMBER = (20, 10, 0)
+            </code></pre>
+          </div>
+        </div>
+        <div class="callout success"><p>Ein RGB-Tupel bündelt eine Farbe als <code>(red, green, blue)</code>. Amber mischt Rot und Grün. Stoppt den Test und trennt USB vor dem nächsten Aufbau.</p></div>
+        <aside class="notes">
+          Verbindet Farben und Tupel. Leuchtet nichts, stoppen, USB trennen und IN/OUT, GP16, 3.3 V sowie GND prüfen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Wiederverwendung im fertigen Code</p>
+        <h2><code>02_pixel_functions.py</code> benennt drei Aufgaben eindeutig</h2>
+        <p class="activity">In Thonny ausprobieren · Führt die Datei aus und beantwortet die Fragen</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+def show_colour(colour):
+    pixels.fill(colour)
+    pixels.write()
+
+def chase(colour, delay_ms):
+    for index in range(PIXEL_COUNT):
+        ...
+
+def level_to_colour(percent):
+    ...
+          </code></pre>
+          <div>
+            <div class="card">
+              <h3>Findet und erklärt</h3>
+              <ul class="tight">
+                <li>eine Funktion mit einem Parameter;</li>
+                <li>die Funktion mit zwei Parametern;</li>
+                <li>den zurückgegebenen Farbwert;</li>
+                <li>die verschachtelten Schleifen am Ende.</li>
+              </ul>
+            </div>
+            <div class="card" style="margin-top: 0.6em;">
+              <h3>Kernidee</h3>
+              <p>Eine zurückgegebene Farbe ist besser wiederverwendbar, weil späterer Code den Wert nutzen kann.</p>
+            </div>
+          </div>
+        </div>
+        <div class="callout"><p>Öffnet <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a> und ordnet jedem Funktionsnamen seine Aufgabe zu.</p></div>
+        <aside class="notes">
+          Die Klasse liest ein fertiges Beispiel als Vorbereitung auf den Starter und verändert diese Datei nicht zu einem neuen Projekt.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">04</span>
+        <p class="eyebrow">Teil 4 · Tagesaufgabe</p>
+        <h2>Baut das Pixel Pet schichtweise</h2>
+        <p class="lede">Behaltet die funktionierende RGB-Schicht, ergänzt den Drehknopf und programmiert eine Funktion nach der anderen.</p>
+        <aside class="notes">
+          Die nächste Folie bleibt direkt vor dem Starter, weil sie den kombinierten Aufbau einführt.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Ohne USB bauen · Aufgabe 2</p>
+        <h2>Behaltet die RGB-Basis und ergänzt das Potentiometer</h2>
+        <a class="diagram-link" href="../../diagrams/rgb8-module.html" style="margin-bottom: 0.8em;">Schaltplan der RGB-Basis + Tabelle</a>
+        <div class="grid-2">
+          <div>
+            <div class="diagram-frame layered">
+              <img src="../../diagrams/rgb8-module.png" alt="Schaltplan der beibehaltenen RGB-Basis: Das 8-RGB-Modul bleibt über IN mit GP16, 3.3 V und GND verbunden.">
+            </div>
+          </div>
+          <div>
+            <table class="compact-table">
+              <thead><tr><th>Potentiometer-Pin</th><th>Verbindung</th></tr></thead>
+              <tbody>
+                <tr><td><code>3V3</code> äußerer Pin</td><td>dieselbe versorgte 3.3-V-Schiene wie RGB <code>IN V</code></td></tr>
+                <tr><td>mittlerer <code>WIPER</code></td><td>GP26 / ADC0</td></tr>
+                <tr><td><code>GND</code> äußerer Pin</td><td>dieselbe gemeinsame GND-Schiene wie RGB <code>IN G</code></td></tr>
+              </tbody>
+            </table>
+            <div class="callout warning" style="margin-top: 0.7em;">
+              <p>Stoppt den RGB-Test, trennt USB, lasst die drei funktionierenden Kabel liegen, ergänzt die drei Drehknopf-Kabel und prüft zu zweit alle sechs Verbindungen.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Lasst die drei unveränderten und die drei neuen Verbindungen benennen. Das geprüfte RGB-Modul nicht unnötig neu verdrahten.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Starter öffnen</p>
+        <h2>Lest zuerst den Drehknopf und wählt einen Zustand</h2>
+        <p class="activity">Schaltung testen · Öffnet <code>03_pixel_pet_starter.py</code></p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Bereits vorgegeben</h3>
+            <ul class="tight">
+              <li><code>pixels</code> und <code>knob</code> sind bereits erstellt.</li>
+              <li>Die Endlosschleife liest und druckt bereits Werte und wählt einen Zustand.</li>
+              <li>Der <code>finally</code>-Block schaltet die Pixel bereits sicher aus.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Ergänzt zuerst</h3>
+            <ol class="tight">
+              <li>Gebt in <code>read_energy_percent()</code> kurz <code>raw_value</code> aus, dreht den Knopf und prüft die Zahlen. Gebt dann 0-100 zurück.</li>
+              <li>Gebt in <code>choose_state()</code> <code>"sleepy"</code>, <code>"curious"</code> oder <code>"excited"</code> zurück.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="callout success" style="margin-top: 0.7em;"><p>Dreht den Knopf durch alle drei Bereiche. Prüft Energie und Zustand vor der Animation.</p></div>
+        <aside class="notes">
+          USB erst nach der Kontrolle verbinden. Eingang und Entscheidung zuerst über die Shell-Ausgabe prüfen. Endlosschleife, Hardware-Setup und finally bleiben erhalten.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Anzeigen fertigstellen</p>
+        <h2>Ergänzt jeweils eine Zustandsanimation</h2>
+        <p class="activity">In Thonny ausprobieren · Testet jede Funktion vor der nächsten</p>
+        <div class="state-grid">
+          <div class="card"><h3>0-32%</h3><p><strong>sleepy</strong><br>langsames blaues Pulsieren</p></div>
+          <div class="card"><h3>33-65%</h3><p><strong>curious</strong><br>wanderndes grünes Pixel</p></div>
+          <div class="card"><h3>66-100%</h3><p><strong>excited</strong><br>schnelles buntes Funkeln</p></div>
+        </div>
+        <ol>
+          <li>Ergänzt <code>show_sleepy()</code> und testet sie direkt.</li>
+          <li>Ergänzt <code>show_curious()</code> mit den Indizes 0-7 und testet sie.</li>
+          <li>Ergänzt <code>show_excited()</code> mit niedrigen RGB-Werten und testet sie.</li>
+          <li>Führt das ganze Programm aus und dreht den Knopf durch alle Bereiche.</li>
+        </ol>
+        <aside class="notes">
+          Haltet jede Funktion klein und beobachtbar. Bei korrekter Zustandswahl eine Anzeigefunktion direkt aufrufen. Die Ausgaben für Energie und Zustand bleiben als Debug-Hilfe erhalten.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Abschlussfrage</p>
+        <h2>Welche Zeile kann eine andere Funktion verwenden?</h2>
+        <p class="activity paper">Auf Papier · Antwortet vor dem Aufräumen</p>
+        <div class="grid-2">
+          <pre><code class="language-python" data-trim>
+print(energy)
+return energy
+          </code></pre>
+          <div class="card">
+            <h3>Erklärt den Unterschied</h3>
+            <p>Eine Zeile zeigt einen Wert. Die andere gibt ihn zurück, damit eine weitere Funktion entscheiden kann.</p>
+            <p style="margin-top: 0.7em;"><strong>Eure Antwort:</strong> Mit welcher Zeile kann <code>choose_state(...)</code> den Wert verwenden?</p>
+          </div>
+        </div>
+        <div class="footer"><span>Tag 3 geschafft</span><span>Programm stoppen · Pixel aus · USB trennen · Modul und Drehknopf zurückgeben</span></div>
+        <aside class="notes">
+          Erwartete Antwort: return energy. Sammelt eine Antwort pro Person ein. Beendet mit Stoppen und Trennen von USB.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Hinweise für Lehrkräfte</p>
+        <h2>Unterrichtsfolge und Quellen</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Hier angepasste TEALS-Folge</h3>
+            <p>Einheit 3, Lektionen 3.01-3.04: eingebaute Funktionsaufrufe und Argumente, eigene Funktionen, return im Vergleich zu print und lokaler Gültigkeitsbereich.</p>
+            <p>Einheit 4, Lektionen 4.01-4.03: <code>for</code>-Schleifen, <code>range</code>, Indizes und das Verfolgen verschachtelter Schleifen.</p>
+          </div>
+          <div class="card">
+            <h3>Verwendete Workshop-Quellen</h3>
+            <p><code>day-3-make-it-reusable.md</code>, <code>WIRING_AND_SAFETY.md</code>, <code>rgb8-module.html</code>, <code>rgb8-module.png</code>, <code>01_neopixel_colours.py</code>, <code>02_pixel_functions.py</code> und <code>03_pixel_pet_starter.py</code>.</p>
+          </div>
+        </div>
+        <p class="tiny" style="margin-top: 2em;">
+          TEALS-Quellrepositorys:
+          <a href="https://github.com/TEALSK12/2nd-semester-introduction-to-computer-science/tree/master/units/3_unit/slidedecks">Foliensätze zu Einheit 3</a>
+          und
+          <a href="https://github.com/TEALSK12/2nd-semester-introduction-to-computer-science/tree/master/units/4_unit/slidedecks">Foliensätze zu Einheit 4</a>.
+        </p>
+        <aside class="notes">
+          Diese Folie dient Quellenangabe und Planung, nicht der Projektion. Der Foliensatz übernimmt die TEALS-Reihenfolge, ersetzt aber Konsolenübungen durch RGB- und Pixel-Pet-Aufgaben.
+        </aside>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script src="../workshop-slides.js"></script>
+</body>
+</html>

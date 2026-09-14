@@ -1,5 +1,10 @@
 # Workshop slide principles
 
+These slide rules apply in every language. See
+[`../TRANSLATION_PRINCIPLES.md`](../TRANSLATION_PRINCIPLES.md) for the
+English-first translation workflow and the rule that code, identifiers, and
+code comments remain English.
+
 These rules apply to every teacher-presented Reveal.js deck in this folder.
 The slides provide the explicit teaching and guided practice. The daily
 Markdown lesson provides the student lab, detailed wiring instructions, code

@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tag 2: Lasst es entscheiden — Workshop-Folien</title>
+  <meta name="description" content="Präsentation für Schülerinnen und Schüler an Tag 2 des Raspberry Pi Pico Python-Workshops.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../workshop-slides.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class="title-slide">
+        <p class="eyebrow">Python in der physischen Welt · Tag 2</p>
+        <h1>Lasst es entscheiden</h1>
+        <p class="lede">Macht aus Eingaben Entscheidungen und baut dann eine Reaktionszeit-Challenge mit Taster, Potentiometer und klaren Python-Entscheidungen.</p>
+        <div class="callout success" style="max-width: 25em; margin-top: 1em;"><p><strong>Mission:</strong> Verwandelt Zahlen und Tastersignale in Verhalten, das ihr vorhersagen, testen und erklären könnt.</p></div>
+        <div class="footer"><span>S öffnet die Notizen</span><span>F startet den Vollbildmodus</span></div>
+        <aside class="notes">
+          Beginnen Sie mit der Mission und der heutigen Hardware. Erinnern Sie die Klasse
+          daran, dass jede Änderung an der Verkabelung bei getrenntem USB-Kabel erfolgt.
+          Das Reaktionsspiel nutzt dieselbe Taster-und-LED-Schaltung, die später folgt.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Lernziele</p>
+        <h2>Am Ende könnt ihr …</h2>
+        <div class="grid-3">
+          <div class="card"><h3>Werte unterscheiden</h3><p>Unterscheidet ganze Zahlen, Dezimalzahlen und Boolean-Werte.</p></div>
+          <div class="card"><h3>Einen Wert casten</h3><p>Wandelt mit <code>int(...)</code> eine berechnete Dezimalzahl in eine ganze Zahl um.</p></div>
+          <div class="card"><h3>Eine Frage lesen</h3><p>Erklärt, wie ein Vergleich zu <code>True</code> oder <code>False</code> wird.</p></div>
+          <div class="card"><h3>Einen Pfad wählen</h3><p>Nutzt <code>if</code>, <code>elif</code> und <code>else</code> für verschiedene Ergebnisse.</p></div>
+          <div class="card"><h3>Ergebnisse merken</h3><p>Speichert mit <code>append</code>, <code>len</code> und <code>min</code> mehrere Reaktionszeiten in einer Liste.</p></div>
+          <div class="card"><h3>Eine Schleife gezielt beenden</h3><p>Nutzt <code>while</code>-Bedingungen, die bei einer Zustandsänderung enden.</p></div>
+        </div>
+        <aside class="notes">
+          Formulieren Sie die Ziele konkret und verständlich. Die heutige TEALS-Reihenfolge
+          lautet: Typen und Casting, Boolean-Vergleiche, not/active-low,
+          if-elif-else, Listen und danach bedingte while-Schleifen mit Abbruchbedingungen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Unser Weg heute</p>
+        <h2>Zahlen → Fragen → Entscheidungen → Schaltungen → Spiel</h2>
+        <div class="flow">
+          <div class="flow-box">Typen und<br>Casting</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Boolean-Werte<br>und Vergleiche</div><div class="flow-arrow">→</div>
+          <div class="flow-box"><code>not</code> und<br>active-low-Eingabe</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Entscheidungscode<br>und zwei Aufbauten</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Listen und Schleifen<br>für das Spiel</div>
+        </div>
+        <div class="callout warning"><p>Jede Schaltung erscheint direkt bevor ihr sie aufbauen oder testen sollt.</p></div>
+        <aside class="notes">
+          Dieser Weg zeigt die Abhängigkeiten deutlich. Die Klasse soll verstehen, dass
+          das Reaktionsspiel erst folgt, nachdem alle nötigen Ideen in kleinen,
+          sichtbaren Schritten geübt wurden.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">01</span>
+        <p class="eyebrow">Teil 1 · Beginnt mit Werten</p>
+        <h2>Welche Art von Wert speichert Python?</h2>
+        <p class="lede">Bevor ein Programm entscheiden kann, braucht es Werte in Formen, die Python versteht.</p>
+        <aside class="notes">
+          Leiten Sie diesen Abschnitt zunächst an. Benennen Sie die Typen in
+          verständlicher Sprache, bevor Boolean-Werte als eigene Idee folgen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Arten von Werten</p>
+        <h2>Ganze Zahlen und Dezimalzahlen haben verschiedene Aufgaben</h2>
+        <p class="activity watch">Anschauen und besprechen · Sagt, was jede Zeile speichert</p>
+        <pre><code class="language-python" data-trim>
+raw_value = 32768
+fraction = raw_value / 65535
+
+print(type(raw_value))
+print(type(fraction))
+        </code></pre>
+        <div class="grid-2">
+          <div class="card"><h3><code>int</code></h3><p>Eine ganze Zahl wie <code>32768</code>. Nützlich für Anzahlen, Pin-Nummern und viele Sensorwerte.</p></div>
+          <div class="card"><h3><code>float</code></h3><p>Eine Zahl mit Dezimalteil, zum Beispiel das Ergebnis einer Division.</p></div>
+        </div>
+        <aside class="notes">
+          Verknüpfen Sie raw_value mit dem späteren Potentiometer-Messwert. Führen Sie
+          bool hier noch nicht ein; es folgt als Antwort auf eine Frage.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Casting</p>
+        <h2>Manchmal braucht ihr einen neuen Wert eines anderen Typs</h2>
+        <p class="activity">In Thonny ausprobieren · Führt die Zeilen aus und prüft jedes Ergebnis</p>
+        <pre><code class="language-python" data-trim>
+raw_value = 32768
+fraction = raw_value / 65535
+percent = int(fraction * 100)
+
+print(fraction)
+print(percent)
+print(type(percent))
+        </code></pre>
+        <div class="callout"><p><strong>Casting</strong> bedeutet, dass Python einen neuen Wert in einer anderen Form erzeugt. Hier entfernt <code>int(...)</code> den Dezimalteil.</p></div>
+        <aside class="notes">
+          Die Klasse soll erklären, dass percent eine ganze Zahl aus dem berechneten
+          Dezimalwert ist. Das bereitet die Helligkeitsschwellen ohne Hardware vor.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">02</span>
+        <p class="eyebrow">Teil 2 · Stellt eine Frage</p>
+        <h2>Python kann erst entscheiden, wenn eine Frage wahr oder falsch wird</h2>
+        <p class="lede">Vergleiche erzeugen Boolean-Werte. Diese steuern später die Entscheidungen im Code.</p>
+        <aside class="notes">
+          Wechseln Sie ausdrücklich von Zahlentypen zu Fragen über Werte. Die nächsten
+          Folien erklären Boolean-Werte, Vergleichsoperatoren, Zuweisung im Gegensatz
+          zu Gleichheit und not.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Boolean-Werte</p>
+        <h2>Ein Vergleich stellt eine Frage mit zwei möglichen Antworten</h2>
+        <p class="activity">In Thonny ausprobieren · Sagt das Ergebnis vor Run voraus</p>
+        <pre><code class="language-python" data-trim>
+score = 347
+
+print(score &lt; 350)
+print(score &gt;= 350)
+print(score == 347)
+        </code></pre>
+        <div class="grid-3">
+          <div class="card"><h3><code>True</code></h3><p>Die Aussage stimmt.</p></div>
+          <div class="card"><h3><code>False</code></h3><p>Die Aussage stimmt nicht.</p></div>
+          <div class="card"><h3>Vergleich</h3><p><code>&lt;</code>, <code>&gt;=</code> und <code>==</code> vergleichen Werte und erzeugen eine Boolean-Antwort.</p></div>
+        </div>
+        <aside class="notes">
+          Fragen Sie jeweils nach einer genauen Ausgabezeile. Gehen Sie erst weiter,
+          wenn klar ist: Vergleiche erzeugen Werte, nicht nur Aktionen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Eine häufige Verwechslung</p>
+        <h2><code>=</code> speichert; <code>==</code> fragt, ob zwei Werte gleich sind</h2>
+        <p class="activity watch">Anschauen und besprechen · Lest jede Zeile laut in Worten</p>
+        <table class="compact-table">
+          <thead><tr><th>Code</th><th>So könnt ihr es lesen …</th><th>Aufgabe</th></tr></thead>
+          <tbody>
+            <tr><td><code>reaction_ms = 412</code></td><td>„Speichere 412 in <code>reaction_ms</code>.“</td><td>Zuweisung</td></tr>
+            <tr><td><code>reaction_ms == 412</code></td><td>„Ist <code>reaction_ms</code> gleich 412?“</td><td>Vergleich</td></tr>
+            <tr><td><code>reaction_ms != 412</code></td><td>„Ist <code>reaction_ms</code> ungleich 412?“</td><td>Vergleich</td></tr>
+          </tbody>
+        </table>
+        <div class="callout danger" style="margin-top: 0.7em;"><p>Mit <code>=</code> speichert ihr. Mit <code>==</code> fragt ihr „gleich?“ und mit <code>!=</code> „ungleich?“</p></div>
+        <aside class="notes">
+          Sprechen Sie diese typische TEALS-Verwechslung direkt an: „speichert einen
+          Wert“ im Gegensatz zu „stellt eine Frage“. Verzweigungen folgen erst nach
+          der active-low-Eingabe auf der eigenen if/elif/else-Folie.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow"><code>not</code> und active-low-Eingabe</p>
+        <h2>Beim Tastendruck wird der elektrische Wert niedrig</h2>
+        <p class="activity paper">Auf Papier · Füllt vor dem Prüfen die letzte Spalte aus</p>
+        <table class="compact-table">
+          <thead><tr><th>Physischer Zustand</th><th><code>button.value()</code></th><th><code>not button.value()</code></th><th>Gewünschte Bedeutung</th></tr></thead>
+          <tbody>
+            <tr><td>Losgelassen</td><td><code>1</code></td><td><code>False</code></td><td>nicht gedrückt</td></tr>
+            <tr><td>Gedrückt</td><td><code>0</code></td><td><code>True</code></td><td>gedrückt</td></tr>
+          </tbody>
+        </table>
+        <div class="callout"><p><strong>Active-low</strong> bedeutet: Das wichtige Ereignis setzt das Signal auf niedrig. <code>not</code> macht aus dem Messwert eine verständliche Python-Antwort.</p></div>
+        <aside class="notes">
+          Die Position des Pull-up-Widerstands ist noch nicht nötig. Wichtig ist:
+          losgelassen ergibt 1, gedrückt ergibt 0. Die spätere Aufbaufolie zeigt warum.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Einen Zweig wählen</p>
+        <h2><code>if</code>, <code>elif</code> und <code>else</code> wählen einen Pfad</h2>
+        <p class="activity watch">Anschauen und besprechen · Welcher Zweig läuft bei 10 %, 45 % und 92 %?</p>
+        <pre><code class="language-python" data-trim>
+if percent &lt; 20:
+    led.duty_u16(0)
+elif percent &lt;= 70:
+    led.duty_u16(20000)
+else:
+    led.duty_u16(65535)
+        </code></pre>
+        <div class="callout success"><p>Python prüft von oben nach unten und führt nur den ersten Zweig aus, dessen Bedingung <code>True</code> ist.</p></div>
+        <aside class="notes">
+          Genau diese Struktur nutzt die Klasse nach dem Potentiometer-Aufbau. Fragen
+          Sie nach Zweig und LED-Verhalten, nicht nur nach dem Wort true.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">03</span>
+        <p class="eyebrow">Teil 3 · Baut einen active-low-Eingang</p>
+        <h2>Stellt mit einem Taster eine echte Boolean-Frage</h2>
+        <p class="lede">Jetzt treffen Code und Schaltung aufeinander: GP13 liest die Frage, GP15 zeigt die Antwort.</p>
+        <aside class="notes">
+          Halten Sie hier an und verteilen Sie Taster, einen 10-kΩ-Widerstand, einen
+          220-Ω-Widerstand, eine LED und Jumperkabel.
+        </aside>
+      </section>
+
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div>
+            <p class="eyebrow">Ohne Strom aufbauen · Aufgabe 1</p>
+            <h2>Tastereingang und LED-Ausgang</h2>
+          </div>
+          <a class="diagram-link" href="../../diagrams/button-and-led.html">Genaues Diagramm + Tabelle</a>
+        </div>
+        <div class="diagram-frame">
+          <img src="../../diagrams/button-and-led.png" alt="Vollständiges Breadboard-Diagramm mit Taster und LED: Pico-USB links, Taster über der mittleren Rinne, 10-kΩ-Pull-up von GP13 zu 3,3 V und LED von GP15 über einen 220-Ω-Widerstand zu GND.">
+        </div>
+        <aside class="notes">
+          Diese Schaltung gehört zu 01_button_decisions.py. Der HTML-Link enthält die
+          genaue Verbindungstabelle und erklärt die Tasterkontakte. Prüfen Sie:
+          Pico-USB links, Taster über der mittleren Rinne, 10-kΩ-Pull-up von GP13 zu
+          3,3 V und LED-Pfad von GP15 über 220 Ω zu GND.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Tasterprogramm ausführen</p>
+        <h2>Testet die Frage mit Licht</h2>
+        <p class="activity">Schaltung testen · Erst nach der Teamkontrolle wieder verbinden</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Öffnen und ausführen</h3>
+            <p><a href="../../code/day-2/01_button_decisions.py"><code>01_button_decisions.py</code></a></p>
+            <pre><code class="language-python" data-trim>
+pressed = not button.value()
+
+if pressed:
+    led.on()
+else:
+    led.off()
+            </code></pre>
+          </div>
+          <div class="card">
+            <h3>Das solltet ihr beobachten</h3>
+            <ol>
+              <li>Taster losgelassen: LED aus.</li>
+              <li>Gedrückt halten: LED an und die Shell gibt <code>Pressed: True</code> aus.</li>
+              <li>Stop oder <code>Ctrl+C</code> drücken: Die LED geht aus.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Wirkt der Taster immer gedrückt, trennt USB und prüft seine Ausrichtung sowie den 10-kΩ-Pull-up, bevor ihr Code ändert.</p></div>
+        <aside class="notes">
+          Die äußere while-Schleife ist in der vorgegebenen Datei bereits geschrieben.
+          Die Klasse soll den sichtbaren Zweig mit der active-low-Wahrheitstabelle der
+          vorherigen Folie verbinden.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">04</span>
+        <p class="eyebrow">Teil 4 · Wählt mit einer Zahl eine Helligkeit</p>
+        <h2>Ein Drehknopf erzeugt viele mögliche Werte</h2>
+        <p class="lede">Ein Potentiometer antwortet nicht nur mit Ja oder Nein. Es liefert einen Zahlenbereich, den ihr einteilen könnt.</p>
+        <aside class="notes">
+          Wechseln Sie vom digitalen Eingang mit zwei Zuständen zum analogen Eingang.
+          Dieselben Entscheidungswerkzeuge gelten auch für einen gemessenen Wert.
+        </aside>
+      </section>
+
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div>
+            <p class="eyebrow">Ohne Strom aufbauen · Aufgabe 2</p>
+            <h2>Potentiometer an GP26, LED an GP15</h2>
+          </div>
+          <a class="diagram-link" href="../../diagrams/potentiometer-and-led.html">Genaues Diagramm + Tabelle</a>
+        </div>
+        <div class="diagram-frame">
+          <img src="../../diagrams/potentiometer-and-led.png" alt="Vollständiges Breadboard-Diagramm mit Potentiometer an 3,3 V, GP26 ADC0 und GND sowie roter LED von GP15 über einen 220-Ω-Widerstand zu GND.">
+        </div>
+        <aside class="notes">
+          Diese Schaltung gehört zu 02_potentiometer_led.py. Das Potentiometer darf nie
+          VBUS verwenden. Die Klasse bestimmt beide äußeren Pins und den mittleren
+          Schleifer. Der Schleifer führt zu GP26/ADC0; die LED bleibt über 220 Ω an GP15.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Drehknopf auslesen</p>
+        <h2>Testet die Schaltung und sammelt echte Werte</h2>
+        <p class="activity">Schaltung testen · Dreht die Achse langsam von einem Ende zum anderen</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Ausführen</h3>
+            <p><a href="../../code/day-2/02_potentiometer_led.py"><code>02_potentiometer_led.py</code></a></p>
+            <pre><code class="language-python" data-trim>
+raw_value = knob.read_u16()
+percent = int(raw_value / 65535 * 100)
+            </code></pre>
+          </div>
+          <div class="card">
+            <h3>Notieren</h3>
+            <p>Findet Messwerte nahe <strong>0 %</strong>, <strong>25 %</strong>, <strong>50 %</strong>, <strong>75 %</strong> und <strong>100 %</strong>. Die LED sollte ihre Helligkeit gleichmäßig ändern.</p>
+          </div>
+        </div>
+        <div class="callout"><p>Eure Messwerte müssen nicht exakt sein. Wichtig ist das Muster: niedrige Drehknopfposition → kleine Zahl, hohe Position → große Zahl.</p></div>
+        <aside class="notes">
+          Hier wird die frühere Casting-Folie konkret. Die Klasse soll erklären können,
+          warum percent ein Integer ist, obwohl die Division einen Float erzeugt hat.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Helligkeitsbereiche wählen</p>
+        <h2>Schreibt drei Helligkeitsbereiche</h2>
+        <p class="activity">In Thonny ausprobieren · Bearbeitet dieselbe Datei und testet jeden Bereich</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Fügt diese Verzweigung hinzu</h3>
+            <pre><code class="language-python" data-trim>
+if percent &lt; 20:
+    led.duty_u16(0)
+elif percent &lt;= 70:
+    led.duty_u16(20000)
+else:
+    led.duty_u16(65535)
+            </code></pre>
+          </div>
+          <div class="card">
+            <h3>Konkrete Testreihenfolge</h3>
+            <ol>
+              <li>Dreht den Knopf nahe 0 % und prüft, dass die LED aus ist.</li>
+              <li>Dreht ihn etwa in die Mitte und prüft, dass die LED schwach leuchtet.</li>
+              <li>Dreht ihn fast ganz auf und prüft, dass die LED hell leuchtet.</li>
+            </ol>
+          </div>
+        </div>
+        <aside class="notes">
+          Diese Änderung schreibt die Klasse selbst. Testen Sie konkret und sichtbar.
+          Bei wenig Zeit soll vor jeder Drehknopfposition der Zweig vorausgesagt werden.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">05</span>
+        <p class="eyebrow">Teil 5 · Merken und wiederholen</p>
+        <h2>Nutzt Listen und Abbruchbedingungen für ein Spiel</h2>
+        <p class="lede">Ein Reaktionsspiel braucht mehrere Ergebnisse. Jede Schleife muss wissen, wann sie endet.</p>
+        <aside class="notes">
+          Dieser Abschnitt bereitet den selbst ergänzten Starter vor. Betonen Sie die
+          Wirkung jedes Listenwerkzeugs und jeder while-Bedingung, nicht das Auswendiglernen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Listen</p>
+        <h2>Eine Liste kann mehrere Reaktionszeiten speichern</h2>
+        <p class="activity">In Thonny ausprobieren · Führt jede Zeile aus und erklärt das Ergebnis</p>
+        <pre><code class="language-python" data-trim>
+times = [410, 375, 522]
+print(times[0])
+times.append(330)
+print(len(times))
+print(min(times))
+print(times[-1])
+        </code></pre>
+        <div class="grid-4">
+          <div class="card"><h3>Index</h3><p><code>times[0]</code> fragt nach dem ersten Element.</p></div>
+          <div class="card"><h3>Append</h3><p><code>append</code> fügt am Ende ein neues Ergebnis hinzu.</p></div>
+          <div class="card"><h3><code>len</code></h3><p><code>len(times)</code> zählt die gespeicherten Ergebnisse.</p></div>
+          <div class="card"><h3><code>min</code></h3><p>Mit diesem eingebauten Werkzeug findet ihr heute das schnellste Ergebnis.</p></div>
+        </div>
+        <aside class="notes">
+          TEALS behandelt Listen, Indizes, append und len. Stellen Sie min als praktische
+          Workshop-Ergänzung vor und nutzen Sie es nach Ende der Spielschleife.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Bedingtes <code>while</code></p>
+        <h2>Jede Schleife braucht eine benennbare Abbruchbedingung</h2>
+        <p class="activity paper">Auf Papier · Ordnet jeder Schleife den Moment zu, in dem sie endet</p>
+        <table class="compact-table">
+          <thead><tr><th>Schleife</th><th>So könnt ihr sie lesen …</th><th>Sie endet, wenn …</th></tr></thead>
+          <tbody>
+            <tr><td><code>while len(scores) &lt; ROUNDS:</code></td><td>wiederholen, solange Ergebnisse fehlen</td><td>die Liste <code>ROUNDS</code> Ergebnisse enthält</td></tr>
+            <tr><td><code>while not button.value():</code></td><td>warten, solange der Taster gedrückt ist</td><td>der Taster losgelassen wird</td></tr>
+            <tr><td><code>while button.value():</code></td><td>warten, solange der Taster losgelassen ist</td><td>der Taster gedrückt wird</td></tr>
+          </tbody>
+        </table>
+        <div class="callout success" style="margin-top: 0.7em;"><p>Diese Schleifen enden, weil sich die Bedingung ändert. Nicht jede Aufgabe braucht eine Endlosschleife.</p></div>
+        <aside class="notes">
+          Die beiden Tasterschleifen werden oft vertauscht. Lassen Sie die Klasse auf das
+          physische Ereignis zeigen, das die jeweilige Bedingung von true zu false ändert.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Erinnerung an die Schaltung des Reaktionsspiels</p>
+        <h2>Verwendet dieselbe Taster-und-LED-Schaltung erneut</h2>
+        <p class="activity build">Ohne Strom aufbauen · Nur neu aufbauen, wenn ihr die Schaltung zerlegt habt</p>
+        <div class="grid-2">
+          <div class="card">
+            <img src="../../diagrams/button-and-led.png" alt="Erinnerung an die Taster-und-LED-Schaltung, die für das Reaktionsspiel erneut verwendet wird." style="display:block; width:100%; height:260px; object-fit:cover; object-position:top;">
+          </div>
+          <div class="card">
+            <h3>Behaltet dieselbe Verkabelung</h3>
+            <ul>
+              <li>GP13 liest den Taster.</li>
+              <li>Der 10-kΩ-Pull-up verbindet GP13 mit 3,3 V.</li>
+              <li>GP15 steuert die LED über 220 Ω.</li>
+              <li>Nutzt das <a href="../../diagrams/button-and-led.html">genaue Diagramm mit Tabelle</a>.</li>
+            </ul>
+          </div>
+        </div>
+        <aside class="notes">
+          Diese Folie muss direkt vor dem Aufgabenstart stehen. Sie erinnert daran, dass
+          das Reaktionsspiel die Tasterschaltung wiederverwendet und keinen neuen Aufbau braucht.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Plant zuerst das Spiel</p>
+        <h2>Bringt eine Runde in die richtige Reihenfolge, bevor ihr tippt</h2>
+        <p class="activity paper">Auf Papier · Nummeriert die Schritte vom ersten bis zum letzten</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Öffnen</h3>
+            <p><a href="../../code/day-2/03_reaction_game_starter.py"><code>03_reaction_game_starter.py</code></a></p>
+            <p>Importe, Pin-Einrichtung, <code>scores = []</code> und sicheres Ausschalten der LED sind vorgegeben.</p>
+          </div>
+          <div class="card">
+            <h3>Eine Runde in der richtigen Reihenfolge</h3>
+            <ol>
+              <li>Wartet, bis der Taster losgelassen ist.</li>
+              <li>Wartet eine zufällige Anzahl Millisekunden.</li>
+              <li>Schaltet die LED ein und speichert die Startzeit.</li>
+              <li>Wartet, bis der Taster gedrückt wird.</li>
+              <li>Berechnet <code>reaction_ms</code> und schaltet die LED aus.</li>
+              <li>Fügt das Ergebnis zu <code>scores</code> hinzu.</li>
+              <li>Gebt eine Meldung zum Ergebnis aus.</li>
+            </ol>
+          </div>
+        </div>
+        <aside class="notes">
+          Bleiben Sie konkret: Die Klasse ordnet die genauen Schritte aus den Kommentaren
+          des Starters, statt einen vagen Ablauf zu erfinden. Das vorgegebene Gerüst bleibt stehen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Starter ausbauen</p>
+        <h2>Ersetzt <code>pass</code> durch funktionierende Spiellogik</h2>
+        <p class="activity">In Thonny ausprobieren · Bringt erst eine Runde zum Laufen, dann alle drei</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Schreibt diese Teile</h3>
+            <ol>
+              <li>Löscht innerhalb von <code>try:</code> das Wort <code>pass</code>.</li>
+              <li>Schreibt mit den beiden Wartevorgängen eine funktionierende Runde.</li>
+              <li>Fügt <code>scores.append(reaction_ms)</code> hinzu.</li>
+              <li>Ergänzt <code>if reaction_ms &lt; 350</code> → <code>Quick!</code>, sonst <code>Keep practising!</code>.</li>
+              <li>Umschließt die Runde mit <code>while len(scores) &lt; ROUNDS:</code>.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Nutzt die vorgegebenen Werkzeuge wie gezeigt</h3>
+            <pre style="font-size: 0.5em;"><code class="language-python" data-trim>
+wait_ms = randint(1000, 3000)
+sleep_ms(wait_ms)
+start_ms = ticks_ms()
+end_ms = ticks_ms()
+reaction_ms = ticks_diff(end_ms, start_ms)
+            </code></pre>
+            <p class="tiny" style="margin-top: 0.5em;">Timing-Werkzeuge und das sichere Aufräumen mit <code>try</code>/<code>except</code>/<code>finally</code> sind vorgegeben. Heute konzentriert ihr euch auf die Spiellogik darin.</p>
+          </div>
+        </div>
+        <aside class="notes">
+          Dies ist die zentrale selbstständige Programmierfolie. Lassen Sie die Klasse
+          nach einer glaubwürdigen Reaktionszeit anhalten, bevor die äußere Schleife folgt.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Ergebnis prüfen</p>
+        <h2>Testet das Spiel mit vorzeigbaren Belegen</h2>
+        <p class="activity">Schaltung testen · Führt die vollständige Version mit drei Runden aus</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Euer Programm sollte zeigen</h3>
+            <ol>
+              <li>Die LED wartet und schaltet sich dann ein.</li>
+              <li>Ein Tastendruck erzeugt eine ganzzahlige Reaktionszeit.</li>
+              <li>Jede Runde gibt <code>Quick!</code> oder <code>Keep practising!</code> aus.</li>
+              <li>Nach drei Runden gibt die Shell die Liste und mit <code>min(scores)</code> das schnellste Ergebnis aus.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Nützliche Prüfungen bei Fehlern</h3>
+            <ol>
+              <li>Geht die LED nie an, gebt <code>wait_ms</code> aus und prüft, ob das Programm noch wartet.</li>
+              <li>Erkennt das Spiel keinen Tastendruck, testet den Taster erneut mit <code>01_button_decisions.py</code>.</li>
+              <li>Wirkt ein Ergebnis unmöglich, gebt für eine Runde <code>start_ms</code> und <code>reaction_ms</code> aus.</li>
+            </ol>
+          </div>
+        </div>
+        <aside class="notes">
+          Halten Sie die Fehlersuche konkret und schrittweise: zuerst Timing, dann die
+          bekannte funktionierende Verkabelung, danach die berechneten Werte. Vermeiden
+          Sie vage Aufforderungen wie „kleiner testen“.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Abschlussticket</p>
+        <h2>Schreibt eine genaue Bedingung für den mittleren Bereich</h2>
+        <p class="activity paper">Auf Papier · Antwortet, bevor ihr die Hardware einpackt</p>
+        <div class="callout" style="margin: 1em 0;"><p>Schreibt eine Bedingung, die <code>True</code> ist, wenn <code>reaction_ms</code> mindestens <code>200</code> und kleiner als <code>500</code> ist. Erklärt dann, was genau bei <code>200</code> und <code>500</code> geschieht.</p></div>
+        <div class="footer"><span>Tag 2 abgeschlossen</span><span>Programme stoppen · USB trennen · Bauteile sortiert ablegen</span></div>
+        <aside class="notes">
+          Erwartete Bedingung: 200 &lt;= reaction_ms &lt; 500 oder gleichwertig mit and.
+          Achten Sie auf klare Grenzwertaussagen: 200 gehört dazu, 500 nicht.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Quellenhinweis</p>
+        <h2>Woher die heutige Reihenfolge stammt</h2>
+        <div class="grid-2">
+          <div class="card"><h3>Ideen aus TEALS Unit 2</h3><p>Typen und Casting, Boolean-Werte, Vergleichsoperatoren, <code>=</code> im Gegensatz zu <code>==</code>, <code>not</code>, <code>if</code>/<code>elif</code>/<code>else</code>, Listen und <code>while</code>-Schleifen mit klaren Abbruchbedingungen.</p></div>
+          <div class="card"><h3>Hardware-Aufgaben dieses Workshops</h3><p>Active-low-Tastereingang an GP13, PWM-LED an GP15, Potentiometer-Messung an GP26 / ADC0 und der selbst ausgebaute Reaktionsspiel-Starter mit vorgegebenem Timing- und Aufräumcode.</p></div>
+        </div>
+        <p class="tiny">In diesen Folien verwendete Workshop-Links: <code>../code/day-2/01_button_decisions.py</code>, <code>../code/day-2/02_potentiometer_led.py</code>, <code>../code/day-2/03_reaction_game_starter.py</code>, <code>../diagrams/button-and-led.html</code> und <code>../diagrams/potentiometer-and-led.html</code>.</p>
+        <aside class="notes">
+          Diese letzte Folie erfüllt die Quellenanforderung und dient zugleich als kurze
+          Checkliste der heute verwendeten Workshop-Dateien.
+        </aside>
+      </section>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script src="../workshop-slides.js"></script>
+</body>
+</html>

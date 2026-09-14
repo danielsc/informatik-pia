@@ -3,288 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Teacher presentation decks for the five-day Raspberry Pi Pico Python workshop.">
+  <meta name="description" content="Choose English or German for the Raspberry Pi Pico Python workshop.">
   <title>Python in the Physical World</title>
-  <style>
-    :root {
-      color-scheme: light;
-      --ink: #101828;
-      --muted: #526075;
-      --green: #08705a;
-      --green-dark: #045344;
-      --green-soft: #eaf8f3;
-      --blue-soft: #eef7ff;
-      --line: #d4e1e8;
-      --paper: #ffffff;
-      --background: #f3f9f8;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at 12% 12%, #dff5ee 0, transparent 26rem),
-        radial-gradient(circle at 88% 5%, #e6f4ff 0, transparent 24rem),
-        var(--background);
-    }
-
-    a {
-      color: inherit;
-    }
-
-    .site-header,
-    main,
-    footer {
-      width: min(1120px, calc(100% - 2rem));
-      margin-inline: auto;
-    }
-
-    .site-header {
-      padding: clamp(3.5rem, 8vw, 7rem) 0 2.5rem;
-    }
-
-    .eyebrow {
-      margin: 0 0 1rem;
-      color: var(--green-dark);
-      font-size: 0.85rem;
-      font-weight: 800;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-
-    h1 {
-      max-width: 12ch;
-      margin: 0;
-      font-size: clamp(3rem, 8vw, 6.5rem);
-      line-height: 0.94;
-      letter-spacing: -0.055em;
-    }
-
-    .intro {
-      max-width: 720px;
-      margin: 1.75rem 0 0;
-      color: var(--muted);
-      font-size: clamp(1.15rem, 2.2vw, 1.55rem);
-      line-height: 1.5;
-    }
-
-    .deck-grid {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 1rem;
-      padding: 1rem 0 4rem;
-    }
-
-    .deck-card {
-      position: relative;
-      display: flex;
-      min-height: 260px;
-      flex-direction: column;
-      grid-column: span 2;
-      overflow: hidden;
-      padding: 1.5rem;
-      text-decoration: none;
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: 1.25rem;
-      box-shadow: 0 12px 36px rgb(34 76 70 / 8%);
-      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
-    }
-
-    .deck-card:nth-child(4),
-    .deck-card:nth-child(5) {
-      grid-column: span 3;
-    }
-
-    .deck-card::after {
-      position: absolute;
-      right: -2.5rem;
-      bottom: -4.5rem;
-      width: 11rem;
-      height: 11rem;
-      content: "";
-      background: var(--blue-soft);
-      border-radius: 50%;
-      transition: transform 160ms ease;
-    }
-
-    .deck-card:hover,
-    .deck-card:focus-visible {
-      z-index: 1;
-      border-color: #82c7b4;
-      box-shadow: 0 18px 46px rgb(34 76 70 / 15%);
-      outline: none;
-      transform: translateY(-4px);
-    }
-
-    .deck-card:hover::after,
-    .deck-card:focus-visible::after {
-      transform: scale(1.1);
-    }
-
-    .day {
-      color: var(--green);
-      font-size: 0.78rem;
-      font-weight: 800;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      max-width: 14ch;
-      margin: 0.65rem 0 0.8rem;
-      font-size: 2rem;
-      line-height: 1.05;
-      letter-spacing: -0.035em;
-    }
-
-    .deck-card p {
-      max-width: 38ch;
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .open {
-      z-index: 1;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.45rem;
-      margin-top: auto;
-      padding-top: 1.5rem;
-      color: var(--green-dark);
-      font-weight: 800;
-    }
-
-    .open::after {
-      content: "→";
-      font-size: 1.25em;
-      transition: transform 160ms ease;
-    }
-
-    .deck-card:hover .open::after,
-    .deck-card:focus-visible .open::after {
-      transform: translateX(0.3rem);
-    }
-
-    .controls {
-      margin-bottom: 4rem;
-      padding: 1.4rem 1.6rem;
-      background: var(--green-soft);
-      border: 1px solid #b9dfd4;
-      border-radius: 1rem;
-    }
-
-    .controls strong {
-      color: var(--green-dark);
-    }
-
-    .controls p {
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1.5rem 0 2.5rem;
-      color: var(--muted);
-      border-top: 1px solid var(--line);
-      font-size: 0.9rem;
-    }
-
-    footer p {
-      margin: 0;
-    }
-
-    footer a {
-      color: var(--green-dark);
-      font-weight: 700;
-    }
-
-    @media (max-width: 800px) {
-      .deck-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .deck-card,
-      .deck-card:nth-child(4),
-      .deck-card:nth-child(5) {
-        grid-column: span 1;
-      }
-    }
-
-    @media (max-width: 540px) {
-      .deck-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .deck-card {
-        min-height: 225px;
-      }
-
-      footer {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <header class="site-header">
-    <p class="eyebrow">Raspberry Pi Pico · MicroPython workshop</p>
+    <p class="eyebrow">Raspberry Pi Pico · MicroPython</p>
     <h1>Python in the physical world</h1>
-    <p class="intro">Five classroom presentation decks that teach the Python ideas before students use them to control real circuits.</p>
+    <p class="intro">Choose a language for the five-day workshop and its classroom presentation decks.</p>
   </header>
-
   <main>
-    <section class="deck-grid" aria-label="Workshop presentation decks">
-      <a class="deck-card" href="slides/day-1.html">
-        <span class="day">Day 1</span>
-        <h2>Make it light</h2>
-        <p>Meet Python and Thonny, save a script, debug it, and send a secret message with an LED.</p>
-        <span class="open">Open slides</span>
+    <section class="language-grid" aria-label="Choose a language">
+      <a class="language-card" href="en/" lang="en">
+        <span class="day">English · source language</span>
+        <h2>Open the workshop in English</h2>
+        <p>English is the leading version for future course changes.</p>
+        <span class="open">Continue in English</span>
       </a>
-
-      <a class="deck-card" href="slides/day-2.html">
-        <span class="day">Day 2</span>
-        <h2>Make it decide</h2>
-        <p>Turn button and potentiometer inputs into Boolean questions, choices, and a reaction game.</p>
-        <span class="open">Open slides</span>
-      </a>
-
-      <a class="deck-card" href="slides/day-3.html">
-        <span class="day">Day 3</span>
-        <h2>Make it reusable</h2>
-        <p>Name repeated jobs with functions and loops, then create an interactive eight-pixel pet.</p>
-        <span class="open">Open slides</span>
-      </a>
-
-      <a class="deck-card" href="slides/day-4.html">
-        <span class="day">Day 4</span>
-        <h2>Make it sense</h2>
-        <p>Measure distance safely, handle missing data, and combine light and sound in a proximity alarm.</p>
-        <span class="open">Open slides</span>
-      </a>
-
-      <a class="deck-card" href="slides/day-5.html">
-        <span class="day">Day 5</span>
-        <h2>Build a parking assistant</h2>
-        <p>Combine sensing, decisions, light, and sound into one layered and tested prototype.</p>
-        <span class="open">Open slides</span>
+      <a class="language-card" href="de/" lang="de">
+        <span class="day">Deutsch · Übersetzung</span>
+        <h2>Workshop auf Deutsch öffnen</h2>
+        <p>Folien und Unterrichtsmaterial für den deutschsprachigen Unterricht.</p>
+        <span class="open">Weiter auf Deutsch</span>
       </a>
     </section>
-
-    <aside class="controls">
-      <p><strong>Presentation controls:</strong> use the arrow keys or Space to move, <strong>F</strong> for fullscreen, <strong>S</strong> for speaker notes, and <strong>O</strong> for the slide overview.</p>
-    </aside>
   </main>
-
   <footer>
     <p>Course materials by Daniel Schneider</p>
     <p><a href="https://github.com/danielsc/informatik-pia">View the source on GitHub</a></p>

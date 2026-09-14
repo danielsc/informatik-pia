@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tag 5: Parkassistent — Folien für Lehrkräfte</title>
+  <meta name="description" content="Präsentation für Lehrkräfte zu Tag 5 des Raspberry-Pi-Pico-Python-Workshops.">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/monokai.css">
+  <link rel="stylesheet" href="../workshop-slides.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section class="title-slide">
+        <p class="eyebrow">Python in der physischen Welt · Tag 5</p>
+        <h1>Einen Parkassistenten bauen</h1>
+        <p class="lede">Verbindet Sensorik, Entscheidungen, Licht und Ton zu einem getesteten Produkt.</p>
+        <div class="callout danger" style="max-width: 25em; margin-top: 1em;"><p><strong>Nur ein Prototyp:</strong> Verwendet dieses Projekt niemals, um ein echtes Fahrzeug zu führen oder Menschen oder Eigentum zu schützen.</p></div>
+        <div class="footer"><span>Folien für Lehrkräfte</span><span>S für Notizen · F für Vollbild</span></div>
+        <aside class="notes">
+          Beginnen Sie mit der Einschränkung. Dies ist ein Lernprototyp für den
+          Tisch. Lassen Sie die Lernenden die drei getesteten Teilsysteme aus Tag 3
+          und 4 nennen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Lernziele</p>
+        <h2>Am Ende könnt ihr …</h2>
+        <div class="grid-3">
+          <div class="card"><h3>Festlegen</h3><p>Aus einem Bedarf genaues Verhalten ableiten.</p></div>
+          <div class="card"><h3>Zerlegen</h3><p>Ein Produkt in testbare Funktionen und Schichten teilen.</p></div>
+          <div class="card"><h3>Integrieren</h3><p>Funktionierende Sensor-, Ton- und RGB-Teile verbinden.</p></div>
+          <div class="card"><h3>Testen</h3><p>Normal-, Grenz-, Fehler- und Abschaltfälle prüfen.</p></div>
+          <div class="card"><h3>Umfang begrenzen</h3><p>Eine zuverlässige Verbesserung fertigstellen.</p></div>
+          <div class="card"><h3>Erklären</h3><p>Nachweise zeigen und einen behobenen Fehler beschreiben.</p></div>
+        </div>
+        <aside class="notes">
+          Tag 5 führt keine wesentliche neue Python-Syntax ein. Neu sind die
+          Projektkompetenzen Anforderungen, Zerlegung, Integration, Umfang und
+          Nachweise.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Unser Weg heute</p>
+        <h2>Planen → schichtweise bauen → integrieren → nachweisen</h2>
+        <div class="flow">
+          <div class="flow-box">Verhalten<br>vereinbaren</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Jede Hardware-<br>Schicht neu testen</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Jeweils eine<br>Funktion ergänzen</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Schriftliche<br>Testfälle ausführen</div>
+        </div>
+        <div class="callout warning"><p>Verdrahtet nicht alles auf einmal und startet dann als ersten Test die endgültige Endlosschleife.</p></div>
+        <aside class="notes">
+          Dies folgt dem Projektzyklus aus TEALS Unit 8, angewendet auf ein
+          eingegrenztes, bereits gewähltes physisches Produkt.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">01</span>
+        <p class="eyebrow">Teil 1 · Festlegen, was „funktioniert“ bedeutet</p>
+        <h2>Anforderungen vor dem Code schreiben</h2>
+        <p class="lede">Eine Anforderung beschreibt beobachtbares Verhalten — nicht die Codezeilen, die es erzeugen.</p>
+        <aside class="notes">
+          TEALS Unit 8 führt vor der Umsetzung von Szenarien zur Spezifikation. Die
+          Grundanforderungen sind vorgegeben, damit sich die Lernenden auf die
+          Umsetzung konzentrieren können.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Das Problem der Nutzenden</p>
+        <h2>Klare Rückmeldung geben, wenn sich ein Objekt nähert</h2>
+        <p class="activity paper">Auf Papier · Beschreibt, was Nutzende wahrnehmen sollen</p>
+        <div class="grid-2">
+          <div class="card"><h3>Eingabe</h3><p>Abstandsmessung — oder kein nutzbares Echo.</p></div>
+          <div class="card"><h3>Ausgaben</h3><p>Acht RGB-Pixel, kurze Buzzer-Töne und Nachweise in der Shell.</p></div>
+        </div>
+        <div class="callout danger" style="margin-top: 0.7em;"><p>Der Prototyp gibt Rückmeldung im Unterricht. Er macht keine echte Parksituation sicher.</p></div>
+        <aside class="notes">
+          Lassen Sie die Lernenden das Problem formulieren, ohne Python-Funktionen
+          oder GPIO-Pins zu nennen. Anforderungen beschreiben das beobachtbare
+          Ergebnis für die Nutzenden.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Grundanforderungen</p>
+        <h2>Jede Eingabe gehört zu einem Zustand</h2>
+        <p class="activity paper">Auf Papier · Prüft jeden Grenzwert</p>
+        <table class="compact-table">
+          <thead><tr><th>Zustand</th><th>Regel</th><th>RGB</th><th>Ton</th></tr></thead>
+          <tbody>
+            <tr><td>safe</td><td>über 60 cm</td><td>grün</td><td>stumm</td></tr>
+            <tr><td>caution</td><td>über 25 bis 60 cm</td><td>bernsteinfarben</td><td>langsames Piepen</td></tr>
+            <tr><td>stop</td><td>25 cm oder weniger</td><td>rot</td><td>schnelles Piepen</td></tr>
+            <tr><td>invalid</td><td><code>None</code></td><td>blau</td><td>stumm</td></tr>
+          </tbody>
+        </table>
+        <aside class="notes">
+          Fragen Sie nach Vorhersagen für 61, 60, 26 und 25 cm sowie None. Die
+          Lernenden dürfen Grenzwerte später kalibrieren, müssen Änderungen aber
+          dokumentieren.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Von der Anforderung zum Test</p>
+        <h2>Genauen Aufbau und erwartetes Ergebnis verwenden</h2>
+        <p class="activity paper">Auf Papier · Ergänzt das fehlende erwartete Ergebnis</p>
+        <table class="compact-table">
+          <thead><tr><th>Aufbau</th><th>Erwarteter Zustand</th><th>Erwartete Ausgaben</th></tr></thead>
+          <tbody>
+            <tr><td>flaches Ziel bei 100 cm</td><td>safe</td><td>grün, stumm</td></tr>
+            <tr><td>flaches Ziel bei 40 cm</td><td>caution</td><td>bernsteinfarben, langsames Piepen</td></tr>
+            <tr><td>flaches Ziel bei 15 cm</td><td>stop</td><td>rot, schnelles Piepen</td></tr>
+            <tr><td>Sensor zeigt vom Ziel weg</td><td>?</td><td>?</td></tr>
+          </tbody>
+        </table>
+        <div class="callout"><p>Ein Test besteht nur, wenn das beobachtete Ergebnis der schriftlichen Erwartung entspricht.</p></div>
+        <aside class="notes">
+          Erwartete letzte Zeile: invalid, blau, stumm. Dies ist die konkrete
+          Workshop-Anpassung der TEALS-Szenarien und -Spezifikationen.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">02</span>
+        <p class="eyebrow">Teil 2 · Hardware-Integration</p>
+        <h2>Jeweils eine Schicht bauen und erneut testen</h2>
+        <p class="lede">Die endgültige Schaltung verbindet drei bekannte Schaltungen; ihre Einzeltests bleiben wichtig.</p>
+        <aside class="notes">
+          Trennen Sie USB. Legen Sie das endgültige Diagramm und alle drei früheren
+          Testdateien bereit.
+        </aside>
+      </section>
+
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div><p class="eyebrow">Bei getrennter Stromversorgung bauen · Endgültige Schaltung</p><h2>Vollständiger Parkassistent</h2></div>
+          <a class="diagram-link" href="../../diagrams/parking-assistant.html">Genaues Diagramm + Tabelle</a>
+        </div>
+        <div class="diagram-frame">
+          <img src="../../diagrams/parking-assistant.png" alt="Vollständiger Parkassistent mit geschütztem HC-SR04, über einen Transistor angesteuertem passivem Buzzer und Freenove-8-RGB-Modul an getrennten 5-V- und 3,3-V-Versorgungen mit gemeinsamer Masse.">
+        </div>
+        <aside class="notes">
+          Dieses Diagramm gehört zu parking_assistant_starter.py. Identifizieren
+          Sie vor dem Aufbau alle drei Teilsysteme: Sensor an GP18/GP19,
+          Buzzer-Steuerung an GP15, RGB-Daten an GP16. Die Lehrkraft prüft vor USB
+          jede Spannungsversorgung.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Zwei Spannungen, eine gemeinsame Masse</p>
+        <h2>Jedes Teil aus der richtigen Quelle versorgen</h2>
+        <p class="activity watch">Ansehen und besprechen · Zeigt jede Route im Diagramm</p>
+        <div class="grid-3">
+          <div class="card"><h3>5 V / VBUS</h3><p>Stromversorgung für HC-SR04 VCC und passiven Buzzer.</p></div>
+          <div class="card"><h3>3.3 V</h3><p>Stromversorgung des RGB-Moduls und Pico-GPIO-Logik.</p></div>
+          <div class="card"><h3>GND</h3><p>Alle Teilsysteme verwenden denselben Bezug.</p></div>
+        </div>
+        <div class="callout danger" style="margin-top: 0.7em;"><p>HC-SR04 Echo führt weiterhin durch den 1-kΩ/2-kΩ-Spannungsteiler, bevor es GP18 erreicht.</p></div>
+        <aside class="notes">
+          Die Lernenden sollen Echo-Spannungsteiler und Transistortreiber aus dem
+          Gedächtnis verfolgen und dann mit der genauen Tabelle abgleichen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Schicht 1 · Sensor</p>
+        <h2>Aufbauen, prüfen und den bekannten Test erneut ausführen</h2>
+        <p class="activity build">Bei getrennter Stromversorgung bauen · Prüfung vor USB</p>
+        <ol>
+          <li>Baut den HC-SR04 und beide Widerstände des Echo-Spannungsteilers an den endgültigen Positionen auf.</li>
+          <li>Prüft VBUS, GND, GP19 Trigger und das geschützte GP18 Echo.</li>
+          <li>Verbindet USB wieder und führt <a href="../../code/day-4/01_distance_sensor.py"><code>01_distance_sensor.py</code></a> aus.</li>
+          <li>Prüft, ob ein flaches Ziel plausible Abstände und ein fehlendes Echo <code>None</code> erzeugt.</li>
+        </ol>
+        <aside class="notes">
+          Ergänzen Sie die nächste Schicht erst, wenn dieser Test besteht.
+          Dokumentieren Sie jedes Problem, bevor ein Kabel verändert wird.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Schicht 2 · Ton</p>
+        <h2>Den Buzzer ergänzen, ohne den Sensor zu stören</h2>
+        <p class="activity build">Bei getrennter Stromversorgung bauen · Transistor E/B/C prüfen</p>
+        <ol>
+          <li>Stoppt den Sensortest und trennt USB.</li>
+          <li>Ergänzt den passiven Buzzer, S8050 und den Basiswiderstand an GP15.</li>
+          <li>Verbindet USB wieder und führt <a href="../../code/day-4/02_buzzer_test.py"><code>02_buzzer_test.py</code></a> aus.</li>
+          <li>Führt den Abstandstest erneut aus, um zu beweisen, dass der Sensor noch funktioniert.</li>
+        </ol>
+        <aside class="notes">
+          Eine Regression liegt vor, wenn ein zuvor funktionierender Teil nach einer
+          Änderung nicht mehr funktioniert. Verwenden Sie den Begriff erst nach
+          dieser konkreten Erklärung.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Schicht 3 · Farbe</p>
+        <h2>Das RGB-Modul an 3.3 V ergänzen</h2>
+        <p class="activity build">Bei getrennter Stromversorgung bauen · Anschluss mit IN verwenden</p>
+        <ol>
+          <li>Stoppt das Programm, trennt USB und verbindet RGB <code>IN S</code> mit GP16.</li>
+          <li>Verbindet <code>IN V</code> mit 3.3 V und <code>IN G</code> mit der gemeinsamen Masse GND.</li>
+          <li>Verbindet USB wieder und führt <a href="../../code/day-3/01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a> aus.</li>
+          <li>Führt Sensor- und Buzzer-Test noch einmal aus.</li>
+        </ol>
+        <aside class="notes">
+          Das vollständige Parkassistenten-Diagramm steht direkt vor dieser
+          schichtweisen Aufgabe, sodass jede Verbindung im Zusammenhang eingeführt
+          ist. Verwenden Sie niedrige RGB-Werte.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Abschließende Prüfung ohne Strom</p>
+        <h2>Die Tabelle laut vorlesen</h2>
+        <p class="activity build">Partner- und Lehrkraftprüfung · USB bleibt getrennt</p>
+        <div class="grid-2">
+          <div class="card"><h3>Partnerteam verfolgt</h3><p>Jedes Signal, jede Spannung und Masse, beide Teilerwiderstände, jedes Transistorbein und den RGB-IN-Pin.</p></div>
+          <div class="card"><h3>Lehrkraft bestätigt</h3><p>Keine 5 V erreichen GPIO, beide Massepunkte sind verbunden und alle Schutzbauteile sind vorhanden.</p></div>
+        </div>
+        <div class="callout danger" style="margin-top: 0.7em;"><p>Erst nach dieser Prüfung darf das endgültige Programm mit aktiver Hardware verbunden werden.</p></div>
+        <aside class="notes">
+          Verwenden Sie die HTML-Verbindungstabelle statt nur das visuelle
+          Gedächtnis. Eine Person liest, eine zeigt; tauschen Sie dann für die
+          kritischen Echo- und Buzzer-Wege.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">03</span>
+        <p class="eyebrow">Teil 3 · Softwarearchitektur</p>
+        <h2>Jeder Funktion eine Aufgabe geben</h2>
+        <p class="lede">Kleine Aufgaben lassen sich testen, bevor die Endlosschleife sie verbindet.</p>
+        <aside class="notes">
+          Wiederholen Sie die Funktionen aus Tag 3 und die Zustände aus Tag 4.
+          Neue Syntax ist nicht erforderlich.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Die Datenkette</p>
+        <h2>Ein Wert ändert schrittweise seine Bedeutung</h2>
+        <p class="activity watch">Ansehen und besprechen · Verfolgt einen Messwert von 40 cm</p>
+        <pre><code class="language-python" data-trim>
+distance = measure_distance_cm()
+zone = classify_distance(distance)
+show_zone(zone, distance)
+sound_zone(zone)
+        </code></pre>
+        <div class="callout success"><p>Bei 40 cm: Messung → <code>"caution"</code> → bernsteinfarbene Pixel → langsames Piepen.</p></div>
+        <aside class="notes">
+          Fragen Sie, was jede Funktion erhält und was sie verändert oder zurückgibt.
+          Stellen Sie dem einen großen Block gegenüber, dessen Fehler schwer
+          einzugrenzen sind.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Zerlegung</p>
+        <h2>Eine große Aufgabe in testbare Teile zerlegen</h2>
+        <p class="activity paper">Auf Papier · Ordnet jeder Funktion eine Zusage zu</p>
+        <table class="compact-table">
+          <thead><tr><th>Funktion</th><th>Zusage</th><th>Erster Test</th></tr></thead>
+          <tbody>
+            <tr><td><code>measure_distance_cm()</code></td><td>Zahl oder <code>None</code></td><td>flaches Ziel, dann kein Echo</td></tr>
+            <tr><td><code>classify_distance(distance)</code></td><td>ein Zustands-String</td><td>feste Zahlen, ohne Sensor</td></tr>
+            <tr><td><code>show_zone(zone, distance)</code></td><td>passende RGB-Ausgabe</td><td>jeder Zustands-String</td></tr>
+            <tr><td><code>sound_zone(zone)</code></td><td>passendes Tonmuster</td><td>jeder Zustands-String</td></tr>
+          </tbody>
+        </table>
+        <aside class="notes">
+          TEALS Unit 8 fordert Aufgaben, die klein genug zum Schätzen und Testen
+          sind. Hier ist jede Funktion eine konkrete Aufgabe mit beobachtbarem
+          Ergebnis.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Logik ohne Sensor testen</p>
+        <h2>Zuerst feste Werte verwenden</h2>
+        <p class="activity">In Thonny ausprobieren · Vor der Endlosschleife ausführen</p>
+        <pre><code class="language-python" data-trim>
+print(classify_distance(100))   # safe
+print(classify_distance(40))    # caution
+print(classify_distance(15))    # stop
+print(classify_distance(None))  # invalid
+        </code></pre>
+        <div class="callout"><p>Wenn dieser Test fehlschlägt, liegt das Problem in der Klassifizierungslogik — nicht in der Sensorverkabelung.</p></div>
+        <aside class="notes">
+          Die Lernenden ergänzen nach classify_distance vorübergehende print-Tests.
+          Entfernen oder kommentieren Sie diese erst, wenn alle erwarteten Zustände
+          erscheinen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Konfigurationszugriff</p>
+        <h2>Der Zustand wählt seine Farbe</h2>
+        <p class="activity watch">Ansehen und besprechen · Sagt das Tupel voraus</p>
+        <pre><code class="language-python" data-trim>
+ZONE_COLOURS = {
+    "safe": (0, 20, 0),
+    "caution": (25, 8, 0),
+    "stop": (25, 0, 0),
+    "invalid": (0, 0, 20),
+}
+
+colour = ZONE_COLOURS["caution"]
+        </code></pre>
+        <div class="callout success"><p>Das Ergebnis ist <code>(25, 8, 0)</code>: wenig Rot und etwas Grün erzeugen Bernsteinfarben.</p></div>
+        <aside class="notes">
+          Dies verwendet den Dictionary-Zugriff aus Tag 4 und die RGB-Tupel aus Tag
+          3 erneut. Hier wird kein neues Konzept eingeführt.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Die Endlosschleife kommt zuletzt</p>
+        <h2>Nur getestete Funktionen integrieren</h2>
+        <p class="activity watch">Ansehen und besprechen · Nennt die vier wiederholten Schritte</p>
+        <pre><code class="language-python" data-trim>
+while True:
+    distance = measure_distance_cm()
+    zone = classify_distance(distance)
+    show_zone(zone, distance)
+    sound_zone(zone)
+        </code></pre>
+        <div class="callout warning"><p>Stoppt mit <code>Ctrl+C</code>. Der bereitgestellte <code>finally</code>-Block schaltet RGB- und PWM-Ausgänge aus.</p></div>
+        <aside class="notes">
+          Das Schreiben von try/finally wird nicht bewertet. Die Lernenden sollen
+          verstehen, weshalb das Abschaltverhalten zu den Tests gehört.
+        </aside>
+      </section>
+
+      <section class="section-slide">
+        <span class="section-number">04</span>
+        <p class="eyebrow">Teil 4 · Umsetzen und nachweisen</p>
+        <h2>Jeweils eine Funktion fertigstellen</h2>
+        <p class="lede">Nachweise über die Funktion entscheiden über den nächsten Schritt — nicht die Menge des geschriebenen Codes.</p>
+        <aside class="notes">
+          Öffnen Sie die Starterdatei erst, wenn die Schaltungsschichten und festen
+          Anforderungen bereit sind.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Starterdatei</p>
+        <h2>Unterscheidet Vorgaben und eigene Aufgaben</h2>
+        <p class="activity">In Thonny ausprobieren · Öffnet <code>parking_assistant_starter.py</code></p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Bereits vorgegeben</h3>
+            <ul><li>Imports und Pin-Einrichtung;</li><li>Grenzwertkonstanten;</li><li>Zustandsfarben;</li><li>Funktionsnamen;</li><li>Aufräumen.</li></ul>
+          </div>
+          <div class="card">
+            <h3>Das ergänzt ihr</h3>
+            <ul><li>Abstandsmessung;</li><li>Klassifizierung;</li><li>RGB-Anzeige;</li><li>Tonverhalten;</li><li>Tests und eine Verbesserung.</li></ul>
+          </div>
+        </div>
+        <aside class="notes">
+          Verwenden Sie die vollständige parking_assistant.py nur zur Demonstration,
+          Wiederherstellung oder zum abschließenden Vergleich.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Reihenfolge der Umsetzung</p>
+        <h2>Fertigstellen, testen, dann weitergehen</h2>
+        <ol>
+          <li>Ergänzt <code>classify_distance()</code>; testet feste Werte.</li>
+          <li>Ergänzt <code>show_zone()</code>; ruft die Funktion mit jedem Zustand auf.</li>
+          <li>Ergänzt <code>sound_zone()</code>; safe und invalid bleiben stumm.</li>
+          <li>Ergänzt <code>measure_distance_cm()</code>; testet Ziel und fehlendes Echo.</li>
+          <li>Führt die Schleife mit stummgeschaltetem Ton aus; ergänzt dann kurze Buzzer-Signale.</li>
+          <li>Führt jeden schriftlichen Test aus und dokumentiert das tatsächliche Ergebnis.</li>
+        </ol>
+        <aside class="notes">
+          Die Klassifizierung kommt zuerst, weil sie ohne Hardware-Eingabe getestet
+          werden kann. Der Ton wird zuletzt integriert, um Ablenkung zu verringern
+          und Fehler sichtbar zu machen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Testnachweise</p>
+        <h2>Normal, Grenzwert, ungültig, Abschalten</h2>
+        <p class="activity">Produkt testen · Tatsächliche Ergebnisse dokumentieren</p>
+        <table class="compact-table">
+          <thead><tr><th>Test</th><th>Eingabe/Aufbau</th><th>Erwartet</th></tr></thead>
+          <tbody>
+            <tr><td>T1</td><td>100 cm</td><td>safe, grün, stumm</td></tr>
+            <tr><td>T2</td><td>40 cm</td><td>caution, bernsteinfarben, langsames Piepen</td></tr>
+            <tr><td>T3</td><td>15 cm</td><td>stop, rot, schnelles Piepen</td></tr>
+            <tr><td>T4</td><td>kein nutzbares Echo</td><td>invalid, blau, stumm</td></tr>
+            <tr><td>T5–6</td><td>genau 60 cm und 25 cm</td><td>vereinbarte Grenzzustände</td></tr>
+            <tr><td>T7</td><td>Stop drücken</td><td>alle Ausgaben aus</td></tr>
+          </tbody>
+        </table>
+        <aside class="notes">
+          Zum Bestehen sind tatsächliche Nachweise nötig. Wenn ein Test fehlschlägt,
+          bestimmen Sie vor dem Bearbeiten die verantwortliche Funktion oder
+          Hardware-Schicht.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Umfang</p>
+        <h2>Eine zuverlässige Verbesserung</h2>
+        <p class="activity paper">Auf Papier · Erst wählen, wenn die Ausgangsversion besteht</p>
+        <div class="grid-3">
+          <div class="card"><h3>Abstandsanzeige</h3><p>Mehr Pixel füllen, wenn sich das Objekt nähert.</p></div>
+          <div class="card"><h3>Stummmodus</h3><p>Optische Warnungen beibehalten und den Ton abschalten.</p></div>
+          <div class="card"><h3>Selbsttest</h3><p>Beim Start jede Farbe zeigen und einen leisen Ton spielen.</p></div>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Wenn die Zeit knapp wird, streicht die Verbesserung — nicht die Pflichtprüfungen oder das sichere Aufräumen.</p></div>
+        <aside class="notes">
+          Dies ist das TEALS-Prinzip der Streichliste. Eine fertige Funktion liefert
+          bessere Nachweise als mehrere unfertige Änderungen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Abschlusspräsentation</p>
+        <h2>Drei Minuten mit Nachweisen</h2>
+        <ol>
+          <li>Beschreibt das Problem der Nutzenden und die Grenze des Prototyps.</li>
+          <li>Demonstriert safe, caution, stop und invalid.</li>
+          <li>Zeigt einen genauen Grenzwerttest.</li>
+          <li>Erklärt Eingabe und Rückgabewert einer Funktion.</li>
+          <li>Beschreibt einen Fehler, den Nachweis und die Korrektur.</li>
+          <li>Nennt eine Verbesserung, die ihr umgesetzt oder bewusst gestrichen habt.</li>
+        </ol>
+        <aside class="notes">
+          Beide Personen sprechen. Das Präsentationsformat gehört zum Workshop;
+          TEALS Unit 8 liefert Planung, Umsetzungs-Kontrollpunkte und Reflexion.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Reflexion</p>
+        <h2>Was haben eure Nachweise gezeigt?</h2>
+        <div class="grid-2">
+          <div class="card"><h3>Verständnis</h3><p>Welches Programmierkonzept wurde klarer, weil ihr es sehen oder hören konntet?</p></div>
+          <div class="card"><h3>Debugging</h3><p>Welcher Fehler lag im Code, welcher in der Verkabelung und welcher in einer falschen Annahme?</p></div>
+          <div class="card"><h3>Design</h3><p>Wo speichert das Programm Grenzwerte, Farben und Zustände?</p></div>
+          <div class="card"><h3>Verantwortung</h3><p>Was müsste ein echtes Sicherheitsprodukt leisten, das dieser Prototyp nicht bietet?</p></div>
+        </div>
+        <div class="footer"><span>Workshop abgeschlossen</span><span>Ausgänge stoppen · USB trennen · sicher abbauen</span></div>
+        <aside class="notes">
+          Sammeln Sie individuelle Antworten. Beenden Sie den Tag mit vollständigem
+          Abschalten und einer Bestandsaufnahme der Bauteile.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Referenz für Lehrkräfte</p>
+        <h2>Lernabfolge und Quellen</h2>
+        <div class="grid-2">
+          <div class="card"><h3>Anpassung von TEALS Unit 8</h3><p>Anforderungen, Machbarkeit, Zerlegung, Umsetzungsaufgaben, Kontrollpunkte, Umfangssteuerung und Reflexion.</p></div>
+          <div class="card"><h3>Anpassung für den Workshop</h3><p>Festes Parkassistenten-Produkt, schichtweise Schaltungsintegration, Grenzwert-/Fehler-/Abschalttests und eine kurze Präsentation mit Nachweisen.</p></div>
+        </div>
+        <p class="tiny">Quellen: Lektionsdateien von TEALS Unit 8, Planungsbogen für das Abschlussprojekt, Entwicklungsplan und Bewertungsraster. Die Hardware-Aufgaben verwenden die eigenständigen Kursdiagramme des Workshops.</p>
+        <aside class="notes">
+          Unit 8 enthält Lektionsdokumente statt eines gemeinsamen Folienordners.
+          Diese Quellenfolie dient der Lehrkraft und muss nicht im Unterricht
+          gezeigt werden.
+        </aside>
+      </section>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script src="../workshop-slides.js"></script>
+</body>
+</html>

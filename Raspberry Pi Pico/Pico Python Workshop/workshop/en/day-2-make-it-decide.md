@@ -5,8 +5,8 @@
 Turn physical input into decisions, then build a reaction-time challenge.
 
 **Python:** Boolean values, comparisons, casting, `if`/`elif`/`else`, `while`,
-lists, indexes, `append`, `len`  
-**Hardware:** button, ADC, potentiometer, PWM LED  
+lists, indexes, `append`, `len`<br>
+**Hardware:** button, ADC, potentiometer, PWM LED<br>
 **TEALS connection:** Unit 2, Data Types and Conditionals
 
 ## 1. A button is a Boolean question
@@ -14,11 +14,11 @@ lists, indexes, `append`, `len`
 Disconnect USB. Gather the tactile button, one 10 kΩ resistor, one 220 Ω
 resistor, one red LED, and jumper wires.
 
-[Open the course's scalable HTML wiring diagram](diagrams/button-and-led.html).
+[Open the course's scalable HTML wiring diagram](../../diagrams/button-and-led.html).
 It shows the Pico connections, breadboard orientation, internal button
 contacts, and pre-power checks.
 
-![Button and LED breadboard wiring](diagrams/button-and-led.png)
+![Button and LED breadboard wiring](../../diagrams/button-and-led.png)
 
 Build in this order:
 
@@ -42,7 +42,7 @@ Rotating the button 90 degrees in the same holes can make the input appear
 permanently pressed. If the program always prints `Pressed: True`, disconnect
 USB and check orientation before changing the code.
 
-Run [`code/day-2/01_button_decisions.py`](code/day-2/01_button_decisions.py).
+Run [`code/day-2/01_button_decisions.py`](../../code/day-2/01_button_decisions.py).
 The Freenove circuit is active-low:
 
 ```python
@@ -78,12 +78,12 @@ A digital input has two states. A potentiometer can produce many values.
 Disconnect USB and build the circuit below.
 
 Open the
-[scalable, accessible potentiometer-and-LED diagram](diagrams/potentiometer-and-led.html)
+[scalable, accessible potentiometer-and-LED diagram](../../diagrams/potentiometer-and-led.html)
 for exact breadboard contacts and the connection table.
 
-![Potentiometer on ADC0 and PWM LED on GP15](diagrams/potentiometer-and-led.png)
+![Potentiometer on ADC0 and PWM LED on GP15](../../diagrams/potentiometer-and-led.png)
 
-Run [`code/day-2/02_potentiometer_led.py`](code/day-2/02_potentiometer_led.py).
+Run [`code/day-2/02_potentiometer_led.py`](../../code/day-2/02_potentiometer_led.py).
 
 The Pico reads a number from 0 to 65535:
 
@@ -192,7 +192,7 @@ timing tools; students only use the call patterns listed below.
 ## Daily build: Reaction-Time Challenge
 
 Rebuild the button and LED circuit. Start from
-[`code/day-2/03_reaction_game_starter.py`](code/day-2/03_reaction_game_starter.py).
+[`code/day-2/03_reaction_game_starter.py`](../../code/day-2/03_reaction_game_starter.py).
 The starter supplies imports, pin setup, an empty `scores` list, and safe LED
 cleanup. **You write the game.**
 
@@ -255,7 +255,7 @@ list and the fastest result with `min(scores)`.
 
 The supplied `try`/`except`/`finally` wrapper is safety scaffolding, not syntax
 you must write today. Use
-[`code/day-2/03_reaction_game_solution.py`](code/day-2/03_reaction_game_solution.py)
+[`code/day-2/03_reaction_game_solution.py`](../../code/day-2/03_reaction_game_solution.py)
 only for recovery or comparison after your three-round version works.
 
 ### Extensions
@@ -270,7 +270,7 @@ Choose one only after the baseline works:
 - create a two-player version.
 
 The optional
-[`code/day-2/03_reaction_game_extension.py`](code/day-2/03_reaction_game_extension.py)
+[`code/day-2/03_reaction_game_extension.py`](../../code/day-2/03_reaction_game_extension.py)
 shows one possible false-start implementation after students have designed
 their own.
 

@@ -25,7 +25,7 @@ Raspberry Pi Pico/Pico Python Workshop/diagrams/
 
 Before changing or creating a diagram, read:
 
-1. `Raspberry Pi Pico/Pico Python Workshop/WIRING_AND_SAFETY.md`
+1. `Raspberry Pi Pico/Pico Python Workshop/workshop/en/WIRING_AND_SAFETY.md`
 2. The lesson that will use the diagram
 3. The corresponding MicroPython program in `code/`
 4. `references/quality-rubric.md` in this skill

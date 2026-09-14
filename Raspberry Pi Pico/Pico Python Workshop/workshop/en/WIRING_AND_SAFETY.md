@@ -71,7 +71,7 @@ diagram.
 ## Ordinary LED
 
 Build from the
-[scalable ordinary-LED diagram](diagrams/ordinary-led.html) in
+[scalable ordinary-LED diagram](../../diagrams/ordinary-led.html) in
 [Day 1](day-1-make-it-light.md#4-build-an-external-led).
 
 | From | Through | To |
@@ -85,7 +85,7 @@ resistor.
 ## Button
 
 Build from the
-[scalable button-and-LED diagram](diagrams/button-and-led.html) in
+[scalable button-and-LED diagram](../../diagrams/button-and-led.html) in
 [Day 2](day-2-make-it-decide.md#1-a-button-is-a-boolean-question).
 
 A four-leg tactile button has only two electrical terminals. The two legs in
@@ -106,7 +106,7 @@ be connected while released; A and B should connect only while pressed.
 ## Potentiometer and PWM LED
 
 Build from the
-[scalable potentiometer-and-LED diagram](diagrams/potentiometer-and-led.html)
+[scalable potentiometer-and-LED diagram](../../diagrams/potentiometer-and-led.html)
 in [Day 2](day-2-make-it-decide.md#2-from-analogue-world-to-numbers).
 
 | Part | Connection |
@@ -122,7 +122,7 @@ wiper between 0 V and 3.3 V.
 ## Freenove 8-RGB LED module
 
 Build from the
-[scalable 8-RGB module diagram](diagrams/rgb8-module.html) in
+[scalable 8-RGB module diagram](../../diagrams/rgb8-module.html) in
 [Day 3](day-3-make-it-reusable.md#1-meet-the-rgb-module).
 
 Connect the header marked **IN**, not OUT:
@@ -138,7 +138,7 @@ The examples deliberately use low RGB values to reduce glare and current.
 ## Passive buzzer with transistor driver
 
 Build from the
-[scalable passive-buzzer diagram](diagrams/passive-buzzer.html) in
+[scalable passive-buzzer diagram](../../diagrams/passive-buzzer.html) in
 [Day 4](day-4-make-it-sense.md#3-test-the-passive-buzzer).
 
 | From | Through | To |
@@ -153,7 +153,7 @@ order shown in the diagram before inserting the transistor.
 ## HC-SR04 distance sensor: safer Echo connection
 
 Build from the
-[scalable safe HC-SR04 diagram](diagrams/distance-sensor.html) in
+[scalable safe HC-SR04 diagram](../../diagrams/distance-sensor.html) in
 [Day 4](day-4-make-it-sense.md#safety-gate).
 
 The HC-SR04 uses 5 V, so Echo can rise close to 5 V. This course intentionally
@@ -172,7 +172,7 @@ should inspect every unpowered sensor circuit before USB is connected.
 
 ## Combined builds
 
-The [Day 4 proximity-alarm diagram](diagrams/proximity-alarm.html) combines
+The [Day 4 proximity-alarm diagram](../../diagrams/proximity-alarm.html) combines
 the protected sensor and transistor-driven buzzer. The
 [Day 5 parking-assistant lesson](day-5-parking-assistant.md) adds the 8-RGB
 module on GP16 and keeps its 3.3 V supply separate from the 5 V sensor and
@@ -190,6 +190,6 @@ There are no GPIO conflicts in this plan.
 
 The course diagrams are original vector artwork informed by the official
 Freenove lessons. Source links and attribution are collected in
-[Sources, Images, and Attribution](SOURCES_AND_IMAGES.md). The official
+[Sources, Images, and Attribution](../../SOURCES_AND_IMAGES.md). The official
 HC-SR04 image is a factual reference only; students must use the safer course
 diagram with the Echo divider.

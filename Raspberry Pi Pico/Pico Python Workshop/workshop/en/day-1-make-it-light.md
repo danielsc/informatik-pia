@@ -5,8 +5,8 @@
 By the end of today, your code will send a secret message using light.
 
 **Python:** interpreter, script, `print`, strings, integers, floats, variables,
-assignment, comments, imports, errors  
-**Hardware:** onboard LED, external LED, GPIO output  
+assignment, comments, imports, errors<br>
+**Hardware:** onboard LED, external LED, GPIO output<br>
 **TEALS connection:** Unit 1, Introduction to Python
 
 ## 1. Meet the interpreter
@@ -41,7 +41,7 @@ Errors are information, not failure.
 
 ## 2. Your first physical program
 
-Open [`code/day-1/01_hello_pico.py`](code/day-1/01_hello_pico.py).
+Open [`code/day-1/01_hello_pico.py`](../../code/day-1/01_hello_pico.py).
 
 Before running it, predict the order of the printed messages and LED changes.
 Then change the words and delay.
@@ -68,7 +68,7 @@ voltage, which changes the real world.
 
 ## 3. Variables are labelled storage
 
-Run [`code/day-1/02_variable_blink.py`](code/day-1/02_variable_blink.py).
+Run [`code/day-1/02_variable_blink.py`](../../code/day-1/02_variable_blink.py).
 
 Change only these values:
 
@@ -90,10 +90,10 @@ this kind of repetition.
 Disconnect USB first.
 
 Open the
-[scalable, accessible ordinary-LED diagram](diagrams/ordinary-led.html) and
+[scalable, accessible ordinary-LED diagram](../../diagrams/ordinary-led.html) and
 build from its exact connection table.
 
-![Ordinary red LED on GP15 through a 220 ohm resistor](diagrams/ordinary-led.png)
+![Ordinary red LED on GP15 through a 220 ohm resistor](../../diagrams/ordinary-led.png)
 
 Reconnect only after both partners check:
 
@@ -131,7 +131,7 @@ Invent a signal with:
 - a clean final `off` state.
 
 Start from
-[`code/day-1/03_secret_signal_starter.py`](code/day-1/03_secret_signal_starter.py).
+[`code/day-1/03_secret_signal_starter.py`](../../code/day-1/03_secret_signal_starter.py).
 Do not open the solution until your own message works.
 
 Possible themes: space beacon, robot greeting, lighthouse, goal celebration, or

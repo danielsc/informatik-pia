@@ -16,7 +16,7 @@ The rhythm for each activity is:
 5. **Change** one thing and predict again.
 6. **Challenge** students to combine ideas without copying a full solution.
 
-Use the [teacher Reveal.js slides](slides/README.md) for the explicit teaching
+Use the [teacher Reveal.js slides](../../slides/README.md) for the explicit teaching
 and guided-practice portion. The daily Markdown lesson remains the student lab
 sheet with wiring diagrams, code links, and build criteria.
 
@@ -122,7 +122,7 @@ Daily exit tickets:
 
 Minimum: a named message, at least two timing variables, and a recognisable LED
 pattern. Strong work adds an external LED and comments that explain intent.
-Present [`slides/day-1.html`](slides/day-1.html) before launching the lab. Its
+Present [`slides/day-1.html`](../../slides/en/day-1.html) before launching the lab. Its
 speaker notes include questions, demonstrations, expected answers, circuit
 safety reminders, and suggested transition points.
 
@@ -140,7 +140,7 @@ the score loop stops at three items, and each button loop stops when the input
 changes. `randint`, `ticks_ms`, and `ticks_diff` are provided APIs, not
 implementation objectives.
 
-Present [`slides/day-2.html`](slides/day-2.html) before and between the button,
+Present [`slides/day-2.html`](../../slides/en/day-2.html) before and between the button,
 potentiometer, and reaction-game tasks.
 
 ### Day 3: Pixel Pet
@@ -149,7 +149,7 @@ Minimum: three states selected by potentiometer input and displayed by
 functions on the RGB module. Strong work gives each state a short animation
 using indexed pixels.
 
-Present [`slides/day-3.html`](slides/day-3.html) before the RGB build and use
+Present [`slides/day-3.html`](../../slides/en/day-3.html) before the RGB build and use
 its function, loop, and Pixel Pet sections as the corresponding tasks begin.
 
 ### Day 4: Proximity Alarm Prototype
@@ -158,12 +158,12 @@ Minimum: valid distance measurement, safe/caution/stop classification, and
 different buzzer behaviour. Strong work handles no echo without freezing and
 records calibration evidence.
 
-Present [`slides/day-4.html`](slides/day-4.html) in sections so each safety
+Present [`slides/day-4.html`](../../slides/en/day-4.html) in sections so each safety
 diagram immediately precedes the sensor, buzzer, or combined build.
 
 ### Day 5: Parking Assistant
 
-Present [`slides/day-5.html`](slides/day-5.html) while students move through
+Present [`slides/day-5.html`](../../slides/en/day-5.html) while students move through
 requirements, layered hardware integration, function-by-function
 implementation, testing, and demonstration.
 

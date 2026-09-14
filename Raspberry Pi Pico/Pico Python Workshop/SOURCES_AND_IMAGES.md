@@ -68,7 +68,8 @@ on a network request for the image.
 The linked Freenove HC-SR04 circuit connects Echo directly to GP18. This course
 does **not** reproduce that connection. It adds a 1 kΩ/2 kΩ divider because the
 HC-SR04 Echo is a 5 V signal and RP2040 GPIO is 3.3 V-only. See
-[Wiring and safety](WIRING_AND_SAFETY.md).
+[Wiring and safety in English](workshop/en/WIRING_AND_SAFETY.md) or
+[German](workshop/de/WIRING_AND_SAFETY.md).
 
 ## Reuse
 

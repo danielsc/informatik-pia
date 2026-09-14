@@ -5,8 +5,8 @@
 Measure distance safely, handle unreliable data, and prototype an alarm.
 
 **Python:** sensor functions, return values, `None`, dictionaries, timeouts,
-requirements, test cases  
-**Hardware:** HC-SR04, passive buzzer and NPN driver  
+requirements, test cases<br>
+**Hardware:** HC-SR04, passive buzzer and NPN driver<br>
 **TEALS connection:** Unit 6 Dictionaries and Unit 8 project planning
 
 ## Safety gate
@@ -16,10 +16,10 @@ The HC-SR04 is a 5 V device, but Pico GPIO is 3.3 V-only. You must add the
 [Wiring and safety](WIRING_AND_SAFETY.md#hc-sr04-distance-sensor-safer-echo-connection).
 The official Freenove diagram's direct Echo wire is **not** used. Build from
 the course diagram below; open the
-[scalable, accessible version](diagrams/distance-sensor.html) to inspect every
+[scalable, accessible version](../../diagrams/distance-sensor.html) to inspect every
 contact and the exact connection table.
 
-![Safe HC-SR04 breadboard wiring with a protected Echo input](diagrams/distance-sensor.png)
+![Safe HC-SR04 breadboard wiring with a protected Echo input](../../diagrams/distance-sensor.png)
 
 For comparison and attribution, see the official Freenove
 [HC-SR04 layout](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter22_06.png)
@@ -33,7 +33,7 @@ connection table to verify `Echo → 1 kΩ → GP18 junction → 2 kΩ → GND`.
 
 ## 1. Measure a round trip
 
-Run [`code/day-4/01_distance_sensor.py`](code/day-4/01_distance_sensor.py).
+Run [`code/day-4/01_distance_sensor.py`](../../code/day-4/01_distance_sensor.py).
 The sensor sends an ultrasonic pulse and times its return:
 
 ```text
@@ -80,17 +80,17 @@ incorrectly mean “dangerously close.”
 Disconnect USB. Build the transistor driver from
 [Wiring and safety](WIRING_AND_SAFETY.md#passive-buzzer-with-transistor-driver).
 
-Open the [scalable, accessible buzzer diagram](diagrams/passive-buzzer.html) for
+Open the [scalable, accessible buzzer diagram](../../diagrams/passive-buzzer.html) for
 the exact connection table, transistor orientation, and pre-power checks.
 
-![Passive buzzer and S8050 transistor-driver breadboard wiring](diagrams/passive-buzzer.png)
+![Passive buzzer and S8050 transistor-driver breadboard wiring](../../diagrams/passive-buzzer.png)
 
 For comparison and attribution, see the official Freenove
 [passive-buzzer circuit](https://docs.freenove.com/projects/fnk0063/en/latest/_images/Chapter07_11.png)
 and [Buzzer lesson](https://docs.freenove.com/projects/fnk0063/en/latest/fnk0063/codes/Python/7_Buzzer.html).
 The local diagram is original course artwork informed by that source.
 
-Run [`code/day-4/02_buzzer_test.py`](code/day-4/02_buzzer_test.py). Start with
+Run [`code/day-4/02_buzzer_test.py`](../../code/day-4/02_buzzer_test.py). Start with
 brief sounds and low PWM duty. Visual-only participation is always acceptable.
 
 ## 4. A dictionary holds configuration
@@ -123,16 +123,16 @@ Changing configuration should not require rewriting measurement logic.
 
 ## Daily build: Proximity Alarm Prototype
 
-Run [`code/day-4/03_proximity_alarm.py`](code/day-4/03_proximity_alarm.py).
+Run [`code/day-4/03_proximity_alarm.py`](../../code/day-4/03_proximity_alarm.py).
 Today the Shell and onboard LED provide visual information; tomorrow the RGB
 module replaces them.
 
 Build both circuits together from the
-[scalable, accessible proximity-alarm diagram](diagrams/proximity-alarm.html).
+[scalable, accessible proximity-alarm diagram](../../diagrams/proximity-alarm.html).
 It uses GP19 for Trigger, protected GP18 for Echo, GP15 for buzzer control, and
 the Pico's onboard LED; no external LED is required.
 
-![Combined HC-SR04 and passive-buzzer proximity alarm wiring](diagrams/proximity-alarm.png)
+![Combined HC-SR04 and passive-buzzer proximity alarm wiring](../../diagrams/proximity-alarm.png)
 
 Build in layers:
 

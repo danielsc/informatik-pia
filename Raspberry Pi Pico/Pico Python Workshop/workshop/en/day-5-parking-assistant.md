@@ -5,8 +5,8 @@
 Integrate sensing, decisions, light, and sound into one testable product.
 
 **Python:** decomposition, dictionaries, state, integration, boundary testing,
-debugging, cleanup  
-**Hardware:** HC-SR04, passive buzzer driver, 8-RGB module  
+debugging, cleanup<br>
+**Hardware:** HC-SR04, passive buzzer driver, 8-RGB module<br>
 **TEALS connection:** Unit 8 Final Project
 
 This is a table-top learning prototype, **not a real vehicle safety device**.
@@ -19,11 +19,11 @@ Keep USB disconnected until an instructor has checked the HC-SR04 divider,
 5 V wiring, transistor orientation, and common grounds.
 
 Build from the
-[scalable, accessible complete parking-assistant diagram](diagrams/parking-assistant.html).
+[scalable, accessible complete parking-assistant diagram](../../diagrams/parking-assistant.html).
 It includes the protected HC-SR04, transistor-driven passive buzzer, and the
 8-RGB module's `IN` header on its separate 3.3 V supply.
 
-![Complete parking assistant breadboard wiring](diagrams/parking-assistant.png)
+![Complete parking assistant breadboard wiring](../../diagrams/parking-assistant.png)
 
 This original course diagram is informed by the official Freenove
 ultrasonic-ranging, buzzer, and NeoPixel lessons.
@@ -76,8 +76,8 @@ Each function has one main responsibility. This makes failures easier to
 isolate.
 
 Start from
-[`code/day-5/parking_assistant_starter.py`](code/day-5/parking_assistant_starter.py).
-Use [`code/day-5/parking_assistant.py`](code/day-5/parking_assistant.py) only
+[`code/day-5/parking_assistant_starter.py`](../../code/day-5/parking_assistant_starter.py).
+Use [`code/day-5/parking_assistant.py`](../../code/day-5/parking_assistant.py) only
 for comparison, recovery, or teacher demonstration.
 
 The starter deliberately supplies imports, pin setup, cleanup, and function
