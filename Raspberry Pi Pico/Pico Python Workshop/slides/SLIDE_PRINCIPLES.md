@@ -119,6 +119,9 @@ The slides never replace the diagram's HTML connection table.
 
 - Use a 16:9, 1280 × 720 Reveal.js canvas.
 - Support Reveal's `F` key for fullscreen without adding a persistent control.
+- Provide a small, persistent, language-aware link from every slide back to the
+  corresponding days overview. Do not make users traverse slide history to
+  choose another day.
 - Include speaker notes on every slide and presenter-view instructions.
 - Use large, high-contrast type suitable for projection.
 - Do not rely on colour alone; pair colour with text labels.

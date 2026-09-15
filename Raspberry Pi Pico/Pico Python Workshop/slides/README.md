@@ -55,6 +55,7 @@ Useful controls:
 | Key | Action |
 |---|---|
 | arrow keys or Space | move through slides and reveals |
+| **Days overview** link | return directly to the five-day deck list |
 | `S` | open the presenter view with speaker notes and timer |
 | `F` | enter fullscreen |
 | `O` or Esc | show the slide overview |

@@ -1,3 +1,14 @@
+const slideLanguage = document.documentElement.lang.startsWith("de")
+  ? "de"
+  : "en";
+const daysOverviewLink = document.createElement("a");
+
+daysOverviewLink.className = "days-overview-link";
+daysOverviewLink.href = `../../${slideLanguage}/`;
+daysOverviewLink.textContent =
+  slideLanguage === "de" ? "← Tagesübersicht" : "← Days overview";
+document.body.append(daysOverviewLink);
+
 Reveal.initialize({
   hash: true,
   history: true,
