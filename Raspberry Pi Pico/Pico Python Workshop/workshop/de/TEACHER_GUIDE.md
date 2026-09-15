@@ -158,7 +158,10 @@ Implementierungsziele.
 
 Präsentieren Sie
 [`slides/day-2.html`](../../slides/de/day-2.html) vor und zwischen den Aufgaben
-zu Taster, Potentiometer und Reaktionsspiel.
+zu Taster, Potentiometer und Reaktionsspiel. Lasst Taster und LED verbunden,
+wenn das Potentiometer ergänzt wird. Das Potentiometer-Programm ignoriert GP13,
+das spätere Reaktionsspiel ignoriert GP26. Daher ist an Tag 2 kein Neuaufbau
+der Schaltung nötig.
 
 ### Tag 3: Pixel-Haustier
 

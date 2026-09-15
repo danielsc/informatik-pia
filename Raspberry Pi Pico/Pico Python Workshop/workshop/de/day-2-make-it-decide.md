@@ -79,13 +79,17 @@ pressed or time_is_up
 ## 2. Von der analogen Welt zu Zahlen
 
 Ein digitaler Eingang hat zwei Zustände. Ein Potentiometer kann viele Werte
-liefern. Trennt USB und baut die folgende Schaltung auf.
+liefern. Trennt USB, **lasst die Taster-und-LED-Schaltung unverändert** und
+ergänzt nur die drei unten gezeigten Potentiometer-Verbindungen.
 
 Öffnet das
 [skalierbare, barrierearme Diagramm für Potentiometer und LED](../../diagrams/potentiometer-and-led.html),
 um die genauen Breadboard-Kontakte und die Verbindungstabelle zu sehen.
 
-![Potentiometer an ADC0 und PWM-LED an GP15](../../diagrams/potentiometer-and-led.png)
+![Schrittweise erweiterte Tag-2-Schaltung mit beibehaltenem Taster und Potentiometer an ADC0](../../diagrams/potentiometer-and-led.png)
+
+Das nächste Programm verwendet GP13 nicht. Der angeschlossene Taster
+beeinflusst den Potentiometer-Test daher nicht.
 
 Führt
 [`code/day-2/02_potentiometer_led.py`](../../code/day-2/02_potentiometer_led.py)
@@ -200,7 +204,9 @@ verwendet nur die unten aufgeführten Aufrufmuster.
 
 ## Tagesprojekt: Reaktionszeit-Challenge
 
-Baut die Taster-und-LED-Schaltung erneut auf. Beginnt mit
+Lasst die vollständige Schaltung verbunden. Das Reaktionsspiel nutzt den
+Taster an GP13 und die LED an GP15; das Potentiometer an GP26 wird einfach
+ignoriert. Beginnt mit
 [`code/day-2/03_reaction_game_starter.py`](../../code/day-2/03_reaction_game_starter.py).
 Der Starter enthält Importe, Pin-Einrichtung, eine leere `scores`-Liste und das
 sichere Ausschalten der LED. **Ihr schreibt das Spiel.**

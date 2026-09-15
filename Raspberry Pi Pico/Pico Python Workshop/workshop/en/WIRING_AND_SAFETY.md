@@ -114,11 +114,17 @@ centre channel in the orientation shown.
 Before power: use continuity mode if available. A pair in one terminal should
 be connected while released; A and B should connect only while pressed.
 
-## Potentiometer and PWM LED
+## Incremental button, potentiometer, and PWM LED
 
 Build from the
 [scalable potentiometer-and-LED diagram](../../diagrams/potentiometer-and-led.html)
 in [Day 2](day-2-make-it-decide.md#2-from-analogue-world-to-numbers).
+Keep the button circuit from the previous activity connected and add only the
+potentiometer. The potentiometer program ignores GP13; the later reaction game
+ignores GP26.
+
+[![Button retained while the GP26 potentiometer is added](../../diagrams/potentiometer-and-led.png)](../../diagrams/potentiometer-and-led.html)
+
 For the isolated teacher ADC test, use the
 [potentiometer-only diagram](../../diagrams/potentiometer-only.html):
 
@@ -129,6 +135,8 @@ For the isolated teacher ADC test, use the
 | potentiometer `3V3` outer pin | 3.3 V |
 | potentiometer centre `WIPER` | GP26 / ADC0 |
 | potentiometer `GND` outer pin | GND |
+| button signal | GP13 with 10 kΩ pull-up to 3.3 V |
+| button other terminal | GND |
 | LED | GP15 through 220 Ω to LED, then GND |
 
 Use only 3.3 V across the potentiometer. Turning the shaft moves the centre

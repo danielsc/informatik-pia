@@ -122,11 +122,17 @@ Vor dem Einschalten: Verwendet nach Möglichkeit den Durchgangsprüfmodus. Ein
 Beinpaar desselben Anschlusses muss im ungedrückten Zustand verbunden sein; A
 und B dürfen nur beim Drücken verbunden sein.
 
-## Potentiometer und PWM-LED
+## Schrittweise Schaltung mit Taster, Potentiometer und PWM-LED
 
 Baut nach dem
 [skalierbaren Potentiometer-und-LED-Diagramm](../../diagrams/potentiometer-and-led.html)
 in [Tag 2](day-2-make-it-decide.md#2-von-der-analogen-welt-zu-zahlen).
+Lasst die Tasterschaltung aus der vorherigen Aufgabe verbunden und ergänzt nur
+das Potentiometer. Das Potentiometer-Programm ignoriert GP13; das spätere
+Reaktionsspiel ignoriert GP26.
+
+[![Beibehaltener Taster mit ergänztem GP26-Potentiometer](../../diagrams/potentiometer-and-led.png)](../../diagrams/potentiometer-and-led.html)
+
 Verwendet für den einzelnen ADC-Test der Lehrkraft das
 [Nur-Potentiometer-Diagramm](../../diagrams/potentiometer-only.html):
 
@@ -137,6 +143,8 @@ Verwendet für den einzelnen ADC-Test der Lehrkraft das
 | äußerer Potentiometer-Pin `3V3` | 3.3 V |
 | mittlerer Potentiometer-Pin `WIPER` | GP26 / ADC0 |
 | äußerer Potentiometer-Pin `GND` | GND |
+| Tastersignal | GP13 mit 10-kΩ-Pull-up zu 3,3 V |
+| anderer Tasteranschluss | GND |
 | LED | GP15 über 220 Ω zur LED, dann GND |
 
 Verwendet am Potentiometer ausschließlich 3.3 V. Beim Drehen bewegt sich der

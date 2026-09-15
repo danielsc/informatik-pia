@@ -283,18 +283,19 @@ else:
       <section class="diagram-slide">
         <div class="diagram-header">
           <div>
-            <p class="eyebrow">Build while unplugged · Task 2</p>
-            <h2>Potentiometer on GP26, LED on GP15</h2>
+            <p class="eyebrow">Add while unplugged · Task 2</p>
+            <h2>Keep the button; add the potentiometer</h2>
           </div>
           <a class="diagram-link" href="../../diagrams/potentiometer-and-led.html">Exact diagram + table</a>
         </div>
         <div class="diagram-frame">
-          <img src="../../diagrams/potentiometer-and-led.png" alt="Full potentiometer-and-LED breadboard diagram with the potentiometer connected to 3.3 volts, GP26 ADC0, and ground, and a red LED on GP15 through a 220 ohm resistor to ground.">
+          <img src="../../diagrams/potentiometer-and-led.png" alt="Incremental breadboard diagram that keeps the button on GP13 and LED on GP15, then adds a potentiometer connected to 3.3 volts, GP26 ADC0, and ground.">
         </div>
         <aside class="notes">
-          This circuit supports 02_potentiometer_led.py. It must never use VBUS for
-          the potentiometer. Students identify both outer pins and the centre wiper;
-          the wiper goes to GP26/ADC0 and the LED remains on GP15 through 220 Ω.
+          Do not remove the button or its 10 kΩ pull-up. Students add only the
+          potentiometer's three connections. It must never use VBUS: the outer pins
+          go to 3.3 V and GND, while the centre wiper goes to GP26/ADC0. The
+          02_potentiometer_led.py program ignores the still-connected button.
         </aside>
       </section>
 
@@ -410,11 +411,11 @@ print(times[-1])
 
       <section>
         <p class="eyebrow">Reaction game circuit reminder</p>
-        <h2>Reuse the same button-and-LED circuit</h2>
-        <p class="activity build">Build while unplugged · Rebuild only if you took the circuit apart</p>
+        <h2>Everything you need is still connected</h2>
+        <p class="activity check">Check before running · No circuit rebuild</p>
         <div class="grid-2">
           <div class="card">
-            <img src="../../diagrams/button-and-led.png" alt="Reminder of the button-and-LED circuit used again for the reaction game." style="display:block; width:100%; height:260px; object-fit:cover; object-position:top;">
+            <img src="../../diagrams/potentiometer-and-led.png" alt="The combined Day 2 circuit with button, potentiometer, and LED still connected." style="display:block; width:100%; height:260px; object-fit:cover; object-position:top;">
           </div>
           <div class="card">
             <h3>Keep the same wiring</h3>
@@ -422,14 +423,15 @@ print(times[-1])
               <li>GP13 reads the button.</li>
               <li>10 kΩ pull-up connects GP13 to 3.3 V.</li>
               <li>GP15 drives the LED through 220 Ω.</li>
-              <li>Use the <a href="../../diagrams/button-and-led.html">exact diagram and table</a>.</li>
+              <li>Leave the potentiometer connected; this program ignores GP26.</li>
+              <li>Use the <a href="../../diagrams/potentiometer-and-led.html">exact diagram and table</a>.</li>
             </ul>
           </div>
         </div>
         <aside class="notes">
-          This slide must sit immediately before the task launch. It satisfies the
-          requirement to remind students that the reaction game reuses the button circuit,
-          not a new build.
+          This slide must sit immediately before the task launch. Students do not rebuild
+          anything: the reaction game reuses GP13 and GP15 and simply does not initialise
+          or read the potentiometer on GP26.
         </aside>
       </section>
 

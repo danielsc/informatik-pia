@@ -73,13 +73,17 @@ pressed or time_is_up
 ## 2. From analogue world to numbers
 
 A digital input has two states. A potentiometer can produce many values.
-Disconnect USB and build the circuit below.
+Disconnect USB, **leave the button and LED circuit in place**, and add only the
+potentiometer's three connections shown below.
 
 Open the
 [scalable, accessible potentiometer-and-LED diagram](../../diagrams/potentiometer-and-led.html)
 for exact breadboard contacts and the connection table.
 
-![Potentiometer on ADC0 and PWM LED on GP15](../../diagrams/potentiometer-and-led.png)
+![Incremental Day 2 circuit with the button retained and a potentiometer added on ADC0](../../diagrams/potentiometer-and-led.png)
+
+The next program does not use GP13, so the connected button does not affect
+the potentiometer test.
 
 Run [`code/day-2/02_potentiometer_led.py`](../../code/day-2/02_potentiometer_led.py).
 
@@ -189,7 +193,8 @@ timing tools; students only use the call patterns listed below.
 
 ## Daily build: Reaction-Time Challenge
 
-Rebuild the button and LED circuit. Start from
+Keep the complete circuit connected. The reaction-game program uses the button
+on GP13 and LED on GP15; it simply ignores the potentiometer on GP26. Start from
 [`code/day-2/03_reaction_game_starter.py`](../../code/day-2/03_reaction_game_starter.py).
 The starter supplies imports, pin setup, an empty `scores` list, and safe LED
 cleanup. **You write the game.**

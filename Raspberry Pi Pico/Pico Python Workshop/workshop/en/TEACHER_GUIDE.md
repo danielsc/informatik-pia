@@ -141,7 +141,9 @@ changes. `randint`, `ticks_ms`, and `ticks_diff` are provided APIs, not
 implementation objectives.
 
 Present [`slides/day-2.html`](../../slides/en/day-2.html) before and between the button,
-potentiometer, and reaction-game tasks.
+potentiometer, and reaction-game tasks. Keep the button and LED connected when
+students add the potentiometer. The potentiometer program ignores GP13, and the
+reaction-game program later ignores GP26, so no Day 2 circuit rebuild is needed.
 
 ### Day 3: Pixel Pet
 

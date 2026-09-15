@@ -282,18 +282,19 @@ else:
       <section class="diagram-slide">
         <div class="diagram-header">
           <div>
-            <p class="eyebrow">Ohne Strom aufbauen · Aufgabe 2</p>
-            <h2>Potentiometer an GP26, LED an GP15</h2>
+            <p class="eyebrow">Ohne Strom ergänzen · Aufgabe 2</p>
+            <h2>Lasst den Taster stecken und ergänzt das Potentiometer</h2>
           </div>
           <a class="diagram-link" href="../../diagrams/potentiometer-and-led.html">Genaues Diagramm + Tabelle</a>
         </div>
         <div class="diagram-frame">
-          <img src="../../diagrams/potentiometer-and-led.png" alt="Vollständiges Breadboard-Diagramm mit Potentiometer an 3,3 V, GP26 ADC0 und GND sowie roter LED von GP15 über einen 220-Ω-Widerstand zu GND.">
+          <img src="../../diagrams/potentiometer-and-led.png" alt="Schrittweise erweitertes Breadboard-Diagramm: Taster an GP13 und LED an GP15 bleiben verbunden; ergänzt wird ein Potentiometer an 3,3 V, GP26 ADC0 und GND.">
         </div>
         <aside class="notes">
-          Diese Schaltung gehört zu 02_potentiometer_led.py. Das Potentiometer darf nie
-          VBUS verwenden. Die Klasse bestimmt beide äußeren Pins und den mittleren
-          Schleifer. Der Schleifer führt zu GP26/ADC0; die LED bleibt über 220 Ω an GP15.
+          Entfernen Sie weder den Taster noch seinen 10-kΩ-Pull-up. Die Klasse ergänzt
+          nur die drei Potentiometer-Verbindungen. VBUS darf nicht verwendet werden:
+          Die äußeren Pins führen zu 3,3 V und GND, der mittlere Schleifer zu GP26/ADC0.
+          02_potentiometer_led.py ignoriert den weiterhin verbundenen Taster.
         </aside>
       </section>
 
@@ -409,11 +410,11 @@ print(times[-1])
 
       <section>
         <p class="eyebrow">Erinnerung an die Schaltung des Reaktionsspiels</p>
-        <h2>Verwendet dieselbe Taster-und-LED-Schaltung erneut</h2>
-        <p class="activity build">Ohne Strom aufbauen · Nur neu aufbauen, wenn ihr die Schaltung zerlegt habt</p>
+        <h2>Alles Nötige ist noch angeschlossen</h2>
+        <p class="activity check">Vor dem Start prüfen · Kein Neuaufbau</p>
         <div class="grid-2">
           <div class="card">
-            <img src="../../diagrams/button-and-led.png" alt="Erinnerung an die Taster-und-LED-Schaltung, die für das Reaktionsspiel erneut verwendet wird." style="display:block; width:100%; height:260px; object-fit:cover; object-position:top;">
+            <img src="../../diagrams/potentiometer-and-led.png" alt="Die kombinierte Tag-2-Schaltung, in der Taster, Potentiometer und LED weiterhin verbunden sind." style="display:block; width:100%; height:260px; object-fit:cover; object-position:top;">
           </div>
           <div class="card">
             <h3>Behaltet dieselbe Verkabelung</h3>
@@ -421,13 +422,15 @@ print(times[-1])
               <li>GP13 liest den Taster.</li>
               <li>Der 10-kΩ-Pull-up verbindet GP13 mit 3,3 V.</li>
               <li>GP15 steuert die LED über 220 Ω.</li>
-              <li>Nutzt das <a href="../../diagrams/button-and-led.html">genaue Diagramm mit Tabelle</a>.</li>
+              <li>Lasst das Potentiometer verbunden; dieses Programm ignoriert GP26.</li>
+              <li>Nutzt das <a href="../../diagrams/potentiometer-and-led.html">genaue Diagramm mit Tabelle</a>.</li>
             </ul>
           </div>
         </div>
         <aside class="notes">
-          Diese Folie muss direkt vor dem Aufgabenstart stehen. Sie erinnert daran, dass
-          das Reaktionsspiel die Tasterschaltung wiederverwendet und keinen neuen Aufbau braucht.
+          Diese Folie muss direkt vor dem Aufgabenstart stehen. Es wird nichts neu
+          aufgebaut: Das Reaktionsspiel nutzt GP13 und GP15 und initialisiert oder liest
+          das Potentiometer an GP26 einfach nicht.
         </aside>
       </section>
 

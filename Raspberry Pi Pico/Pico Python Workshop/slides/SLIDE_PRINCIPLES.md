@@ -91,6 +91,12 @@ For each circuit:
 Combined circuits must be introduced as layered builds. Students retest each
 known-working layer before running the combined program.
 
+Prefer additive hardware transitions within a day. If a later task needs a
+component that is already connected safely, keep it in place and add the next
+component around it. Explicitly say when the current program ignores connected
+hardware. Require dismantling only for safety, pin conflicts, space, or the
+day's stated cleanup point.
+
 The slides never replace the diagram's HTML connection table.
 
 ## 6. Use precise code demonstrations

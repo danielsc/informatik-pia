@@ -236,19 +236,19 @@ condition is present.
 
 ## Audit: `potentiometer-and-led.html`
 
-Reviewed against `code/day-2/02_potentiometer_led.py`, the Day 2 lesson, the
-wiring guide, and the rendered PNG.
+Reviewed against all three Day 2 programs, the Day 2 lesson, the wiring guide,
+and the rendered PNG.
 
 | # | Score | Result | Evidence |
 |---:|---:|---|---|
-| 1 | 4 | PASS | Full breadboard, canonical Pico, native potentiometer, LED, resistor, rails, and coloured wiring create a recognisable physical kit layout. |
-| 2 | 4 | PASS | The potentiometer track spans 3.3 V and GND, its wiper reaches GP26/ADC0, and GP15 drives the LED only through 220 Ω. |
-| 3 | 4 | PASS | GP26 physical pin 31, GP15 physical pin 20, 3V3 physical pin 36, and GND physical pin 13 agree with the program. |
-| 4 | 3 | PASS | All 23 contacts are exact, distinct, and unobscured; the compact internal 3.3 V rail bridge is clear, while the separated ADC route remains necessarily long. |
-| 5 | 4 | PASS | All components use canonical native dimensions; potentiometer terminals, LED polarity, and red-red-brown-gold 220 Ω bands are correct. |
-| 6 | 4 | PASS | The rotary control and movable centre wiper are visible, with the two outer supply pins clearly distinguished from ADC0. |
-| 7 | 3 | PASS | Labels and contacts are legible with no crossings, though the necessary separated perimeter routes make the drawing visually busier. |
-| 8 | 4 | PASS | The inset limits the potentiometer to 3.3 V, requires the LED resistor and polarity check, labels every used rail, and requires USB disconnection. |
+| 1 | 4 | PASS | Full breadboard, canonical Pico, native button, potentiometer, LED, resistors, rails, and coloured wiring create a recognisable physical kit layout. |
+| 2 | 4 | PASS | The retained active-low button reaches GP13 through its 10 kΩ pull-up, the potentiometer spans 3.3 V and GND with its wiper on GP26/ADC0, and GP15 drives the LED only through 220 Ω. |
+| 3 | 4 | PASS | GP13 physical pin 17, GP26 physical pin 31, GP15 physical pin 20, 3V3 physical pin 36, and GND pins 38 and 13 agree with the programs. |
+| 4 | 3 | PASS | All 39 contacts are exact, distinct, and unobscured; the incremental layout preserves the original button and LED, while the separated ADC route remains necessarily long. |
+| 5 | 4 | PASS | All components use canonical native dimensions; button terminals, potentiometer pins, LED polarity, and both resistor colour codes are correct. |
+| 6 | 4 | PASS | The button spans the centre channel with A/B pairs identified, and the potentiometer's two outer pins and centre wiper are clearly distinguished. |
+| 7 | 3 | PASS | Labels and contacts are legible with no crossings, though the necessary separated perimeter ADC route makes the combined drawing visually busier. |
+| 8 | 4 | PASS | The inset keeps the button pull-up, limits the potentiometer to 3.3 V, requires the LED resistor and polarity check, and requires USB disconnection. |
 | 9 | 4 | PASS | Responsive inline SVG, semantic alternatives, ARIA groups, print CSS, caption, and exact connection table are present. |
 | 10 | 4 | PASS | The original vector drawing attributes the factual Freenove lesson and contains no copied artwork or external rendering dependency. |
 
@@ -259,8 +259,8 @@ critical categories are **4/4**, and no automatic-fail condition is present.
 
 | Category | Score | Evidence |
 |---|---:|---|
-| Conductor separation | **4/4** | Automated checking finds no overlaps or ambiguous crossings across the ADC, PWM, power, ground, and component leads. |
-| Power-rail use | **4/4** | Pico 3V3 visibly sources the top rail and a clear right-side internal bridge links the labelled bottom 3.3 V rail; Pico GND sources the bottom GND rail. |
+| Conductor separation | **4/4** | Automated checking finds no overlaps or ambiguous crossings across the button, ADC, PWM, power, ground, and component leads. |
+| Power-rail use | **4/4** | Pico 3V3 visibly sources the top rail and a clear right-side bridge links the labelled bottom 3.3 V rail; Pico GND sources both labelled GND rails. |
 | Rail-stripe geometry | **4/4** | All four stripe distances are exactly `13.50 px`; maximum error is `0.00 px`. |
 
 ## Audit: `rgb8-module.html`
