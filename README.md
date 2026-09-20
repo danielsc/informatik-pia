@@ -2,6 +2,13 @@
 
 Teaching materials and classroom projects for computer science.
 
+## AI literacy
+
+The [`AI/`](AI/) folder contains an early, deliberately lightweight curriculum
+and slide scaffold for generative AI, prompting, fabrications, privacy, bias,
+and AI relationships. It is a planning artifact, not yet a presentation-ready
+unit.
+
 ## Raspberry Pi Pico Python workshop
 
 **[Open the multilingual five-day workshop](https://danielsc.github.io/informatik-pia/)**

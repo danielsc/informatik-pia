@@ -35,13 +35,14 @@ We should be able to take some of this material.
 ## AI Relationships and Mental Health
 I find it provides a decent way to approach the issues of AI and mental health at a level appropriate for an 8th grader.
 - https://www.cyberlite.org/behind-the-chat
-Some of this is also addressed in the [[AI Activities]]
+Some of this is also addressed in
+[AI Relationships & Mental Health](AI/topics/06-ai-relationships-and-mental-health.md).
 
 ## AI Teaching Activities
 - https://saniavn.github.io/ 
 	- https://llm-probability.org/ (nice)
 - https://ai4k12.org/activities/ (too old)
-- [[AI Activities]] (proposed by Chat GPT)
+- [AI curriculum activities](AI/README.md)
 
 
 
