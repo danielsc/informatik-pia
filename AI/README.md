@@ -23,7 +23,9 @@ Online Privacy and AI Relationships & Mental Health.
 
 ## Slides
 
-- [Understanding and using AI responsibly — draft](slides/ai-literacy.html)
+- [Open the deployed “Understanding and using AI responsibly” draft
+  slides](https://danielsc.github.io/informatik-pia/ai/slides/ai-literacy.html)
+- [View the slide source](slides/ai-literacy.html)
 
 The deck shows the intended sequence and a few activities already under
 discussion. Worksheets, exact prompts, timings, expected answers, safeguarding
