@@ -6,7 +6,6 @@ on:
       - master
     paths:
       - "Raspberry Pi Pico/Pico Python Workshop/**"
-      - "AI/slides/**"
       - ".github/workflows/deploy-pico-workshop-pages.yml"
   workflow_dispatch:
 
@@ -32,16 +31,10 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Assemble Pages website
-        run: |
-          mkdir -p _site/ai
-          cp -R "Raspberry Pi Pico/Pico Python Workshop/." _site/
-          cp -R AI/slides _site/ai/
-
       - name: Upload workshop website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: "_site"
+          path: "Raspberry Pi Pico/Pico Python Workshop"
 
       - name: Deploy to GitHub Pages
         id: deployment

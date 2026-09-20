@@ -21,16 +21,6 @@ These topics are not yet assigned to fixed days. Colleagues with relevant
 training could join at suitable points during the week, particularly for
 Online Privacy and AI Relationships & Mental Health.
 
-## Slides
-
-- [Open the deployed “Understanding and using AI responsibly” draft
-  slides](https://danielsc.github.io/informatik-pia/ai/slides/ai-literacy.html)
-- [View the slide source](slides/ai-literacy.html)
-
-The deck shows the intended sequence and a few activities already under
-discussion. Worksheets, exact prompts, timings, expected answers, safeguarding
-guidance, and facilitation notes still need to be developed.
-
 Activities that connect several topics are collected in
 [`cross-topic-activities.md`](cross-topic-activities.md).
 
