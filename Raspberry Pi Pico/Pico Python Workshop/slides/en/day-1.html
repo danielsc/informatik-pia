@@ -152,51 +152,11 @@
 
     .pico-art {
       position: absolute;
-      right: 48px;
-      bottom: 88px;
-      width: 230px;
-      height: 112px;
-      border: 10px solid var(--pico);
-      border-radius: 22px;
-      background:
-        radial-gradient(circle at 26px 22px, #fbbf24 0 7px, transparent 8px),
-        radial-gradient(circle at 64px 22px, #fbbf24 0 7px, transparent 8px),
-        radial-gradient(circle at 102px 22px, #fbbf24 0 7px, transparent 8px),
-        radial-gradient(circle at 140px 22px, #fbbf24 0 7px, transparent 8px),
-        radial-gradient(circle at 178px 22px, #fbbf24 0 7px, transparent 8px),
-        radial-gradient(circle at 26px 90px, #fbbf24 0 7px, transparent 8px),
-        radial-gradient(circle at 64px 90px, #fbbf24 0 7px, transparent 8px),
-        radial-gradient(circle at 102px 90px, #fbbf24 0 7px, transparent 8px),
-        radial-gradient(circle at 140px 90px, #fbbf24 0 7px, transparent 8px),
-        radial-gradient(circle at 178px 90px, #fbbf24 0 7px, transparent 8px),
-        linear-gradient(135deg, #0b9668, #05634a);
-      box-shadow: 0 22px 50px rgb(6 95 70 / 24%);
+      right: 28px;
+      bottom: 72px;
+      width: 360px;
+      height: auto;
       transform: rotate(-5deg);
-    }
-
-    .pico-art::before {
-      content: "";
-      position: absolute;
-      top: 28px;
-      left: -42px;
-      width: 42px;
-      height: 56px;
-      border: 5px solid #94a3b8;
-      border-right: 0;
-      border-radius: 8px 0 0 8px;
-      background: linear-gradient(90deg, #dbe4ee, #94a3b8);
-    }
-
-    .pico-art::after {
-      content: "PICO";
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      color: rgb(255 255 255 / 75%);
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: 0.2em;
     }
 
     .section-slide {
@@ -558,7 +518,7 @@
         <div class="callout success" style="max-width: 19em; margin-top: 1em;">
           <p><strong>Mission:</strong> send a secret message using light.</p>
         </div>
-        <div class="pico-art" aria-hidden="true"></div>
+        <img class="pico-art" src="../assets/raspberry-pi-pico.svg" alt="" aria-hidden="true">
         <div class="footer">
           <span>Teacher slides</span>
           <span>Press S for speaker notes · F for fullscreen</span>

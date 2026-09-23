@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 238" role="img"
+  aria-labelledby="title desc">
+  <title id="title">Raspberry Pi Pico board</title>
+  <desc id="desc">
+    An original top-view illustration of a green Raspberry Pi Pico board with
+    forty edge pads, a USB connector, BOOTSEL button, RP2040 chip, and a white
+    raspberry mark.
+  </desc>
+  <defs>
+    <linearGradient id="pcb" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#20a477"/>
+      <stop offset="0.5" stop-color="#0b8b65"/>
+      <stop offset="1" stop-color="#067253"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset="0.38" stop-color="#cbd5e1"/>
+      <stop offset="0.72" stop-color="#94a3b8"/>
+      <stop offset="1" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#263443"/>
+      <stop offset="1" stop-color="#090f16"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="150%" height="180%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10"
+        flood-color="#0f172a" flood-opacity="0.28"/>
+    </filter>
+    <pattern id="pads" width="24.6" height="25" patternUnits="userSpaceOnUse">
+      <circle cx="12.3" cy="12.5" r="7.2" fill="#d6aa48"
+        stroke="#805f24" stroke-width="1.4"/>
+      <circle cx="12.3" cy="12.5" r="3.4" fill="#e8edf2"/>
+    </pattern>
+  </defs>
+
+  <g filter="url(#shadow)" transform="translate(27 20)">
+    <rect x="21" y="10" width="500" height="188" rx="18"
+      fill="url(#pcb)" stroke="#056147" stroke-width="5"/>
+
+    <circle cx="48" cy="37" r="14" fill="#d8b251" stroke="#76561f" stroke-width="3"/>
+    <circle cx="48" cy="37" r="7" fill="#eef2f6"/>
+    <circle cx="494" cy="37" r="14" fill="#d8b251" stroke="#76561f" stroke-width="3"/>
+    <circle cx="494" cy="37" r="7" fill="#eef2f6"/>
+    <circle cx="48" cy="171" r="14" fill="#d8b251" stroke="#76561f" stroke-width="3"/>
+    <circle cx="48" cy="171" r="7" fill="#eef2f6"/>
+    <circle cx="494" cy="171" r="14" fill="#d8b251" stroke="#76561f" stroke-width="3"/>
+    <circle cx="494" cy="171" r="7" fill="#eef2f6"/>
+
+    <rect x="32" y="14" width="478" height="25" fill="url(#pads)"/>
+    <rect x="32" y="169" width="478" height="25" fill="url(#pads)"/>
+
+    <path d="M0 72h54v65H0c-9 0-16-7-16-16V88c0-9 7-16 16-16z"
+      fill="url(#metal)" stroke="#64748b" stroke-width="4"/>
+    <rect x="-5" y="85" width="37" height="39" rx="5"
+      fill="#334155" stroke="#0f172a" stroke-width="3"/>
+    <rect x="32" y="78" width="31" height="53" rx="6"
+      fill="#dde4ea" stroke="#64748b" stroke-width="3"/>
+    <path d="M7 91h19M7 118h19" stroke="#94a3b8" stroke-width="3"/>
+
+    <g aria-label="BOOTSEL button">
+      <rect x="105" y="75" width="45" height="42" rx="7"
+        fill="#e2e8f0" stroke="#64748b" stroke-width="3"/>
+      <rect x="115" y="67" width="25" height="27" rx="6"
+        fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+      <text x="127.5" y="132" text-anchor="middle"
+        font-family="Arial, sans-serif" font-size="10" font-weight="700"
+        fill="#d1fae5">BOOTSEL</text>
+    </g>
+
+    <g aria-label="RP2040 microcontroller">
+      <rect x="218" y="56" width="91" height="91" rx="7"
+        fill="url(#chip)" stroke="#020617" stroke-width="4"/>
+      <g stroke="#cbd5e1" stroke-width="3">
+        <path d="M228 52v-8m14 8v-8m14 8v-8m14 8v-8m14 8v-8m14 8v-8"/>
+        <path d="M228 151v8m14-8v8m14-8v8m14-8v8m14-8v8m14-8v8"/>
+        <path d="M214 66h-8m8 14h-8m8 14h-8m8 14h-8m8 14h-8m8 14h-8"/>
+        <path d="M313 66h8m-8 14h8m-8 14h8m-8 14h8m-8 14h8m-8 14h8"/>
+      </g>
+      <circle cx="237" cy="76" r="5" fill="#94a3b8"/>
+      <text x="263.5" y="99" text-anchor="middle"
+        font-family="Arial, sans-serif" font-size="13" font-weight="700"
+        fill="#cbd5e1">RP2040</text>
+      <path d="M253 117c7-11 15-11 22 0M258 124c4-6 8-6 12 0"
+        fill="none" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+
+    <g aria-label="Board components">
+      <rect x="172" y="71" width="23" height="16" rx="3"
+        fill="#d8dee6" stroke="#64748b" stroke-width="2"/>
+      <rect x="167" y="113" width="33" height="15" rx="3"
+        fill="#1f2937" stroke="#0f172a" stroke-width="2"/>
+      <rect x="338" y="62" width="29" height="20" rx="3"
+        fill="#1f2937" stroke="#0f172a" stroke-width="2"/>
+      <rect x="383" y="65" width="21" height="17" rx="3"
+        fill="#17212d" stroke="#0f172a" stroke-width="2"/>
+      <rect x="415" y="91" width="33" height="22" rx="3"
+        fill="#18232e" stroke="#0f172a" stroke-width="2"/>
+      <rect x="349" y="125" width="25" height="15" rx="3"
+        fill="#d8dee6" stroke="#64748b" stroke-width="2"/>
+      <g fill="#e8c15e">
+        <rect x="158" y="50" width="12" height="7" rx="2"/>
+        <rect x="179" y="143" width="12" height="7" rx="2"/>
+        <rect x="383" y="126" width="12" height="7" rx="2"/>
+        <rect x="456" y="132" width="12" height="7" rx="2"/>
+      </g>
+      <circle cx="445" cy="55" r="5" fill="#f97316"/>
+    </g>
+
+    <g aria-label="Raspberry mark" transform="translate(111 145)" fill="#ecfdf5">
+      <path d="M9-22c-8-8-3-17 8-15 3-8 13-10 18-3 8-5 17 0 16 9
+        10 2 12 12 5 19 7 6 4 16-5 18-2 10-13 13-20 7-7 7-18 4-20-6
+        -10-1-14-11-7-18-9-7-4-16 5-20-5-8 0-17 9-17z"/>
+      <path d="M17-44c-1-12 7-20 20-21-2 11-8 18-20 21z"/>
+      <path d="M37-45c6-10 16-12 26-7-6 9-14 13-26 7z"/>
+    </g>
+
+    <text x="398" y="151" font-family="Arial, sans-serif" font-size="24"
+      font-weight="500" fill="#ecfdf5" opacity="0.92">Pico</text>
+    <rect x="452" y="130" width="28" height="27" rx="4"
+      fill="#ecfdf5" opacity="0.92"/>
+    <text x="466" y="151" text-anchor="middle" font-family="Arial, sans-serif"
+      font-size="19" font-weight="800" fill="#087f5b">2</text>
+
+    <g fill="#d1fae5" opacity="0.55">
+      <circle cx="78" cy="58" r="2"/><circle cx="92" cy="145" r="2"/>
+      <circle cx="153" cy="98" r="2"/><circle cx="205" cy="41" r="2"/>
+      <circle cx="328" cy="44" r="2"/><circle cx="330" cy="154" r="2"/>
+      <circle cx="477" cy="92" r="2"/>
+    </g>
+  </g>
+</svg>
