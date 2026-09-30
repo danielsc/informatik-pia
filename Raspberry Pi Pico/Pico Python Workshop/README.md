@@ -25,6 +25,9 @@ maintenance rules.
 | [`slides/workshop-slides.css`](slides/workshop-slides.css) | shared presentation design |
 | [`slides/workshop-slides.js`](slides/workshop-slides.js) | shared Reveal.js configuration |
 | [`SOURCES_AND_IMAGES.md`](SOURCES_AND_IMAGES.md) | sources, licences, and image attribution |
+| [`OPTIMIERTE_EINKAUFSLISTE.md`](OPTIMIERTE_EINKAUFSLISTE.md) | optimized German purchasing list for 40 workshop kits, grouped by supplier |
+| [`CONRAD_EINKAUFSLISTE.md`](CONRAD_EINKAUFSLISTE.md) | detailed German Conrad supplier research |
+| [`BERRYBASE_EINKAUFSLISTE.md`](BERRYBASE_EINKAUFSLISTE.md) | detailed German BerryBase supplier research |
 ## Teacher component tests
 
 The [`code/teacher-tests/`](code/teacher-tests/) folder contains one small
