@@ -94,6 +94,15 @@ this kind of repetition.
 
 ### How the breadboard connects
 
+Look at the [marked template breadboard and connectivity table](../../diagrams/breadboard-connectivity.html):
+
+![Template breadboard with highlighted five-hole strips, separate centre-channel sides, and a connected rail row](../../diagrams/breadboard-connectivity.png)
+
+**1:** the five holes a–e in one column are joined; the next column is separate.
+**2:** f–j form another group, not joined across the centre channel.
+**3:** holes along one rail row are joined, separately from other rail rows.
+These markings show hidden metal strips, not wires you need to add.
+
 With USB disconnected, inspect the breadboard before placing components:
 
 - Each five-hole strip in a terminal field is internally connected.

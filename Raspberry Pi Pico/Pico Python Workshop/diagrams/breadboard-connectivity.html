@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How a breadboard connects inside</title>
+  <style>
+    :root { color-scheme: light; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+    body { margin: 0; padding: 24px; color: #172033; background: #eef2f7; }
+    figure, .connectivity { max-width: 1900px; margin: 0 auto; }
+    svg { display: block; width: 100%; height: auto; background: white; }
+    figcaption { margin-top: 14px; line-height: 1.5; }
+    .connectivity { margin-top: 18px; padding: 20px; box-sizing: border-box; background: white; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 10px; text-align: left; vertical-align: top; border-top: 1px solid #cbd5e1; }
+    @media print {
+      body { padding: 0; background: white; }
+      .connectivity { padding: 0; }
+      svg { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <figure>
+    <svg viewBox="0 70 1900 580" role="img" aria-labelledby="diagram-title diagram-description">
+      <title id="diagram-title">How a breadboard connects inside: five-hole strips and separate rail rows</title>
+      <desc id="diagram-description">An empty landscape breadboard shows rows a through j, two outer power-rail banks, and the centre channel. Transparent outlines reveal hidden metal, not jumper wires or inserted contacts. Marking 1 surrounds the five connected holes a21 through e21; the adjacent purple outlined strip a22 through e22 is a separate group. Marking 2 surrounds f21 through j21, which connect to each other but not to a21 through e21 across the channel. Marking 3 highlights the complete upper rail row as one connected group; the dashed outline around the next rail row identifies a different group. Rails are separate from all terminal strips and are unpowered. This template shows continuous rails; real boards may have splits. Check continuity only with all power disconnected.</desc>
+      <defs>
+        <pattern id="terminal-holes" width="26" height="27" patternUnits="userSpaceOnUse">
+          <circle cx="13" cy="13.5" r="4.5" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+          <circle cx="13" cy="13.5" r="1.8" fill="#64748b"/>
+        </pattern>
+        <linearGradient id="breadboard" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fffef9"/>
+          <stop offset="0.5" stop-color="#f8f5ec"/>
+          <stop offset="1" stop-color="#fffef9"/>
+        </linearGradient>
+        <style>
+          text { font-family: Inter, Arial, sans-serif; fill: #172033; }
+          .row { font-size: 24px; font-weight: 700; }
+          .column { font-size: 18px; font-weight: 600; fill: #475569; }
+          .heading { font-size: 32px; font-weight: 700; }
+          .note { font-size: 28px; }
+          .legend { font-size: 26px; }
+          .number { font-size: 24px; font-weight: 700; fill: white; text-anchor: middle; dominant-baseline: central; }
+          .board-number { font-size: 20px; }
+        </style>
+      </defs>
+      <rect x="0" y="70" width="1900" height="580" fill="white"/>
+      <g aria-label="Empty canonical landscape breadboard, with no Pico or components">
+        <rect id="breadboard" x="38" y="96" width="1204" height="500" rx="14"
+          data-hole-origin-x="13" data-hole-origin-y="13.5"
+          data-hole-pitch-x="26" data-hole-pitch-y="27"
+          fill="url(#breadboard)" stroke="#94a3b8" stroke-width="2"/>
+        <rect id="top-power-rail-holes" data-breadboard-hole-field="true"
+          x="78" y="108" width="1120" height="54" fill="url(#terminal-holes)"/>
+        <line id="top-rail-upper-stripe" x1="82" y1="108" x2="1198" y2="108" stroke="#ef4444" stroke-width="3"/>
+        <line id="top-rail-lower-stripe" x1="82" y1="162" x2="1198" y2="162" stroke="#3b82f6" stroke-width="3"/>
+        <text class="row" x="51" y="129" fill="#dc2626">+</text>
+        <text class="row" x="51" y="157" fill="#2563eb">−</text>
+        <rect id="top-terminal-holes" data-breadboard-hole-field="true"
+          x="78" y="189" width="1120" height="135" fill="url(#terminal-holes)"/>
+        <rect x="65" y="327" width="1150" height="30" rx="4" fill="#e7e5df" stroke="#cbd5e1"/>
+        <line x1="78" y1="342" x2="1198" y2="342" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="8 8"/>
+        <text x="815" y="350" style="font-size:22px;font-weight:700">CENTRE CHANNEL</text>
+        <rect id="bottom-terminal-holes" data-breadboard-hole-field="true"
+          x="78" y="357" width="1120" height="129" fill="url(#terminal-holes)"/>
+        <g aria-label="Terminal row letters a through j">
+          <text class="row" x="51" y="211">a</text>
+          <text class="row" x="51" y="238">b</text>
+          <text class="row" x="51" y="265">c</text>
+          <text class="row" x="51" y="292">d</text>
+          <text class="row" x="51" y="319">e</text>
+          <text class="row" x="51" y="373">f</text>
+          <text class="row" x="51" y="400">g</text>
+          <text class="row" x="51" y="427">h</text>
+          <text class="row" x="51" y="454">i</text>
+          <text class="row" x="51" y="481">j</text>
+        </g>
+        <rect id="bottom-power-rail-holes" data-breadboard-hole-field="true"
+          x="78" y="513" width="1120" height="54" fill="url(#terminal-holes)"/>
+        <line id="bottom-rail-upper-stripe" x1="82" y1="513" x2="1198" y2="513" stroke="#3b82f6" stroke-width="3"/>
+        <line id="bottom-rail-lower-stripe" x1="82" y1="567" x2="1198" y2="567" stroke="#ef4444" stroke-width="3"/>
+        <text class="row" x="51" y="535" fill="#2563eb">−</text>
+        <text class="row" x="51" y="562" fill="#dc2626">+</text>
+        <g class="column" text-anchor="middle" aria-label="Selected column numbers: 1, 21, 22, 43">
+          <text x="91" y="589">1</text>
+          <text x="611" y="589">21</text>
+          <text x="637" y="589">22</text>
+          <text x="1183" y="589">43</text>
+        </g>
+      </g>
+      <g id="circuit-connections" aria-label="No circuit contacts: empty instructional breadboard"></g>
+      <!-- Transparent annotations reveal existing hidden metal, not added contacts. -->
+      <g id="connectivity-markings" aria-label="Numbered hidden-connectivity highlights, not wires">
+        <rect x="601" y="192" width="20" height="129" rx="9" fill="#0f766e" fill-opacity="0.12" stroke="#0f766e" stroke-width="3"/>
+        <rect x="627" y="192" width="20" height="129" rx="9" fill="#7c3aed" fill-opacity="0.10" stroke="#7c3aed" stroke-width="3" stroke-dasharray="6 4"/>
+        <circle cx="611" cy="176" r="12" fill="#0f766e"/>
+        <text class="number board-number" x="611" y="176">1</text>
+        <rect x="601" y="354" width="20" height="129" rx="9" fill="#b45309" fill-opacity="0.12" stroke="#b45309" stroke-width="3"/>
+        <circle cx="611" cy="499" r="12" fill="#b45309"/>
+        <text class="number board-number" x="611" y="499">2</text>
+        <rect x="82" y="113.5" width="1112" height="16" rx="7" fill="#b91c1c" fill-opacity="0.12" stroke="#b91c1c" stroke-width="3"/>
+        <rect x="82" y="140.5" width="1112" height="16" rx="7" fill="#1d4ed8" fill-opacity="0.08" stroke="#1d4ed8" stroke-width="3" stroke-dasharray="8 5"/>
+        <circle cx="1220" cy="121.5" r="14" fill="#b91c1c"/>
+        <text class="number board-number" x="1220" y="121.5">3</text>
+      </g>
+      <g aria-label="External numbered callouts">
+        <circle cx="1290" cy="123" r="20" fill="#b91c1c"/>
+        <text class="number" x="1290" y="123">3</text>
+        <text class="heading" x="1324" y="132">One rail row connects along</text>
+        <text class="note" x="1324" y="172">Dashed row: a separate group.</text>
+        <text class="note" x="1324" y="208">Rails do not power themselves.</text>
+        <circle cx="1290" cy="269" r="20" fill="#0f766e"/>
+        <text class="number" x="1290" y="269">1</text>
+        <text class="heading" x="1324" y="278">Five holes connect vertically</text>
+        <text class="note" x="1324" y="318">a–e in one column form a strip.</text>
+        <text class="note" x="1324" y="354">Next column: a separate strip.</text>
+        <circle cx="1290" cy="415" r="20" fill="#b45309"/>
+        <text class="number" x="1290" y="415">2</text>
+        <text class="heading" x="1324" y="424">No connection across channel</text>
+        <text class="note" x="1324" y="464">f–j connect to each other,</text>
+        <text class="note" x="1324" y="500">not to a–e above.</text>
+      </g>
+      <g aria-label="Legend and power-off reminder">
+        <rect x="1280" y="540" width="36" height="20" rx="5" fill="#0f766e" fill-opacity="0.12" stroke="#0f766e" stroke-width="3"/>
+        <text class="legend" x="1324" y="559">Outlines = hidden metal, not wires</text>
+        <text class="legend" x="1280" y="598">Continuity test: all power disconnected.</text>
+        <text class="legend" x="38" y="634">Continuous rails shown here. Real rail splits vary: check your board while unplugged.</text>
+      </g>
+    </svg>
+    <figcaption>
+      Original course artwork using the shared landscape breadboard template.
+      This is a connectivity explanation, not a circuit or a component-placement plan:
+      there is no Pico, no jumper wire, and no inserted contact. Transparent
+      outlines indicate the hidden metal joining holes; unmarked holes follow
+      the same five-hole-strip pattern. The rail stripes are identifiers, not
+      voltage sources. The board shown has continuous rails; actual rail splits
+      vary by model. Disconnect USB and every other power source before checking
+      continuity with a meter. This shared English technical asset supports
+      Day 1 in both languages.
+    </figcaption>
+  </figure>
+  <section class="connectivity" aria-labelledby="connectivity-title">
+    <h1 id="connectivity-title">Exact connection list — breadboard connectivity, not GPIO wiring</h1>
+    <table>
+      <caption>Internal groups shown by the numbered markings</caption>
+      <thead><tr><th scope="col">Marking</th><th scope="col">Internally connected</th><th scope="col">Separate from this group</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">1 — solid teal strip</th><td>a21, b21, c21, d21, e21</td><td>All holes in column 22; f21 through j21; every rail.</td></tr>
+        <tr><th scope="row">1 — adjacent dashed purple strip</th><td>a22, b22, c22, d22, e22</td><td>The teal strip a21 through e21, all other columns, the opposite terminal field, and every rail.</td></tr>
+        <tr><th scope="row">2 — solid amber strip</th><td>f21, g21, h21, i21, j21</td><td>a21 through e21 across the centre channel; adjacent columns; every rail.</td></tr>
+        <tr><th scope="row">3 — solid red rail outline</th><td>All 43 holes in the uppermost rail row of this template board.</td><td>The dashed blue rail row below it, both bottom rail rows, and every terminal strip.</td></tr>
+        <tr><th scope="row">3 — dashed blue rail outline</th><td>All 43 holes in the second top rail row of this template board.</td><td>The red rail row above it, both bottom rail rows, and every terminal strip.</td></tr>
+        <tr><th scope="row">Unmarked groups</th><td>Each other column has one a–e strip and a separate f–j strip. Each bottom rail row is its own continuous group on this board.</td><td>Different columns, opposite terminal fields, and different rail rows are not joined internally.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Unplugged check:</strong> with all power disconnected, compare two holes
+      inside one marked strip, then a hole in the adjacent strip and a hole across
+      the channel. Check along each rail too: some physical breadboards have rail
+      splits that are not shown by this template. Never use continuity mode on a powered circuit.</p>
+  </section>
+</body>
+</html>

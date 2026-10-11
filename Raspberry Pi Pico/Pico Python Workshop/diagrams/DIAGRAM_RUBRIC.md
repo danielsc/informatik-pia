@@ -412,3 +412,58 @@ live Pico hardware tests. Canonical sensor labels are small in the wide final
 circuit; open the scalable HTML and use its exact table rather than counting
 holes in a projected PNG. The off-board modules are illustrated spatially;
 their breadboard cable contacts, not their header pins, specify placement.
+
+## Audit: `breadboard-connectivity.html`
+
+This original Day 1 instructional illustration explains the empty breadboard,
+not a circuit. It uses the canonical template's unchanged landscape body,
+26 × 27 px hole pitch, four hole fields, row letters, rail stripes, and centre
+channel. Omitting the Pico, components, wires, and contact dots is an explicit
+instructional exception: leaving the board empty exposes the internal groups.
+No MicroPython program or GPIO netlist is needed; the HTML table describes
+internal connectivity instead. Its facts match Day 1's breadboard explanation
+and `workshop/en/WIRING_AND_SAFETY.md`.
+
+| # | Score | Result | Evidence |
+|---:|---:|---|---|
+| 1 | 4 | PASS | The canonical landscape board dominates the image; physical hole pattern, cream body, rail banks, and centre channel retain the existing ordinary-LED diagram's visual language. |
+| 2 | 4 | PASS | Separate outlines enclose a21–e21, adjacent a22–e22, and f21–j21. No connection crosses the channel. Two complete top rail rows are distinct groups, separate from terminal strips and bottom rails. |
+| 3 | N/A | Instructional exception | No Pico, GPIO pins, code constants, or supply connection is drawn. |
+| 4 | 4 | PASS | All holes remain visible; highlights surround rather than replace holes. The exact connectivity table agrees with the highlighted column coordinates and 43-hole rail rows. This is not a placement plan. |
+| 5 | N/A | Instructional exception | No components, protection parts, polarity, leads, or inserted contacts are depicted. |
+| 6 | N/A | Instructional exception | No switch or directional component is present. Board orientation and a–j labels are explicit. |
+| 7 | 3 | PASS | External numbered callouts, separate strip colours, solid/dashed outlines, and the hidden-metal legend remain legible at about 1016 × 310 px. Small selected column numbers are secondary; the HTML table supplies their exact names. |
+| 8 | 4 | PASS | The image states that rails do not power themselves and requires all power disconnected for continuity testing. Image and HTML warn that real rail splits vary; no split or voltage source is invented. |
+| 9 | 4 | PASS | Standalone responsive inline SVG, meaningful title/description and group labels, print CSS, caption, exact HTML connectivity table, and a wide SVG-only PNG; no remote artwork. |
+| 10 | 4 | PASS | Original annotations on the course's own vector template; no copied image pixels, traced proprietary artwork, or endorsement claim. |
+
+### Routing and geometry
+
+| Category | Score | Evidence |
+|---|---:|---|
+| Conductor separation | N/A | No conductors or physical contacts. Transparent outlines represent existing hidden metal, not added jumper wires. Number badges sit outside hole fields. |
+| Power-rail use | 4 | All rails are unpowered. The explanation explicitly distinguishes rail identity from a voltage source. |
+| Rail-stripe geometry | 4 | Both banks have two complete hole rows; all four stripe-to-hole distances are exactly 13.50 px with 0.00 px error. |
+| Hole fields and endpoints | 4 | Four unchanged canonical hole fields; no clipped rows. The empty `circuit-connections` layer declares zero contacts, with zero endpoint, marker, obstruction, or duplicate-hole errors. |
+
+**Verification:** all four applicable scripts passed: `check-diagram.py`,
+`check-breadboard-endpoints.py`, `check-routing-overlaps.py`, and
+`check-rail-stripes.py`. A direct geometry comparison confirmed that board,
+pattern pitch, and all hole-field coordinates match the reusable template.
+The SVG parsed as XML; the highlighted column numbers, five-hole groups, and
+rail-hole counts agree with the HTML table.
+
+Rendered using `render-preview.sh` with the explicit sibling PNG destination,
+then captured **only the SVG** using Playwright's `page.locator("svg").screenshot`
+in installed Chromium-based Chrome. The final PNG is **1900 × 580 px** rather
+than a full-page screenshot containing the table. The full-size PNG and a
+1016 × 310 px classroom-size capture were visually inspected; browser checks
+found no clipped SVG text. To reproduce the final crop, open the HTML in a
+1948 px-wide Chromium viewport (24 px body padding each side) and screenshot
+the SVG element into `breadboard-connectivity.png`.
+
+**Outcome:** PASS for every applicable category; hardware-specific categories
+are explicitly not applicable, not asserted as tested. No live hardware test
+was performed. The shared English asset is intended for both languages with
+localized adjacent lesson/deck prose. Actual rail continuity must still be
+checked on the unplugged classroom board.

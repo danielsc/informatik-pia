@@ -23,6 +23,16 @@ Die GPIO-Pins des Pico arbeiten mit **3.3-V-Logik und vertragen keine 5 V**.
 
 ## Nach einem Kursdiagramm bauen
 
+Erkennt zuerst die internen Verbindungen im
+[markierten Vorlagen-Diagramm](../../diagrams/breadboard-connectivity.html):
+
+![Breadboard-Verbindungen: Fünfergruppen, getrennte Seiten der Mittelrinne und unabhängige Schienenreihen](../../diagrams/breadboard-connectivity.png)
+
+Die nummerierten Markierungen zeigen verborgene Metallstreifen, keine Kabel.
+Jede a–e- oder f–j-Spalte ist eine eigene Fünfergruppe; über die Mittelrinne
+besteht keine interne Verbindung. Jede Schienenreihe ist getrennt. Prüft
+mögliche Schienenunterbrechungen am echten Board bei getrennter USB-Verbindung.
+
 Jeder farbige Punkt in einem Diagramm markiert die Mitte eines echten
 Breadboard-Lochs. Ein Kabel oder Bauteilbein endet in diesem Loch; zwei
 physische Kontakte teilen sich niemals ein Loch.

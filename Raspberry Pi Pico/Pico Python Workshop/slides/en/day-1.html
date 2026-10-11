@@ -1026,27 +1026,12 @@ led.off()
         <p class="eyebrow">Inside a breadboard</p>
         <h2>Which holes are already connected?</h2>
         <p class="activity watch">Watch and discuss · USB stays unplugged</p>
-        <svg viewBox="0 0 1000 260" role="img" aria-label="Schematic of separate five-hole strips, an unconnected centre channel, and power rails with a split" style="display:block;width:100%;height:260px;background:white;border-radius:12px;">
-          <g font-family="sans-serif" font-size="22" fill="#111827">
-            <text x="25" y="30">Power rails: separate + and − strips</text>
-            <path d="M30 60H450 M510 60H960" stroke="#dc2626" stroke-width="8"/>
-            <path d="M30 90H450 M510 90H960" stroke="#2563eb" stroke-width="8"/>
-            <text x="5" y="67">+</text><text x="5" y="97">−</text><text x="453" y="43">split</text>
-            <rect x="30" y="125" width="930" height="95" rx="12" fill="#f1f5f9"/>
-            <path d="M350 125V220" stroke="white" stroke-width="24"/>
-            <g stroke="#087f5b" stroke-width="9"><path d="M65 155H285 M415 155H635"/><path d="M65 195H285 M415 195H635"/></g>
-            <g fill="white" stroke="#475569" stroke-width="2">
-              <circle cx="65" cy="155" r="9"/><circle cx="120" cy="155" r="9"/><circle cx="175" cy="155" r="9"/><circle cx="230" cy="155" r="9"/><circle cx="285" cy="155" r="9"/>
-              <circle cx="415" cy="155" r="9"/><circle cx="470" cy="155" r="9"/><circle cx="525" cy="155" r="9"/><circle cx="580" cy="155" r="9"/><circle cx="635" cy="155" r="9"/>
-              <circle cx="65" cy="195" r="9"/><circle cx="120" cy="195" r="9"/><circle cx="175" cy="195" r="9"/><circle cx="230" cy="195" r="9"/><circle cx="285" cy="195" r="9"/>
-              <circle cx="415" cy="195" r="9"/><circle cx="470" cy="195" r="9"/><circle cx="525" cy="195" r="9"/><circle cx="580" cy="195" r="9"/><circle cx="635" cy="195" r="9"/>
-            </g>
-            <text x="690" y="160">Each strip: 5 joined holes</text><text x="690" y="200">Next strip: separate</text>
-            <text x="245" y="250">Centre channel: no connection across</text>
-          </g>
-        </svg>
-        <div class="callout warning" style="margin-top:0.5em;"><p>Rails are not automatically powered. <strong>+</strong> and <strong>−</strong> are labels, not voltage sources. Connect only the rail segments shown in the circuit: 3.3 V or VBUS must never be confused. A split needs a jumper only if the diagram calls for it.</p></div>
-        <aside class="notes">This is an original connectivity schematic, not a physical wiring plan. Point to five joined holes, a different strip, the centre gap, and the separate rails on the actual board. Rail splits vary by breadboard: inspect markings and use the exact circuit table. Two legs in one strip are electrically joined; a resistor must bridge separate strips. No power yet.</aside>
+        <a href="../../diagrams/breadboard-connectivity.html" aria-label="Open the scalable breadboard connectivity diagram and explanation">
+          <img src="../../diagrams/breadboard-connectivity.png" alt="Template breadboard with numbered markings: 1 joins five holes a–e in one column; 2 is a separate f–j group across the centre channel; 3 marks a connected rail row, separate from the other rails" style="display:block;width:100%;height:310px;object-fit:contain;margin:0;">
+        </a>
+        <div class="callout" style="margin-top:0.4em;"><p><strong>1:</strong> five holes share a strip; the next column is separate. <strong>2:</strong> no internal connection across the channel. <strong>3:</strong> each rail row is separate.</p></div>
+        <p class="footer-note" style="font-size:0.5em;margin-top:0.5em;">Markings show hidden metal, not added wires. Rails are not powered by their colour; check for splits while unplugged.</p>
+        <aside class="notes">Use the template breadboard image and match its numbered markings to the real board. Trace a–e vertically in one column, then f–j across the channel: these are separate metal strips. Adjacent columns are separate too. Trace one long rail row, not both rows together; top and bottom rail banks are also separate. Markings represent hidden connections, not jumper cables. Rail splits vary: inspect the actual board and check continuity only while unplugged. A resistor must bridge different groups. No power yet; do not join 3.3 V and VBUS.</aside>
       </section>
 
       <section>

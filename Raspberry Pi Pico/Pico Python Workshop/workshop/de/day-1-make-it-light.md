@@ -96,6 +96,15 @@ solche Wiederholungen vermeidet.
 
 ### So verbindet das Breadboard die Kontakte
 
+Seht euch das [markierte Vorlagen-Breadboard mit Verbindungstabelle](../../diagrams/breadboard-connectivity.html) an:
+
+![Breadboard aus der Vorlage mit markierten Fünferstreifen, getrennten Seiten der Mittelrinne und verbundener Schienenreihe](../../diagrams/breadboard-connectivity.png)
+
+**1:** Die fünf Löcher a–e einer Spalte sind verbunden; die Nachbarspalte ist getrennt.
+**2:** f–j bilden eine eigene Gruppe, ohne Verbindung über die Mittelrinne.
+**3:** Löcher entlang einer Schienenreihe sind verbunden, getrennt von anderen Reihen.
+Die Markierungen zeigen verborgene Metallstreifen, keine zusätzlich benötigten Kabel. die Kontakte
+
 Untersucht das Breadboard bei getrennter USB-Verbindung:
 
 - Jeder Fünferstreifen im Steckfeld ist intern verbunden.
