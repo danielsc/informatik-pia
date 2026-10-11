@@ -1028,27 +1028,12 @@ led.off()
         <p class="eyebrow">Im Inneren eines Breadboards</p>
         <h2>Welche Löcher sind schon verbunden?</h2>
         <p class="activity watch">Anschauen und besprechen · USB bleibt getrennt</p>
-        <svg viewBox="0 0 1000 260" role="img" aria-label="Schema getrennter Fünfergruppen, der unverbundenen Mittelrinne und unterbrochener Stromschienen" style="display:block;width:100%;height:260px;background:white;border-radius:12px;">
-          <g font-family="sans-serif" font-size="22" fill="#111827">
-            <text x="25" y="30">Stromschienen: + und − sind getrennt</text>
-            <path d="M30 60H450 M510 60H960" stroke="#dc2626" stroke-width="8"/>
-            <path d="M30 90H450 M510 90H960" stroke="#2563eb" stroke-width="8"/>
-            <text x="5" y="67">+</text><text x="5" y="97">−</text><text x="450" y="43">Lücke</text>
-            <rect x="30" y="125" width="930" height="95" rx="12" fill="#f1f5f9"/>
-            <path d="M350 125V220" stroke="white" stroke-width="24"/>
-            <g stroke="#087f5b" stroke-width="9"><path d="M65 155H285 M415 155H635"/><path d="M65 195H285 M415 195H635"/></g>
-            <g fill="white" stroke="#475569" stroke-width="2">
-              <circle cx="65" cy="155" r="9"/><circle cx="120" cy="155" r="9"/><circle cx="175" cy="155" r="9"/><circle cx="230" cy="155" r="9"/><circle cx="285" cy="155" r="9"/>
-              <circle cx="415" cy="155" r="9"/><circle cx="470" cy="155" r="9"/><circle cx="525" cy="155" r="9"/><circle cx="580" cy="155" r="9"/><circle cx="635" cy="155" r="9"/>
-              <circle cx="65" cy="195" r="9"/><circle cx="120" cy="195" r="9"/><circle cx="175" cy="195" r="9"/><circle cx="230" cy="195" r="9"/><circle cx="285" cy="195" r="9"/>
-              <circle cx="415" cy="195" r="9"/><circle cx="470" cy="195" r="9"/><circle cx="525" cy="195" r="9"/><circle cx="580" cy="195" r="9"/><circle cx="635" cy="195" r="9"/>
-            </g>
-            <text x="690" y="160">Je 5 Löcher verbunden</text><text x="690" y="200">Nächste Gruppe: getrennt</text>
-            <text x="245" y="250">Mittelrinne: keine Verbindung darüber</text>
-          </g>
-        </svg>
-        <div class="callout warning" style="margin-top:0.5em;"><p>Schienen sind nicht automatisch versorgt. <strong>+</strong> und <strong>−</strong> sind Beschriftungen, keine Spannungsquellen. Verbindet nur die gezeigten Abschnitte: 3.3 V und VBUS nie verwechseln. Eine Lücke wird nur überbrückt, wenn der Schaltplan es verlangt.</p></div>
-        <aside class="notes">Eigenes Verbindungsschema, kein physischer Verdrahtungsplan. Am echten Board fünf verbundene Löcher, eine andere Gruppe, Mittelrinne und getrennte Schienen zeigen. Schienenunterbrechungen variieren: Markierungen und genaue Tabelle prüfen. Zwei Beine in derselben Gruppe sind verbunden; ein Widerstand muss getrennte Gruppen verbinden. Noch kein Strom.</aside>
+        <a href="../../diagrams/breadboard-connectivity.html" aria-label="Skalierbare Breadboard-Abbildung mit Verbindungserklärung öffnen">
+          <img src="../../diagrams/breadboard-connectivity.png" alt="Breadboard aus der Vorlage mit nummerierten Markierungen: 1 verbindet fünf Löcher a–e einer Spalte; 2 ist eine getrennte f–j-Gruppe jenseits der Mittelrinne; 3 markiert eine verbundene Schienenreihe, getrennt von den anderen Schienen" style="display:block;width:100%;height:310px;object-fit:contain;margin:0;">
+        </a>
+        <div class="callout" style="margin-top:0.4em;"><p><strong>1:</strong> fünf Löcher verbunden; nächste Spalte getrennt. <strong>2:</strong> keine interne Verbindung über die Rinne. <strong>3:</strong> jede Schienenreihe ist getrennt.</p></div>
+        <p class="footer-note" style="font-size:0.5em;margin-top:0.5em;">Markierungen zeigen verborgenes Metall, keine Kabel. Schienenfarbe liefert keine Spannung; mögliche Unterbrechungen ohne Strom prüfen.</p>
+        <aside class="notes">Nummerierte Markierungen auf dem Vorlagen-Breadboard mit dem echten Board vergleichen. a–e senkrecht in einer Spalte verfolgen, dann f–j jenseits der Rinne: getrennte Metallstreifen. Nachbarspalten sind ebenfalls getrennt. Eine lange Schienenreihe verfolgen, nicht beide Reihen zusammen; auch obere und untere Schienen sind getrennt. Markierungen zeigen interne Verbindungen, keine Jumperkabel. Unterbrechungen variieren: echtes Board ansehen und Durchgang nur ohne Strom prüfen. Ein Widerstand muss unterschiedliche Gruppen verbinden. Noch kein Strom; 3.3 V und VBUS nicht verbinden.</aside>
       </section>
 
       <section>

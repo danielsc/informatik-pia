@@ -21,6 +21,16 @@ The Pico's GPIO pins use **3.3 V logic and are not 5 V tolerant**.
 
 ## How to build from a course diagram
 
+First identify the breadboard's internal connections in the
+[marked template diagram](../../diagrams/breadboard-connectivity.html):
+
+![Breadboard connectivity: five-hole groups, separate channel sides, and independent rail rows](../../diagrams/breadboard-connectivity.png)
+
+The numbered markings show hidden metal strips, not jumper wires. Each a–e
+or f–j column is a separate five-hole group; there is no internal connection
+across the centre channel. Each rail row is separate. Check for rail splits
+on your actual board with USB disconnected.
+
 Each coloured dot in a diagram marks the centre of one real breadboard hole.
 A wire or component lead ends in that hole; two physical contacts never share
 one hole.
