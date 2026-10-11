@@ -9,12 +9,19 @@ Ordnet wiederholten Code in Funktionen und erweckt acht RGB-Pixel zum Leben.
 **Hardware:** Freenove-8-RGB-LED-Modul, Potentiometer<br>
 ## 1. Lernt das RGB-Modul kennen
 
+Schaut euch zuerst das Bauteil an: Es hat acht einzeln steuerbare RGB-LEDs.
+Jede mischt Rot, Grün und Blau. Das Modul kann Farben, ein wanderndes Licht
+oder eine Animation anzeigen.
+
 Trennt die USB-Verbindung und folgt der
 [8-RGB-Anschlusstabelle](WIRING_AND_SAFETY.md#freenove-8-rgb-led-modul).
 
 Öffnet den
 [skalierbaren, barrierearmen Schaltplan für das 8-RGB-Modul](../../diagrams/rgb8-module.html)
-und verwendet den mit `IN` beschrifteten Anschluss des Moduls.
+und verwendet den mit `IN` beschrifteten Anschluss des Moduls. Lasst es
+außerhalb des Breadboards und verwendet drei Male–Female-Jumperkabel:
+Buchsen auf die Stiftkontakte des Moduls, Stecker ins Breadboard. Prüft
+die Pin-Beschriftung statt nur die Kabelreihenfolge.
 
 ![Quadratisches Freenove-8-RGB-Modul, dessen IN-Anschluss mit GP16 verbunden ist](../../diagrams/rgb8-module.png)
 
@@ -24,6 +31,22 @@ verwendet eine eigene Bibliothek. Unser Code nutzt das eingebaute
 MicroPython-Modul `neopixel`; ihr braucht also keine zusätzliche Datei.
 
 Führt [`code/day-3/01_neopixel_colours.py`](../../code/day-3/01_neopixel_colours.py) aus.
+
+Erzeugt das Hardwareobjekt, bevor ihr `pixels` verwendet:
+
+```python
+from machine import Pin
+from neopixel import NeoPixel
+
+PIXEL_PIN = 16
+PIXEL_COUNT = 8
+pixels = NeoPixel(Pin(PIXEL_PIN), PIXEL_COUNT)
+```
+
+`pixels` ist ein `NeoPixel`-Objekt, keine normale Liste. Es speichert ein
+RGB-Tupel pro LED und erlaubt Indizes wie eine Liste: `pixels[0]` ist die
+erste LED, `pixels[7]` die letzte. `pixels.fill(colour)` ändert alle
+gespeicherten Farben; `pixels.write()` sendet sie an die echten LEDs.
 
 Eine RGB-Farbe ist ein Tupel aus Rot-, Grün- und Blauwert:
 
@@ -82,13 +105,18 @@ for index in range(8):
 jeden Wert, und `index` speichert den aktuellen Wert. Genau das sind die
 gültigen Pixelindizes.
 
-Wendet die Schleife nun auf die Hardware an:
+Erzeugt `pixels` wie oben, füllt alle acht Einträge mit schwachem Blau
+und sendet dann die Farben ans Modul:
 
 ```python
-for index in range(8):
+for index in range(PIXEL_COUNT):
     pixels[index] = (0, 0, 20)
-    pixels.write()
+pixels.write()
 ```
+
+Erwartung: Alle acht LEDs leuchten schwach blau. Ändert einen Index auf
+ein schwach rotes Tupel und ruft erneut `pixels.write()` auf; nur diese LED
+sollte ihre Farbe ändern.
 
 Welchen Fehler erwartet ihr bei `pixels[8]`?
 
@@ -131,6 +159,11 @@ eine benannte Aufgabe.
 Lasst das RGB-Modul an GP16 angeschlossen. Ergänzt das Potentiometer an GP26
 mit 3.3 V und GND. In diesem Aufbau gibt es keine gewöhnliche LED.
 
+Verwendet das vollständige
+[NeoPixel-und-Potentiometer-Diagramm mit Verbindungstabelle](../../diagrams/neopixel-and-potentiometer.html):
+
+![Acht RGB-Pixel über Jumperkabel angeschlossen und ein Potentiometer an GP26](../../diagrams/neopixel-and-potentiometer.png)
+
 Behaltet die drei RGB-Verbindungen aus dem Schaltplan von Tag 3 und ergänzt:
 
 | Potentiometer-Pin | Verbindung |
@@ -144,12 +177,12 @@ Kontrolliert zu zweit die drei neuen Kontakte, verbindet USB wieder und gebt
 die ADC-Rohwerte aus, bevor ihr mit dem Pixel Pet beginnt.
 
 Beginnt mit
-[`code/day-3/03_pixel_pet_starter.py`](../../code/day-3/03_pixel_pet_starter.py).
+[`code/day-3/03_pixel_pet_1_starter.py`](../../code/day-3/03_pixel_pet_1_starter.py).
 Der Drehknopf steuert die „Energie“ des Tiers:
 
 - 0-32%: sleepy, langsames blaues Pulsieren;
 - 33-65%: curious, ein wanderndes grünes Pixel;
-- 66-100%: excited, schnelles buntes Funkeln.
+- 66-100%: excited, schnelle Farbwechsel.
 
 Anforderungen:
 
@@ -161,7 +194,12 @@ Anforderungen:
 - Die Schleife gibt Energie und Zustand zum Debuggen aus.
 
 Der vorgegebene `try`/`finally`-Block schaltet beim Programmende alle Pixel
-aus. Diese Sicherheitsumhüllung müsst ihr nicht selbst schreiben.
+aus. Es ist das Aufräummuster von Tag 1; lasst es stehen.
+
+Nutzt bekannte Schleifen: Besucht die Blauwerte in `[2, 5, 8, 11, 14]`
+für langsames Pulsieren, verwendet `range(PIXEL_COUNT)` für das wandernde
+grüne Pixel und durchlauft eine Liste von RGB-Tupeln für schnelle
+Farbwechsel. Weder `range()` mit drei Argumenten noch `%` sind nötig.
 
 ### Zusatzideen
 

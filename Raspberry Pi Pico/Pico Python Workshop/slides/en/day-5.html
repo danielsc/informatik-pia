@@ -125,8 +125,8 @@
       <section class="section-slide">
         <span class="section-number">02</span>
         <p class="eyebrow">Part 2 · Hardware integration</p>
-        <h2>Build and retest one layer at a time</h2>
-        <p class="lede">The final circuit combines three known circuits; it does not erase their separate tests.</p>
+        <h2>Keep the Day 4 build; add colour</h2>
+        <p class="lede">Sensor and buzzer are already together from Day 4. Retain and retest them. Only the RGB module and final software integration are new today.</p>
         <aside class="notes">
           Disconnect USB. Prepare the final diagram and all three earlier test files.
         </aside>
@@ -138,12 +138,15 @@
           <a class="diagram-link" href="../../diagrams/parking-assistant.html">Exact diagram + table</a>
         </div>
         <div class="diagram-frame">
-          <img src="../../diagrams/parking-assistant.png" alt="Complete parking assistant with protected HC-SR04, transistor-driven passive buzzer, and Freenove 8-RGB module on separate 5 V and 3.3 V supplies with common ground.">
+          <img src="../../diagrams/parking-assistant.png" alt="Complete parking assistant: retained protected HC-SR04 on GP18/GP19 and transistor buzzer on GP14, plus off-board 8-RGB module on GP16, with separate 5 V and 3.3 V supplies and common ground.">
         </div>
         <aside class="notes">
-          This diagram belongs to parking_assistant_starter.py. Identify all three
-          subsystems before building: sensor on GP18/GP19, buzzer control on GP15,
-          RGB data on GP16. Instructor checks every power domain before USB.
+          This diagram belongs to parking_assistant_1_starter.py. Identify all three
+          subsystems: retained sensor on GP18/GP19, retained buzzer control on GP14,
+          new RGB data on GP16. Do not rebuild the Day 4 base. Move an existing connection
+          only if the final layout requires it, while unplugged, then retest.
+          Both modules remain off-board with male–female jumpers.
+          Instructor checks every power domain before USB.
         </aside>
       </section>
 
@@ -165,27 +168,27 @@
 
       <section>
         <p class="eyebrow">Layer 1 · Sensor</p>
-        <h2>Build, inspect, and rerun the known test</h2>
-        <p class="activity build">Build while unplugged · Instructor checks before USB</p>
+        <h2>Retain, inspect, and rerun the known test</h2>
+        <p class="activity build">Check while unplugged · Instructor checks before USB</p>
         <ol>
-          <li>Build the HC-SR04 and both Echo-divider resistors in the final positions.</li>
+          <li>Keep the Day 4 HC-SR04 and Echo divider; do not rebuild them.</li>
           <li>Check VBUS, GND, GP19 Trigger, and protected GP18 Echo.</li>
           <li>Reconnect and run <a href="../../code/day-4/01_distance_sensor.py"><code>01_distance_sensor.py</code></a>.</li>
           <li>Confirm a flat target produces believable distances and no echo produces <code>None</code>.</li>
         </ol>
         <aside class="notes">
-          Do not add the next layer until this test passes. Record any problem before
-          changing a wire.
+          No new sensor layer today. Keep the HC-SR04 off-board with male–female jumpers.
+          Retest before adding RGB. Record any problem before changing a wire.
         </aside>
       </section>
 
       <section>
         <p class="eyebrow">Layer 2 · Sound</p>
-        <h2>Add the buzzer without disturbing the sensor</h2>
-        <p class="activity build">Build while unplugged · Check transistor E/B/C</p>
+        <h2>Retest the buzzer already built on Day 4</h2>
+        <p class="activity build">Check while unplugged · Check transistor E/B/C</p>
         <ol>
           <li>Stop the sensor test and unplug USB.</li>
-          <li>Add the passive buzzer, S8050, and GP15 base resistor.</li>
+          <li>Keep the passive buzzer, S8050, and 1 kΩ base resistor on GP14. Check E/B/C; add nothing.</li>
           <li>Reconnect and run <a href="../../code/day-4/02_buzzer_test.py"><code>02_buzzer_test.py</code></a>.</li>
           <li>Rerun the distance test to prove the sensor still works.</li>
         </ol>
@@ -200,9 +203,9 @@
         <h2>Add the RGB module on 3.3 V</h2>
         <p class="activity build">Build while unplugged · Use the header marked IN</p>
         <ol>
-          <li>Stop, unplug, then connect RGB <code>IN S</code> to GP16.</li>
+          <li>Stop and unplug. Keep the RGB module off-board; use male–female jumpers, <code>IN S</code> to GP16.</li>
           <li>Connect <code>IN V</code> to 3.3 V and <code>IN G</code> to common GND.</li>
-          <li>Reconnect and run <a href="../../code/day-3/01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a>.</li>
+          <li>Partner + instructor check while unplugged; then reconnect and run <a href="../../code/day-3/01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a>.</li>
           <li>Rerun sensor and buzzer tests once more.</li>
         </ol>
         <aside class="notes">
@@ -342,7 +345,7 @@ while True:
       <section>
         <p class="eyebrow">Starter file</p>
         <h2>Know what is supplied and what is yours</h2>
-        <p class="activity">Try in Thonny · Open <code>parking_assistant_starter.py</code></p>
+        <p class="activity">Try in Thonny · Open <a href="../../code/day-5/parking_assistant_1_starter.py"><code>parking_assistant_1_starter.py</code></a></p>
         <div class="grid-2">
           <div class="card">
             <h3>Already supplied</h3>
@@ -354,7 +357,7 @@ while True:
           </div>
         </div>
         <aside class="notes">
-          Use the complete parking_assistant.py only for teacher demonstration,
+          Use the complete parking_assistant_2_solution.py only for teacher demonstration,
           recovery, or final comparison.
         </aside>
       </section>

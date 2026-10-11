@@ -11,6 +11,10 @@ colour, sound, games, and a parking assistant that reacts to the real world.
 **Hardware:** Raspberry Pi Pico and Freenove FNK0063 Super Starter Kit<br>
 **Editor:** Thonny
 
+Check your kit before the course: you also need male-to-female module leads
+and a 2 kΩ resistor (or the documented two-series-1-kΩ alternative).
+Not every supplied kit contains these.
+
 **Teacher presentations:** [open the hosted slide website][slides-site] — no
 repository clone is required.
 
@@ -45,10 +49,12 @@ Hardware activities use the
 The examples are deliberately small. Type them, run them, change them, predict
 what will happen, and only then move to the challenge.
 
-Some supplied programs contain a `try`/`except`/`finally` safety wrapper so
+Some supplied programs contain a `try`/`finally` safety wrapper so
 `Ctrl+C` turns outputs off. You are not expected to write that wrapper from
-memory. Focus on the new code identified in the lesson; the wrapper is provided
-scaffolding.
+memory. Day 1 explains it before its first use; leave the supplied cleanup in
+place. Focus on the new code identified in each lesson.
+
+**Quick lookup:** [ADC and PWM explained](day-2-make-it-decide.md#adc-and-pwm-quick-reference).
 
 ## Python learning progression
 
@@ -56,10 +62,10 @@ Each idea is taught before a challenge requires students to use it:
 
 | Day | New student-owned ideas | Earlier ideas practised again |
 |---|---|---|
-| 1 | values, types, variables, assignment, scripts, errors | none |
+| 1 | values, types including tuple and `None`, variables, assignment, scripts, errors, `try`/`finally` cleanup | none |
 | 2 | casting, Booleans, comparisons, `if`/`elif`/`else`, lists, `while` | variables and debugging |
 | 3 | function calls, parameters, `return`, `for`, `range`, indexes, nested loops | conditionals and lists |
-| 4 | `None`, dictionaries, sensor functions, timeouts | functions, loops, and conditionals |
+| 4 | dictionaries, sensor functions, timeouts | `None`, functions, loops, and conditionals |
 | 5 | requirements, integration, boundary tests, state configuration | all earlier ideas |
 
 Library-specific setup such as `Pin`, `PWM`, `NeoPixel`, and

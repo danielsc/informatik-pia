@@ -35,7 +35,7 @@
 </head>
 <body>
   <figure>
-    <svg viewBox="0 0 1280 760" role="img" aria-labelledby="title description">
+    <svg viewBox="0 -300 1280 1060" role="img" aria-labelledby="title description">
       <title id="title">Raspberry Pi Pico GP16 to Freenove square 8-RGB module IN header</title>
       <desc id="description">A square eight-pixel RGB module connects at its IN header. Signal S goes to GP16, V goes to Pico 3.3 volts, and G goes to common ground.</desc>
       <defs>
@@ -220,10 +220,10 @@
           <text x="62" y="205" class="pin-label" fill="#fff">IN</text>
         </symbol>
       </defs>
-      <rect width="1280" height="760" rx="14" fill="#ffffff"/>
-      <text class="title" x="42" y="48">Freenove 8-RGB module · use the IN header</text>
-      <text class="subtitle" x="42" y="75">Exact physical circuit for code/teacher-tests/05_rgb_pixels.py</text>
-      <g aria-label="Wire legend">
+      <rect y="-300" width="1280" height="1060" rx="14" fill="#ffffff"/>
+      <text class="title" x="42" y="-260">Freenove 8-RGB module · use the IN header</text>
+      <text class="subtitle" x="42" y="-230">Exact physical circuit for code/teacher-tests/05_rgb_pixels.py</text>
+      <g aria-label="Wire legend" transform="translate(0 -300)">
         <line class="wire-red" x1="790" y1="42" x2="830" y2="42"/><text class="small" x="840" y="47">3.3 V</text>
         <line class="wire-output" x1="940" y1="42" x2="980" y2="42"/><text class="small" x="990" y="47">GP16 data</text>
         <line class="wire-black" x1="1090" y1="42" x2="1130" y2="42"/><text class="small" x="1140" y="47">GND</text>
@@ -295,10 +295,37 @@
           fill="none" stroke="none"/>
       </g>
       <g aria-label="Canonical square Freenove 8-RGB module with separate OUT and IN headers">
-        <use href="#component-rgb8-module" x="800" y="200" width="220" height="220"
-          data-obscures-holes="810,210,1010,410"/>
+        <use href="#component-rgb8-module" x="800" y="-190" width="220" height="220"
+          data-obscures-holes="810,-180,1010,20"/>
       </g>
       <g id="circuit-connections" aria-label="Pixel-exact circuit wiring and physical contacts">
+        <polyline class="wire-output" points="892,44 892,60 897,60 897,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
+        <circle data-contact-marker="true" cx="897" cy="202.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-output" points="897,283.5 897,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="897" cy="283.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="897" cy="391.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <g aria-label="Female output jumper socket on module header; male end at breadboard">
+          <rect x="885" y="26" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
+          <rect x="889" y="29" width="6" height="5" fill="#16a34a"/>
+        </g>
+        <polyline class="wire-red" points="910,44 910,60 923,60 923,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
+        <circle data-contact-marker="true" cx="923" cy="202.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-red" points="923,283.5 923,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="923" cy="283.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="923" cy="391.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <g aria-label="Female red female-to-male cable and strip jumper socket on module header; male end at breadboard">
+          <rect x="903" y="26" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
+          <rect x="907" y="29" width="6" height="5" fill="#dc2626"/>
+        </g>
+        <polyline class="wire-black" points="928,44 928,60 949,60 949,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
+        <circle data-contact-marker="true" cx="949" cy="202.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-black" points="949,283.5 949,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="949" cy="283.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="949" cy="391.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <g aria-label="Female black jumper socket on module header; male end at breadboard">
+          <rect x="921" y="26" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
+          <rect x="925" y="29" width="6" height="5" fill="#111827"/>
+        </g>
 
         <line class="wire-red" x1="195" y1="229.5" x2="195" y2="121.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
@@ -310,15 +337,9 @@
           data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="wire-black" x1="949" y1="472.5" x2="949" y2="526.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
-        <polyline class="component-lead" points="892,420 892,438 897,438 897,445.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#16a34a"/>
-        <polyline class="component-lead" points="910,420 910,438 923,438 923,445.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#dc2626"/>
-        <polyline class="component-lead" points="928,420 928,438 949,438 949,445.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#111827"/>
+
+
+
         <circle data-contact-marker="true" cx="195" cy="229.5" r="6"
           fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="195" cy="121.5" r="6"
@@ -339,12 +360,9 @@
           fill="#111827" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="949" cy="526.5" r="6"
           fill="#111827" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="897" cy="445.5" r="6"
-          fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="923" cy="445.5" r="6"
-          fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="949" cy="445.5" r="6"
-          fill="#111827" stroke="#ffffff" stroke-width="2"/>
+
+
+
       </g>
       <text class="tiny" x="606" y="194">GP16 · physical pin 21</text>
       <g aria-label="Safety and pre-power check inset">
@@ -356,6 +374,15 @@
         <text class="small" x="680" y="672">✓ The module is not connected to VBUS / 5 V.</text>
         <text class="small" x="680" y="698">✓ One contact per visible hole; partner checks the unpowered circuit.</text>
       </g>
+
+      <g aria-label="Off-breadboard module cable instructions">
+        <text class="label" x="42" y="-166">Modules stay OFF the breadboard.</text>
+        <text class="small" x="42" y="-140">Female sockets fit the labelled module header.</text>
+        <text class="small" x="42" y="-114">Male cable ends plug into the coloured hole dots.</text>
+        <text class="small" x="42" y="-88">Short jumpers join the upper and lower terminal strips.</text>
+        <text class="small" x="42" y="-62">Cables pass over rails; they do not contact them.</text>
+        <text class="small" x="42" y="-36">Disconnect USB before wiring; one contact per hole.</text>
+      </g>
     </svg>
     <figcaption>Original course artwork informed by the official Freenove NeoPixel lesson. It matches <code>code/teacher-tests/05_rgb_pixels.py</code>, uses MicroPython's built-in <code>neopixel</code> module, and connects the square module's IN header only.</figcaption>
     <section class="netlist" aria-labelledby="connection-list-title">
@@ -363,9 +390,9 @@
       <table>
         <thead><tr><th>From</th><th>Through</th><th>To</th></tr></thead>
         <tbody>
-          <tr><td>Pico GP16, physical pin 21</td><td>green data jumper</td><td>8-RGB module IN S</td></tr>
-          <tr><td>Pico 3V3(OUT), physical pin 36</td><td>labelled top 3.3 V rail and red jumper</td><td>8-RGB module IN V</td></tr>
-          <tr><td>8-RGB module IN G</td><td>black jumper and labelled bottom GND rail</td><td>Pico GND, physical pin 13</td></tr>
+          <tr><td>Pico GP16, physical pin 21</td><td>female-to-male green data cable and strip jumper</td><td>8-RGB module IN S</td></tr>
+          <tr><td>Pico 3V3(OUT), physical pin 36</td><td>labelled top 3.3 V rail and red female-to-male cable and strip jumper</td><td>8-RGB module IN V</td></tr>
+          <tr><td>8-RGB module IN G</td><td>black female-to-male cable, strip jumper, and labelled bottom GND rail</td><td>Pico GND, physical pin 13</td></tr>
         </tbody>
       </table>
     </section>

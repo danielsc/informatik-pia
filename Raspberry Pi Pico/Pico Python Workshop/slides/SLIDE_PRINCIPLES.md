@@ -56,8 +56,10 @@ instruction to run it.
 - Identify supplied APIs and safety wrappers explicitly. Students may call a
   supplied hardware or timing API without being expected to reproduce its
   implementation.
-- Keep `try`/`except`/`finally`, hardware constructors, and specialised timing
-  details as provided scaffolding unless the lesson explicitly teaches them.
+- Introduce `try`/`finally` before its first use and keep the supplied cleanup
+  in student programs. Do not introduce `try`/`except` for these activities.
+  Hardware constructors and specialised timing tools remain supplied APIs;
+  explain their purpose before asking students to call them.
 
 ## 4. Adapt TEALS teaching; replace TEALS labs
 

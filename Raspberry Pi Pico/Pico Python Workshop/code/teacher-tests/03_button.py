@@ -11,7 +11,7 @@ print("Stop with Ctrl+C.")
 
 try:
     while True:
-        pressed = not button.value()
+        pressed = button.value()
 
         if pressed != was_pressed:
             print("Pressed:", pressed)

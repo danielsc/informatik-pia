@@ -5,7 +5,7 @@
 By the end of today, your code will send a secret message using light.
 
 **Python:** interpreter, script, `print`, strings, integers, floats, variables,
-assignment, comments, imports, errors<br>
+assignment, tuples, `None`, comments, imports, errors, `try`/`finally`<br>
 **Hardware:** onboard LED, external LED, GPIO output<br>
 ## 1. Meet the interpreter
 
@@ -17,6 +17,8 @@ print("Hello, Pico!")
 type("hello")
 type(42)
 type(0.5)
+type((0, 0, 20))
+type(None)
 ```
 
 Discuss:
@@ -24,6 +26,11 @@ Discuss:
 - A string is text in quotes.
 - An integer is a whole number.
 - A float contains a decimal point.
+- A tuple is an ordered group of values, written with commas and usually
+  parentheses: `(0, 0, 20)`. Its items cannot be replaced. On Day 3, these
+  three values will mean red, green, and blue brightness.
+- `None` is a special value meaning “no value” or “no result”. It is not `0`,
+  `False`, or an empty string. It has its own type, `NoneType`.
 - An expression produces a value.
 - An interpreter runs code.
 
@@ -85,6 +92,20 @@ this kind of repetition.
 
 ## 4. Build an external LED
 
+### How the breadboard connects
+
+With USB disconnected, inspect the breadboard before placing components:
+
+- Each five-hole strip in a terminal field is internally connected.
+- The centre channel separates the two terminal fields; matching holes on
+  opposite sides are **not** connected.
+- Long outer power rails are separate from the terminal strips and from each
+  other. Some rails have a break halfway along: check continuity while unplugged.
+- A red stripe is only a marking, not a voltage source. A rail becomes 3.3 V
+  or 5 V only when connected to the matching Pico supply. Never join those supplies.
+- Put one lead in each hole; join components through separate holes in the
+  same connected strip.
+
 Disconnect USB first.
 
 Open the
@@ -102,6 +123,24 @@ Reconnect only after both partners check:
 Make a copy of `code/day-1/02_variable_blink.py`. In the copy, replace
 `Pin("LED", Pin.OUT)` with `Pin(15, Pin.OUT)`, then run the smallest external
 LED test before changing the pattern.
+
+### Safe stopping with `try`/`finally`
+
+Before the first program that uses it, learn this cleanup pattern:
+
+```python
+try:
+    led.on()
+    sleep(1)
+finally:
+    led.off()
+```
+
+The indented `try` block runs the activity. `finally` runs when execution
+leaves it, whether the activity finishes, an error occurs, or `Ctrl+C`
+interrupts it. It leaves the LED off. It does not hide errors; Thonny may
+still show `KeyboardInterrupt`. Later programs use the same pattern for PWM
+and RGB pixels. Disconnecting power is not a way to run cleanup.
 
 ## 5. Debugging relay
 
@@ -129,7 +168,7 @@ Invent a signal with:
 - a clean final `off` state.
 
 Start from
-[`code/day-1/03_secret_signal_starter.py`](../../code/day-1/03_secret_signal_starter.py).
+[`code/day-1/03_secret_signal_1_starter.py`](../../code/day-1/03_secret_signal_1_starter.py).
 Do not open the solution until your own message works.
 
 Possible themes: space beacon, robot greeting, lighthouse, goal celebration, or

@@ -1,7 +1,7 @@
 from machine import Pin, PWM
 from time import sleep_ms
 
-BUZZER_PIN = 15
+BUZZER_PIN = 14
 QUIET_DUTY = 2500
 
 buzzer = PWM(Pin(BUZZER_PIN))
@@ -23,8 +23,6 @@ try:
         print(frequency, "Hz")
         beep(frequency, 120)
         sleep_ms(350)
-except KeyboardInterrupt:
-    print("Stopped")
 finally:
     buzzer.duty_u16(0)
     buzzer.deinit()

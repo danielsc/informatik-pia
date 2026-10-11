@@ -22,7 +22,7 @@ Build in this order:
 
 1. Match the Pico's USB-left orientation.
 2. Place the button across the centre channel exactly as shown.
-3. Add the 10 kΩ pull-up and 220 Ω LED resistor.
+3. Add the 10 kΩ pull-down and 220 Ω LED resistor.
 4. Add power, ground, GP13, and GP15 wires.
 5. Read the HTML connection table aloud while a partner points to each hole.
 
@@ -37,14 +37,14 @@ Before connecting USB, use a multimeter in continuity mode if available:
 3. The A-to-B test should beep only while the button is pressed.
 
 Rotating the button 90 degrees in the same holes can make the input appear
-permanently pressed. If the program always prints `Pressed: True`, disconnect
+permanently pressed. If the program always prints `Pressed: 1`, disconnect
 USB and check orientation before changing the code.
 
 Run [`code/day-2/01_button_decisions.py`](../../code/day-2/01_button_decisions.py).
-The Freenove circuit is active-low:
+The course circuit is active-high:
 
 ```python
-pressed = not button.value()
+pressed = button.value()
 
 if pressed:
     led.on()
@@ -56,10 +56,15 @@ else:
 other path. The supplied `while True` keeps asking the button question until
 you press Stop or `Ctrl+C`.
 
-The 10 kΩ pull-up resistor makes GP13 read `1` while the button is released.
-Pressing connects GP13 to ground, making it read `0`. `not` converts that
-active-low electrical signal into a natural Python value: `pressed` is `True`
-when a person is pressing the button.
+The 10 kΩ pull-down resistor connects GP13 to GND and makes it read `0` while
+the button is released. Pressing connects GP13 to 3.3 V, making it read `1`.
+Python treats `0` as false and `1` as true in a condition, so `if pressed:`
+directly means “if the button is pressed”. The pin detects voltage, not current.
+
+`not` reverses a truth value: `not True` is `False`, and `not False` is `True`.
+Thus `not pressed` means “the button is not pressed”. `and` requires both
+conditions to be true; `or` requires at least one. For the examples below,
+first set `score = 1` and `time_is_up = False`.
 
 Predict these expressions before trying them:
 
@@ -93,6 +98,22 @@ The Pico reads a number from 0 to 65535:
 raw_value = knob.read_u16()
 percent = int(raw_value / 65535 * 100)
 ```
+
+### ADC and PWM quick reference
+
+**ADC = Analog-to-Digital Converter.** It turns an input voltage into a
+number. The potentiometer changes the voltage at GP26; `knob.read_u16()`
+represents roughly 0–3.3 V as a number from `0` to `65535`.
+
+**PWM = Pulse-Width Modulation.** It rapidly switches an output off and on.
+The **duty cycle** is the proportion of time it stays on: 10% gives a dim LED,
+90% a bright one. `led.duty_u16(...)` sets that proportion using `0` to `65535`.
+The pin switches between about 0 V and 3.3 V; it does not produce a steady
+intermediate voltage. **ADC reads the knob; PWM controls the brightness.**
+
+Reading GP26 with `Pin(..., Pin.IN).value()` instead would give only `0` or
+`1`, not the knob position. Its threshold is not guaranteed to be halfway.
+Use `knob.read_u16() >= 32768` if you want an explicit upper-half test.
 
 Here `int(...)` casts a float to an integer. Record values near 0%, 25%, 50%,
 75%, and 100%. Real measurements will not be exact.
@@ -146,18 +167,18 @@ Indexes start at zero. Predict what `times[-1]` returns.
 A game must keep checking the button while it waits:
 
 ```python
-while button.value():
+while not button.value():
     sleep_ms(1)
 ```
 
 Read this as: “while the button is released, wait 1 ms and check again.” The
-loop stops when `button.value()` becomes `0`. Unlike `while True`, this loop
+loop stops when `button.value()` becomes `1`. Unlike `while True`, this loop
 has a condition that can become false.
 
-The opposite wait uses `not`:
+The opposite wait checks the pressed state directly:
 
 ```python
-while not button.value():
+while button.value():
     sleep_ms(10)
 ```
 
@@ -180,7 +201,7 @@ Everything students must write in the baseline has now been practised:
 | Game code | Where it was introduced |
 |---|---|
 | variables and assignment | Day 1 |
-| active-low `button.value()` | Day 2, section 1 |
+| active-high `button.value()`, `not`, and `and` | Day 2, section 1 |
 | `if`/`else` and comparisons | Day 2, sections 1 and 2 |
 | `scores = []`, `append`, `len`, and `min` | Day 2, section 3 |
 | `while` with a condition | Day 2, section 4 |
@@ -195,12 +216,16 @@ timing tools; students only use the call patterns listed below.
 
 Keep the complete circuit connected. The reaction-game program uses the button
 on GP13 and LED on GP15; it simply ignores the potentiometer on GP26. Start from
-[`code/day-2/03_reaction_game_starter.py`](../../code/day-2/03_reaction_game_starter.py).
+[`code/day-2/03_reaction_game_1_starter.py`](../../code/day-2/03_reaction_game_1_starter.py).
 The starter supplies imports, pin setup, an empty `scores` list, and safe LED
 cleanup. **You write the game.**
 
-The first version is deliberately smaller than a commercial reaction game:
-three rounds, no false-start detector, and two result categories.
+### How the game works
+
+Release the button and wait. When the LED lights, press as quickly as you can.
+Pressing **before** it lights is a **false start**: that attempt earns no score
+and you try again. Complete three valid rounds and compare your reaction times.
+The first version uses two result categories.
 
 ### Step 1: write the plan as comments
 
@@ -208,7 +233,8 @@ Put these ideas in the correct order before writing Python:
 
 - repeat until the score list contains three results;
 - wait until the button is released;
-- wait a random amount of time;
+- wait a random amount of time, checking for an early press;
+- if pressed early, report a false start and do not time or score that attempt;
 - turn on the LED and remember the start time;
 - wait while the button is released;
 - calculate the elapsed time and turn off the LED;
@@ -220,15 +246,28 @@ Put these ideas in the correct order before writing Python:
 Use the supplied tools:
 
 - `randint(1000, 3000)` chooses the wait in milliseconds;
-- `sleep_ms(wait_ms)` performs that wait;
+- `sleep_ms(1)` pauses briefly between checks;
 - `ticks_ms()` records a clock reading;
 - `ticks_diff(end, start)` calculates elapsed milliseconds.
 
 Write and test one round before adding the outer game loop. The LED must turn
 off after the press, and the Shell must print a believable reaction time.
-Remember that this active-low button reads `1` when released and `0` when
+Remember that this active-high button reads `0` when released and `1` when
 pressed; use one `while` loop to wait for release and another to wait for the
 press.
+
+During the random wait, keep checking the button instead of sleeping for the
+whole delay. This supplied timing pattern combines two conditions with `and`:
+
+```python
+wait_started_ms = ticks_ms()
+while ticks_diff(ticks_ms(), wait_started_ms) < wait_ms and not button.value():
+    sleep_ms(1)
+```
+
+It stops when time is up **or** the button is pressed. Then check
+`if button.value():` to report a false start. Put the LED, reaction timing,
+and score code in the `else` branch so an early press cannot earn a score.
 
 ### Step 3: add a decision
 
@@ -256,16 +295,15 @@ state.
 Append each `reaction_ms` to `scores`. When the loop finishes, print the whole
 list and the fastest result with `min(scores)`.
 
-The supplied `try`/`except`/`finally` wrapper is safety scaffolding, not syntax
-you must write today. Use
-[`code/day-2/03_reaction_game_solution.py`](../../code/day-2/03_reaction_game_solution.py)
+The supplied `try`/`finally` wrapper uses the cleanup pattern introduced on
+Day 1. Leave it in place. Use
+[`code/day-2/03_reaction_game_2_solution.py`](../../code/day-2/03_reaction_game_2_solution.py)
 only for recovery or comparison after your three-round version works.
 
 ### Extensions
 
 Choose one only after the baseline works:
 
-- detect a press before the LED and report a false start;
 - calculate the average with `sum(scores) / len(scores)`;
 - add a third result category with `elif`;
 - celebrate a personal best;
@@ -273,14 +311,15 @@ Choose one only after the baseline works:
 - create a two-player version.
 
 The optional
-[`code/day-2/03_reaction_game_extension.py`](../../code/day-2/03_reaction_game_extension.py)
-shows one possible false-start implementation after students have designed
-their own.
+[`code/day-2/03_reaction_game_3_extension.py`](../../code/day-2/03_reaction_game_3_extension.py)
+adds five rounds, a third result category, and an average after the baseline
+works.
 
 ### Demo checklist
 
 - Show one complete timed round.
 - Show all three stored scores.
+- Demonstrate a false start and show that it does not add a score.
 - Explain why the main program needs a `while` loop.
 - Point to the Boolean expression that ends a wait.
 - Explain why each score is an integer.

@@ -38,7 +38,7 @@
         </div>
         <aside class="notes">
           Formulieren Sie die Ziele konkret und verständlich. Die heutige TEALS-Reihenfolge
-          lautet: Typen und Casting, Boolean-Vergleiche, not/active-low,
+          lautet: Typen und Casting, Boolean-Vergleiche, not/active-high, and,
           if-elif-else, Listen und danach bedingte while-Schleifen mit Abbruchbedingungen.
         </aside>
       </section>
@@ -163,26 +163,54 @@ print(score == 347)
         <aside class="notes">
           Sprechen Sie diese typische TEALS-Verwechslung direkt an: „speichert einen
           Wert“ im Gegensatz zu „stellt eine Frage“. Verzweigungen folgen erst nach
-          der active-low-Eingabe auf der eigenen if/elif/else-Folie.
+          der active-high-Eingabe auf der eigenen if/elif/else-Folie.
         </aside>
       </section>
 
       <section>
-        <p class="eyebrow"><code>not</code> und active-low-Eingabe</p>
-        <h2>Beim Tastendruck wird der elektrische Wert niedrig</h2>
-        <p class="activity paper">Auf Papier · Füllt vor dem Prüfen die letzte Spalte aus</p>
+        <p class="eyebrow">Boolean-Antworten umkehren</p>
+        <h2><code>not</code> kehrt eine Boolean-Antwort um</h2>
+        <p class="activity">In Thonny ausprobieren · Jede Antwort vor Run vorhersagen</p>
+        <pre><code class="language-python" data-trim>
+print(not True)
+print(not False)
+ready = True
+print(not ready)
+        </code></pre>
+        <div class="callout"><p><code>not True</code> ist <code>False</code>; <code>not False</code> ist <code>True</code>. Bei digitalen Messwerten wirkt <code>0</code> wie falsch und <code>1</code> wie wahr.</p></div>
+        <aside class="notes">not vor Hardware- und Schleifenbeispielen definieren. Erwartet False, True, False. Ein digitaler Pin liefert den Integer 0 oder 1, kein bool-Objekt; not erzeugt einen Boolean-Wert.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Active-high-Taster</p>
+        <h2>Gedrückt ist 1; losgelassen ist 0</h2>
+        <p class="activity paper">Auf Papier · Beide fehlenden Antworten und Bedeutungen notieren, dann aufdecken</p>
         <table class="compact-table">
-          <thead><tr><th>Physischer Zustand</th><th><code>button.value()</code></th><th><code>not button.value()</code></th><th>Gewünschte Bedeutung</th></tr></thead>
+          <thead><tr><th>Physischer Zustand</th><th><code>button.value()</code></th><th><code>not button.value()</code></th><th>Bedeutung von <code>not</code></th></tr></thead>
           <tbody>
-            <tr><td>Losgelassen</td><td><code>1</code></td><td><code>False</code></td><td>nicht gedrückt</td></tr>
-            <tr><td>Gedrückt</td><td><code>0</code></td><td><code>True</code></td><td>gedrückt</td></tr>
+            <tr><td>Losgelassen</td><td><code>0</code></td><td><span class="fragment"><code>True</code></span></td><td><span class="fragment">nicht gedrückt</span></td></tr>
+            <tr><td>Gedrückt</td><td><code>1</code></td><td><span class="fragment"><code>False</code></span></td><td><span class="fragment">„nicht gedrückt“ ist falsch</span></td></tr>
           </tbody>
         </table>
-        <div class="callout"><p><strong>Active-low</strong> bedeutet: Das wichtige Ereignis setzt das Signal auf niedrig. <code>not</code> macht aus dem Messwert eine verständliche Python-Antwort.</p></div>
+        <div class="callout"><p><strong>Active-high:</strong> Der Druck setzt GP13 auf 3.3 V. Der externe 10-kΩ-Pull-down zu GND sorgt losgelassen für 0. Nutzt <code>button.value() == 1</code> für „gedrückt“.</p></div>
         <aside class="notes">
-          Die Position des Pull-up-Widerstands ist noch nicht nötig. Wichtig ist:
-          losgelassen ergibt 1, gedrückt ergibt 0. Die spätere Aufbaufolie zeigt warum.
+          Erst Antworten notieren, dann Fragmente aufdecken. Losgelassen: not 0 ist True, also nicht gedrückt.
+          Gedrückt: not 1 ist False. Der Taster verbindet GP13 beim Druck mit 3.3 V;
+          der externe 10-kΩ-Widerstand verbindet GP13 mit GND. Die Aufbaufolie zeigt die Schaltung.
         </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Zwei Bedingungen gemeinsam</p>
+        <h2><code>and</code> braucht zwei wahre Antworten</h2>
+        <p class="activity">In Thonny ausprobieren · Vorhersagen, dann einen Wert ändern</p>
+        <pre><code class="language-python" data-trim>
+waiting = True
+pressed = False
+print(waiting and not pressed)
+        </code></pre>
+        <div class="callout"><p>Die Antwort ist nur <code>True</code>, solange wir noch warten <strong>und</strong> der Taster nicht gedrückt ist. Ändert <code>pressed</code> zu <code>True</code>: Die gemeinsame Antwort wird <code>False</code>.</p></div>
+        <aside class="notes">and vor der überwachten Wartezeit im Reaktionsspiel erklären. Beide Bedingungen müssen gelten; sobald eine falsch wird, endet eine while-Schleife. Später beantwortet die vorgegebene Timing-API, ob die zufällige Wartezeit noch läuft.</aside>
       </section>
 
       <section>
@@ -206,7 +234,7 @@ else:
 
       <section class="section-slide">
         <span class="section-number">03</span>
-        <p class="eyebrow">Teil 3 · Baut einen active-low-Eingang</p>
+        <p class="eyebrow">Teil 3 · Baut einen active-high-Eingang</p>
         <h2>Stellt mit einem Taster eine echte Boolean-Frage</h2>
         <p class="lede">Jetzt treffen Code und Schaltung aufeinander: GP13 liest die Frage, GP15 zeigt die Antwort.</p>
         <aside class="notes">
@@ -224,13 +252,13 @@ else:
           <a class="diagram-link" href="../../diagrams/button-and-led.html">Genaues Diagramm + Tabelle</a>
         </div>
         <div class="diagram-frame">
-          <img src="../../diagrams/button-and-led.png" alt="Vollständiges Breadboard-Diagramm mit Taster und LED: Pico-USB links, Taster über der mittleren Rinne, 10-kΩ-Pull-up von GP13 zu 3,3 V und LED von GP15 über einen 220-Ω-Widerstand zu GND.">
+          <img src="../../diagrams/button-and-led.png" alt="Vollständige Taster-und-LED-Schaltung: externer 10-kΩ-Pull-down von GP13 zu GND, Taster von GP13 zu 3.3 V und LED von GP15 über 220 Ω zu GND.">
         </div>
         <aside class="notes">
           Diese Schaltung gehört zu 01_button_decisions.py. Der HTML-Link enthält die
           genaue Verbindungstabelle und erklärt die Tasterkontakte. Prüfen Sie:
-          Pico-USB links, Taster über der mittleren Rinne, 10-kΩ-Pull-up von GP13 zu
-          3,3 V und LED-Pfad von GP15 über 220 Ω zu GND.
+          Pico-USB links, Taster über der mittleren Rinne, externer 10-kΩ-Pull-down von GP13 zu
+          GND, Taster von GP13 zu 3.3 V und LED-Pfad von GP15 über 220 Ω zu GND.
         </aside>
       </section>
 
@@ -243,7 +271,7 @@ else:
             <h3>Öffnen und ausführen</h3>
             <p><a href="../../code/day-2/01_button_decisions.py"><code>01_button_decisions.py</code></a></p>
             <pre><code class="language-python" data-trim>
-pressed = not button.value()
+pressed = button.value()
 
 if pressed:
     led.on()
@@ -255,16 +283,18 @@ else:
             <h3>Das solltet ihr beobachten</h3>
             <ol>
               <li>Taster losgelassen: LED aus.</li>
-              <li>Gedrückt halten: LED an und die Shell gibt <code>Pressed: True</code> aus.</li>
+              <li>Gedrückt halten: LED an, Shell-Ausgabe <code>Pressed: 1</code>. Losgelassen: <code>Pressed: 0</code>.</li>
               <li>Stop oder <code>Ctrl+C</code> drücken: Die LED geht aus.</li>
             </ol>
           </div>
         </div>
-        <div class="callout warning" style="margin-top: 0.7em;"><p>Wirkt der Taster immer gedrückt, trennt USB und prüft seine Ausrichtung sowie den 10-kΩ-Pull-up, bevor ihr Code ändert.</p></div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Wirkt der Taster immer gedrückt, stoppt, trennt USB und prüft seine Ausrichtung sowie den externen 10-kΩ-Pull-down zu GND, bevor ihr Code ändert.</p></div>
         <aside class="notes">
           Die äußere while-Schleife ist in der vorgegebenen Datei bereits geschrieben.
-          Die Klasse soll den sichtbaren Zweig mit der active-low-Wahrheitstabelle der
-          vorherigen Folie verbinden.
+          Die Klasse soll den sichtbaren Zweig mit der active-high-Wahrheitstabelle der
+          vorherigen Folie verbinden. pressed speichert den Integer 0 oder 1:
+          In if pressed wirkt 0 wie falsch und 1 wie wahr. Das Programm druckt Zahlen,
+          nicht True oder False.
         </aside>
       </section>
 
@@ -291,7 +321,7 @@ else:
           <img src="../../diagrams/potentiometer-and-led.png" alt="Schrittweise erweitertes Breadboard-Diagramm: Taster an GP13 und LED an GP15 bleiben verbunden; ergänzt wird ein Potentiometer an 3,3 V, GP26 ADC0 und GND.">
         </div>
         <aside class="notes">
-          Entfernen Sie weder den Taster noch seinen 10-kΩ-Pull-up. Die Klasse ergänzt
+          Entfernen Sie weder den Taster noch seinen externen 10-kΩ-Pull-down zu GND. Die Klasse ergänzt
           nur die drei Potentiometer-Verbindungen. VBUS darf nicht verwendet werden:
           Die äußeren Pins führen zu 3,3 V und GND, der mittlere Schleifer zu GP26/ADC0.
           02_potentiometer_led.py ignoriert den weiterhin verbundenen Taster.
@@ -377,7 +407,14 @@ print(len(times))
 print(min(times))
 print(times[-1])
         </code></pre>
-        <div class="grid-4">
+        <aside class="notes">Jede Zeile ausführen und Ergebnis vergleichen. Indizes beginnen bei null; -1 bezeichnet das letzte Element. Die nächste Folie benennt die Werkzeuge vor ihrem Einsatz im Spiel.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Listenwerkzeuge</p>
+        <h2>Finden, ergänzen, zählen, schnellste Zeit wählen</h2>
+        <p class="activity watch">Anschauen und besprechen · Jedes Werkzeug einer ausgeführten Zeile zuordnen</p>
+        <div class="grid-2">
           <div class="card"><h3>Index</h3><p><code>times[0]</code> fragt nach dem ersten Element.</p></div>
           <div class="card"><h3>Append</h3><p><code>append</code> fügt am Ende ein neues Ergebnis hinzu.</p></div>
           <div class="card"><h3><code>len</code></h3><p><code>len(times)</code> zählt die gespeicherten Ergebnisse.</p></div>
@@ -392,18 +429,18 @@ print(times[-1])
       <section>
         <p class="eyebrow">Bedingtes <code>while</code></p>
         <h2>Jede Schleife braucht eine benennbare Abbruchbedingung</h2>
-        <p class="activity paper">Auf Papier · Ordnet jeder Schleife den Moment zu, in dem sie endet</p>
+        <p class="activity paper">Auf Papier · Zuordnen: A: Druck, B: Loslassen, C: genug Ergebnisse</p>
         <table class="compact-table">
           <thead><tr><th>Schleife</th><th>So könnt ihr sie lesen …</th><th>Sie endet, wenn …</th></tr></thead>
           <tbody>
-            <tr><td><code>while len(scores) &lt; ROUNDS:</code></td><td>wiederholen, solange Ergebnisse fehlen</td><td>die Liste <code>ROUNDS</code> Ergebnisse enthält</td></tr>
-            <tr><td><code>while not button.value():</code></td><td>warten, solange der Taster gedrückt ist</td><td>der Taster losgelassen wird</td></tr>
-            <tr><td><code>while button.value():</code></td><td>warten, solange der Taster losgelassen ist</td><td>der Taster gedrückt wird</td></tr>
+            <tr><td><code>while len(scores) &lt; ROUNDS:</code></td><td><span class="fragment">wiederholen, solange Ergebnisse fehlen</span></td><td><span class="fragment">C: Liste enthält <code>ROUNDS</code> Ergebnisse</span></td></tr>
+            <tr><td><code>while not button.value():</code></td><td><span class="fragment">warten, solange der Taster losgelassen ist</span></td><td><span class="fragment">A: Taster wird gedrückt</span></td></tr>
+            <tr><td><code>while button.value():</code></td><td><span class="fragment">warten, solange der Taster gedrückt ist</span></td><td><span class="fragment">B: Taster wird losgelassen</span></td></tr>
           </tbody>
         </table>
         <div class="callout success" style="margin-top: 0.7em;"><p>Diese Schleifen enden, weil sich die Bedingung ändert. Nicht jede Aufgabe braucht eine Endlosschleife.</p></div>
         <aside class="notes">
-          Die beiden Tasterschleifen werden oft vertauscht. Lassen Sie die Klasse auf das
+          Antworten verborgen halten, bis Teams C, A, B notiert und jede Schleife erklärt haben. Die beiden Tasterschleifen werden oft vertauscht. Lassen Sie die Klasse auf das
           physische Ereignis zeigen, das die jeweilige Bedingung von true zu false ändert.
         </aside>
       </section>
@@ -420,7 +457,7 @@ print(times[-1])
             <h3>Behaltet dieselbe Verkabelung</h3>
             <ul>
               <li>GP13 liest den Taster.</li>
-              <li>Der 10-kΩ-Pull-up verbindet GP13 mit 3,3 V.</li>
+              <li>Externer 10-kΩ-Pull-down verbindet GP13 mit GND; der Taster verbindet GP13 mit 3.3 V.</li>
               <li>GP15 steuert die LED über 220 Ω.</li>
               <li>Lasst das Potentiometer verbunden; dieses Programm ignoriert GP26.</li>
               <li>Nutzt das <a href="../../diagrams/potentiometer-and-led.html">genaue Diagramm mit Tabelle</a>.</li>
@@ -435,64 +472,91 @@ print(times[-1])
       </section>
 
       <section>
+        <p class="eyebrow">Regeln des Reaktionsspiels</p>
+        <h2>Auf das Licht warten — dann reagieren!</h2>
+        <p class="activity watch">Anschauen und besprechen · Eine faire Runde ohne Code üben</p>
+        <div class="grid-3">
+          <div class="card"><h3>1 · Bereitmachen</h3><p>Taster loslassen. Die LED bleibt eine zufällige Zeit aus. Noch nicht drücken.</p></div>
+          <div class="card"><h3>2 · Los!</h3><p>Sobald die LED leuchtet, so schnell wie möglich drücken. Gemessen wird vom Einschalten bis zum Druck.</p></div>
+          <div class="card"><h3>3 · Fehlstart</h3><p>Ein Druck vor dem Licht ist ein <code>False start!</code> Kein Ergebnis wird gespeichert. Loslassen und die Runde erneut versuchen.</p></div>
+        </div>
+        <div class="callout success" style="margin-top:0.7em;"><p>Sammelt drei gültige Zeiten. Weniger Millisekunden bedeuten eine schnellere Reaktion. Sagt voraus, was bei einem Druck während der dunklen Wartezeit passiert.</p></div>
+        <aside class="notes">Spiel vor der Umsetzung erklären. Fairen Druck und Fehlstart zeigen. Frühe Tastendrücke müssen während der Wartezeit erkannt werden, statt als Nullzeit-Erfolg zu zählen. Nur gültige Runden zählen zu ROUNDS.</aside>
+      </section>
+
+      <section>
         <p class="eyebrow">Plant zuerst das Spiel</p>
         <h2>Bringt eine Runde in die richtige Reihenfolge, bevor ihr tippt</h2>
         <p class="activity paper">Auf Papier · Nummeriert die Schritte vom ersten bis zum letzten</p>
         <div class="grid-2">
           <div class="card">
             <h3>Öffnen</h3>
-            <p><a href="../../code/day-2/03_reaction_game_starter.py"><code>03_reaction_game_starter.py</code></a></p>
+            <p><a href="../../code/day-2/03_reaction_game_1_starter.py"><code>03_reaction_game_1_starter.py</code></a></p>
             <p>Importe, Pin-Einrichtung, <code>scores = []</code> und sicheres Ausschalten der LED sind vorgegeben.</p>
           </div>
           <div class="card">
-            <h3>Eine Runde in der richtigen Reihenfolge</h3>
-            <ol>
+            <h3>Schritte zum Ordnen</h3>
+            <ul>
+              <li>Wartet eine zufällige Zeit und prüft dabei auf frühen Druck.</li>
               <li>Wartet, bis der Taster losgelassen ist.</li>
-              <li>Wartet eine zufällige Anzahl Millisekunden.</li>
+              <li>Bei frühem Druck: <code>False start!</code> melden und ohne Ergebnis erneut versuchen.</li>
               <li>Schaltet die LED ein und speichert die Startzeit.</li>
-              <li>Wartet, bis der Taster gedrückt wird.</li>
-              <li>Berechnet <code>reaction_ms</code> und schaltet die LED aus.</li>
-              <li>Fügt das Ergebnis zu <code>scores</code> hinzu.</li>
-              <li>Gebt eine Meldung zum Ergebnis aus.</li>
-            </ol>
+            </ul>
           </div>
         </div>
         <aside class="notes">
           Bleiben Sie konkret: Die Klasse ordnet die genauen Schritte aus den Kommentaren
-          des Starters, statt einen vagen Ablauf zu erfinden. Das vorgegebene Gerüst bleibt stehen.
+          des Starters, statt einen vagen Ablauf zu erfinden. Erster Teil: loslassen,
+          überwacht warten, Fehlstart-Zweig, LED und Startzeit. Gültigen Zweig auf der
+          nächsten Folie fortsetzen. Das vorgegebene Gerüst bleibt stehen.
         </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Gültiges Ende planen</p>
+        <h2>Was passiert nach dem Einschalten?</h2>
+        <p class="activity paper">Auf Papier · Vier Schritte nach einem gültigen Start ordnen</p>
+        <ul>
+          <li>Gültiges Ergebnis zu <code>scores</code> hinzufügen.</li>
+          <li>Eine Meldung zum Ergebnis ausgeben.</li>
+          <li>Warten, bis der Taster gedrückt wird.</li>
+          <li><code>reaction_ms</code> berechnen und LED ausschalten.</li>
+        </ul>
+        <div class="callout warning"><p>Ein Fehlstart nimmt diesen Weg nicht. Er gibt <code>False start!</code> aus, speichert nichts und wiederholt die Runde.</p></div>
+        <aside class="notes">Erwartet: auf Druck warten, berechnen und ausschalten, speichern, Meldung. Mit dem ersten Planungsteil verbinden. Nur der gültige Zweig speichert eine Reaktionszeit.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Timing-API-Rezept</p>
+        <h2>Warten — aber den Taster weiter prüfen</h2>
+        <p class="activity watch">Anschauen und besprechen · Die mit and verbundenen Bedingungen erklären</p>
+        <pre><code class="language-python" data-trim>
+wait_ms = randint(1000, 3000)
+wait_started_ms = ticks_ms()
+while (
+    ticks_diff(ticks_ms(), wait_started_ms)
+    &lt; wait_ms and not button.value()
+):
+    sleep_ms(1)
+        </code></pre>
+        <div class="callout"><p>Warten, solange Zeit bleibt <strong>und</strong> kein Druck erfolgt. Danach <code>button.value()</code> prüfen: Fehlstart oder gültiger Start? Mit <code>ticks_ms()</code> und <code>ticks_diff(end_ms, start_ms)</code> einen gültigen Druck messen.</p></div>
+        <aside class="notes">Timing-Ausdruck als zwei mit and verbundene Bedingungen lesen. Ein einzelnes sleep_ms(wait_ms) übersieht frühe Tastendrücke. Vorgegebenes API-Rezept wiederverwenden; Fehlstart-Zweig und Spiellogik schreibt die Klasse selbst.</aside>
       </section>
 
       <section>
         <p class="eyebrow">Starter ausbauen</p>
         <h2>Ersetzt <code>pass</code> durch funktionierende Spiellogik</h2>
-        <p class="activity">In Thonny ausprobieren · Bringt erst eine Runde zum Laufen, dann alle drei</p>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Schreibt diese Teile</h3>
-            <ol>
-              <li>Löscht innerhalb von <code>try:</code> das Wort <code>pass</code>.</li>
-              <li>Schreibt mit den beiden Wartevorgängen eine funktionierende Runde.</li>
-              <li>Fügt <code>scores.append(reaction_ms)</code> hinzu.</li>
-              <li>Ergänzt <code>if reaction_ms &lt; 350</code> → <code>Quick!</code>, sonst <code>Keep practising!</code>.</li>
-              <li>Umschließt die Runde mit <code>while len(scores) &lt; ROUNDS:</code>.</li>
-            </ol>
-          </div>
-          <div class="card">
-            <h3>Nutzt die vorgegebenen Werkzeuge wie gezeigt</h3>
-            <pre style="font-size: 0.5em;"><code class="language-python" data-trim>
-wait_ms = randint(1000, 3000)
-sleep_ms(wait_ms)
-start_ms = ticks_ms()
-end_ms = ticks_ms()
-reaction_ms = ticks_diff(end_ms, start_ms)
-            </code></pre>
-            <p class="tiny" style="margin-top: 0.5em;">Timing-Werkzeuge und das sichere Aufräumen mit <code>try</code>/<code>except</code>/<code>finally</code> sind vorgegeben. Heute konzentriert ihr euch auf die Spiellogik darin.</p>
-          </div>
-        </div>
+        <p class="activity">In Thonny ausprobieren · Erst eine Runde, dann alle drei</p>
+        <ol>
+          <li>Innerhalb von <code>try:</code> <code>pass</code> löschen; <code>finally</code> behalten.</li>
+          <li>Eine Runde mit überwachter zufälliger Wartezeit schreiben.</li>
+          <li>Bei Fehlstart <code>False start!</code> ausgeben; nur gültige Runden verwenden <code>scores.append(reaction_ms)</code>.</li>
+          <li><code>if reaction_ms &lt; 350</code> → <code>Quick!</code>, sonst <code>Keep practising!</code> ergänzen.</li>
+          <li>Runde mit <code>while len(scores) &lt; ROUNDS:</code> umschließen.</li>
+        </ol>
         <aside class="notes">
           Dies ist die zentrale selbstständige Programmierfolie. Lassen Sie die Klasse
-          nach einer glaubwürdigen Reaktionszeit anhalten, bevor die äußere Schleife folgt.
+          nach einer glaubwürdigen Reaktionszeit und einem abgewiesenen Fehlstart anhalten, bevor die äußere Schleife folgt. Vorgegebenes Aufräumgerüst behalten.
         </aside>
       </section>
 
@@ -505,7 +569,7 @@ reaction_ms = ticks_diff(end_ms, start_ms)
             <h3>Euer Programm sollte zeigen</h3>
             <ol>
               <li>Die LED wartet und schaltet sich dann ein.</li>
-              <li>Ein Tastendruck erzeugt eine ganzzahlige Reaktionszeit.</li>
+              <li>Ein Druck nach dem Licht erzeugt eine ganzzahlige Reaktionszeit. Ein früher Druck gibt <code>False start!</code> aus und speichert kein Ergebnis.</li>
               <li>Jede Runde gibt <code>Quick!</code> oder <code>Keep practising!</code> aus.</li>
               <li>Nach drei Runden gibt die Shell die Liste und mit <code>min(scores)</code> das schnellste Ergebnis aus.</li>
             </ol>

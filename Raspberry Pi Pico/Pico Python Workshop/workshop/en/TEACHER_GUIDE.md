@@ -27,7 +27,10 @@ sheet with wiring diagrams, code links, and build criteria.
 - Inventory each kit against the component lists in the daily lessons.
 - Identify the passive buzzer. It usually has no sealed underside; do not rely
   on appearance alone if the components are labelled.
-- Prepare the Freenove `220 Ω`, `1 kΩ`, `2 kΩ`, and `10 kΩ` resistors.
+- Inventory `220 Ω`, `1 kΩ`, `2 kΩ`, and `10 kΩ` resistors; not every kit
+  contains 2 kΩ. Prepare the documented two-series-1-kΩ alternative if needed.
+- Pack ten male-to-female leads per kit (seven used, three spare); confirm
+  module headers are fitted before students connect off-board RGB and HC-SR04.
 - Print or display a Pico physical pinout.
 - Build and test one complete parking assistant.
 - Confirm the 8-RGB module works with MicroPython's built-in `neopixel` module.
@@ -55,7 +58,7 @@ debugging is often more valuable than a polished lecture.
 
 | Workshop | Approximate TEALS alignment | Deliberate emphasis |
 |---|---|---|
-| Day 1 | Unit 1: Introduction to Python | interpreter, scripts, strings, numbers, variables, comments, errors |
+| Day 1 | Unit 1: Introduction to Python | interpreter, scripts, strings, numbers, tuples, `None`, variables, comments, errors, cleanup |
 | Day 2 | Unit 2: Data Types and Conditionals | casting, Booleans, comparisons, conditionals, lists, `while` |
 | Day 3 | Units 3 and 4: Functions; Nested Loops and Lists | imports, abstraction, parameters, returns, `for`, `range`, indexes |
 | Day 4 | Unit 6 and Unit 8 preparation | dictionaries as configuration, decomposition, requirements, testing |
@@ -70,7 +73,9 @@ scaffolding as already learned.
 
 | Before students are asked to use... | Teach and practise first |
 |---|---|
-| variables in the Day 1 signal | values, types, assignment, and changing one value |
+| variables in the Day 1 signal | values, types including tuple and `None`, assignment, and changing one value |
+| first `try`/`finally` program | activity in `try`; cleanup in `finally` on completion, error, or Ctrl+C |
+| first breadboard build | five-hole strips, centre-channel separation, powered and possibly split rails |
 | conditions in the Day 2 challenge | Boolean expressions followed by `if`/`elif`/`else` |
 | lists in the reaction game | creation, index 0, `append`, `len`, and `min` |
 | `while` in the reaction game | a visible condition that changes from true to false |
@@ -85,8 +90,10 @@ Booleans/conditionals/lists/`while`, Unit 3 functions, Unit 4 `for` and nested
 loops, Unit 6 dictionaries, and Unit 8 project planning. This workshop keeps
 that dependency order even though several units share a single workshop day.
 
-`try`/`except`/`finally`, hardware constructors, and timing-library details are
-provided safety scaffolds. Point out what they accomplish, but do not assess
+`try`/`finally`, hardware constructors, and timing-library details are
+provided safety scaffolds. Introduce `try`/`finally` explicitly on Day 1 before
+its first use; no `try`/`except` lesson is needed. Point out what the supplied
+constructors and timing tools accomplish, but do not assess
 students on reproducing them.
 
 Day 1 deliberately leaves repeated flash blocks visible. Day 3 should refer
@@ -130,8 +137,8 @@ safety reminders, and suggested transition points.
 
 Minimum: students write a random wait, measure one button press, classify it
 with `if`/`else`, repeat for three rounds with `while`, append each score, and
-report the fastest. Strong work adds `elif`, an average, or false-start
-detection. Do not require students to reproduce the supplied hardware setup or
+report the fastest. A press before the LED is a false start and must not
+add a score. Strong work adds `elif` or an average. Do not require students to reproduce the supplied hardware setup or
 cleanup wrapper.
 
 Before releasing the starter, check that students can explain

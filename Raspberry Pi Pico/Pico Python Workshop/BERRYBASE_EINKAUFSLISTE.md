@@ -21,6 +21,7 @@ Muster bestellt werden.
 | Raspberry Pi Pico 2 H | 38 | 38 | direkt passend |
 | Breadboard, 830 Kontakte | 38 | 38 | direkt passend |
 | Jumperkabel Stecker–Stecker, 40er-Band | 38 Bänder | 38 | direkt passend |
+| Jumperkabel Stecker–Buchse, 40er-Band | mindestens 7 Kabel je Kit + Reserve | 10 Bänder (400 Kabel) | für Sensor und RGB außerhalb des Breadboards |
 | rote 5-mm-LED | 38 + Reserve | 50 | direkt passend |
 | 6×6-mm-Taster, 4 Pins | 38 + Reserve | 50 | Muster prüfen |
 | Breadboard-Potentiometer, 10 kΩ linear | 38 + Reserve | 40 | direkt passend |
@@ -61,6 +62,14 @@ HC-SR04-Echo-Spannungsteiler.
 - **BerryBase:** [40pin Jumper-/Dupont-Kabel Male–Male, trennbar, 20 cm](https://www.berrybase.de/40pin-jumper-dupont-kabel-male-male-trennbar-laenge-0-20-m)
 - **SKU:** `DUPK-40-MM-20`
 - **Hinweis:** Die Kabel lassen sich einzeln vom Flachband trennen.
+
+Zusätzlich **10 Bänder mit je 40 Male–Female-Kabeln, 20 cm** bestellen:
+[Stecker–Buchse, SKU `DUPK-40-FM-20`](https://www.berrybase.de/40pin-jumper-dupont-kabel-male-female-trennbar/laenge-0-20-m).
+Pro Kit zehn Kabel einpacken: vier für HC-SR04, drei für RGB `IN` und drei
+als Reserve. Die Buchsen kommen auf Modul-Stiftkontakte, die Stecker ins
+Breadboard. Beide Module bleiben außerhalb des Boards. Vor der Bestellung
+prüfen, ob die RGB-Header bereits verlötet sind; andernfalls müssen sie vor
+dem Workshop vorbereitet werden. Preis im Mengenangebot ergänzen.
 
 ### 4. Rote 5-mm-LEDs
 
@@ -127,11 +136,17 @@ THT-Widerstände stehen:
 | 220 Ω | Vorwiderstand der gewöhnlichen LED | 100 |
 | 1 kΩ | Transistor-Basis und oberer HC-SR04-Teilerwiderstand | 100 |
 | 2 kΩ | unterer HC-SR04-Teilerwiderstand | 100 |
-| 10 kΩ | Pull-up des Tasters | 100 |
+| 10 kΩ | Pull-down des Tasters | 100 |
 
 0,25 W oder mehr ist für die Kursschaltungen ausreichend. **Nicht 2,2 kΩ
 anstelle von 2 kΩ liefern lassen.** Die Kursunterlagen und die Berechnung des
 Echo-Spannungsteilers verwenden ausdrücklich 1 kΩ und 2 kΩ.
+
+Manche vorhandenen Kits enthalten nur 220 Ω, 1 kΩ und 10 kΩ. Dann ersetzen
+**zwei 1 kΩ in Reihe** den unteren 2-kΩ-Zweig; der obere 1-kΩ-Widerstand
+bleibt separat. Mit Buzzer sind es vier 1-kΩ-Widerstände pro Kit.
+Bei dieser Alternative **200 statt 100 Stück 1 kΩ** bestellen. Die reguläre
+Bestellung enthält weiterhin 2 kΩ; den Teiler niemals weglassen.
 
 ### 10. Taster
 
@@ -157,7 +172,7 @@ Kursdiagramm.
 - **Empfehlung:** Im B2B-Angebot ausdrücklich nach einem zweipoligen passiven
   5-V-Summer ohne eigene Tonerzeugung und ohne Modulplatine fragen.
 - **Vor Bestellung:** Ein Muster mit der vorhandenen
-  S8050-Treiberschaltung und `05_passive_buzzer.py` testen.
+  S8050-Treiberschaltung und `06_passive_buzzer.py` testen.
 - **Keine stillschweigende Modulsubstitution:** Bei einem KY-006- oder
   Grove-Modul müssten Schaltplan, Anschlussliste und möglicherweise die
   Treiberschaltung geändert werden.

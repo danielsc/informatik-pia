@@ -12,7 +12,7 @@ its exact connection table.
 | [`03_button.py`](03_button.py) | GP13 reports each press and release | [button only](../../diagrams/button-only.html) |
 | [`04_potentiometer.py`](04_potentiometer.py) | GP26 reports raw and percentage values | [potentiometer only](../../diagrams/potentiometer-only.html) |
 | [`05_rgb_pixels.py`](05_rgb_pixels.py) | one GP16 pixel moves and changes colour | [8-RGB module](../../diagrams/rgb8-module.html) |
-| [`06_passive_buzzer.py`](06_passive_buzzer.py) | GP15 plays three repeating pitches | [passive buzzer and transistor](../../diagrams/passive-buzzer.html) |
+| [`06_passive_buzzer.py`](06_passive_buzzer.py) | GP14 plays three repeating pitches | [passive buzzer and transistor](../../diagrams/passive-buzzer.html) |
 | [`07_distance_sensor.py`](07_distance_sensor.py) | GP19/GP18 report distance or `No echo` | [HC-SR04 with Echo divider](../../diagrams/distance-sensor.html) |
 
 ### 01 · Onboard LED
@@ -25,7 +25,7 @@ its exact connection table.
 
 ### 03 · Button
 
-[![Active-low button connected to GP13](../../diagrams/button-only.png)](../../diagrams/button-only.html)
+[![Active-high button connected to GP13 with a 10 kΩ pull-down](../../diagrams/button-only.png)](../../diagrams/button-only.html)
 
 ### 04 · Potentiometer
 
@@ -41,7 +41,7 @@ its exact connection table.
 
 The buzzer test deliberately keeps each sound short and uses a low duty value.
 The physical buzzer must use the 1 kΩ base resistor and S8050 transistor driver
-shown in the diagram. Do not connect the physical buzzer directly to GP15 and
+shown in the diagram. Do not connect the physical buzzer directly to GP14 and
 do not hold it near an ear.
 
 ### 07 · Distance sensor
@@ -50,6 +50,10 @@ do not hold it near an ear.
 
 The HC-SR04 physical circuit must use the 1 kΩ/2 kΩ Echo divider so its
 5 V Echo signal never reaches GP18 directly.
+Use four male-to-female leads to keep the sensor off the breadboard. If the
+kit has no 2 kΩ resistor, use two 1 kΩ in series for the lower divider leg,
+with a separate 1 kΩ upper leg; get an unplugged check against the
+[alternative connection reference](../../workshop/en/WIRING_AND_SAFETY.md#hc-sr04-distance-sensor-safer-echo-connection).
 
 Resistors and the S8050 transistor do not receive software commands of their
 own. They are tested as part of the external-LED, button, buzzer, and sensor

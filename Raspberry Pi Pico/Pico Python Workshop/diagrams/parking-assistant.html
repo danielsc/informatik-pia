@@ -90,10 +90,10 @@
 </head>
 <body>
   <figure>
-    <svg viewBox="0 0 1900 760" role="img" aria-labelledby="title description">
+    <svg viewBox="0 -300 1900 1060" role="img" aria-labelledby="title description">
       <title id="title">Complete Raspberry Pi Pico parking assistant with HC-SR04, passive buzzer, and 8-RGB module</title>
       <desc id="description">
-        A canonical horizontal Raspberry Pi Pico operates a protected HC-SR04 on GP19 and GP18, a passive buzzer through a GP15 S8050 transistor driver, and a square eight-pixel RGB module from GP16. Five-volt and 3.3-volt supplies remain separate and all grounds are common.
+        A canonical horizontal Raspberry Pi Pico operates a protected HC-SR04 on GP19 and GP18, a passive buzzer through a GP14 S8050 transistor driver, and a square eight-pixel RGB module from GP16. Five-volt and 3.3-volt supplies remain separate and all grounds are common.
       </desc>
 
       <defs>
@@ -365,9 +365,9 @@
         </style>
       </defs>
 
-      <rect width="1900" height="760" rx="14" fill="#ffffff"/>
-      <text class="title" x="42" y="48">Parking assistant · sensor, buzzer, and RGB module</text>
-      <text class="subtitle" x="42" y="75">Exact complete breadboard placement for code/day-5/parking_assistant.py and starter</text>
+      <rect y="-300" width="1900" height="1060" rx="14" fill="#ffffff"/>
+      <text class="title" x="42" y="-260">Parking assistant · sensor, buzzer, and RGB module</text>
+      <text class="subtitle" x="42" y="-230">Complete Day 5 circuit for code/day-5/parking_assistant_1_starter.py</text>
 
 
       <!-- Full breadboard -->
@@ -450,7 +450,7 @@
       </g>
 
 
-            <g aria-label="Wire legend">
+            <g aria-label="Wire legend" transform="translate(0 -300)">
         <line class="wire-red" x1="780" y1="38" x2="814" y2="38"/>
         <text class="small" x="822" y="43">5 V</text>
         <line class="wire-black" x1="935" y1="38" x2="969" y2="38"/>
@@ -460,15 +460,15 @@
         <line class="wire-input" x1="780" y1="66" x2="814" y2="66"/>
         <text class="small" x="822" y="71">GP18</text>
         <line class="wire-output" x1="935" y1="66" x2="969" y2="66"/>
-        <text class="small" x="977" y="71">GP15</text>
+        <text class="small" x="977" y="71">GP14</text>
         <line class="wire-output" x1="1090" y1="66" x2="1124" y2="66"/>
         <text class="small" x="1132" y="71">GP16 RGB data</text>
         <line class="wire-red" x1="1280" y1="66" x2="1314" y2="66"/>
         <text class="small" x="1322" y="71">3.3 V RGB power</text>
       </g>
       <g aria-label="HC-SR04 ultrasonic sensor with four labelled pins">
-        <use href="#component-hcsr04" x="641" y="216.5" width="330" height="180"
-          data-obscures-holes="653,228,959,364"/>
+        <use href="#component-hcsr04" x="641" y="-150" width="330" height="180"
+          data-obscures-holes="653,-138,959,-3"/>
       </g>
       <g aria-label="Passive buzzer with marked positive and negative terminals">
         <use href="#component-passive-buzzer" x="1056" y="251.5" width="150" height="145"
@@ -479,17 +479,80 @@
           data-obscures-holes="1274,226,1364,318"/>
       </g>
       <g aria-label="Canonical square Freenove 8-RGB module with its IN header connected">
-        <use href="#component-rgb8-module" x="1481" y="196.5" width="220" height="220"
-          data-obscures-holes="1491,206.5,1691,406.5"/>
+        <use href="#component-rgb8-module" x="1481" y="-190" width="220" height="220"
+          data-obscures-holes="1491,-180,1691,20"/>
       </g>
       <g id="circuit-connections" aria-label="Pixel-exact complete parking assistant wiring">
+        <polyline class="wire-output" points="1573,44 1573,60 1573,60 1573,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
+        <circle data-contact-marker="true" cx="1573" cy="202.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-output" points="1573,283.5 1573,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="1573" cy="283.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="1573" cy="391.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
+        <g aria-label="Female output jumper socket on module header; male end at breadboard">
+          <rect x="1566" y="26" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
+          <rect x="1570" y="29" width="6" height="5" fill="#16a34a"/>
+        </g>
+        <polyline class="wire-red" points="1591,44 1591,60 1599,60 1599,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
+        <circle data-contact-marker="true" cx="1599" cy="202.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-red" points="1599,283.5 1599,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="1599" cy="283.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="1599" cy="391.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <g aria-label="Female red female-to-male cable and strip jumper socket on module header; male end at breadboard">
+          <rect x="1584" y="26" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
+          <rect x="1588" y="29" width="6" height="5" fill="#dc2626"/>
+        </g>
+        <polyline class="wire-black" points="1609,44 1609,60 1625,60 1625,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
+        <circle data-contact-marker="true" cx="1625" cy="202.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-black" points="1625,283.5 1625,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="1625" cy="283.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="1625" cy="391.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <g aria-label="Female black jumper socket on module header; male end at breadboard">
+          <rect x="1602" y="26" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
+          <rect x="1606" y="29" width="6" height="5" fill="#111827"/>
+        </g>
+        <polyline class="wire-red" points="767,41 767,60 767,60 767,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
+        <circle data-contact-marker="true" cx="767" cy="202.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-red" points="767,283.5 767,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="767" cy="283.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="767" cy="391.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <g aria-label="Female red female-to-male cable and strip jumper socket on module header; male end at breadboard">
+          <rect x="760" y="23" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
+          <rect x="764" y="26" width="6" height="5" fill="#dc2626"/>
+        </g>
+        <polyline class="wire-yellow" points="793,41 793,60 793,60 793,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
+        <circle data-contact-marker="true" cx="793" cy="202.5" r="6" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-yellow" points="793,283.5 793,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="793" cy="283.5" r="6" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="793" cy="391.5" r="6" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+        <g aria-label="Female yellow jumper socket on module header; male end at breadboard">
+          <rect x="786" y="23" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
+          <rect x="790" y="26" width="6" height="5" fill="#ca8a04"/>
+        </g>
+        <polyline class="wire-input" points="819,41 819,60 819,60 819,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
+        <circle data-contact-marker="true" cx="819" cy="202.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-input" points="819,283.5 819,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="819" cy="283.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="819" cy="391.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <g aria-label="Female input jumper socket on module header; male end at breadboard">
+          <rect x="812" y="23" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
+          <rect x="816" y="26" width="6" height="5" fill="#2563eb"/>
+        </g>
+        <polyline class="wire-black" points="845,41 845,60 845,60 845,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
+        <circle data-contact-marker="true" cx="845" cy="202.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-black" points="845,283.5 845,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <circle data-contact-marker="true" cx="845" cy="283.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="845" cy="391.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <g aria-label="Female black jumper socket on module header; male end at breadboard">
+          <rect x="838" y="23" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
+          <rect x="842" y="26" width="6" height="5" fill="#111827"/>
+        </g>
                 <line class="wire-red" x1="91" y1="229.5" x2="91" y2="121.5" data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="wire-black" x1="403" y1="445.5" x2="403" y2="526.5" data-connection-kind="wire" data-breadboard-ends="both"/>
         <polyline class="wire-red" points="1807,121.5 1850,121.5 1850,553.5 1807,553.5" data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="wire-red" x1="767" y1="472.5" x2="767" y2="553.5" data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="wire-black" x1="845" y1="472.5" x2="845" y2="526.5" data-connection-kind="wire" data-breadboard-ends="both"/>
         <polyline class="wire-yellow" points="481,229.5 611,229.5 611,445.5 793,445.5" data-connection-kind="wire" data-breadboard-ends="both"/>
-        <polyline class="wire-input" points="507,202.5 507,180 975,180 975,418.5 923,418.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <polyline class="wire-input" points="507,202.5 507,-190 975,-190 975,418.5 923,418.5" data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="component-lead" x1="819" y1="445.5" x2="923" y2="445.5"
           data-connection-kind="component" data-breadboard-ends="both"
           data-contact-start-color="#2563eb" data-contact-end-color="#2563eb"/>
@@ -498,32 +561,20 @@
           data-contact-start-color="#2563eb" data-contact-end-color="#111827"/>
         <polyline class="wire-black" points="1027,445.5 1053,445.5 1053,526.5" data-connection-kind="wire" data-breadboard-ends="both"/>
         <polyline class="wire-red" points="1105,418.5 1079,418.5 1079,553.5" data-connection-kind="wire" data-breadboard-ends="both"/>
-        <polyline class="wire-output" points="585,472.5 585,605 1209,605 1209,472.5" data-connection-kind="wire" data-breadboard-ends="both"/>
+        <polyline class="wire-output" points="559,472.5 559,605 1209,605 1209,472.5" data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="component-lead" x1="1209" y1="445.5" x2="1313" y2="445.5"
           data-connection-kind="component" data-breadboard-ends="both"
           data-contact-start-color="#16a34a" data-contact-end-color="#16a34a"/>
         <line class="wire-violet" x1="1157" y1="418.5" x2="1339" y2="418.5" data-connection-kind="wire" data-breadboard-ends="both"/>
         <polyline class="wire-black" points="1287,391.5 1365,391.5 1365,526.5" data-connection-kind="wire" data-breadboard-ends="both"/>
-        <line class="component-lead" x1="767" y1="393.5" x2="767" y2="418.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#dc2626"/>
-        <line class="component-lead" x1="793" y1="393.5" x2="793" y2="418.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#ca8a04"/>
-        <line class="component-lead" x1="819" y1="393.5" x2="819" y2="418.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#2563eb"/>
-        <line class="component-lead" x1="845" y1="393.5" x2="845" y2="418.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#111827"/>
-        <circle data-contact-marker="true" cx="767" cy="418.5" r="6"
-          fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="793" cy="418.5" r="6"
-          fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="819" cy="418.5" r="6"
-          fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="845" cy="418.5" r="6"
-          fill="#111827" stroke="#ffffff" stroke-width="2"/>
+
+
+
+
+
+
+
+
         <circle cx="1105" cy="391.5" r="6" fill="#dc2626" stroke="#ffffff"
           stroke-width="2" data-connection-kind="connector"
           data-breadboard-ends="center" data-contact-color="#dc2626"/>
@@ -575,7 +626,7 @@
           fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="1079" cy="553.5" r="6"
           fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="585" cy="472.5" r="6"
+        <circle data-contact-marker="true" cx="559" cy="472.5" r="6"
           fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="1209" cy="472.5" r="6"
           fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
@@ -589,28 +640,22 @@
           fill="#111827" stroke="#ffffff" stroke-width="2"/>
         <polyline class="wire-output" points="585,202.5 637,202.5 637,430 1066,430 1066,570 1183,570 1183,460 1235,460 1235,570 1573,570 1573,472.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
-        <polyline class="wire-red" points="195,229.5 195,90 1443,90 1443,445.5 1599,445.5 1599,472.5"
+        <polyline class="wire-red" points="195,229.5 195,60 36,60 36,-220 1443,-220 1443,445.5 1599,445.5 1599,472.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="wire-black" x1="1625" y1="472.5" x2="1625" y2="526.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
-        <line class="component-lead" x1="1573" y1="416.5" x2="1573" y2="418.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#16a34a"/>
-        <polyline class="component-lead" points="1591,416.5 1591,417.5 1599,417.5 1599,418.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#dc2626"/>
-        <polyline class="component-lead" points="1609,416.5 1609,417.5 1625,417.5 1625,418.5"
-          data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#111827"/>
+
+
+
         <circle data-contact-marker="true" cx="585" cy="202.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="1573" cy="472.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="195" cy="229.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="1599" cy="472.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="1625" cy="472.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="1625" cy="526.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="1573" cy="418.5" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="1599" cy="418.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="1625" cy="418.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+
+
+
       <g aria-label="Echo divider and transistor base resistors">
         <use href="#component-resistor-1k" x="819" y="433.5" width="104" height="24"
           data-obscures-holes="845,436,897,455"/>
@@ -640,8 +685,7 @@
       <text class="tiny" x="650" y="438">GP19 pin 25</text>
       <text class="tiny" x="650" y="408">GP18 pin 24 · protected Echo</text>
       <text class="tiny" x="1256" y="386">flat face: E · B · C</text>
-      <text class="label" x="1488" y="461">RGB IN: S · V · G</text>
-      <text class="tiny" x="1160" y="86" fill="#dc2626">separate 3.3 V route to RGB V</text>
+      <text class="label" x="1488" y="252">RGB IN: S · V · G</text>
       <g aria-label="Voltage separation note">
         <rect class="callout" x="62" y="620" width="430" height="105" rx="12"/>
         <text class="label" x="84" y="646">Keep the supplies separate</text>
@@ -653,14 +697,23 @@
         <text x="532" y="646" style="font:700 13px Inter,sans-serif;fill:#9a3412">Before connecting USB</text>
         <text class="small" x="532" y="672">✓ Echo has the 1 kΩ / 2 kΩ divider; no direct 5 V reaches GP18.</text>
         <text class="small" x="532" y="698">✓ Sensor, divider, emitter, and RGB module share Pico GND.</text>
-        <text class="small" x="1190" y="672">✓ GP19 = Trig, GP18 = Echo, GP15 = buzzer, GP16 = RGB data.</text>
+        <text class="small" x="1190" y="672">✓ GP19 = Trig, GP18 = Echo, GP14 = buzzer, GP16 = RGB data.</text>
         <text class="small" x="1190" y="698">✓ RGB uses IN S/V/G at 3.3 V; E/B/C and polarity checked.</text>
       </g>
 
+
+      <g aria-label="Off-breadboard module cable instructions">
+        <text class="label" x="42" y="-166">Modules stay OFF the breadboard.</text>
+        <text class="small" x="42" y="-140">Female sockets fit the labelled module header.</text>
+        <text class="small" x="42" y="-114">Male cable ends plug into the coloured hole dots.</text>
+        <text class="small" x="42" y="-88">Short jumpers join the upper and lower terminal strips.</text>
+        <text class="small" x="42" y="-62">Cables pass over rails; they do not contact them.</text>
+        <text class="small" x="42" y="-36">Disconnect USB before wiring; one contact per hole.</text>
+      </g>
     </svg>
 
     <figcaption>
-      Original course artwork informed by the official Freenove ultrasonic-ranging, passive-buzzer, and NeoPixel lessons. It matches <code>code/day-5/parking_assistant.py</code> and the starter: protected GP18 Echo, GP19 Trigger, transistor-driven GP15 buzzer, and the RGB module IN header on GP16.
+      Original course artwork informed by the official Freenove ultrasonic-ranging, passive-buzzer, and NeoPixel lessons. It matches <code>code/day-5/parking_assistant_1_starter.py</code> and <code>parking_assistant_2_solution.py</code>: protected GP18 Echo, GP19 Trigger, transistor-driven GP14 buzzer, and the RGB module IN header on GP16.
     </figcaption>
 
     <section class="netlist" aria-labelledby="connection-list-title">
@@ -671,16 +724,16 @@
           <tr>
             <td>Pico VBUS / 5 V, physical pin 40</td>
             <td>top 5 V rail; rail jumper also powers bottom 5 V rail</td>
-            <td>HC-SR04 VCC and passive buzzer +</td>
+            <td>HC-SR04 VCC via strip jumper and female-to-male cable; passive buzzer +</td>
           </tr>
           <tr>
             <td>Pico GP19, physical pin 25</td>
-            <td>yellow Trigger jumper</td>
+            <td>female-to-male yellow Trigger cable and strip jumper</td>
             <td>HC-SR04 Trig</td>
           </tr>
           <tr>
             <td>HC-SR04 Echo</td>
-            <td>1 kΩ resistor</td>
+            <td>female-to-male Echo cable, strip jumper, then 1 kΩ resistor</td>
             <td>divider junction and Pico GP18, physical pin 24</td>
           </tr>
           <tr>
@@ -689,7 +742,7 @@
             <td>bottom GND rail</td>
           </tr>
           <tr>
-            <td>Pico GP15, physical pin 20</td>
+            <td>Pico GP14, physical pin 19</td>
             <td>1 kΩ base resistor</td>
             <td>S8050 base B</td>
           </tr>
@@ -705,17 +758,17 @@
           </tr>
           <tr>
             <td>Pico GP16, physical pin 21</td>
-            <td>green data jumper</td>
+            <td>female-to-male green data cable and strip jumper</td>
             <td>8-RGB module IN S</td>
           </tr>
           <tr>
             <td>Pico 3V3(OUT), physical pin 36</td>
-            <td>separate labelled 3.3 V route</td>
+            <td>separate labelled 3.3 V route, strip jumper, and red female-to-male cable</td>
             <td>8-RGB module IN V</td>
           </tr>
           <tr>
             <td>8-RGB module IN G</td>
-            <td>bottom common GND rail</td>
+            <td>black female-to-male cable, strip jumper, and bottom common GND rail</td>
             <td>Pico GND physical pin 13</td>
           </tr>
         </tbody>

@@ -1,0 +1,54 @@
+from machine import Pin
+from random import randint
+from time import sleep_ms, ticks_diff, ticks_ms
+
+BUTTON_PIN = 13
+LED_PIN = 15
+ROUNDS = 3
+
+button = Pin(BUTTON_PIN, Pin.IN)
+led = Pin(LED_PIN, Pin.OUT)
+scores = []
+
+print("Reaction-Time Challenge")
+print("Press only after the LED turns on.")
+
+try:
+    while len(scores) < ROUNDS:
+        print("\nRelease the button...")
+        while button.value():
+            sleep_ms(10)
+
+        wait_ms = randint(1000, 3000)
+        print("Get ready...")
+        wait_started_ms = ticks_ms()
+        while ticks_diff(ticks_ms(), wait_started_ms) < wait_ms and not button.value():
+            sleep_ms(1)
+
+        if button.value():
+            print("False start! This round does not count.")
+        else:
+            led.on()
+            start_ms = ticks_ms()
+
+            while not button.value():
+                sleep_ms(1)
+
+            reaction_ms = ticks_diff(ticks_ms(), start_ms)
+            led.off()
+            scores.append(reaction_ms)
+
+            if reaction_ms < 350:
+                message = "Quick!"
+            else:
+                message = "Keep practising!"
+
+            print("Reaction:", reaction_ms, "ms -", message)
+
+        while button.value():
+            sleep_ms(10)
+
+    print("\nScores:", scores)
+    print("Fastest:", min(scores), "ms")
+finally:
+    led.off()

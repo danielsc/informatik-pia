@@ -28,10 +28,18 @@ und die Freenove-Lektion
 Der lokale Schaltplan ist eine eigene Kursgrafik auf Grundlage dieser Quelle.
 
 Eine Lehrkraft muss die stromlose Schaltung prüfen, bevor USB verbunden wird.
-Holt den HC-SR04, einen 1-kΩ-Widerstand, einen 2-kΩ-Widerstand und
-Jumper-Kabel. Setzt Sensor und beide Widerstände ein, bevor ihr 5 V verbindet.
+Holt den HC-SR04, einen 1-kΩ-Widerstand, einen 2-kΩ-Widerstand und vier
+Male–Female-Jumperkabel. Lasst den Sensor außerhalb des Breadboards mit
+freien Schallöffnungen. Die Buchsen passen auf seine Stiftkontakte, die
+Stecker ins Breadboard. Setzt beide Widerstände ein, bevor ihr 5 V verbindet.
 Prüft mit der Anschlusstabelle:
 `Echo → 1 kΩ → GP18 junction → 2 kΩ → GND`.
+
+Fehlt im Kit ein 2-kΩ-Widerstand, verwendet **zwei 1-kΩ-Widerstände in
+Reihe** für den unteren Zweig, wie in der
+[Teiler-Alternative](WIRING_AND_SAFETY.md#hc-sr04-abstandssensor-sicherere-echo-verbindung).
+Ihr braucht drei 1-kΩ-Widerstände für den Teiler und einen vierten für den
+Buzzer-Treiber. Lasst den Teiler niemals weg.
 
 ## 1. Messt Hin- und Rückweg
 
@@ -45,6 +53,18 @@ distance = speed × round-trip time ÷ 2
 
 Der Code verwendet einen Timeout. Ohne ihn könnte ein ausbleibendes Echo das
 Programm für immer in einer Schleife festhalten.
+
+Der 10-Mikrosekunden-Impuls am **elektrischen Trig-Eingang** fordert eine
+Messung an; er ist nicht der Schallimpuls. Der Sensor sendet acht
+Ultraschallzyklen mit 40 kHz (ungefähr 200 Mikrosekunden). Sein
+**elektrischer Echo-Impuls** bleibt für das abstandsabhängige Zeitintervall
+high. `time_pulse_us(echo, 1, timeout)` wartet auf high und misst bis low;
+die Wartezeit vor dem high-Pegel wird nicht mitgemessen.
+
+Bei „No echo“ stoppt und trennt USB: VCC muss mit VBUS/5 V verbunden sein,
+Trig mit GP19 und Echo **über den Teiler** mit GP18, nicht umgekehrt.
+Verbindet alle Massepunkte. Testet einen flachen Gegenstand in 20–50 cm
+Abstand. Eine rote Schiene führt nicht automatisch 5 V: Verfolgt ihre Versorgung.
 
 Der vorgegebene `try`/`finally`-Code setzt Trigger beim Programmende auf low.
 Er ist ein Sicherheitsgerüst. Eure Aufgaben heute sind die Sensorfunktion,
@@ -140,7 +160,7 @@ morgen ersetzt das RGB-Modul sie.
 
 Baut beide Schaltungen gemeinsam nach dem
 [skalierbaren, barrierearmen Schaltplan des Näherungsalarms](../../diagrams/proximity-alarm.html).
-Er verwendet GP19 für Trigger, den geschützten GP18 für Echo, GP15 zur
+Er verwendet GP19 für Trigger, den geschützten GP18 für Echo, GP14 zur
 Buzzer-Steuerung und die eingebaute LED des Pico. Eine externe LED ist nicht
 nötig.
 

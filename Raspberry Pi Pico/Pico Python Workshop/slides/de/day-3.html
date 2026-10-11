@@ -178,6 +178,23 @@ cheer()
       </section>
 
       <section>
+        <p class="eyebrow">Das Bauteil kennenlernen</p>
+        <h2>Acht LEDs, jede mit eigener Farbe</h2>
+        <p class="activity watch">Anschauen und besprechen · Unversorgtes 8-RGB-Modul ansehen</p>
+        <div class="grid-2">
+          <svg viewBox="0 0 360 280" role="img" aria-label="Vereinfachtes quadratisches 8-RGB-Modul mit acht einzeln steuerbaren LEDs und IN-S-V-G-Anschluss" style="width:100%;height:280px;">
+            <rect x="60" y="10" width="240" height="240" rx="18" fill="#087f5b" stroke="#065f46" stroke-width="5"/>
+            <g stroke="#e2e8f0" stroke-width="5"><circle cx="115" cy="55" r="19" fill="#ef4444"/><circle cx="180" cy="55" r="19" fill="#f59e0b"/><circle cx="245" cy="55" r="19" fill="#22c55e"/><circle cx="245" cy="130" r="19" fill="#06b6d4"/><circle cx="245" cy="205" r="19" fill="#3b82f6"/><circle cx="180" cy="205" r="19" fill="#a855f7"/><circle cx="115" cy="205" r="19" fill="#ec4899"/><circle cx="115" cy="130" r="19" fill="white"/></g>
+            <text x="180" y="125" text-anchor="middle" fill="white" font-family="sans-serif" font-size="25">8 RGB</text>
+            <text x="180" y="155" text-anchor="middle" fill="white" font-family="sans-serif" font-size="18">IN: S V G</text>
+            <text x="180" y="278" text-anchor="middle" fill="#111827" font-family="sans-serif" font-size="17">Bauteilskizze — kein Schaltplan</text>
+          </svg>
+          <div class="card"><h3>Einzeln steuerbare RGB-Pixel</h3><p>Jede der <strong>8 LEDs</strong> mischt Rot, Grün und Blau. Wählt eine Farbe für alle acht — oder eine andere Farbe an jeder Position.</p><p>Ein Datensignal an GP16 steuert alle acht. Niedrige Helligkeitswerte nutzen. Das Modul bleibt neben dem Breadboard; am IN-Anschluss Male–Female-Jumper verwenden.</p></div>
+        </div>
+        <aside class="notes">Echtes quadratisches Modul zeigen und acht LEDs sowie IN-Anschluss finden. Die eigene Skizze erklärt Fähigkeiten, keine Verdrahtung. Noch nichts verbinden oder aufrufen: Der vollständige Schaltplan bleibt unmittelbar vor dem Aufbau.</aside>
+      </section>
+
+      <section>
         <p class="eyebrow">Parameter und Farbdaten</p>
         <h2>Ein gebündelter RGB-Wert kann an eine Funktion übergeben werden</h2>
         <p class="activity">In Thonny ausprobieren · Gebt den Wert vor dem Hardwareeinsatz aus</p>
@@ -287,6 +304,22 @@ for index in range(8):
       </section>
 
       <section>
+        <p class="eyebrow">Zuerst die Pixelsteuerung erstellen</p>
+        <h2><code>pixels</code> ist ein <code>NeoPixel</code>-Objekt</h2>
+        <p class="activity watch">Anschauen und besprechen · Einrichtung lesen; USB bleibt getrennt</p>
+        <pre><code class="language-python" data-trim>
+from machine import Pin
+from neopixel import NeoPixel
+
+PIXEL_PIN = 16
+PIXEL_COUNT = 8
+pixels = NeoPixel(Pin(PIXEL_PIN), PIXEL_COUNT)
+        </code></pre>
+        <div class="callout"><p><code>NeoPixel(...)</code> erstellt die Steuerung für acht LEDs an GP16. Sie ist <strong>listenähnlich, keine normale Python-Liste</strong>: Zuweisungen über Indizes speichern Farben; <code>pixels.write()</code> sendet sie an die LEDs.</p></div>
+        <aside class="notes">Beide Importe, Pin- und Anzahlkonstanten sowie Konstruktor vor pixels[index] erklären. Anders als eine normale Liste kommuniziert dieses Objekt mit Hardware und besitzt fill/write. Vollständige Einrichtung wird in den vorgegebenen Dateien wiederverwendet. Noch kein USB.</aside>
+      </section>
+
+      <section>
         <p class="eyebrow">Pixelpositionen</p>
         <h2>Gültige Indizes dieses Moduls sind 0 bis 7</h2>
         <p class="activity paper">Auf Papier · Markiert die erste, letzte und ungültige Position</p>
@@ -303,10 +336,12 @@ for index in range(8):
         <pre><code class="language-python" data-trim>
 for index in range(8):
     pixels[index] = (0, 0, 20)
+pixels.write()
         </code></pre>
-        <div class="callout danger"><p><strong>Vorhersage:</strong> <code>pixels[8]</code> fragt nach einer neunten Position, die dieses Modul nicht hat.</p></div>
+        <div class="callout"><p><code>pixels[index] = (0, 0, 20)</code> speichert schwaches Blau an der aktuellen Position. Danach sendet <code>pixels.write()</code> alle acht Farben: <strong>Alle acht LEDs leuchten blau</strong>.</p></div>
+        <p class="tiny"><strong>Vorhersage:</strong> Ist <code>pixels[8]</code> gültig? Warum?</p>
         <aside class="notes">
-          Das Modul ist ringförmig, der Code nummeriert trotzdem von 0 bis 7. Fragt nach erstem, letztem und ungültigem Index.
+          Das Modul ist ringförmig, der Code nummeriert trotzdem von 0 bis 7. Erster Index 0, letzter 7, 8 ungültig. Die Zuweisung ändert gespeicherte Farbdaten, nicht index selbst. write steht außerhalb der Schleife und sendet alles gemeinsam. Nur besprechen, bis die stromlose Schaltung geprüft ist.
         </aside>
       </section>
 
@@ -355,10 +390,10 @@ for lap in range(2):
           <a class="diagram-link" href="../../diagrams/rgb8-module.html">Genauer Schaltplan + Tabelle</a>
         </div>
         <div class="diagram-frame">
-          <img src="../../diagrams/rgb8-module.png" alt="Vollständiger Schaltplan des quadratischen Freenove-8-RGB-Moduls: IN ist mit Pico GP16, 3.3 V und GND verbunden.">
+          <img src="../../diagrams/rgb8-module.png" alt="Vollständige Schaltung: quadratisches 8-RGB-Modul neben dem Breadboard, mit Male–Female-Jumpern von IN S V G zu GP16, 3.3 V und GND.">
         </div>
         <aside class="notes">
-          Die Folie führt die Schaltung für 01_neopixel_colours.py ein. USB bleibt getrennt: IN S an GP16, IN V an 3.3 V, IN G an GND. Kontrolle zu zweit mit der HTML-Tabelle.
+          Die Folie führt die Schaltung für 01_neopixel_colours.py ein. USB bleibt getrennt: IN S an GP16, IN V an 3.3 V, IN G an GND. Kontrolle zu zweit mit der HTML-Tabelle. Modul neben dem Board lassen: Female-Enden an IN S/V/G, Male-Enden ins Breadboard. Modul nicht direkt einstecken.
         </aside>
       </section>
 
@@ -395,9 +430,8 @@ AMBER = (20, 10, 0)
 
       <section>
         <p class="eyebrow">Wiederverwendung im fertigen Code</p>
-        <h2><code>02_pixel_functions.py</code> benennt drei Aufgaben eindeutig</h2>
-        <p class="activity">In Thonny ausprobieren · Führt die Datei aus und beantwortet die Fragen</p>
-        <div class="grid-2">
+        <h2>Drei Funktionen, drei Aufgaben</h2>
+        <p class="activity">In Thonny ausprobieren · <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a> ausführen, Funktionen finden</p>
           <pre><code class="language-python" data-trim>
 def show_colour(colour):
     pixels.fill(colour)
@@ -410,7 +444,14 @@ def chase(colour, delay_ms):
 def level_to_colour(percent):
     ...
           </code></pre>
-          <div>
+        <aside class="notes">Drei benannte Aufgaben in 02_pixel_functions.py zeigen. Nur ein Ausschnitt; Importe und Pixeleinrichtung bleiben in der Datei. Unverändertes Beispiel an der geprüften RGB-Schaltung ausführen, dann mit den Lesefragen fortsetzen.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Wiederverwendbare Aufgaben lesen</p>
+        <h2>Was geht hinein — und was kommt zurück?</h2>
+        <p class="activity">In Thonny ausprobieren · 02_pixel_functions.py offen lassen</p>
+        <div class="grid-2">
             <div class="card">
               <h3>Findet und erklärt</h3>
               <ul class="tight">
@@ -423,7 +464,6 @@ def level_to_colour(percent):
             <div class="card" style="margin-top: 0.6em;">
               <h3>Kernidee</h3>
               <p>Eine zurückgegebene Farbe ist besser wiederverwendbar, weil späterer Code den Wert nutzen kann.</p>
-            </div>
           </div>
         </div>
         <div class="callout"><p>Öffnet <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a> und ordnet jedem Funktionsnamen seine Aufgabe zu.</p></div>
@@ -442,17 +482,21 @@ def level_to_colour(percent):
         </aside>
       </section>
 
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div><p class="eyebrow">Ohne USB bauen · Aufgabe 2</p><h2>RGB + Potentiometer: die ganze Schaltung</h2></div>
+          <a class="diagram-link" href="../../diagrams/neopixel-and-potentiometer.html">Genauer Schaltplan + Tabelle</a>
+        </div>
+        <div class="diagram-frame contain">
+          <img src="../../diagrams/neopixel-and-potentiometer.png" alt="Vollständige Pixel-Pet-Schaltung: 8-RGB-Modul neben dem Board, Male–Female-IN-Jumper zu GP16, 3.3 V und GND; Potentiometer außen an 3.3 V und GND, Schleifer an GP26 ADC0.">
+        </div>
+        <aside class="notes">Die vollständige Schaltung für 03_pixel_pet_1_starter.py, nicht nur die RGB-Basis. RGB-Test stoppen, USB trennen. Getestetes Modul neben dem Board und seine drei Kabel beibehalten; nur Drehknopf ergänzen. Skalierbare HTML-Tabelle öffnen.</aside>
+      </section>
+
       <section>
-        <p class="eyebrow">Ohne USB bauen · Aufgabe 2</p>
-        <h2>Behaltet die RGB-Basis und ergänzt das Potentiometer</h2>
-        <a class="diagram-link" href="../../diagrams/rgb8-module.html" style="margin-bottom: 0.8em;">Schaltplan der RGB-Basis + Tabelle</a>
-        <div class="grid-2">
-          <div>
-            <div class="diagram-frame layered">
-              <img src="../../diagrams/rgb8-module.png" alt="Schaltplan der beibehaltenen RGB-Basis: Das 8-RGB-Modul bleibt über IN mit GP16, 3.3 V und GND verbunden.">
-            </div>
-          </div>
-          <div>
+        <p class="eyebrow">Neue Schicht prüfen</p>
+        <h2>Drei Kabel behalten; drei ergänzen</h2>
+        <p class="activity build">Ohne USB bauen · Vor dem Verbinden zu zweit prüfen</p>
             <table class="compact-table">
               <thead><tr><th>Potentiometer-Pin</th><th>Verbindung</th></tr></thead>
               <tbody>
@@ -463,8 +507,6 @@ def level_to_colour(percent):
             </table>
             <div class="callout warning" style="margin-top: 0.7em;">
               <p>Stoppt den RGB-Test, trennt USB, lasst die drei funktionierenden Kabel liegen, ergänzt die drei Drehknopf-Kabel und prüft zu zweit alle sechs Verbindungen.</p>
-            </div>
-          </div>
         </div>
         <aside class="notes">
           Lasst die drei unveränderten und die drei neuen Verbindungen benennen. Das geprüfte RGB-Modul nicht unnötig neu verdrahten.
@@ -474,7 +516,7 @@ def level_to_colour(percent):
       <section>
         <p class="eyebrow">Starter öffnen</p>
         <h2>Lest zuerst den Drehknopf und wählt einen Zustand</h2>
-        <p class="activity">Schaltung testen · Öffnet <code>03_pixel_pet_starter.py</code></p>
+        <p class="activity">Schaltung testen · Öffnet <a href="../../code/day-3/03_pixel_pet_1_starter.py"><code>03_pixel_pet_1_starter.py</code></a></p>
         <div class="grid-2">
           <div class="card">
             <h3>Bereits vorgegeben</h3>
@@ -505,17 +547,38 @@ def level_to_colour(percent):
         <div class="state-grid">
           <div class="card"><h3>0-32%</h3><p><strong>sleepy</strong><br>langsames blaues Pulsieren</p></div>
           <div class="card"><h3>33-65%</h3><p><strong>curious</strong><br>wanderndes grünes Pixel</p></div>
-          <div class="card"><h3>66-100%</h3><p><strong>excited</strong><br>schnelles buntes Funkeln</p></div>
+          <div class="card"><h3>66-100%</h3><p><strong>excited</strong><br>schnelle Farbenparty</p></div>
         </div>
+        <div class="callout" style="margin-top:0.7em;"><p>Dreht den Knopf durch alle drei Bereiche. Jeder Zustand wählt eine Anzeigefunktion. Ergänzt und testet diese Funktionen auf der nächsten Folie einzeln.</p></div>
+        <aside class="notes">Drei Zustände und ihr sichtbares Verhalten vor der Umsetzung bestätigen. Die Ausgangsversion bleibt spielerisch: blaues Aufblenden, grüne Verfolgung, schnelle Farbenparty. Bei falscher Anzeige Zustand und Energie in der Shell lesen.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Anzeigen programmieren</p>
+        <h2>Eine Animation, ein Test</h2>
+        <p class="activity">In Thonny ausprobieren · Jede Funktion vor der nächsten testen</p>
         <ol>
-          <li>Ergänzt <code>show_sleepy()</code> und testet sie direkt.</li>
-          <li>Ergänzt <code>show_curious()</code> mit den Indizes 0-7 und testet sie.</li>
-          <li>Ergänzt <code>show_excited()</code> mit niedrigen RGB-Werten und testet sie.</li>
+          <li><code>show_sleepy()</code>: Über <code>[2, 5, 8, 11, 14]</code> laufen, blau füllen, senden und pausieren.</li>
+          <li><code>show_curious()</code>: Für jeden Index in <code>range(PIXEL_COUNT)</code> löschen, ein grünes Pixel setzen, senden und pausieren.</li>
+          <li><code>show_excited()</code>: Über eine Liste niedriger RGB-Tupel laufen; jede Farbe füllen, senden und pausieren.</li>
           <li>Führt das ganze Programm aus und dreht den Knopf durch alle Bereiche.</li>
         </ol>
         <aside class="notes">
-          Haltet jede Funktion klein und beobachtbar. Bei korrekter Zustandswahl eine Anzeigefunktion direkt aufrufen. Die Ausgaben für Energie und Zustand bleiben als Debug-Hilfe erhalten.
+          Haltet jede Funktion klein und beobachtbar. Bei korrekter Zustandswahl eine Anzeigefunktion direkt aufrufen. In 03_pixel_pet_1_starter.py bleiben Energie und Zustand als Debug-Hilfe erhalten. Gelernte for-Schleifen, Listen, if und Funktionen verwenden; kein Modulo und kein range mit drei Argumenten. Jede Funktion vor der Integration direkt testen.
         </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Optionale Anzeigevariante</p>
+        <h2>Der Zustand wählt die Anzahl leuchtender Pixel</h2>
+        <p class="activity paper">Auf Papier · Eine direkte Pixelanzahl vor dem Code planen</p>
+        <div class="grid-3">
+          <div class="card"><h3>sleepy</h3><p>2 schwach blaue Pixel</p></div>
+          <div class="card"><h3>curious</h3><p>5 grüne Pixel</p></div>
+          <div class="card"><h3>excited</h3><p>8 amberfarbene Pixel</p></div>
+        </div>
+        <div class="callout" style="margin-top:0.7em;"><p>Mit <code>if</code>/<code>elif</code>/<code>else</code> eine Anzahl wählen. Anzeige löschen, über <code>range(lit_count)</code> so viele Pixel setzen, dann <code>pixels.write()</code> aufrufen. Anzahl bei 0 %, 50 % und 100 % vorhersagen.</p></div>
+        <aside class="notes">Optional, erst nach den drei Ausgangsanimationen. Zustandsbereiche wählen direkt 2, 5, 8 Pixel; keine Umlaufrechnung. Zuerst löschen, damit vorher leuchtende Positionen ausgehen. finally behalten.</aside>
       </section>
 
       <section>

@@ -37,8 +37,6 @@ try:
             print("Distance:", round(distance, 1), "cm")
 
         sleep_ms(300)
-except KeyboardInterrupt:
-    print("Stopped")
 finally:
     trigger.off()
 

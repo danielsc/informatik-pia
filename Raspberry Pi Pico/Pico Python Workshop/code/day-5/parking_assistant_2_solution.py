@@ -4,7 +4,7 @@ from time import sleep_ms, sleep_us
 
 TRIGGER_PIN = 19
 ECHO_PIN = 18
-BUZZER_PIN = 15
+BUZZER_PIN = 14
 PIXEL_PIN = 16
 PIXEL_COUNT = 8
 
@@ -128,12 +128,9 @@ try:
         print_status(distance, zone)
         show_zone(zone, distance)
         sound_zone(zone)
-except KeyboardInterrupt:
-    print("Parking assistant stopped.")
 finally:
     trigger.off()
     buzzer.duty_u16(0)
     buzzer.deinit()
     pixels.fill(OFF)
     pixels.write()
-

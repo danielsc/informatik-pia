@@ -11,7 +11,7 @@ print("Press the button. Stop with Ctrl+C.")
 
 try:
     while True:
-        pressed = not button.value()
+        pressed = button.value()
 
         if pressed:
             led.on()
@@ -20,7 +20,6 @@ try:
             led.off()
 
         sleep_ms(50)
-except KeyboardInterrupt:
+finally:
     led.off()
     print("Stopped")
-

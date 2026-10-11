@@ -32,8 +32,12 @@ Arbeitsblatt der Lernenden mit Schaltbildern, Code-Links und Baukriterien.
 - Identifizieren Sie den passiven Buzzer. Er hat meist keine versiegelte
   Unterseite; verlassen Sie sich bei beschrifteten Bauteilen nicht allein auf
   das Aussehen.
-- Legen Sie die Freenove-Widerstände `220 Ω`, `1 kΩ`, `2 kΩ` und `10 kΩ`
-  bereit.
+- Prüfen Sie `220 Ω`, `1 kΩ`, `2 kΩ` und `10 kΩ`; nicht jedes Kit enthält
+  2 kΩ. Bereiten Sie gegebenenfalls die dokumentierte Alternative aus zwei
+  1-kΩ-Widerständen in Reihe vor.
+- Packen Sie zehn Male–Female-Kabel pro Kit (sieben genutzt, drei Reserve).
+  Prüfen Sie verlötete Modul-Header vor dem Anschluss von RGB und HC-SR04
+  außerhalb des Breadboards.
 - Drucken Sie eine Darstellung der physischen Pico-Pinbelegung aus oder zeigen
   Sie sie an.
 - Bauen und testen Sie einen vollständigen Parkassistenten.
@@ -64,7 +68,7 @@ systematischem Debugging ist oft wertvoller als ein makelloser Vortrag.
 
 | Workshop | Ungefähre TEALS-Zuordnung | Bewusster Schwerpunkt |
 |---|---|---|
-| Tag 1 | Unit 1: Introduction to Python | Interpreter, Skripte, Strings, Zahlen, Variablen, Kommentare, Fehler |
+| Tag 1 | Unit 1: Introduction to Python | Interpreter, Skripte, Strings, Zahlen, Tupel, `None`, Variablen, Kommentare, Fehler, Aufräumen |
 | Tag 2 | Unit 2: Data Types and Conditionals | Typumwandlung, boolesche Werte, Vergleiche, Bedingungen, Listen, `while` |
 | Tag 3 | Units 3 and 4: Functions; Nested Loops and Lists | Imports, Abstraktion, Parameter, Rückgabewerte, `for`, `range`, Indizes |
 | Tag 4 | Unit 6 und Vorbereitung auf Unit 8 | Dictionaries als Konfiguration, Zerlegung, Anforderungen, Testen |
@@ -80,7 +84,9 @@ bereits gelernt.
 
 | Bevor die Lernenden Folgendes einsetzen sollen ... | Zuerst vermitteln und üben |
 |---|---|
-| Variablen im Signal von Tag 1 | Werte, Typen, Zuweisung und das Ändern eines Werts |
+| Variablen im Signal von Tag 1 | Werte, Typen einschließlich Tupel und `None`, Zuweisung und das Ändern eines Werts |
+| erstes `try`/`finally`-Programm | Aufgabe in `try`; Aufräumen in `finally` nach Ende, Fehler oder Ctrl+C |
+| erster Breadboard-Aufbau | Fünferstreifen, Mittelkanal, versorgte und eventuell geteilte Schienen |
 | Bedingungen in der Challenge von Tag 2 | boolesche Ausdrücke, anschließend `if`/`elif`/`else` |
 | Listen im Reaktionsspiel | Erstellen, Index 0, `append`, `len` und `min` |
 | `while` im Reaktionsspiel | eine sichtbare Bedingung, die sich von wahr zu falsch ändert |
@@ -96,8 +102,10 @@ verschachtelte Schleifen, in Unit 6 Dictionaries und in Unit 8 die
 Projektplanung. Dieser Workshop bewahrt diese Abhängigkeiten, obwohl mehrere
 Units auf einen Workshoptag fallen.
 
-`try`/`except`/`finally`, Hardware-Konstruktoren und Details der
-Timing-Bibliothek sind bereitgestellte Sicherheitshilfen. Erklären Sie ihre
+`try`/`finally`, Hardware-Konstruktoren und Details der
+Timing-Bibliothek sind bereitgestellte Sicherheitshilfen. Führen Sie
+`try`/`finally` an Tag 1 ausdrücklich vor dem ersten Einsatz ein;
+eine `try`/`except`-Lektion ist nicht nötig. Erklären Sie ihre
 Wirkung, prüfen Sie aber nicht, ob die Lernenden sie selbst reproduzieren
 können.
 
@@ -145,7 +153,8 @@ Antworten, Sicherheitshinweise zur Schaltung und empfohlene Übergänge.
 Minimum: Die Lernenden programmieren eine zufällige Wartezeit, messen einen
 Tastendruck, klassifizieren ihn mit `if`/`else`, wiederholen dies mit `while`
 über drei Runden, hängen jeden Wert an und melden den schnellsten. Gute Arbeiten
-ergänzen `elif`, einen Durchschnitt oder eine Fehlstarterkennung. Verlangen Sie
+ergänzen `elif` oder einen Durchschnitt. Ein Tastendruck vor der LED ist ein
+Fehlstart und darf kein Ergebnis hinzufügen. Verlangen Sie
 nicht, dass die Lernenden die bereitgestellte Hardware-Einrichtung oder die
 Aufräumhülle selbst reproduzieren.
 

@@ -5,7 +5,7 @@
 Am Ende des Tages sendet euer Code eine geheime Nachricht mit Licht.
 
 **Python:** Interpreter, Skript, `print`, Strings, Integer, Floats, Variablen,
-Zuweisung, Kommentare, Importe, Fehler<br>
+Zuweisung, Tupel, `None`, Kommentare, Importe, Fehler, `try`/`finally`<br>
 **Hardware:** eingebaute LED, externe LED, GPIO-Ausgang<br>
 ## 1. Lernt den Interpreter kennen
 
@@ -17,6 +17,8 @@ print("Hello, Pico!")
 type("hello")
 type(42)
 type(0.5)
+type((0, 0, 20))
+type(None)
 ```
 
 Besprecht:
@@ -24,6 +26,11 @@ Besprecht:
 - Ein String ist Text in Anführungszeichen.
 - Ein Integer ist eine ganze Zahl.
 - Ein Float enthält eine Dezimalstelle.
+- Ein Tupel ist eine geordnete Gruppe von Werten mit Kommas und meist
+  Klammern: `(0, 0, 20)`. Seine Elemente lassen sich nicht ersetzen. An Tag 3
+  stehen diese drei Werte für die Helligkeit von Rot, Grün und Blau.
+- `None` ist ein besonderer Wert für „kein Wert“ oder „kein Ergebnis“.
+  Er ist nicht `0`, `False` oder ein leerer String und hat den Typ `NoneType`.
 - Ein Ausdruck erzeugt einen Wert.
 - Ein Interpreter führt Code aus.
 
@@ -87,6 +94,22 @@ solche Wiederholungen vermeidet.
 
 ## 4. Baut eine externe LED
 
+### So verbindet das Breadboard die Kontakte
+
+Untersucht das Breadboard bei getrennter USB-Verbindung:
+
+- Jeder Fünferstreifen im Steckfeld ist intern verbunden.
+- Die mittlere Rinne trennt beide Steckfelder; gegenüberliegende Löcher
+  sind **nicht** miteinander verbunden.
+- Die langen äußeren Versorgungsschienen sind von den Steckfeldern und
+  voneinander getrennt. Manche sind in der Mitte unterbrochen: Prüft den
+  Durchgang bei getrennter Stromversorgung.
+- Eine rote Linie ist nur eine Markierung, keine Spannungsquelle. Erst der
+  Anschluss an die passende Pico-Versorgung macht daraus 3.3 V oder 5 V.
+  Verbindet diese Spannungen niemals miteinander.
+- Steckt nur ein Bein oder Kabelende in jedes Loch. Nutzt separate Löcher
+  desselben verbundenen Streifens, um Bauteile miteinander zu verbinden.
+
 Trennt zuerst die USB-Verbindung.
 
 Öffnet das
@@ -105,6 +128,25 @@ geprüft haben:
 Erstellt eine Kopie von `code/day-1/02_variable_blink.py`. Ersetzt in der Kopie
 `Pin("LED", Pin.OUT)` durch `Pin(15, Pin.OUT)`. Führt dann zuerst den kleinsten
 Test für die externe LED aus, bevor ihr das Muster ändert.
+
+### Sicher stoppen mit `try`/`finally`
+
+Lernt dieses Aufräummuster vor dem ersten Programm, das es verwendet:
+
+```python
+try:
+    led.on()
+    sleep(1)
+finally:
+    led.off()
+```
+
+Der eingerückte `try`-Block führt die Aufgabe aus. `finally` läuft, wenn
+dieser Block verlassen wird: nach dem Ende, bei einem Fehler oder bei einer
+Unterbrechung mit `Ctrl+C`. Die LED bleibt danach aus. Fehler werden nicht
+versteckt; Thonny kann weiterhin `KeyboardInterrupt` anzeigen. Spätere
+Programme verwenden das Muster für PWM und RGB-Pixel. Durch Trennen der
+Stromversorgung wird kein Aufräumcode ausgeführt.
 
 ## 5. Fehlersuche als Staffel
 
@@ -133,7 +175,7 @@ Erfindet ein Signal mit:
 - einem sauberen abschließenden `off`-Zustand.
 
 Beginnt mit
-[`code/day-1/03_secret_signal_starter.py`](../../code/day-1/03_secret_signal_starter.py).
+[`code/day-1/03_secret_signal_1_starter.py`](../../code/day-1/03_secret_signal_1_starter.py).
 Öffnet die Lösung erst, wenn eure eigene Nachricht funktioniert.
 
 Mögliche Themen: Weltraumbake, Robotergruß, Leuchtturm, Torjubel oder

@@ -18,13 +18,12 @@ try:
     #
     # 1. Repeat until scores contains ROUNDS results.
     # 2. Wait until the button is released.
-    # 3. Wait a random time.
+    # 3. Wait a random time, checking for an early press.
+    #    If pressed early, report a false start; do not add a score.
     # 4. Turn on the LED and remember the start time.
     # 5. Wait until the button is pressed.
     # 6. Calculate reaction_ms and turn off the LED.
     # 7. Append reaction_ms and classify the result.
     pass
-except KeyboardInterrupt:
-    print("\nGame stopped")
 finally:
     led.off()

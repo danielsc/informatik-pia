@@ -51,9 +51,6 @@ try:
             show_excited()
 
         sleep_ms(100)
-except KeyboardInterrupt:
-    print("Pixel Pet is resting.")
 finally:
     pixels.fill(OFF)
     pixels.write()
-

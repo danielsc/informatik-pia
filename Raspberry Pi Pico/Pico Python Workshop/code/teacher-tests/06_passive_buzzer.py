@@ -1,7 +1,7 @@
 from machine import Pin, PWM
 from time import sleep_ms
 
-BUZZER_PIN = 15
+BUZZER_PIN = 14
 QUIET_DUTY = 2500
 
 buzzer = PWM(Pin(BUZZER_PIN))

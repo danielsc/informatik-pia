@@ -16,7 +16,7 @@ Die Preise sind Momentaufnahmen aus den verlinkten Shops. Vor der Bestellung
 sollte für 40 Kits jeweils ein schriftliches Schul- oder Mengenangebot
 eingeholt werden.
 
-## Gesamtkosten
+## Kalkulierte Teilekosten ohne zusätzlich benötigte Male–Female-Kabel
 
 | Reichelt | BerryBase | Warenwert gesamt | Pro Kit |
 |---:|---:|---:|---:|
@@ -28,6 +28,9 @@ bestätigt werden. Bei Reichelt Versandkosten oder kostenlose Lieferung im
 Angebot gesondert ausweisen lassen.
 
 Die 40 USB-A-auf-Micro-B-Datenkabel sind in der Bestellkalkulation enthalten.
+**Die zusätzlich benötigten Male–Female-Kabel sind noch nicht eingepreist.**
+Die Tabelle ist deshalb keine vollständige Kit-Gesamtsumme; deren bestätigten
+Preis vor Freigabe zu BerryBase, Gesamtwert und Pro-Kit-Kosten addieren.
 
 ## Bestellung 1: Reichelt
 
@@ -51,6 +54,11 @@ benötigt.
 
 Der zweite 1-kΩ-Widerstand pro Kit ist beabsichtigt: Einer gehört an die Basis
 des Summer-Transistors, einer in den HC-SR04-Echo-Spannungsteiler.
+Fehlt in vorhandenen Kits 2 kΩ, ersetzen zwei 1 kΩ in Reihe den unteren
+Teilerzweig; der obere 1 kΩ bleibt separat. Mit Buzzer braucht ein Kit dann
+vier 1-kΩ-Widerstände. Für diese Alternative 200 statt 100 Stück 1 kΩ
+einplanen und die Kalkulation entsprechend anpassen. Die reguläre Liste
+enthält weiterhin den einzelnen 2-kΩ-Widerstand.
 
 ## Bestellung 2: BerryBase
 
@@ -60,7 +68,14 @@ des Summer-Transistors, einer in den HC-SR04-Echo-Spannungsteiler.
 | 2 | [Breadboard-Potentiometer, 10 kΩ linear](https://www.berrybase.de/breadboard-potentiometer-10k-ohm) | 40 | 1,19 € | 47,60 € |
 | 3 | [HC-SR04-Ultraschallsensor](https://www.berrybase.de/hc-sr04-ultraschall-sensor) | 40 | 1,49 € | 59,60 € |
 | 4 | [NeoPixel-Stick mit 8 WS2812-LEDs, SKU NEOPS8](https://www.berrybase.de/neopixel-stick-mit-8-ws2812-5050-rgb-leds) | 40 | 2,60 € | 104,00 € |
-|  | **Zwischensumme BerryBase** |  |  | **283,20 €** |
+| 5 | [40-poliges Jumperkabel-Band Male–Female, 20 cm, SKU DUPK-40-FM-20](https://www.berrybase.de/40pin-jumper-dupont-kabel-male-female-trennbar/laenge-0-20-m) | 10 Bänder (400 Kabel) | Angebot anfordern | noch offen |
+|  | **Bekannte Zwischensumme BerryBase ohne Pos. 5** |  |  | **283,20 €** |
+
+Je Kit zehn Male–Female-Kabel einpacken: vier für HC-SR04, drei für RGB `IN`,
+drei als Reserve. Buchsen kommen auf Modul-Stiftkontakte, Stecker ins
+Breadboard; Sensor und RGB-Modul bleiben außerhalb des Boards.
+Prüfen, ob die RGB-Header verlötet geliefert werden, und gegebenenfalls
+vor dem Workshop vorbereiten.
 
 Der BerryBase-Pico kostet derzeit 6,50 € und ist deshalb nicht eingeplant; der
 Pico 2 H bei Reichelt spart bei 40 Stück 24,00 €. Das günstige
@@ -90,7 +105,7 @@ einem besseren Mengenangebot, weil sonst ein dritter Versandvorgang entsteht.
 2. Prüfen, ob der Taster über den Mittelkanal passt und welche Pins intern
    verbunden sind.
 3. Den passiven Piezo-Signalgeber mit
-   `code/teacher-tests/05_passive_buzzer.py` und der Transistorschaltung testen.
+   `code/teacher-tests/06_passive_buzzer.py` und der Transistorschaltung testen.
 4. Die Pinreihenfolge des tatsächlich gelieferten BC337-25 im Hersteller-
    Datenblatt prüfen.
 5. Vor Einsatz des BC337-25 die noch auf S8050 ausgelegten Summer-Schaltpläne,
@@ -99,6 +114,9 @@ einem besseren Mengenangebot, weil sonst ein dritter Versandvorgang entsteht.
    1-kΩ/2-kΩ-Echo-Spannungsteiler verwenden; nicht 2,2 kΩ liefern lassen.
 7. Bei Position 11 kontrollieren, dass tatsächlich Datenkabel und keine reinen
    Ladekabel geliefert werden.
+8. Male–Female-Kabel und mindestens einen 2-kΩ-Widerstand pro Kit prüfen.
+   Der 10-kΩ-Tasterwiderstand wird als **Pull-down** verwendet; GP15 bleibt
+   für die LED, GP14 steuert den Buzzer über den Transistor.
 
 ## Anfrage für das Mengenangebot
 

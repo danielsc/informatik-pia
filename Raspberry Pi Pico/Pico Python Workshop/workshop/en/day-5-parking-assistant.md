@@ -29,18 +29,21 @@ ultrasonic-ranging, buzzer, and NeoPixel lessons.
 | Component | Signal | Power |
 |---|---|---|
 | HC-SR04 | Trig GP19; Echo via divider to GP18 | 5 V and GND |
-| passive buzzer driver | GP15 through 1 kΩ to NPN base | 5 V and GND |
+| passive buzzer driver | GP14 through 1 kΩ to NPN base | 5 V and GND |
 | 8-RGB module IN | GP16 | 3.3 V and GND |
 
 Do not wire everything and immediately run the final endless loop. Build and
 test one layer at a time:
 
-1. With USB disconnected, build the HC-SR04 and Echo-divider part of the final
-   diagram. Get an instructor check, then run Day 4's distance test.
-2. Stop the program, disconnect USB, and add the transistor-driven buzzer.
-   Reconnect only after checking `E/B/C`, then run Day 4's buzzer test.
-3. Stop, disconnect, and add the RGB module's `IN` header on 3.3 V. Run Day 3's
-   RGB colour test.
+1. Retain the verified sensor-and-buzzer circuit from Day 4. With USB
+   disconnected, compare it with the final diagram; reposition only if needed
+   to make room for the RGB connections. Get an instructor check, then rerun
+   Day 4's distance test.
+2. Rerun Day 4's buzzer test and then the distance test. The buzzer is already
+   built; this checks that existing parts still work, not a new construction.
+3. Stop, disconnect, and add the RGB module's `IN` connections on 3.3 V using
+   three male-to-female leads. Keep sensor and RGB module off the breadboard.
+   Run Day 3's RGB colour test.
 4. Stop and compare the whole build with the final HTML connection table. Get
    one final instructor check of 5 V, 3.3 V, the divider, and common ground.
 5. Test `classify_distance()` with fixed numbers before using live readings.
@@ -74,8 +77,8 @@ Each function has one main responsibility. This makes failures easier to
 isolate.
 
 Start from
-[`code/day-5/parking_assistant_starter.py`](../../code/day-5/parking_assistant_starter.py).
-Use [`code/day-5/parking_assistant.py`](../../code/day-5/parking_assistant.py) only
+[`code/day-5/parking_assistant_1_starter.py`](../../code/day-5/parking_assistant_1_starter.py).
+Use [`code/day-5/parking_assistant_2_solution.py`](../../code/day-5/parking_assistant_2_solution.py) only
 for comparison, recovery, or teacher demonstration.
 
 The starter deliberately supplies imports, pin setup, cleanup, and function

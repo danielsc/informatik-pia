@@ -18,8 +18,7 @@ try:
         led.duty_u16(raw_value)
         print("Raw:", raw_value, "Brightness:", percent, "%")
         sleep_ms(100)
-except KeyboardInterrupt:
+finally:
     led.duty_u16(0)
     led.deinit()
     print("Stopped")
-
