@@ -184,6 +184,23 @@ cheer()
       </section>
 
       <section>
+        <p class="eyebrow">Meet the component</p>
+        <h2>Eight LEDs, each with its own colour</h2>
+        <p class="activity watch">Watch and discuss · Inspect the unpowered 8-RGB module</p>
+        <div class="grid-2">
+          <svg viewBox="0 0 360 280" role="img" aria-label="Simplified square 8-RGB module with eight individually addressable LEDs and IN S V G header" style="width:100%;height:280px;">
+            <rect x="60" y="10" width="240" height="240" rx="18" fill="#087f5b" stroke="#065f46" stroke-width="5"/>
+            <g stroke="#e2e8f0" stroke-width="5"><circle cx="115" cy="55" r="19" fill="#ef4444"/><circle cx="180" cy="55" r="19" fill="#f59e0b"/><circle cx="245" cy="55" r="19" fill="#22c55e"/><circle cx="245" cy="130" r="19" fill="#06b6d4"/><circle cx="245" cy="205" r="19" fill="#3b82f6"/><circle cx="180" cy="205" r="19" fill="#a855f7"/><circle cx="115" cy="205" r="19" fill="#ec4899"/><circle cx="115" cy="130" r="19" fill="white"/></g>
+            <text x="180" y="125" text-anchor="middle" fill="white" font-family="sans-serif" font-size="25">8 RGB</text>
+            <text x="180" y="155" text-anchor="middle" fill="white" font-family="sans-serif" font-size="18">IN: S V G</text>
+            <text x="180" y="278" text-anchor="middle" fill="#111827" font-family="sans-serif" font-size="17">Component sketch—not wiring</text>
+          </svg>
+          <div class="card"><h3>Addressable RGB pixels</h3><p>Each of the <strong>8 LEDs</strong> mixes red, green, and blue. Choose one colour for all eight—or a different colour at each position.</p><p>One GP16 data signal controls all eight. Use low brightness values. Keep the module off the breadboard; its IN header takes male–female jumpers.</p></div>
+        </div>
+        <aside class="notes">Hold up the real square module and locate its eight LEDs and IN header. The original sketch explains capability, not physical wiring. No connection or API call yet: the complete circuit introduction still comes immediately before the build.</aside>
+      </section>
+
+      <section>
         <p class="eyebrow">Parameters and colour data</p>
         <h2>One grouped RGB value can be passed into a function</h2>
         <p class="activity">Try in Thonny · Print the grouped value before we use hardware</p>
@@ -298,6 +315,22 @@ for index in range(8):
       </section>
 
       <section>
+        <p class="eyebrow">Create the pixel controller first</p>
+        <h2><code>pixels</code> is a <code>NeoPixel</code> object</h2>
+        <p class="activity watch">Watch and discuss · Read the setup; hardware remains unplugged</p>
+        <pre><code class="language-python" data-trim>
+from machine import Pin
+from neopixel import NeoPixel
+
+PIXEL_PIN = 16
+PIXEL_COUNT = 8
+pixels = NeoPixel(Pin(PIXEL_PIN), PIXEL_COUNT)
+        </code></pre>
+        <div class="callout"><p><code>NeoPixel(...)</code> creates the controller for eight LEDs on GP16. It is <strong>list-like, not a regular Python list</strong>: indexed assignments store colour data; <code>pixels.write()</code> sends that data to the LEDs.</p></div>
+        <aside class="notes">Explain both imports, the pin and count constants, and the constructor before any pixels[index] use. Unlike a normal list, this object communicates with hardware and has fill/write methods. Students reuse this complete creation code in the supplied files. Do not reconnect yet.</aside>
+      </section>
+
+      <section>
         <p class="eyebrow">Pixel positions</p>
         <h2>Valid indexes on this module are 0 through 7</h2>
         <p class="activity paper">On paper · Mark the first position, the last position, and the one that is out of range</p>
@@ -314,11 +347,13 @@ for index in range(8):
         <pre><code class="language-python" data-trim>
 for index in range(8):
     pixels[index] = (0, 0, 20)
+pixels.write()
         </code></pre>
-        <div class="callout danger"><p><strong>Predict:</strong> <code>pixels[8]</code> asks for a ninth position that this module does not have.</p></div>
+        <div class="callout"><p><code>pixels[index] = (0, 0, 20)</code> stores dim blue at the current position. After the loop, <code>pixels.write()</code> sends all eight colours: <strong>all eight LEDs light blue</strong>.</p></div>
+        <p class="tiny"><strong>Predict:</strong> Is <code>pixels[8]</code> valid? Why?</p>
         <aside class="notes">
           The physical module is arranged in a loop, but the code still numbers eight
-          positions from 0 to 7. Ask which index is first, last, and invalid.
+          positions from 0 to 7. First is 0, last is 7, 8 is invalid. The assignment changes buffered colour data, not index itself. write is outside the loop, sending all changes together. Discuss only until the circuit has passed its unplugged check.
         </aside>
       </section>
 
@@ -369,13 +404,14 @@ for lap in range(2):
           <a class="diagram-link" href="../../diagrams/rgb8-module.html">Exact diagram + table</a>
         </div>
         <div class="diagram-frame">
-          <img src="../../diagrams/rgb8-module.png" alt="Complete square Freenove 8-RGB module diagram wired from the IN header to Pico GP16, 3.3 volts, and ground.">
+          <img src="../../diagrams/rgb8-module.png" alt="Complete circuit with the square 8-RGB module off the breadboard, connected by male–female jumpers from IN S V G to GP16, 3.3 volts, and ground.">
         </div>
         <aside class="notes">
           This slide introduces the exact circuit immediately before students build it.
           It supports 01_neopixel_colours.py. USB stays disconnected. Use the header
           marked IN: IN S to GP16, IN V to 3.3 V, and IN G to GND. Require a partner
-          check against the HTML table, not only the PNG.
+          check against the HTML table, not only the PNG. Keep the module off-board:
+          female ends on IN S/V/G; male ends in the breadboard. Do not insert the module into the breadboard.
         </aside>
       </section>
 
@@ -413,9 +449,8 @@ AMBER = (20, 10, 0)
 
       <section>
         <p class="eyebrow">See reuse in working code</p>
-        <h2><code>02_pixel_functions.py</code> names three jobs clearly</h2>
-        <p class="activity">Try in Thonny · Run the file, then answer the prompts</p>
-        <div class="grid-2">
+        <h2>Three functions, three jobs</h2>
+        <p class="activity">Try in Thonny · Run <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a>, then find these functions</p>
           <pre><code class="language-python" data-trim>
 def show_colour(colour):
     pixels.fill(colour)
@@ -428,7 +463,14 @@ def chase(colour, delay_ms):
 def level_to_colour(percent):
     ...
           </code></pre>
-          <div>
+        <aside class="notes">Show the three named jobs in 02_pixel_functions.py. This is an excerpt; imports and pixel setup remain in the file. Run the unchanged example on the checked RGB circuit, then continue with the reading prompts.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Read the reusable jobs</p>
+        <h2>What goes in—and what comes back?</h2>
+        <p class="activity">Try in Thonny · Keep 02_pixel_functions.py open</p>
+        <div class="grid-2">
             <div class="card">
               <h3>Find and explain</h3>
               <ul class="tight">
@@ -441,7 +483,6 @@ def level_to_colour(percent):
             <div class="card" style="margin-top: 0.6em;">
               <h3>Big idea</h3>
               <p>Returning a colour is more reusable than printing a colour because later code can still use the value.</p>
-            </div>
           </div>
         </div>
         <div class="callout"><p>Open <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a> and match each function name to its one job.</p></div>
@@ -462,17 +503,21 @@ def level_to_colour(percent):
         </aside>
       </section>
 
+      <section class="diagram-slide">
+        <div class="diagram-header">
+          <div><p class="eyebrow">Build while unplugged · Task 2</p><h2>RGB + potentiometer: the complete circuit</h2></div>
+          <a class="diagram-link" href="../../diagrams/neopixel-and-potentiometer.html">Exact diagram + table</a>
+        </div>
+        <div class="diagram-frame contain">
+          <img src="../../diagrams/neopixel-and-potentiometer.png" alt="Complete Pixel Pet circuit: off-board 8-RGB module via male–female IN jumpers to GP16, 3.3 volts and ground; potentiometer outer pins to 3.3 volts and ground, wiper to GP26 ADC0.">
+        </div>
+        <aside class="notes">This is the full combined circuit for 03_pixel_pet_1_starter.py, not the RGB-only base. Stop the RGB test and unplug USB. Keep the tested module off-board and its three wires connected; add only the knob. Open the scalable HTML for the exact table.</aside>
+      </section>
+
       <section>
-        <p class="eyebrow">Build while unplugged · Task 2</p>
-        <h2>Keep the RGB base, then add the potentiometer</h2>
-        <a class="diagram-link" href="../../diagrams/rgb8-module.html" style="margin-bottom: 0.8em;">RGB base diagram + table</a>
-        <div class="grid-2">
-          <div>
-            <div class="diagram-frame layered">
-              <img src="../../diagrams/rgb8-module.png" alt="Retained RGB base diagram showing the 8-RGB module still connected from the IN header to GP16, 3.3 volts, and ground.">
-            </div>
-          </div>
-          <div>
+        <p class="eyebrow">Check the added layer</p>
+        <h2>Keep three wires; add three wires</h2>
+        <p class="activity build">Build while unplugged · Partner-check before reconnecting</p>
             <table class="compact-table">
               <thead><tr><th>Potentiometer pin</th><th>Connection</th></tr></thead>
               <tbody>
@@ -483,8 +528,6 @@ def level_to_colour(percent):
             </table>
             <div class="callout warning" style="margin-top: 0.7em;">
               <p>Stop the RGB test, unplug USB, keep its three working wires, add these three knob wires, then partner-check all six connections.</p>
-            </div>
-          </div>
         </div>
         <aside class="notes">
           Make students say which three connections are unchanged and which three are
@@ -496,7 +539,7 @@ def level_to_colour(percent):
       <section>
         <p class="eyebrow">Open the starter</p>
         <h2>First read the knob and choose a state</h2>
-        <p class="activity">Test the circuit · Open <code>03_pixel_pet_starter.py</code></p>
+        <p class="activity">Test the circuit · Open <a href="../../code/day-3/03_pixel_pet_1_starter.py"><code>03_pixel_pet_1_starter.py</code></a></p>
         <div class="grid-2">
           <div class="card">
             <h3>Already supplied</h3>
@@ -529,20 +572,42 @@ def level_to_colour(percent):
         <div class="state-grid">
           <div class="card"><h3>0-32%</h3><p><strong>sleepy</strong><br>slow blue pulse</p></div>
           <div class="card"><h3>33-65%</h3><p><strong>curious</strong><br>green moving pixel</p></div>
-          <div class="card"><h3>66-100%</h3><p><strong>excited</strong><br>quick colourful sparkle</p></div>
+          <div class="card"><h3>66-100%</h3><p><strong>excited</strong><br>quick colour party</p></div>
         </div>
+        <div class="callout" style="margin-top:0.7em;"><p>Turn the knob through all three ranges. Each state selects one display function. Complete and test those functions one at a time on the next slide.</p></div>
+        <aside class="notes">Confirm the three states and their expected visible behaviour before implementation. The baseline stays playful: blue fade, green chase, quick colour party. Read state and energy in the Shell if the output seems wrong.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Implement the displays</p>
+        <h2>One animation, one test</h2>
+        <p class="activity">Try in Thonny · Test each function before adding the next</p>
         <ol>
-          <li>Complete <code>show_sleepy()</code> and test it directly.</li>
-          <li>Complete <code>show_curious()</code> using indexes 0-7 and test it.</li>
-          <li>Complete <code>show_excited()</code> with low RGB values and test it.</li>
+          <li><code>show_sleepy()</code>: use <code>range(6)</code> and <code>blue = step * 3</code>; fill blue, write and pause.</li>
+          <li><code>show_curious()</code>: clear, light one green pixel, write and pause for each index in <code>range(PIXEL_COUNT)</code>.</li>
+          <li><code>show_excited()</code>: loop over a list of low RGB tuples; fill, write and pause for each colour.</li>
           <li>Run the whole program and turn the knob through every range.</li>
         </ol>
         <aside class="notes">
           Keep each function small and observable. Ask students to call a display
           function directly if state selection works but the pixels do not. Students
-          remain in 03_pixel_pet_starter.py and keep its printed energy and state lines
-          as debugging evidence.
+          remain in 03_pixel_pet_1_starter.py and keep its printed energy and state lines
+          as debugging evidence. Use taught for loops, lists, if and functions—no modulo
+          or three-argument range is needed. Call each function directly before integration.
         </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Optional display remix</p>
+        <h2>Let the state choose how many pixels light</h2>
+        <p class="activity paper">On paper · Plan a direct lit-count before coding</p>
+        <div class="grid-3">
+          <div class="card"><h3>sleepy</h3><p>2 dim blue pixels</p></div>
+          <div class="card"><h3>curious</h3><p>5 green pixels</p></div>
+          <div class="card"><h3>excited</h3><p>8 amber pixels</p></div>
+        </div>
+        <div class="callout" style="margin-top:0.7em;"><p>Use <code>if</code>/<code>elif</code>/<code>else</code> to choose a count. Clear the display, loop over <code>range(lit_count)</code> to assign that many pixels, then call <code>pixels.write()</code>. Predict the count at 0%, 50%, and 100%.</p></div>
+        <aside class="notes">Optional only after the three baseline animations work. The state zones directly select 2, 5, 8 lit pixels; no wraparound arithmetic. Clear first so previously lit positions do not remain on. Preserve finally cleanup.</aside>
       </section>
 
       <section>

@@ -23,7 +23,7 @@ Baut in dieser Reihenfolge:
 
 1. Richtet den Pico wie gezeigt mit dem USB-Anschluss nach links aus.
 2. Setzt den Taster genau wie gezeigt über die mittlere Rinne.
-3. Fügt den 10-kΩ-Pull-up-Widerstand und den 220-Ω-LED-Widerstand hinzu.
+3. Fügt den 10-kΩ-Pull-down-Widerstand und den 220-Ω-LED-Widerstand hinzu.
 4. Verbindet Stromversorgung, GND, GP13 und GP15.
 5. Eine Person liest die HTML-Verbindungstabelle laut vor, während die andere
    auf jedes Loch zeigt.
@@ -42,15 +42,15 @@ Durchgangsprüfmodus:
 3. Der A-zu-B-Test sollte nur bei gedrücktem Taster piepen.
 
 Wenn ihr den Taster in denselben Löchern um 90 Grad dreht, kann die Eingabe
-dauerhaft gedrückt wirken. Falls das Programm immer `Pressed: True` ausgibt,
+dauerhaft gedrückt wirken. Falls das Programm immer `Pressed: 1` ausgibt,
 trennt USB und prüft die Ausrichtung, bevor ihr den Code ändert.
 
 Führt
 [`code/day-2/01_button_decisions.py`](../../code/day-2/01_button_decisions.py)
-aus. Die Freenove-Schaltung ist active-low:
+aus. Die Kursschaltung ist active-high:
 
 ```python
-pressed = not button.value()
+pressed = button.value()
 
 if pressed:
     led.on()
@@ -62,10 +62,16 @@ else:
 den anderen Pfad. Das vorgegebene `while True` fragt den Taster immer wieder
 ab, bis ihr Stop oder `Ctrl+C` drückt.
 
-Der 10-kΩ-Pull-up-Widerstand sorgt dafür, dass GP13 bei losgelassenem Taster
-`1` liest. Durch Drücken wird GP13 mit GND verbunden und liest `0`. `not`
-wandelt dieses active-low-Signal in einen verständlichen Python-Wert um:
-`pressed` ist `True`, wenn jemand den Taster drückt.
+Der 10-kΩ-Pull-down-Widerstand verbindet GP13 mit GND. Bei losgelassenem
+Taster liest GP13 `0`. Drücken verbindet GP13 mit 3.3 V und ergibt `1`.
+Python behandelt `0` in einer Bedingung als falsch und `1` als wahr:
+`if pressed:` bedeutet direkt „wenn der Taster gedrückt ist“. Der Eingang
+erkennt Spannung, nicht Strom.
+
+`not` kehrt einen Wahrheitswert um: `not True` ist `False`, `not False` ist
+`True`. `not pressed` bedeutet also „der Taster ist nicht gedrückt“.
+`and` verlangt zwei wahre Bedingungen, `or` mindestens eine. Setzt für die
+folgenden Beispiele zuerst `score = 1` und `time_is_up = False`.
 
 Sagt diese Ausdrücke voraus, bevor ihr sie ausprobiert:
 
@@ -101,6 +107,26 @@ Der Pico liest eine Zahl von 0 bis 65535:
 raw_value = knob.read_u16()
 percent = int(raw_value / 65535 * 100)
 ```
+
+### ADC und PWM zum Nachschlagen
+
+**ADC = Analog-to-Digital Converter (Analog-Digital-Wandler).** Er macht aus
+einer Eingangsspannung eine Zahl. Das Potentiometer verändert die Spannung
+an GP26; `knob.read_u16()` stellt ungefähr 0–3.3 V als Zahl von `0` bis
+`65535` dar.
+
+**PWM = Pulse-Width Modulation (Pulsweitenmodulation).** Sie schaltet einen
+Ausgang schnell aus und ein. Der **Tastgrad (duty cycle)** ist der Anteil der
+Zeit, in dem er eingeschaltet bleibt: 10% ergibt eine schwach leuchtende LED,
+90% eine helle. `led.duty_u16(...)` legt diesen Anteil mit `0` bis `65535`
+fest. Der Pin wechselt zwischen ungefähr 0 V und 3.3 V; er liefert keine
+gleichbleibende Zwischen-Spannung. **ADC liest den Drehknopf; PWM steuert die
+Helligkeit.**
+
+Mit `Pin(..., Pin.IN).value()` an GP26 würdet ihr nur `0` oder `1` lesen,
+nicht die Drehknopfposition. Der Umschaltpunkt liegt nicht garantiert in
+der Mitte. Für eine ausdrückliche Prüfung der oberen Hälfte verwendet
+`knob.read_u16() >= 32768`.
 
 Hier wandelt `int(...)` durch Casting einen Float in einen Integer um. Notiert
 Werte nahe 0 %, 25 %, 50 %, 75 % und 100 %. Echte Messwerte sind nicht exakt.
@@ -154,18 +180,18 @@ Indizes beginnen bei null. Sagt voraus, was `times[-1]` zurückgibt.
 Ein Spiel muss den Taster beim Warten ständig prüfen:
 
 ```python
-while button.value():
+while not button.value():
     sleep_ms(1)
 ```
 
 Lest dies so: „Solange der Taster losgelassen ist, wartet 1 ms und prüft
-erneut.“ Die Schleife endet, wenn `button.value()` zu `0` wird. Anders als
+erneut.“ Die Schleife endet, wenn `button.value()` zu `1` wird. Anders als
 `while True` hat diese Schleife eine Bedingung, die falsch werden kann.
 
-Für das entgegengesetzte Warten wird `not` verwendet:
+Das entgegengesetzte Warten prüft direkt, ob der Taster gedrückt ist:
 
 ```python
-while not button.value():
+while button.value():
     sleep_ms(10)
 ```
 
@@ -190,7 +216,7 @@ Alles, was ihr für die Grundversion schreiben müsst, wurde jetzt geübt:
 | Spielcode | Wo er eingeführt wurde |
 |---|---|
 | Variablen und Zuweisung | Tag 1 |
-| active-low `button.value()` | Tag 2, Abschnitt 1 |
+| active-high `button.value()`, `not` und `and` | Tag 2, Abschnitt 1 |
 | `if`/`else` und Vergleiche | Tag 2, Abschnitte 1 und 2 |
 | `scores = []`, `append`, `len` und `min` | Tag 2, Abschnitt 3 |
 | `while` mit einer Bedingung | Tag 2, Abschnitt 4 |
@@ -207,12 +233,17 @@ verwendet nur die unten aufgeführten Aufrufmuster.
 Lasst die vollständige Schaltung verbunden. Das Reaktionsspiel nutzt den
 Taster an GP13 und die LED an GP15; das Potentiometer an GP26 wird einfach
 ignoriert. Beginnt mit
-[`code/day-2/03_reaction_game_starter.py`](../../code/day-2/03_reaction_game_starter.py).
+[`code/day-2/03_reaction_game_1_starter.py`](../../code/day-2/03_reaction_game_1_starter.py).
 Der Starter enthält Importe, Pin-Einrichtung, eine leere `scores`-Liste und das
 sichere Ausschalten der LED. **Ihr schreibt das Spiel.**
 
-Die erste Version ist bewusst kleiner als ein kommerzielles Reaktionsspiel:
-drei Runden, keine Fehlstart-Erkennung und zwei Ergebniskategorien.
+### So funktioniert das Spiel
+
+Lasst den Taster los und wartet. Sobald die LED aufleuchtet, drückt ihr so
+schnell wie möglich. Ein am Ende der zufälligen Wartezeit noch gedrückter Taster ist ein **Fehlstart**:
+Dieser Versuch zählt nicht, und ihr versucht es erneut. Spielt drei gültige
+Runden und vergleicht eure Reaktionszeiten. Die erste Version hat zwei
+Ergebniskategorien.
 
 ### Schritt 1: Schreibt den Plan als Kommentare
 
@@ -221,6 +252,7 @@ Bringt diese Ideen in die richtige Reihenfolge, bevor ihr Python schreibt:
 - wiederholen, bis die Ergebnisliste drei Werte enthält;
 - warten, bis der Taster losgelassen ist;
 - eine zufällige Zeit lang warten;
+- danach den Taster prüfen; ist er noch gedrückt, einen Fehlstart ohne Ergebnis melden;
 - die LED einschalten und die Startzeit speichern;
 - warten, solange der Taster losgelassen ist;
 - die vergangene Zeit berechnen und die LED ausschalten;
@@ -233,15 +265,28 @@ Verwendet die vorgegebenen Werkzeuge:
 
 - `randint(1000, 3000)` wählt die Wartezeit in Millisekunden;
 - `sleep_ms(wait_ms)` wartet diese Zeit;
+- `sleep_ms(1)` wartet kurz zwischen den Prüfungen;
 - `ticks_ms()` speichert einen Zeitstempel;
 - `ticks_diff(end, start)` berechnet die vergangenen Millisekunden.
 
 Schreibt und testet eine Runde, bevor ihr die äußere Spielschleife hinzufügt.
 Nach dem Tastendruck muss die LED ausgehen und die Shell eine glaubwürdige
-Reaktionszeit ausgeben. Denkt daran: Dieser active-low-Taster liest `1`, wenn
-er losgelassen ist, und `0`, wenn er gedrückt ist. Verwendet eine
+Reaktionszeit ausgeben. Denkt daran: Dieser active-high-Taster liest `0`, wenn
+er losgelassen ist, und `1`, wenn er gedrückt ist. Verwendet eine
 `while`-Schleife, um auf das Loslassen zu warten, und eine weitere, um auf den
 Tastendruck zu warten.
+
+Haltet die zufällige Wartezeit einfach und prüft danach den Taster vor dem
+Einschalten der LED:
+
+```python
+sleep_ms(wait_ms)
+```
+
+Prüft danach mit `if button.value():` auf einen Fehlstart. LED, Reaktionsmessung
+und Ergebnis gehören in den `else`-Zweig. Diese Grundversion erkennt einen
+beim Start gehaltenen Taster, aber keinen während der Wartezeit bereits
+losgelassenen Druck.
 
 ### Schritt 3: Fügt eine Entscheidung hinzu
 
@@ -270,9 +315,9 @@ Fügt jeden Wert `reaction_ms` mit `append` zu `scores` hinzu. Gebt nach dem
 Ende der Schleife die gesamte Liste und mit `min(scores)` das schnellste
 Ergebnis aus.
 
-Das vorgegebene `try`/`except`/`finally`-Gerüst dient der Sicherheit. Ihr müsst
-diese Syntax heute nicht selbst schreiben. Verwendet
-[`code/day-2/03_reaction_game_solution.py`](../../code/day-2/03_reaction_game_solution.py)
+Das vorgegebene `try`/`finally`-Gerüst nutzt das Aufräummuster von Tag 1.
+Lasst es stehen. Verwendet
+[`code/day-2/03_reaction_game_2_solution.py`](../../code/day-2/03_reaction_game_2_solution.py)
 nur zur Wiederherstellung oder zum Vergleich, nachdem eure Version mit drei
 Runden funktioniert.
 
@@ -280,8 +325,6 @@ Runden funktioniert.
 
 Wählt erst eine Erweiterung, wenn die Grundversion funktioniert:
 
-- erkennt einen Tastendruck vor dem Aufleuchten der LED und meldet einen
-  Fehlstart;
 - berechnet den Durchschnitt mit `sum(scores) / len(scores)`;
 - fügt mit `elif` eine dritte Ergebniskategorie hinzu;
 - feiert eine persönliche Bestzeit;
@@ -289,14 +332,17 @@ Wählt erst eine Erweiterung, wenn die Grundversion funktioniert:
 - erstellt eine Version für zwei Personen.
 
 Die optionale Datei
-[`code/day-2/03_reaction_game_extension.py`](../../code/day-2/03_reaction_game_extension.py)
-zeigt eine mögliche Fehlstart-Erkennung, nachdem ihr eure eigene entworfen
-habt.
+[`code/day-2/03_reaction_game_3_extension.py`](../../code/day-2/03_reaction_game_3_extension.py)
+ergänzt nach der funktionierenden Grundversion fünf Runden, eine dritte
+Ergebniskategorie und einen Durchschnitt. Sie prüft außerdem während der
+Wartezeit auf Tastendrücke, auch wenn diese vor ihrem Ende losgelassen werden.
+Diese zusätzliche Logik ist optional.
 
 ### Checkliste für die Vorführung
 
 - Zeigt eine vollständige Runde mit Zeitmessung.
 - Zeigt alle drei gespeicherten Ergebnisse.
+- Zeigt einen Fehlstart und dass dabei kein Ergebnis hinzugefügt wird.
 - Erklärt, warum das Hauptprogramm eine `while`-Schleife braucht.
 - Zeigt auf den Boolean-Ausdruck, der einen Wartevorgang beendet.
 - Erklärt, warum jedes Ergebnis ein Integer ist.

@@ -95,6 +95,7 @@
     }
 
     .reveal pre {
+      position: relative;
       width: 100%;
       margin: 0.55em 0;
       border: 1px solid #1e293b;
@@ -705,6 +706,23 @@
       </section>
 
       <section>
+        <p class="eyebrow">Zwei weitere Arten von Werten</p>
+        <h2>Eine Gruppe von Werten — oder noch kein Wert</h2>
+        <p class="activity">In Thonny ausprobieren · Vorhersagen, dann jeden Typ prüfen</p>
+        <div class="grid-2">
+          <div class="card"><h3><code>tuple</code></h3><p><code>(0, 30, 0)</code> bündelt Werte in fester Reihenfolge. Später nutzen wir ein Tupel für Rot, Grün und Blau. Seine Elemente lassen sich nicht direkt ändern.</p></div>
+          <div class="card"><h3><code>None</code></h3><p>Ein besonderer Wert für „noch kein Wert“ oder „kein brauchbares Ergebnis“. Er ist weder null noch der Text <code>"None"</code>.</p></div>
+        </div>
+        <pre><code class="language-python" data-trim>
+colour = (0, 30, 0)
+measurement = None
+print(type(colour))
+print(type(measurement))
+        </code></pre>
+        <aside class="notes">Erwartet tuple und NoneType. Ein Tupel ist eine geordnete Gruppe; None bezeichnet das Fehlen eines Werts, keine Zahl. Noch keine Indizes oder Sensorprogramme verwenden. An Tag 3 und 4 wieder aufgreifen.</aside>
+      </section>
+
+      <section>
         <p class="eyebrow">Ausdrücke</p>
         <h2>Ein Ausdruck erzeugt einen Wert</h2>
         <p class="activity">In Thonny ausprobieren · Sagt voraus, testet dann alle drei</p>
@@ -814,6 +832,25 @@ print("Hello, physical world!")
           Lassen Sie zuerst auf das Programm und dann auf die Ausgabe zeigen. Führen Sie
           das Skript aus und vergleichen Sie die Reihenfolge in Shell und Editor.
         </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Programme sicher beenden</p>
+        <h2><code>try</code> führt aus; <code>finally</code> räumt auf</h2>
+        <p class="activity watch">Anschauen und besprechen · Normales Ende, dann Stop verfolgen</p>
+        <pre><code class="language-python" data-trim>
+from machine import Pin
+from time import sleep
+
+led = Pin("LED", Pin.OUT)
+try:
+    led.on()
+    sleep(1)
+finally:
+    led.off()
+        </code></pre>
+        <div class="callout success"><p>Der eingerückte <code>try</code>-Block führt die Aufgabe aus. <code>finally</code> schaltet den Ausgang aus: am Ende, bei einem unterbrechenden Fehler oder bei Stop / <code>Ctrl+C</code>. Lasst dieses Aufräumen in jedem Hardwareprogramm stehen.</p></div>
+        <aside class="notes">try/finally vor dem ersten vorgegebenen Hardwareprogramm einführen. Das ist Aufräumen, nicht try/except oder Fehlerbehandlung: Ein Fehler kann danach weiterhin angezeigt werden. Bei getrennter Stromversorgung kann der Block nicht laufen. Beide eingerückten Blöcke erklären; das Gerüst wird wiederverwendet, nicht auswendig gelernt.</aside>
       </section>
 
       <section>
@@ -988,6 +1025,33 @@ led.off()
       </section>
 
       <section>
+        <p class="eyebrow">Im Inneren eines Breadboards</p>
+        <h2>Welche Löcher sind schon verbunden?</h2>
+        <p class="activity watch">Anschauen und besprechen · USB bleibt getrennt</p>
+        <svg viewBox="0 0 1000 260" role="img" aria-label="Schema getrennter Fünfergruppen, der unverbundenen Mittelrinne und unterbrochener Stromschienen" style="display:block;width:100%;height:260px;background:white;border-radius:12px;">
+          <g font-family="sans-serif" font-size="22" fill="#111827">
+            <text x="25" y="30">Stromschienen: + und − sind getrennt</text>
+            <path d="M30 60H450 M510 60H960" stroke="#dc2626" stroke-width="8"/>
+            <path d="M30 90H450 M510 90H960" stroke="#2563eb" stroke-width="8"/>
+            <text x="5" y="67">+</text><text x="5" y="97">−</text><text x="450" y="43">Lücke</text>
+            <rect x="30" y="125" width="930" height="95" rx="12" fill="#f1f5f9"/>
+            <path d="M350 125V220" stroke="white" stroke-width="24"/>
+            <g stroke="#087f5b" stroke-width="9"><path d="M65 155H285 M415 155H635"/><path d="M65 195H285 M415 195H635"/></g>
+            <g fill="white" stroke="#475569" stroke-width="2">
+              <circle cx="65" cy="155" r="9"/><circle cx="120" cy="155" r="9"/><circle cx="175" cy="155" r="9"/><circle cx="230" cy="155" r="9"/><circle cx="285" cy="155" r="9"/>
+              <circle cx="415" cy="155" r="9"/><circle cx="470" cy="155" r="9"/><circle cx="525" cy="155" r="9"/><circle cx="580" cy="155" r="9"/><circle cx="635" cy="155" r="9"/>
+              <circle cx="65" cy="195" r="9"/><circle cx="120" cy="195" r="9"/><circle cx="175" cy="195" r="9"/><circle cx="230" cy="195" r="9"/><circle cx="285" cy="195" r="9"/>
+              <circle cx="415" cy="195" r="9"/><circle cx="470" cy="195" r="9"/><circle cx="525" cy="195" r="9"/><circle cx="580" cy="195" r="9"/><circle cx="635" cy="195" r="9"/>
+            </g>
+            <text x="690" y="160">Je 5 Löcher verbunden</text><text x="690" y="200">Nächste Gruppe: getrennt</text>
+            <text x="245" y="250">Mittelrinne: keine Verbindung darüber</text>
+          </g>
+        </svg>
+        <div class="callout warning" style="margin-top:0.5em;"><p>Schienen sind nicht automatisch versorgt. <strong>+</strong> und <strong>−</strong> sind Beschriftungen, keine Spannungsquellen. Verbindet nur die gezeigten Abschnitte: 3.3 V und VBUS nie verwechseln. Eine Lücke wird nur überbrückt, wenn der Schaltplan es verlangt.</p></div>
+        <aside class="notes">Eigenes Verbindungsschema, kein physischer Verdrahtungsplan. Am echten Board fünf verbundene Löcher, eine andere Gruppe, Mittelrinne und getrennte Schienen zeigen. Schienenunterbrechungen variieren: Markierungen und genaue Tabelle prüfen. Zwei Beine in derselben Gruppe sind verbunden; ein Widerstand muss getrennte Gruppen verbinden. Noch kein Strom.</aside>
+      </section>
+
+      <section>
         <p class="eyebrow">Sicherheitskontrolle</p>
         <h2>Trennen → bauen → im Team prüfen → einschalten</h2>
         <p class="activity build">Aufbau vorbereiten · Programm mit Stop beenden und USB trennen</p>
@@ -1124,7 +1188,7 @@ led.off()
       <section>
         <p class="eyebrow">Euer Projekt</p>
         <h2>Erzeugt eine Nachricht aus Licht</h2>
-        <div class="grid-2">
+        <p class="activity">In Thonny ausprobieren · Starter öffnen, Aufräumen behalten</p>
           <div class="card">
             <h3>Muss enthalten</h3>
             <ul>
@@ -1135,21 +1199,10 @@ led.off()
               <li>einen abschließenden <code>off</code>-Zustand.</li>
             </ul>
           </div>
-          <div class="card">
-            <h3>Baut es in dieser Reihenfolge</h3>
-            <ol>
-              <li>Führt den Starter aus und prüft sein kurzes Lichtsignal.</li>
-              <li>Fügt zwei kurze Signale hinzu, um die erste Gruppe zu beenden.</li>
-              <li>Ändert <code>short_flash</code> und prüft alle drei.</li>
-              <li>Fügt eine Pause und dann eine Gruppe mit <code>long_flash</code> hinzu.</li>
-              <li>Verdeckt den Code und lasst euer Signal entschlüsseln.</li>
-            </ol>
-          </div>
-        </div>
         <div class="callout warning" style="margin-top: 0.6em;">
           <p>
             Beginnt mit
-            <a href="../../code/day-1/03_secret_signal_starter.py"><code>03_secret_signal_starter.py</code></a>.
+            <a href="../../code/day-1/03_secret_signal_1_starter.py"><code>03_secret_signal_1_starter.py</code></a>.
             Öffnet die Lösung erst, wenn euer eigenes Signal funktioniert.
           </p>
         </div>
@@ -1157,7 +1210,23 @@ led.off()
           Halten Sie Lösungsdateien verborgen oder unter Ihrer Kontrolle. Für den
           Mindesterfolg genügt die eingebaute LED; stärkere Arbeiten übertragen dieselbe
           Logik auf die geprüfte GP15-Schaltung. Die Wiederholung an Tag 1 ist beabsichtigt;
-          Schleifen folgen an Tag 3. Prüfen Sie zuerst, ob ein Signal funktioniert und
+          Schleifen folgen an Tag 3.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">In kleinen Schritten bauen</p>
+        <h2>Ein Lichtsignal, dann die ganze Nachricht</h2>
+        <p class="activity">In Thonny ausprobieren · Eine Änderung, vorhersagen, dann Run</p>
+        <ol>
+          <li>Führt den Starter aus und prüft sein kurzes Lichtsignal.</li>
+          <li>Fügt zwei kurze Signale hinzu, um die erste Gruppe zu beenden.</li>
+          <li>Ändert <code>short_flash</code> und prüft alle drei.</li>
+          <li>Fügt eine Pause und dann eine Gruppe mit <code>long_flash</code> hinzu.</li>
+          <li>Verdeckt den Code und lasst euer Signal entschlüsseln.</li>
+        </ol>
+        <aside class="notes">
+          Prüfen Sie zuerst, ob ein Signal funktioniert und
           mit off endet. Lassen Sie später die Wirkung einer geänderten Zeitvariable
           zeigen und beide Teammitglieder ihre Ergänzungen erklären. Tauschen Sie Driver
           und Navigator nach dem ersten funktionierenden Signal oder nach 20 Minuten.

@@ -25,9 +25,17 @@ and [Ultrasonic Ranging lesson](https://docs.freenove.com/projects/fnk0063/en/la
 The local diagram is original course artwork informed by that source.
 
 An instructor must inspect the unpowered circuit before USB is connected.
-Gather the HC-SR04, one 1 kΩ resistor, one 2 kΩ resistor, and jumper wires.
-Place the sensor and both divider resistors before adding 5 V. Use the diagram's
+Gather the HC-SR04, one 1 kΩ resistor, one 2 kΩ resistor, and four
+male-to-female jumper leads. Keep the sensor off the breadboard with its
+two cylinders unobstructed; sockets fit its header and male ends enter the
+breadboard. Place both divider resistors before adding 5 V. Use the diagram's
 connection table to verify `Echo → 1 kΩ → GP18 junction → 2 kΩ → GND`.
+
+If your kit has no 2 kΩ resistor, use **two 1 kΩ resistors in series** for
+the lower leg, as shown in the
+[divider alternative](WIRING_AND_SAFETY.md#hc-sr04-distance-sensor-safer-echo-connection).
+You need three 1 kΩ resistors for the divider, plus a fourth for the buzzer
+driver. Never omit the divider.
 
 ## 1. Measure a round trip
 
@@ -40,6 +48,18 @@ distance = speed × round-trip time ÷ 2
 
 The code uses a timeout. Without one, no returning echo could trap the program
 inside a loop forever.
+
+The 10 microsecond **electrical Trig pulse** requests a measurement; it is
+not the sound pulse. The sensor emits eight cycles of 40 kHz ultrasound
+(about 200 microseconds). Its **electrical Echo pulse** stays high for
+the distance-dependent timing interval. `time_pulse_us(echo, 1, timeout)`
+waits for Echo to go high and measures until it goes low; it does not
+include the wait before Echo becomes high.
+
+If you get “No echo”, stop and unplug before checking: VCC must reach
+VBUS/5 V, Trig must reach GP19, and Echo must reach GP18 **through the
+divider**, not the other way around. All grounds must connect. Test a flat
+target 20–50 cm away. A red rail is not necessarily 5 V: trace its supply.
 
 The supplied `try`/`finally` code returns Trigger low when the program stops.
 It is safety scaffolding; today's student-owned ideas are the sensor function,
@@ -127,7 +147,7 @@ module replaces them.
 
 Build both circuits together from the
 [scalable, accessible proximity-alarm diagram](../../diagrams/proximity-alarm.html).
-It uses GP19 for Trigger, protected GP18 for Echo, GP15 for buzzer control, and
+It uses GP19 for Trigger, protected GP18 for Echo, GP14 for buzzer control, and
 the Pico's onboard LED; no external LED is required.
 
 ![Combined HC-SR04 and passive-buzzer proximity alarm wiring](../../diagrams/proximity-alarm.png)

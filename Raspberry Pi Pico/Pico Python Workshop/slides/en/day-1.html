@@ -95,6 +95,7 @@
     }
 
     .reveal pre {
+      position: relative;
       width: 100%;
       margin: 0.55em 0;
       border: 1px solid #1e293b;
@@ -704,6 +705,23 @@
       </section>
 
       <section>
+        <p class="eyebrow">Two more kinds of value</p>
+        <h2>A group of values—or no value yet</h2>
+        <p class="activity">Try in Thonny · Predict, then inspect each type</p>
+        <div class="grid-2">
+          <div class="card"><h3><code>tuple</code></h3><p><code>(0, 30, 0)</code> groups values in a fixed order. Later we use one tuple for red, green, and blue. Its items cannot be changed in place.</p></div>
+          <div class="card"><h3><code>None</code></h3><p>A special value meaning “no value yet” or “no usable result”. It is not zero and not the text <code>"None"</code>.</p></div>
+        </div>
+        <pre><code class="language-python" data-trim>
+colour = (0, 30, 0)
+measurement = None
+print(type(colour))
+print(type(measurement))
+        </code></pre>
+        <aside class="notes">Expect tuple and NoneType. A tuple is one ordered group; None marks absence, not a number. No indexing or sensor code is needed yet. Revisit these values on Days 3 and 4.</aside>
+      </section>
+
+      <section>
         <p class="eyebrow">Expressions</p>
         <h2>An expression produces a value</h2>
         <p class="activity">Try in Thonny · Predict, then test all three</p>
@@ -812,6 +830,25 @@ print("Hello, physical world!")
           Ask students to point to the program and then the output. Run the script and
           compare the Shell output order with the editor order.
         </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Safe program endings</p>
+        <h2><code>try</code> does the job; <code>finally</code> cleans up</h2>
+        <p class="activity watch">Watch and discuss · Trace a normal finish, then Stop</p>
+        <pre><code class="language-python" data-trim>
+from machine import Pin
+from time import sleep
+
+led = Pin("LED", Pin.OUT)
+try:
+    led.on()
+    sleep(1)
+finally:
+    led.off()
+        </code></pre>
+        <div class="callout success"><p>The indented <code>try</code> block runs the activity. <code>finally</code> turns the output off when it finishes, when an error interrupts it, or when you press Stop / <code>Ctrl+C</code>. Keep this cleanup in every hardware program.</p></div>
+        <aside class="notes">Introduce try/finally before opening any supplied hardware file. This is cleanup, not try/except or error recovery: an error can still be reported afterwards. It cannot run if power is removed. Explain the two indented blocks; students reuse the wrapper rather than memorise it.</aside>
       </section>
 
       <section>
@@ -986,6 +1023,33 @@ led.off()
       </section>
 
       <section>
+        <p class="eyebrow">Inside a breadboard</p>
+        <h2>Which holes are already connected?</h2>
+        <p class="activity watch">Watch and discuss · USB stays unplugged</p>
+        <svg viewBox="0 0 1000 260" role="img" aria-label="Schematic of separate five-hole strips, an unconnected centre channel, and power rails with a split" style="display:block;width:100%;height:260px;background:white;border-radius:12px;">
+          <g font-family="sans-serif" font-size="22" fill="#111827">
+            <text x="25" y="30">Power rails: separate + and − strips</text>
+            <path d="M30 60H450 M510 60H960" stroke="#dc2626" stroke-width="8"/>
+            <path d="M30 90H450 M510 90H960" stroke="#2563eb" stroke-width="8"/>
+            <text x="5" y="67">+</text><text x="5" y="97">−</text><text x="453" y="43">split</text>
+            <rect x="30" y="125" width="930" height="95" rx="12" fill="#f1f5f9"/>
+            <path d="M350 125V220" stroke="white" stroke-width="24"/>
+            <g stroke="#087f5b" stroke-width="9"><path d="M65 155H285 M415 155H635"/><path d="M65 195H285 M415 195H635"/></g>
+            <g fill="white" stroke="#475569" stroke-width="2">
+              <circle cx="65" cy="155" r="9"/><circle cx="120" cy="155" r="9"/><circle cx="175" cy="155" r="9"/><circle cx="230" cy="155" r="9"/><circle cx="285" cy="155" r="9"/>
+              <circle cx="415" cy="155" r="9"/><circle cx="470" cy="155" r="9"/><circle cx="525" cy="155" r="9"/><circle cx="580" cy="155" r="9"/><circle cx="635" cy="155" r="9"/>
+              <circle cx="65" cy="195" r="9"/><circle cx="120" cy="195" r="9"/><circle cx="175" cy="195" r="9"/><circle cx="230" cy="195" r="9"/><circle cx="285" cy="195" r="9"/>
+              <circle cx="415" cy="195" r="9"/><circle cx="470" cy="195" r="9"/><circle cx="525" cy="195" r="9"/><circle cx="580" cy="195" r="9"/><circle cx="635" cy="195" r="9"/>
+            </g>
+            <text x="690" y="160">Each strip: 5 joined holes</text><text x="690" y="200">Next strip: separate</text>
+            <text x="245" y="250">Centre channel: no connection across</text>
+          </g>
+        </svg>
+        <div class="callout warning" style="margin-top:0.5em;"><p>Rails are not automatically powered. <strong>+</strong> and <strong>−</strong> are labels, not voltage sources. Connect only the rail segments shown in the circuit: 3.3 V or VBUS must never be confused. A split needs a jumper only if the diagram calls for it.</p></div>
+        <aside class="notes">This is an original connectivity schematic, not a physical wiring plan. Point to five joined holes, a different strip, the centre gap, and the separate rails on the actual board. Rail splits vary by breadboard: inspect markings and use the exact circuit table. Two legs in one strip are electrically joined; a resistor must bridge separate strips. No power yet.</aside>
+      </section>
+
+      <section>
         <p class="eyebrow">Safety gate</p>
         <h2>Unplug → build → partner-check → power</h2>
         <p class="activity build">Get ready to build · Stop the program and unplug USB</p>
@@ -1121,7 +1185,7 @@ led.off()
       <section>
         <p class="eyebrow">Your build</p>
         <h2>Create a message made of light</h2>
-        <div class="grid-2">
+        <p class="activity">Try in Thonny · Open the starter, keep the cleanup</p>
           <div class="card">
             <h3>Must include</h3>
             <ul>
@@ -1132,28 +1196,33 @@ led.off()
               <li>a final <code>off</code> state.</li>
             </ul>
           </div>
-          <div class="card">
-            <h3>Build it in this order</h3>
-            <ol>
-              <li>Run the starter: check its one short flash.</li>
-              <li>Add two short flashes to finish the first group.</li>
-              <li>Change <code>short_flash</code>; check all three.</li>
-              <li>Add a pause, then a group using <code>long_flash</code>.</li>
-              <li>Hide the code and ask a partner to decode it.</li>
-            </ol>
-          </div>
-        </div>
         <div class="callout warning" style="margin-top: 0.6em;">
           <p>
             Start with
-            <a href="../../code/day-1/03_secret_signal_starter.py"><code>03_secret_signal_starter.py</code></a>.
+            <a href="../../code/day-1/03_secret_signal_1_starter.py"><code>03_secret_signal_1_starter.py</code></a>.
             Do not open the solution until your own signal works.
           </p>
         </div>
         <aside class="notes">
           Keep solution files hidden or teacher-controlled. Minimum success can use
           the onboard LED. Strong work moves the same logic to the checked GP15
-          circuit. Day 1 repetition is intentional; loops arrive on Day 3. While
+          circuit. Day 1 repetition is intentional; loops arrive on Day 3.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Build in small steps</p>
+        <h2>One flash, then a whole message</h2>
+        <p class="activity">Try in Thonny · Change one thing, predict, then Run</p>
+        <ol>
+          <li>Run the starter: check its one short flash.</li>
+          <li>Add two short flashes to finish the first group.</li>
+          <li>Change <code>short_flash</code>; check all three.</li>
+          <li>Add a pause, then a group using <code>long_flash</code>.</li>
+          <li>Hide the code and ask a partner to decode it.</li>
+        </ol>
+        <aside class="notes">
+          While
           circulating, first check that one flash works and ends off. Later, ask
           students to demonstrate what changes when they edit one timing variable,
           and ask both partners to explain the lines they added. Swap driver and

@@ -4,6 +4,14 @@ Use this rubric for every breadboard wiring diagram.
 
 ## 1. Conductor separation
 
+The centre channel is a gap between electrical strips, not a cable obstacle.
+An insulated female-to-male module cable may run straight across it to its
+final breadboard hole without a detour, intermediate contact, or extra jumper.
+Passing over a hole or power rail does not connect the cable there; only its
+actual male endpoint has a contact dot. Do not confuse crossing the channel
+with crossing another conductor: real disconnected wire crossings must still
+be clearly separated or explicitly bridged away from holes and terminals.
+
 Inspect every jumper, component lead, connector contact, and electrical
 endpoint at normal rendering size.
 

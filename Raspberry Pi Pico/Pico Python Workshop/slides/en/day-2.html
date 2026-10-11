@@ -38,7 +38,7 @@
         </div>
         <aside class="notes">
           Keep the goals concrete and student-readable. The key TEALS sequence today is
-          types and casting, Boolean comparisons, not/active-low, if-elif-else, lists,
+          types and casting, Boolean comparisons, not/active-high, and, if-elif-else, lists,
           then conditional while loops and exit conditions.
         </aside>
       </section>
@@ -163,27 +163,54 @@ print(score == 347)
         <aside class="notes">
           This is a TEALS misconception worth surfacing directly. Use the exact wording
           “stores a value” versus “asks a question.” Do not introduce branching yet;
-          the dedicated if/elif/else slide follows after active-low input.
+          the dedicated if/elif/else slide follows after active-high input.
         </aside>
       </section>
 
       <section>
-        <p class="eyebrow"><code>not</code> and active-low input</p>
-        <h2>The button event makes the electrical value low</h2>
-        <p class="activity paper">On paper · Fill in the last column before checking</p>
+        <p class="eyebrow">Boolean inversion</p>
+        <h2><code>not</code> turns a Boolean answer around</h2>
+        <p class="activity">Try in Thonny · Predict each answer before Run</p>
+        <pre><code class="language-python" data-trim>
+print(not True)
+print(not False)
+ready = True
+print(not ready)
+        </code></pre>
+        <div class="callout"><p><code>not True</code> is <code>False</code>; <code>not False</code> is <code>True</code>. For a digital reading, <code>0</code> acts false and <code>1</code> acts true.</p></div>
+        <aside class="notes">Define not before using it with hardware or loops. Ask for False, True, False. A digital Pin reading is an integer 0 or 1, not a bool object; not produces a Boolean.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Active-high button</p>
+        <h2>Pressed is 1; released is 0</h2>
+        <p class="activity paper">On paper · Write both missing answers and meanings, then reveal</p>
         <table class="compact-table">
-          <thead><tr><th>Physical state</th><th><code>button.value()</code></th><th><code>not button.value()</code></th><th>Meaning we want</th></tr></thead>
+          <thead><tr><th>Physical state</th><th><code>button.value()</code></th><th><code>not button.value()</code></th><th>Meaning of <code>not</code></th></tr></thead>
           <tbody>
-            <tr><td>Released</td><td><code>1</code></td><td><code>False</code></td><td>not pressed</td></tr>
-            <tr><td>Pressed</td><td><code>0</code></td><td><code>True</code></td><td>pressed</td></tr>
+            <tr><td>Released</td><td><code>0</code></td><td><span class="fragment"><code>True</code></span></td><td><span class="fragment">not pressed</span></td></tr>
+            <tr><td>Pressed</td><td><code>1</code></td><td><span class="fragment"><code>False</code></span></td><td><span class="fragment">not pressed is false</span></td></tr>
           </tbody>
         </table>
-        <div class="callout"><p><strong>Active-low</strong> means the important event makes the signal low. <code>not</code> turns that electrical reading into a natural Python answer.</p></div>
+        <div class="callout"><p><strong>Active-high:</strong> the press raises GP13 to 3.3 V. The external 10 kΩ pull-down to GND makes a released button read 0. Use <code>button.value() == 1</code> for “pressed”.</p></div>
         <aside class="notes">
-          Students do not yet need to know pull-up resistor placement, only that the
-          wiring will make released read 1 and pressed read 0. The build slide later
-          will show why.
+          Students write answers before revealing fragments. Released: not 0 is True, meaning not pressed.
+          Pressed: not 1 is False. The button connects GP13 to 3.3 V when pressed;
+          the external 10 kΩ resistor connects GP13 to GND. The build slide shows this circuit.
         </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Two conditions together</p>
+        <h2><code>and</code> needs both answers to be true</h2>
+        <p class="activity">Try in Thonny · Predict, then change one value</p>
+        <pre><code class="language-python" data-trim>
+waiting = True
+pressed = False
+print(waiting and not pressed)
+        </code></pre>
+        <div class="callout"><p>The answer is <code>True</code> only while we are still waiting <strong>and</strong> the button is not pressed. Change <code>pressed</code> to <code>True</code>: the combined answer becomes <code>False</code>.</p></div>
+        <aside class="notes">Both conditions must hold for and to be true. Practise with these fixed values. The baseline reaction game uses a simple sleep followed by a button check, not a combined timing condition.</aside>
       </section>
 
       <section>
@@ -207,7 +234,7 @@ else:
 
       <section class="section-slide">
         <span class="section-number">03</span>
-        <p class="eyebrow">Part 3 · Build an active-low input</p>
+        <p class="eyebrow">Part 3 · Build an active-high input</p>
         <h2>Use a button to create a real Boolean question</h2>
         <p class="lede">Now the code and the circuit meet: GP13 reads the question, and GP15 shows the answer.</p>
         <aside class="notes">
@@ -225,13 +252,13 @@ else:
           <a class="diagram-link" href="../../diagrams/button-and-led.html">Exact diagram + table</a>
         </div>
         <div class="diagram-frame">
-          <img src="../../diagrams/button-and-led.png" alt="Full button-and-LED breadboard diagram with Pico USB on the left, button across the centre gap, a 10 kilo-ohm pull-up to 3.3 volts on GP13, and an LED on GP15 through a 220 ohm resistor to ground.">
+          <img src="../../diagrams/button-and-led.png" alt="Full button-and-LED circuit: GP13 has an external 10 kilo-ohm pull-down to ground, the button connects it to 3.3 volts when pressed, and GP15 drives the LED through 220 ohms.">
         </div>
         <aside class="notes">
           This circuit supports 01_button_decisions.py. The HTML link includes the
           exact connection table and button-terminal explanation. Check USB-left Pico
-          orientation, button across the centre channel, 10 kΩ pull-up from GP13 to
-          3.3 V, and the GP15 LED path through 220 Ω to GND.
+          orientation, button across the centre channel, external 10 kΩ pull-down from GP13 to
+          GND, button from GP13 to 3.3 V, and the GP15 LED path through 220 Ω to GND.
         </aside>
       </section>
 
@@ -244,7 +271,7 @@ else:
             <h3>Open and run</h3>
             <p><a href="../../code/day-2/01_button_decisions.py"><code>01_button_decisions.py</code></a></p>
             <pre><code class="language-python" data-trim>
-pressed = not button.value()
+pressed = button.value()
 
 if pressed:
     led.on()
@@ -256,16 +283,17 @@ else:
             <h3>What you should observe</h3>
             <ol>
               <li>Released button: LED off.</li>
-              <li>Press and hold: LED on and the Shell prints <code>Pressed: True</code>.</li>
+              <li>Press and hold: LED on and the Shell prints <code>Pressed: 1</code>. Released reads <code>Pressed: 0</code>.</li>
               <li>Press Stop or <code>Ctrl+C</code>: the LED turns off.</li>
             </ol>
           </div>
         </div>
-        <div class="callout warning" style="margin-top: 0.7em;"><p>If the program behaves as if the button is always pressed, unplug USB and check the button orientation and the 10 kΩ pull-up before changing code.</p></div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>If the program behaves as if the button is always pressed, stop, unplug USB and check the button orientation and the external 10 kΩ pull-down to GND before changing code.</p></div>
         <aside class="notes">
           The outer while loop in this supplied file is already written. Students should
-          connect the branch they see on screen to the active-low truth table from the
-          previous slide.
+          connect the branch they see on screen to the active-high truth table from the
+          previous slide. pressed stores the integer 0 or 1: 0 acts false and 1 acts true
+          in if pressed. The program prints numbers, not True or False.
         </aside>
       </section>
 
@@ -292,7 +320,7 @@ else:
           <img src="../../diagrams/potentiometer-and-led.png" alt="Incremental breadboard diagram that keeps the button on GP13 and LED on GP15, then adds a potentiometer connected to 3.3 volts, GP26 ADC0, and ground.">
         </div>
         <aside class="notes">
-          Do not remove the button or its 10 kΩ pull-up. Students add only the
+          Do not remove the button or its external 10 kΩ pull-down to GND. Students add only the
           potentiometer's three connections. It must never use VBUS: the outer pins
           go to 3.3 V and GND, while the centre wiper goes to GP26/ADC0. The
           02_potentiometer_led.py program ignores the still-connected button.
@@ -378,7 +406,14 @@ print(len(times))
 print(min(times))
 print(times[-1])
         </code></pre>
-        <div class="grid-4">
+        <aside class="notes">Students run each line and compare the result. Indexing starts at zero; -1 refers to the final item. The next slide names the tools before the game uses them.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">List toolbox</p>
+        <h2>Find, add, count, and choose the fastest</h2>
+        <p class="activity watch">Watch and discuss · Match each tool to the line you just ran</p>
+        <div class="grid-2">
           <div class="card"><h3>Index</h3><p><code>times[0]</code> asks for the first item.</p></div>
           <div class="card"><h3>Append</h3><p><code>append</code> adds one new result at the end.</p></div>
           <div class="card"><h3><code>len</code></h3><p><code>len(times)</code> counts how many results are stored.</p></div>
@@ -393,18 +428,18 @@ print(times[-1])
       <section>
         <p class="eyebrow">Conditional <code>while</code></p>
         <h2>Each loop needs an exit condition you can name</h2>
-        <p class="activity paper">On paper · Match each loop to the moment it stops</p>
+        <p class="activity paper">On paper · Match loops to A: press, B: release, C: enough scores</p>
         <table class="compact-table">
           <thead><tr><th>Loop</th><th>Read it as…</th><th>Stops when…</th></tr></thead>
           <tbody>
-            <tr><td><code>while len(scores) &lt; ROUNDS:</code></td><td>repeat while we still need more scores</td><td>the list already holds <code>ROUNDS</code> results</td></tr>
-            <tr><td><code>while not button.value():</code></td><td>wait while the button is pressed</td><td>the button is released</td></tr>
-            <tr><td><code>while button.value():</code></td><td>wait while the button is released</td><td>the button is pressed</td></tr>
+            <tr><td><code>while len(scores) &lt; ROUNDS:</code></td><td><span class="fragment">repeat while we need more scores</span></td><td><span class="fragment">C: the list holds <code>ROUNDS</code> results</span></td></tr>
+            <tr><td><code>while not button.value():</code></td><td><span class="fragment">wait while the button is released</span></td><td><span class="fragment">A: the button is pressed</span></td></tr>
+            <tr><td><code>while button.value():</code></td><td><span class="fragment">wait while the button is pressed</span></td><td><span class="fragment">B: the button is released</span></td></tr>
           </tbody>
         </table>
         <div class="callout success" style="margin-top: 0.7em;"><p>These loops stop because the condition changes. You do not need an endless loop for every job.</p></div>
         <aside class="notes">
-          Students often reverse the two button loops. Have them point to the physical
+          Keep answers hidden until pairs record C, A, B and explain each loop. Students often reverse the two button loops. Have them point to the physical
           event that changes each condition from true to false.
         </aside>
       </section>
@@ -421,7 +456,7 @@ print(times[-1])
             <h3>Keep the same wiring</h3>
             <ul>
               <li>GP13 reads the button.</li>
-              <li>10 kΩ pull-up connects GP13 to 3.3 V.</li>
+              <li>External 10 kΩ pull-down connects GP13 to GND; the button connects GP13 to 3.3 V.</li>
               <li>GP15 drives the LED through 220 Ω.</li>
               <li>Leave the potentiometer connected; this program ignores GP26.</li>
               <li>Use the <a href="../../diagrams/potentiometer-and-led.html">exact diagram and table</a>.</li>
@@ -436,65 +471,89 @@ print(times[-1])
       </section>
 
       <section>
+        <p class="eyebrow">Reaction game rules</p>
+        <h2>Wait for light—then react!</h2>
+        <p class="activity watch">Watch and discuss · Rehearse one fair round without code</p>
+        <div class="grid-3">
+          <div class="card"><h3>1 · Get ready</h3><p>Release the button. The LED stays off for a random delay. Do not press yet.</p></div>
+          <div class="card"><h3>2 · Go!</h3><p>When the LED lights, press as quickly as possible. Time runs from light-on to your press.</p></div>
+          <div class="card"><h3>3 · False start</h3><p>If the button is still held when the wait ends, print <code>False start!</code> It adds no score. Release and try again.</p></div>
+        </div>
+        <div class="callout success" style="margin-top:0.7em;"><p>Collect three valid times. Lower milliseconds mean a faster reaction. Predict what happens if someone presses during the dark waiting period.</p></div>
+        <aside class="notes">Teach the game before implementation. Demonstrate a fair press and an early press held until the wait ends. The baseline checks once before lighting the LED; a press released during the wait is not detected. Only valid rounds count toward ROUNDS.</aside>
+      </section>
+
+      <section>
         <p class="eyebrow">Plan the game first</p>
         <h2>Put one round in order before you type it</h2>
         <p class="activity paper">On paper · Number the steps from first to last</p>
         <div class="grid-2">
           <div class="card">
             <h3>Open</h3>
-            <p><a href="../../code/day-2/03_reaction_game_starter.py"><code>03_reaction_game_starter.py</code></a></p>
+            <p><a href="../../code/day-2/03_reaction_game_1_starter.py"><code>03_reaction_game_1_starter.py</code></a></p>
             <p>The imports, pin setup, <code>scores = []</code>, and LED cleanup are already supplied.</p>
           </div>
           <div class="card">
-            <h3>One round, in order</h3>
-            <ol>
+            <h3>Steps to order</h3>
+            <ul>
+              <li>Wait a random delay.</li>
               <li>Wait until the button is released.</li>
-              <li>Wait a random number of milliseconds.</li>
+              <li>Then check the button: if held, report <code>False start!</code> without a score.</li>
               <li>Turn on the LED and record the start time.</li>
-              <li>Wait until the button is pressed.</li>
-              <li>Calculate <code>reaction_ms</code> and turn the LED off.</li>
-              <li>Add the result to <code>scores</code>.</li>
-              <li>Print a message for the result.</li>
-            </ol>
+            </ul>
           </div>
         </div>
         <aside class="notes">
           Keep this concrete: students should be ordering exact steps from the starter
-          comments, not inventing a vague process. Make sure everyone understands that
+          comments, not inventing a vague process. First order: release, simple delay,
+          early-press branch, LED and start time. Continue the valid branch on the next
+          slide. Make sure everyone understands that
           the supplied wrapper stays in place.
         </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Plan the valid finish</p>
+        <h2>What happens after the light comes on?</h2>
+        <p class="activity paper">On paper · Order these four steps after a valid start</p>
+        <ul>
+          <li>Add the valid result to <code>scores</code>.</li>
+          <li>Print a message for the result.</li>
+          <li>Wait until the button is pressed.</li>
+          <li>Calculate <code>reaction_ms</code> and turn the LED off.</li>
+        </ul>
+        <div class="callout warning"><p>A false start does not enter this path. It prints <code>False start!</code>, adds no score, and retries the round.</p></div>
+        <aside class="notes">Expected order: wait for press, calculate and turn off, append, message. Join this to the waiting/start plan. Only the valid-start branch can append a reaction time.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Timing API recipe</p>
+        <h2>Wait, then check before lighting the LED</h2>
+        <p class="activity watch">Watch and discuss · Trace the wait and the start check</p>
+        <pre><code class="language-python" data-trim>
+wait_ms = randint(1000, 3000)
+sleep_ms(wait_ms)
+if button.value():
+    print("False start! This round does not count.")
+        </code></pre>
+        <div class="callout"><p>Put the LED and timing in the <code>else</code> branch. A held button earns no score. Use <code>ticks_ms()</code> and <code>ticks_diff(end_ms, start_ms)</code> to time a valid press.</p></div>
+        <aside class="notes">The baseline deliberately sleeps for the whole random wait, then checks once before turning on the LED. A press released during that wait is not detected; continuous checking belongs to the optional extension. Students write the valid-start else branch.</aside>
       </section>
 
       <section>
         <p class="eyebrow">Build the starter</p>
         <h2>Replace <code>pass</code> with working game logic</h2>
         <p class="activity">Try in Thonny · Get one round working before you add all three</p>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Write these parts</h3>
-            <ol>
-              <li>Inside <code>try:</code>, delete <code>pass</code>.</li>
-              <li>Write one working round using the two button waits.</li>
-              <li>Add <code>scores.append(reaction_ms)</code>.</li>
-              <li>Add <code>if reaction_ms &lt; 350</code> → <code>Quick!</code>, else <code>Keep practising!</code>.</li>
-              <li>Wrap the round in <code>while len(scores) &lt; ROUNDS:</code>.</li>
-            </ol>
-          </div>
-          <div class="card">
-            <h3>Use the supplied tools as written</h3>
-            <pre style="font-size: 0.5em;"><code class="language-python" data-trim>
-wait_ms = randint(1000, 3000)
-sleep_ms(wait_ms)
-start_ms = ticks_ms()
-end_ms = ticks_ms()
-reaction_ms = ticks_diff(end_ms, start_ms)
-            </code></pre>
-            <p class="tiny" style="margin-top: 0.5em;">The timing tools and the <code>try</code>/<code>except</code>/<code>finally</code> cleanup are already provided. Today you focus on the game logic inside them.</p>
-          </div>
-        </div>
+        <ol>
+          <li>Inside <code>try:</code>, delete <code>pass</code>; keep <code>finally</code>.</li>
+          <li>Write one round with a random wait, then check the button.</li>
+          <li>On a false start print <code>False start!</code>; only valid rounds use <code>scores.append(reaction_ms)</code>.</li>
+          <li>Add <code>if reaction_ms &lt; 350</code> → <code>Quick!</code>, else <code>Keep practising!</code>.</li>
+          <li>Wrap the round in <code>while len(scores) &lt; ROUNDS:</code>.</li>
+        </ol>
         <aside class="notes">
           This is the main student-owned programming slide. Encourage students to stop
-          after one believable reaction time before they add the outer loop.
+          after one believable reaction time and one rejected false start before adding the outer loop. Keep the supplied cleanup wrapper.
         </aside>
       </section>
 
@@ -507,7 +566,7 @@ reaction_ms = ticks_diff(end_ms, start_ms)
             <h3>Your program should show</h3>
             <ol>
               <li>The LED waits, then turns on.</li>
-              <li>A button press creates one whole-number reaction time.</li>
+              <li>A press after light-on creates one whole-number reaction time. An early press prints <code>False start!</code> and adds no score.</li>
               <li>Each round prints either <code>Quick!</code> or <code>Keep practising!</code>.</li>
               <li>After three rounds, the Shell prints the full list and the fastest score with <code>min(scores)</code>.</li>
             </ol>

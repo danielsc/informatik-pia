@@ -32,20 +32,21 @@ Freenove-Lektionen zu Ultraschallmessung, Buzzer und NeoPixel.
 | Bauteil | Signal | Stromversorgung |
 |---|---|---|
 | HC-SR04 | Trig GP19; Echo über Spannungsteiler an GP18 | 5 V und GND |
-| Treiber für passiven Buzzer | GP15 über 1 kΩ zur NPN-Basis | 5 V und GND |
+| Treiber für passiven Buzzer | GP14 über 1 kΩ zur NPN-Basis | 5 V und GND |
 | `IN` des 8-RGB-Moduls | GP16 | 3.3 V und GND |
 
 Verdrahtet nicht alles auf einmal und startet dann sofort die abschließende
 Endlosschleife. Baut und testet jeweils eine Schicht:
 
-1. Baut bei getrenntem USB den HC-SR04 und den Echo-Spannungsteiler an den
-   Positionen des endgültigen Diagramms auf. Lasst die Schaltung prüfen und
-   führt dann den Abstandstest von Tag 4 aus.
-2. Stoppt das Programm, trennt USB und ergänzt den über einen Transistor
-   angesteuerten Buzzer. Verbindet USB erst nach der Prüfung von `E/B/C` wieder
-   und führt dann den Buzzer-Test von Tag 4 aus.
-3. Stoppt das Programm, trennt USB und ergänzt den `IN`-Anschluss des RGB-Moduls
-   mit 3.3 V. Führt den RGB-Farbtest von Tag 3 aus.
+1. Behaltet die geprüfte Sensor-und-Buzzer-Schaltung von Tag 4. Vergleicht sie
+   bei getrenntem USB mit dem Gesamtdiagramm. Versetzt Bauteile nur, falls Platz
+   für die RGB-Verbindungen nötig ist. Lasst den Aufbau prüfen und führt den
+   Abstandstest von Tag 4 erneut aus.
+2. Führt den Buzzer-Test von Tag 4 und danach den Abstandstest erneut aus.
+   Der Buzzer ist schon aufgebaut; ihr prüft bestehende Teile, statt neu zu bauen.
+3. Stoppt das Programm, trennt USB und ergänzt die `IN`-Verbindungen des
+   RGB-Moduls mit 3.3 V und drei Male–Female-Kabeln. Sensor und RGB-Modul
+   bleiben außerhalb des Breadboards. Führt den RGB-Farbtest von Tag 3 aus.
 4. Stoppt das Programm und vergleicht den gesamten Aufbau mit der
    Verbindungstabelle im abschließenden HTML-Diagramm. Lasst 5 V, 3.3 V, den
    Spannungsteiler und die gemeinsame Masse ein letztes Mal prüfen.
@@ -82,8 +83,8 @@ Jede Funktion hat eine Hauptaufgabe. Dadurch lassen sich Fehler leichter
 eingrenzen.
 
 Beginnt mit
-[`code/day-5/parking_assistant_starter.py`](../../code/day-5/parking_assistant_starter.py).
-Verwendet [`code/day-5/parking_assistant.py`](../../code/day-5/parking_assistant.py)
+[`code/day-5/parking_assistant_1_starter.py`](../../code/day-5/parking_assistant_1_starter.py).
+Verwendet [`code/day-5/parking_assistant_2_solution.py`](../../code/day-5/parking_assistant_2_solution.py)
 nur zum Vergleichen, zur Wiederherstellung oder für eine Demonstration der
 Lehrkraft.
 

@@ -3,7 +3,7 @@ from time import sleep_ms, sleep_us
 
 TRIGGER_PIN = 19
 ECHO_PIN = 18
-BUZZER_PIN = 15
+BUZZER_PIN = 14
 SAFE_DISTANCE_CM = 60
 STOP_DISTANCE_CM = 25
 ECHO_TIMEOUT_US = 30000
@@ -80,8 +80,6 @@ try:
             print("Distance:", round(distance, 1), "cm | Zone:", zone)
 
         alert_once(zone)
-except KeyboardInterrupt:
-    print("Stopped")
 finally:
     trigger.off()
     led.off()

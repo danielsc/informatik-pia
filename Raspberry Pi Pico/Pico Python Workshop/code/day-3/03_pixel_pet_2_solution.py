@@ -24,7 +24,8 @@ def choose_state(energy_percent):
 
 
 def show_sleepy():
-    for blue in range(2, 15, 3):
+    for step in range(6):
+        blue = step * 3
         pixels.fill((0, 0, blue))
         pixels.write()
         sleep_ms(80)
@@ -42,10 +43,10 @@ def show_curious():
 
 def show_excited():
     colours = [(25, 0, 5), (20, 10, 0), (0, 15, 15), (15, 0, 20)]
-    for index in range(PIXEL_COUNT):
-        pixels[index] = colours[index % len(colours)]
-    pixels.write()
-    sleep_ms(120)
+    for colour in colours:
+        pixels.fill(colour)
+        pixels.write()
+        sleep_ms(60)
     pixels.fill(OFF)
     pixels.write()
 
@@ -64,9 +65,6 @@ try:
             show_excited()
 
         sleep_ms(100)
-except KeyboardInterrupt:
-    print("Pixel Pet is resting.")
 finally:
     pixels.fill(OFF)
     pixels.write()
-

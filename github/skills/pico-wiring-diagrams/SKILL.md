@@ -190,6 +190,15 @@ Colour alone is insufficient. Label every relevant GPIO and include a legend.
 Route wires orthogonally where practical. Avoid ambiguous crossings; use a
 visible junction dot only where conductors connect.
 
+The breadboard centre channel separates its electrical terminal strips; it
+does not obstruct an insulated jumper cable. Run an off-board module's
+female-to-male cable continuously to the intended breadboard hole, straight
+across the channel when practical. Do not add a bridge-shaped detour, an
+intermediate contact, or an extra strip-to-strip jumper merely to cross the
+channel. Show a contact dot only at the cable's actual male endpoint, not at
+holes or rails it passes over. This is different from a disconnected crossing
+between two real conductors, which still needs the clarity treatment below.
+
 Do not overlap wires, component leads, connector contacts, or component
 connection points unless the circuit cannot be laid out clearly without doing
 so. Prefer separate parallel lanes. If a crossing is unavoidable, keep it

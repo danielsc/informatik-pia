@@ -30,8 +30,10 @@ physische Kontakte teilen sich niemals ein Loch.
 1. **Bauteile bereitlegen.** Prüft Widerstandswerte und Bauteilnamen, bevor ihr
    etwas einsetzt.
 2. **Pico ausrichten.** Richtet ihn wie im Kursdiagramm mit USB links aus.
-3. **Bauteilgehäuse einsetzen.** Setzt Sensor, Taster, LED, Modul oder
-   Transistor in der gezeigten Ausrichtung ein, bevor ihr Kabel ergänzt.
+3. **Bauteile platzieren.** Setzt Taster, LED und Transistor wie gezeigt ein.
+   Lasst HC-SR04 und RGB-Modul außerhalb des Breadboards. Male–Female-Kabel
+   verbinden die Buchsen mit Modul-Stiftkontakten und die Stecker mit
+   Breadboard-Löchern. Lasst die Schallöffnungen des Sensors frei.
 4. **Stromversorgung und Masse verbinden.** Eine farbige Schiene führt erst
    Strom, wenn ein Kabel sie sichtbar mit Pico `3V3(OUT)`, `VBUS` oder `GND`
    verbindet.
@@ -51,16 +53,23 @@ physische Kontakte teilen sich niemals ein Loch.
 | Pico-Anschluss | Spannung oder Funktion | Sichere Verwendung |
 |---|---|---|
 | `VBUS` | etwa 5 V von USB | nur Stromversorgung für HC-SR04 und Buzzer |
-| `3V3(OUT)` | geregelte 3.3 V | Potentiometer, RGB-Modul, Pull-up-Widerstände |
+| `3V3(OUT)` | geregelte 3.3 V | Potentiometer, RGB-Modul, Versorgung des gedrückten Tasters |
 | GPIO | 3.3-V-Signal | im Programm benannter Ein- oder Ausgang |
 | `GND` | 0-V-Bezug | gemeinsamer Rückleiter für alle Teile der Schaltung |
+
+Eine rote Linie legt die Schienenspannung nicht fest. Folgt den
+Beschriftungen **3.3 V**, **5 V** und **GND** und verfolgt die Versorgung.
+Verbindet 3V3 und VBUS niemals mit derselben verbundenen Schiene. Manche
+Schienen sind in der Mitte geteilt; prüft den Durchgang nur ohne Strom.
 
 ## In diesem Kurs verwendete Pico-Pins
 
 | Signal | GPIO-Name | Physischer Pin |
 |---|---:|---:|
 | interne LED | `LED` | auf der Platine |
-| externe LED / Buzzer-Steuerung | GP15 | 20 |
+| Tastereingang | GP13 | 17 |
+| Buzzer-Steuerung | GP14 | 19 |
+| externe LED | GP15 | 20 |
 | Datenleitung des 8-RGB-Moduls | GP16 | 21 |
 | HC-SR04-Echo-Eingang | GP18 | 24 |
 | HC-SR04-Trigger-Ausgang | GP19 | 25 |
@@ -114,13 +123,14 @@ gezeigten Ausrichtung über dem Mittelkanal des Breadboards sitzen.
 | Teil | Verbindung |
 |---|---|
 | Tastersignal | GP13 |
-| Pull-up | 10 kΩ von GP13 zu 3.3 V |
-| anderer Tasteranschluss | GND |
+| Pull-down | 10 kΩ von GP13 zu GND |
+| anderer Tasteranschluss | 3.3 V |
 | externe LED | GP15 über 220 Ω zur LED, dann GND |
 
 Vor dem Einschalten: Verwendet nach Möglichkeit den Durchgangsprüfmodus. Ein
 Beinpaar desselben Anschlusses muss im ungedrückten Zustand verbunden sein; A
 und B dürfen nur beim Drücken verbunden sein.
+Dies ist **active-high**: losgelassen ergibt `0`, gedrückt ergibt `1`.
 
 ## Schrittweise Schaltung mit Taster, Potentiometer und PWM-LED
 
@@ -143,8 +153,8 @@ Verwendet für den einzelnen ADC-Test der Lehrkraft das
 | äußerer Potentiometer-Pin `3V3` | 3.3 V |
 | mittlerer Potentiometer-Pin `WIPER` | GP26 / ADC0 |
 | äußerer Potentiometer-Pin `GND` | GND |
-| Tastersignal | GP13 mit 10-kΩ-Pull-up zu 3,3 V |
-| anderer Tasteranschluss | GND |
+| Tastersignal | GP13 mit 10-kΩ-Pull-down zu GND |
+| anderer Tasteranschluss | 3.3 V |
 | LED | GP15 über 220 Ω zur LED, dann GND |
 
 Verwendet am Potentiometer ausschließlich 3.3 V. Beim Drehen bewegt sich der
@@ -166,6 +176,11 @@ Verbindet den mit **IN** gekennzeichneten Anschluss, nicht OUT:
 
 Die Beispiele verwenden bewusst niedrige RGB-Werte, um Blendung und
 Stromaufnahme zu verringern.
+Verwendet drei Male–Female-Kabel, damit das Modul außerhalb des Breadboards
+bleibt. Für Pixel Pet verwendet das vollständige
+[RGB-und-Potentiometer-Diagramm](../../diagrams/neopixel-and-potentiometer.html):
+
+[![RGB-Modul mit einem Potentiometer an GP26](../../diagrams/neopixel-and-potentiometer.png)](../../diagrams/neopixel-and-potentiometer.html)
 
 ## Passiver Buzzer mit Transistortreiber
 
@@ -175,7 +190,7 @@ in [Tag 4](day-4-make-it-sense.md#3-testet-den-passiven-buzzer).
 
 | Von | Über | Nach |
 |---|---|---|
-| GP15 | 1-kΩ-Widerstand | S8050-Basis `B` |
+| GP14 | 1-kΩ-Widerstand | S8050-Basis `B` |
 | VBUS / 5 V | passiver Buzzer | S8050-Kollektor `C` |
 | S8050-Emitter `E` | GND-Schiene | Pico GND |
 
@@ -203,6 +218,29 @@ Spannungsteiler:
 Der Spannungsteiler erzeugt ungefähr `5 V × 2/(1+2) = 3.33 V`. Eine Lehrkraft
 sollte jede stromlose Sensorschaltung prüfen, bevor USB verbunden wird.
 
+Lasst den Sensor mit vier Male–Female-Kabeln außerhalb des Breadboards.
+Lest die tatsächlichen Pin-Beschriftungen: Vertauschte Trig- und Echo-Kabel
+verhindern eine Messung.
+
+**Kein 2-kΩ-Widerstand im Kit?** Ersetzt nur den unteren 2-kΩ-Zweig durch
+zwei 1-kΩ-Widerstände in Reihe:
+
+```text
+Echo -- 1 kΩ -- junction -- GP18
+                  |
+                 1 kΩ
+                  |
+                 1 kΩ
+                  |
+                 GND
+```
+
+Verbindet Widerstände über separate Löcher derselben verbundenen
+Kontaktstreifen. Der mittlere Knoten erhält keine weitere Verbindung.
+Ihr braucht drei 1-kΩ-Widerstände für den Sensor-Teiler und einen weiteren
+für den Buzzer-Treiber. Lasst die Alternative ohne Strom prüfen.
+Verwendet hier keine Parallelschaltung und lasst den Teiler niemals weg.
+
 ## Kombinierte Schaltungen
 
 Das [Diagramm des Näherungsalarms von Tag
@@ -215,7 +253,7 @@ den über einen Transistor angesteuerten Buzzer. Die
 | Bauteil | Signal | Stromversorgung |
 |---|---|---|
 | HC-SR04 | Trig GP19; geteiltes Echo an GP18 | 5 V und GND |
-| Treiber für passiven Buzzer | GP15 über 1 kΩ zur Basis | 5 V und GND |
+| Treiber für passiven Buzzer | GP14 über 1 kΩ zur Basis | 5 V und GND |
 | `IN` des 8-RGB-Moduls | GP16 | 3.3 V und GND |
 
 In diesem Plan gibt es keine GPIO-Konflikte.

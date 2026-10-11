@@ -12,6 +12,10 @@ Welt reagiert.
 **Hardware:** Raspberry Pi Pico und Freenove FNK0063 Super Starter Kit<br>
 **Editor:** Thonny
 
+Prüft euer Kit vor dem Kurs: Ihr braucht zusätzlich Male–Female-Kabel für
+Module und einen 2-kΩ-Widerstand (oder die dokumentierte Alternative aus
+zwei 1 kΩ in Reihe). Nicht jedes gelieferte Kit enthält diese Teile.
+
 **Präsentationen für Lehrkräfte:** [öffnet die veröffentlichte
 Folien-Website][slides-site] — das Repository muss nicht geklont werden.
 
@@ -50,10 +54,12 @@ Die Beispiele sind bewusst klein. Tippt sie ab, führt sie aus, verändert sie
 und sagt voraus, was passieren wird. Beginnt erst danach mit der Challenge.
 
 Einige bereitgestellte Programme enthalten eine
-`try`/`except`/`finally`-Sicherheitshülle, damit `Ctrl+C` die Ausgänge
+`try`/`finally`-Sicherheitshülle, damit `Ctrl+C` die Ausgänge
 ausschaltet. Ihr müsst diese Hülle nicht auswendig schreiben können.
-Konzentriert euch auf den neuen Code, auf den die Lektion hinweist; die Hülle
-ist eine bereitgestellte Hilfestellung.
+Tag 1 erklärt sie vor dem ersten Einsatz; lasst den Aufräumcode stehen.
+Konzentriert euch auf den neuen Code der jeweiligen Lektion.
+
+**Zum Nachschlagen:** [ADC und PWM erklärt](day-2-make-it-decide.md#adc-und-pwm-zum-nachschlagen).
 
 ## Lernfortschritt in Python
 
@@ -62,10 +68,10 @@ muss:
 
 | Tag | Neue, von den Lernenden selbst eingesetzte Konzepte | Erneut geübte frühere Konzepte |
 |---|---|---|
-| 1 | Werte, Typen, Variablen, Zuweisung, Skripte, Fehler | keine |
+| 1 | Werte, Typen einschließlich Tupel und `None`, Variablen, Zuweisung, Skripte, Fehler, Aufräumen mit `try`/`finally` | keine |
 | 2 | Typumwandlung, boolesche Werte, Vergleiche, `if`/`elif`/`else`, Listen, `while` | Variablen und Debugging |
 | 3 | Funktionsaufrufe, Parameter, `return`, `for`, `range`, Indizes, verschachtelte Schleifen | Bedingungen und Listen |
-| 4 | `None`, Dictionaries, Sensorfunktionen, Timeouts | Funktionen, Schleifen und Bedingungen |
+| 4 | Dictionaries, Sensorfunktionen, Timeouts | `None`, Funktionen, Schleifen und Bedingungen |
 | 5 | Anforderungen, Integration, Grenzwerttests, Zustandskonfiguration | alle bisherigen Konzepte |
 
 Bibliotheksspezifische Einrichtung wie `Pin`, `PWM`, `NeoPixel` und

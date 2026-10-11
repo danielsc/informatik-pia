@@ -75,7 +75,7 @@
           <img src="../../diagrams/distance-sensor.png" alt="Sichere HC-SR04-Schaltung mit VBUS, Trigger an GP19 und einem Echo-Spannungsteiler aus 1 kΩ und 2 kΩ zum Schutz von GP18.">
         </div>
         <aside class="notes">
-          Dieser Schaltplan gehört zu 01_distance_sensor.py. Verfolgt VBUS zu VCC, GP19 zu Trigger, Echo über 1 kΩ zum GP18-Knotenpunkt, von dort 2 kΩ zu GND und Sensor-GND zu gemeinsamer Masse. Prüfung vor USB.
+          Dieser Schaltplan gehört zu 01_distance_sensor.py. Verfolgt VBUS zu VCC, GP19 zu Trigger, Echo über 1 kΩ zum GP18-Knotenpunkt, von dort 2 kΩ zu GND und Sensor-GND zu gemeinsamer Masse. HC-SR04 neben dem Breadboard lassen: Female-Jumperenden an das Modul, Male-Enden ins Board. Prüfung durch Lehrkraft vor USB.
         </aside>
       </section>
 
@@ -93,8 +93,9 @@
           <div class="flow-box">2 kΩ an GND</div>
         </div>
         <div class="callout danger"><p>Verbindet Echo des HC-SR04 nie direkt mit einem Pico-GPIO.</p></div>
+        <p class="tiny">Kein 2-kΩ-Widerstand? Nach Prüfung durch die Lehrkraft <strong>zwei 1-kΩ-Widerstände in Reihe</strong> als unteren Zweig zu GND nutzen. Ein <strong>separater 1-kΩ-Widerstand</strong> bleibt oben an Echo. Der Kursschaltplan zeigt weiterhin 2 kΩ.</p>
         <aside class="notes">
-          Die Rechnung 5 × 2/(1+2) ≈ 3.33 V ist nur eine Erklärung für Lehrkräfte. Die Klasse muss Widerstandspositionen und den geschützten GP18-Knotenpunkt erkennen.
+          Die Rechnung 5 × 2/(1+2) ≈ 3.33 V ist nur eine Erklärung für Lehrkräfte. Die Klasse muss Widerstandspositionen und den geschützten GP18-Knotenpunkt erkennen. Die Alternative benötigt insgesamt drei separate 1-kΩ-Widerstände, nicht zwei. Untere Widerstände Ende an Ende über getrennte Lochgruppen verbinden, nicht parallel.
         </aside>
       </section>
 
@@ -102,19 +103,16 @@
         <p class="eyebrow">So funktioniert die Messung</p>
         <h2>Der Schall legt Hin- und Rückweg zurück</h2>
         <p class="activity watch">Anschauen und besprechen · Verfolgt den Weg</p>
-        <div class="flow">
-          <div class="flow-box">Trigger sendet<br>einen kurzen Impuls</div><div class="flow-arrow">→</div>
-          <div class="flow-box">Schall breitet sich<br>zum Gegenstand aus</div><div class="flow-arrow">→</div>
-          <div class="flow-box">Echo kehrt<br>zum Sensor zurück</div><div class="flow-arrow">→</div>
-          <div class="flow-box">Pico misst<br>die Impulszeit</div>
+        <div class="flow equal-flow">
+          <div class="flow-box">Schall senden</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Schall hin</div><div class="flow-arrow">→</div>
+          <div class="flow-box">Reflexion zurück</div>
         </div>
         <pre><code class="language-python" data-trim>
 distance_cm = pulse_us * 0.0343 / 2
         </code></pre>
         <div class="callout"><p>Teilt durch 2, weil die gemessene Zeit Hin- und Rückweg enthält.</p></div>
-        <aside class="notes">
-          Fragt, warum durch zwei geteilt wird. Die Geschwindigkeitskonstante rechnet Mikrosekunden Laufzeit in Zentimeter um.
-        </aside>
+        <aside class="notes">Fragt, warum durch zwei geteilt wird. Die Geschwindigkeitskonstante rechnet Mikrosekunden Laufzeit in Zentimeter um. Das genaue Signalschema folgt nach dem Sensortest, direkt vor der Timeout-API.</aside>
       </section>
 
       <section>
@@ -122,22 +120,11 @@ distance_cm = pulse_us * 0.0343 / 2
         <h2>Messt, bevor ihr vertraut</h2>
         <p class="activity">Schaltung testen · Erst Prüfung durch Lehrkraft, dann USB verbinden</p>
         <div class="grid-2">
-          <div class="card">
-            <h3>Ausführen</h3>
-            <p><a href="../../code/day-4/01_distance_sensor.py"><code>01_distance_sensor.py</code></a></p>
-            <p>Messt einen flachen Gegenstand bei 10, 20, 40, 60 und 100 cm.</p>
-          </div>
-          <div class="card">
-            <h3>Vergleichen</h3>
-            <p>Nehmt an jeder Position drei Messwerte auf. Notiert die Abweichung vom Abstand am Lineal.</p>
-          </div>
+          <div class="card"><h3>Ausführen</h3><p><a href="../../code/day-4/01_distance_sensor.py"><code>01_distance_sensor.py</code></a></p><p>Messt einen flachen Gegenstand bei 10, 20, 40, 60 und 100 cm.</p></div>
+          <div class="card"><h3>Vergleichen</h3><p>Nehmt an jeder Position drei Messwerte auf. Notiert die Abweichung vom Abstand am Lineal.</p></div>
         </div>
-        <div class="callout warning" style="margin-top: 0.7em;">
-          <p>Probiert danach einen weichen und einen schrägen Gegenstand. Beschreibt die Änderungen; „repariert“ den Code noch nicht.</p>
-        </div>
-        <aside class="notes">
-          Zuerst Messwerte sammeln. Weiche und schräge Flächen können schwache oder umgelenkte Echos liefern. Das bereitet den ungültigen Zustand vor.
-        </aside>
+        <div class="callout warning" style="margin-top:0.7em;"><p>Probiert danach einen weichen und einen schrägen Gegenstand. Beschreibt die Änderungen; „repariert“ den Code noch nicht.</p></div>
+        <aside class="notes">Zuerst Messwerte sammeln. Weiche und schräge Flächen können schwache oder umgelenkte Echos liefern. Das bereitet den ungültigen Zustand vor.</aside>
       </section>
 
       <section>
@@ -153,8 +140,30 @@ else:
     print(distance)
         </code></pre>
         <div class="callout danger"><p>Wenn bei einem Fehler <code>0</code> verwendet wird, bedeutet das fälschlich: „Der Gegenstand berührt den Sensor.“</p></div>
+        <aside class="notes">TEALS führt None mit Funktionsrückgaben ein. Vergleicht „kein Wert“ mit der gültigen Zahl null und lasst beide Zweige zeigen.</aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Vor der Timeout-API</p>
+        <h2>Echo messen — nicht den Trig-Befehl</h2>
+        <p class="activity watch">Anschauen und besprechen · Das von time_pulse_us gemessene Signal zeigen</p>
+        <svg viewBox="0 0 1000 300" role="img" aria-label="Zeitliches Schema: Trig-Befehl 10 Mikrosekunden, Ultraschallpaket etwa 200 Mikrosekunden, Echo-HIGH-Dauer und Schall auf Hin- und Rückweg" style="display:block;width:100%;height:300px;background:white;border-radius:12px;">
+          <defs><marker id="travel-arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#087f5b"/></marker></defs>
+          <g font-family="sans-serif" font-size="22" fill="#111827">
+            <text x="20" y="30">Zeitskizze — nicht maßstäblich oder exakt ausgerichtet</text>
+            <text x="20" y="80">Trig (GP19)</text><path d="M190 85H225V55H250V85H950" fill="none" stroke="#2563eb" stroke-width="4"/><text x="280" y="66">10-µs-Befehl: „Schall senden“</text>
+            <text x="20" y="135">Ultraschall</text><path d="M190 140H225 l5 -20 l5 40 l5 -40 l5 40 l5 -40 l5 40 l5 -40 l5 40 l5 -40 l5 40 l5 -40 l5 40 l5 -40 l5 40 l5 -40 l5 20 H950" fill="none" stroke="#d97706" stroke-width="3"/><text x="350" y="130">8 Perioden bei 40 kHz ≈ 200 µs</text>
+            <text x="20" y="192">Echo (GP18)</text><path d="M190 200H330V170H820V200H950" fill="none" stroke="#087f5b" stroke-width="4"/><text x="355" y="192">HIGH-Dauer: Pico misst pulse_us</text>
+            <rect x="40" y="230" width="130" height="55" rx="8" fill="#ecfeff"/><text x="60" y="264">Sensor</text>
+            <rect x="850" y="230" width="110" height="55" rx="8" fill="#f1f5f9"/><text x="862" y="264">Objekt</text>
+            <path d="M185 240H830" stroke="#087f5b" stroke-width="4" marker-end="url(#travel-arrow)"/>
+            <path d="M830 277H185" stroke="#087f5b" stroke-width="4" marker-end="url(#travel-arrow)"/>
+            <text x="365" y="234">Schall hin →</text><text x="365" y="296">← Reflektierter Schall zurück</text>
+          </g>
+        </svg>
+        <div class="callout"><p><code>time_pulse_us(echo, 1, ...)</code> misst die <strong>Echo-HIGH-Dauer</strong> bis zur Schallrückkehr. Ohne Rückkehr braucht es einen Timeout — kein endloses Warten.</p></div>
         <aside class="notes">
-          TEALS führt None mit Funktionsrückgaben ein. Vergleicht „kein Wert“ mit der gültigen Zahl null und lasst beide Zweige zeigen.
+          Fragt, warum durch zwei geteilt wird. Die Geschwindigkeitskonstante rechnet Mikrosekunden Laufzeit in Zentimeter um. Trig ist der elektrische 10-µs-Befehl, nicht der gemessene Entfernungsimpuls. Das Modul sendet etwa acht Perioden mit 40 kHz, also etwa 200 µs. Echo ist ein elektrisches HIGH-Intervall bis zum erkannten reflektierten Schall; seine Breite steht für den Hin- und Rückweg. Eigenes Schema, keine exakte zeitliche Ausrichtung und kein Schaltplan.
         </aside>
       </section>
 
@@ -190,7 +199,7 @@ if pulse_us < 0:
           <a class="diagram-link" href="../../diagrams/passive-buzzer.html">Genauer Schaltplan + Tabelle</a>
         </div>
         <div class="diagram-frame">
-          <img src="../../diagrams/passive-buzzer.png" alt="Passiver Buzzer an VBUS, geschaltet durch einen S8050-Transistor; dessen Basis ist über 1 kΩ mit GP15 verbunden.">
+          <img src="../../diagrams/passive-buzzer.png" alt="Passiver Buzzer an VBUS, geschaltet durch einen S8050-Transistor; dessen Basis ist über 1 kΩ mit GP14 verbunden.">
         </div>
         <aside class="notes">
           Dieser Schaltplan gehört zu 02_buzzer_test.py. Lasst Plusmarkierung und flache Transistorseite finden. E, B und C immer mit dem Kursschaltplan prüfen.
@@ -199,19 +208,19 @@ if pulse_us < 0:
 
       <section>
         <p class="eyebrow">Warum ein Transistor?</p>
-        <h2>GP15 steuert, versorgt den Buzzer aber nicht</h2>
+        <h2>GP14 steuert, versorgt den Buzzer aber nicht</h2>
         <p class="activity watch">Anschauen und besprechen · Zeigt beide Wege im Schaltplan</p>
         <div class="grid-2">
           <div class="card">
             <h3>Steuerweg</h3>
-            <p>GP15 → 1-kΩ-Widerstand → Transistorbasis <code>B</code></p>
+            <p>GP14 → 1-kΩ-Widerstand → Transistorbasis <code>B</code></p>
           </div>
           <div class="card">
             <h3>Stromweg</h3>
             <p>VBUS → Buzzer → Kollektor <code>C</code> → Emitter <code>E</code> → GND</p>
           </div>
         </div>
-        <div class="callout danger" style="margin-top: 0.7em;"><p>Verbindet den Buzzer nicht direkt mit GP15.</p></div>
+        <div class="callout danger" style="margin-top: 0.7em;"><p>Verbindet den Buzzer nicht direkt mit GP14. GP15 bleibt der Pin der gewöhnlichen LED.</p></div>
         <aside class="notes">
           Der Transistor ist ein elektronischer Schalter. Mehr Transistorphysik ist für den sicheren Aufbau nicht nötig.
         </aside>
@@ -310,7 +319,7 @@ pause = ZONE_CONFIG["caution"]["pause_ms"]
           <a class="diagram-link" href="../../diagrams/proximity-alarm.html">Genauer Schaltplan + Tabelle</a>
         </div>
         <div class="diagram-frame">
-          <img src="../../diagrams/proximity-alarm.png" alt="Kombinierter Näherungsalarm mit geschütztem HC-SR04 an GP18 und GP19 sowie transistorbetriebenem passivem Buzzer an GP15.">
+          <img src="../../diagrams/proximity-alarm.png" alt="Kombinierter Näherungsalarm mit HC-SR04 neben dem Board an GP18 und GP19, geschütztem Echo-Spannungsteiler sowie transistorbetriebenem passivem Buzzer an GP14.">
         </div>
         <aside class="notes">
           Dieser Schaltplan gehört zu 03_proximity_alarm.py. Der geprüfte Spannungsteiler bleibt, die geprüfte Buzzer-Schaltung kommt hinzu. Die eingebaute LED liefert die sichtbare Ausgabe.

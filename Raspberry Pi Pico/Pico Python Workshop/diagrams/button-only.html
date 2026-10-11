@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Raspberry Pi Pico Active-Low Button Wiring</title>
+  <title>Raspberry Pi Pico Active-High Button Wiring</title>
   <style>
     :root {
       color-scheme: light;
@@ -36,8 +36,8 @@
 <body>
   <figure>
     <svg viewBox="0 0 1280 760" role="img" aria-labelledby="title description">
-      <title id="title">Raspberry Pi Pico active-low button input breadboard wiring</title>
-      <desc id="description">A horizontal Raspberry Pi Pico reads an active-low four-leg tactile button on GP13 with a 10-kilohm pull-up. The button straddles the centre channel with each permanent pair crossing it.</desc>
+      <title id="title">Raspberry Pi Pico active-high button input breadboard wiring</title>
+      <desc id="description">A horizontal Raspberry Pi Pico reads an active-high four-leg tactile button on GP13 with a 10-kilohm pull-down. The button straddles the centre channel with each permanent pair crossing it.</desc>
       <defs>
         <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
           <feDropShadow dx="0" dy="3" stdDeviation="4" flood-opacity="0.2"/>
@@ -223,7 +223,7 @@
         </symbol>
       </defs>
       <rect width="1280" height="760" rx="14" fill="#ffffff"/>
-      <text class="title" x="42" y="48">Button only · active-low GP13 input</text>
+      <text class="title" x="42" y="48">Button only · active-high GP13 input</text>
       <text class="subtitle" x="42" y="75">Exact physical circuit for code/teacher-tests/03_button.py</text>
       <g aria-label="Wire legend">
         <line class="wire-red" x1="760" y1="42" x2="794" y2="42"/>
@@ -299,28 +299,28 @@
         <rect id="pico-bottom-header" x="78" y="351" width="520" height="27"
           fill="none" stroke="none"/>
       </g>
-      <g aria-label="Canonical ten kilohm pull-up resistor">
+      <g aria-label="Canonical ten kilohm pull-down resistor">
         <use href="#component-resistor-10k" x="637" y="217.5" width="104" height="24"
           data-obscures-holes="663,220,715,239"/>
-        <text class="tiny" x="689" y="214" text-anchor="middle">10 kΩ pull-up</text>
+        <text class="tiny" x="689" y="214" text-anchor="middle">10 kΩ pull-down</text>
       </g>
       <g aria-label="Canonical four-leg tactile button spanning the centre channel">
         <use href="#component-button-6mm" x="661" y="277" width="130" height="120"
           data-obscures-holes="679,301,773,373"/>
       </g>
-      <g id="circuit-connections" aria-label="Pixel-exact active-low button wiring">
+      <g id="circuit-connections" aria-label="Pixel-exact active-high button wiring">
         <line class="wire-red" x1="195" y1="229.5" x2="195" y2="121.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="wire-black" x1="143" y1="229.5" x2="143" y2="148.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
-        <line class="wire-red" x1="637" y1="121.5" x2="637" y2="202.5"
+        <line class="wire-black" x1="637" y1="148.5" x2="637" y2="202.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="component-lead" x1="637" y1="229.5" x2="741" y2="229.5"
           data-connection-kind="component" data-breadboard-ends="both"
-          data-contact-start-color="#dc2626" data-contact-end-color="#2563eb"/>
+          data-contact-start-color="#111827" data-contact-end-color="#2563eb"/>
         <line class="wire-input" x1="741" y1="202.5" x2="689" y2="202.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
-        <line class="wire-black" x1="767" y1="202.5" x2="767" y2="148.5"
+        <line class="wire-red" x1="767" y1="202.5" x2="767" y2="121.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
         <line class="wire-input" x1="507" y1="445.5" x2="689" y2="445.5"
           data-connection-kind="wire" data-breadboard-ends="both"/>
@@ -329,40 +329,40 @@
           data-contact-end-color="#2563eb"/>
         <polyline class="component-lead" points="763,289 767,289 767,283.5"
           data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#111827"/>
+          data-contact-end-color="#dc2626"/>
         <line class="component-lead" x1="689" y1="385" x2="689" y2="391.5"
           data-connection-kind="connector" data-breadboard-ends="end"
           data-contact-end-color="#2563eb"/>
         <polyline class="component-lead" points="763,385 767,385 767,391.5"
           data-connection-kind="connector" data-breadboard-ends="end"
-          data-contact-end-color="#111827"/>
+          data-contact-end-color="#dc2626"/>
         <circle data-contact-marker="true" cx="195" cy="229.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="195" cy="121.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="143" cy="229.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="143" cy="148.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="637" cy="121.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="637" cy="202.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="637" cy="229.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="637" cy="148.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="637" cy="202.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="637" cy="229.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="741" cy="229.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="741" cy="202.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="689" cy="202.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="767" cy="202.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="767" cy="148.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="767" cy="202.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="767" cy="121.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="507" cy="445.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="689" cy="445.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="689" cy="283.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="767" cy="283.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="767" cy="283.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <circle data-contact-marker="true" cx="689" cy="391.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
-        <circle data-contact-marker="true" cx="767" cy="391.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <circle data-contact-marker="true" cx="767" cy="391.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
       </g>
-      <text class="tiny" x="518" y="439">GP13 · physical pin 17 · active-low</text>
+      <text class="tiny" x="518" y="439">GP13 · physical pin 17 · active-high</text>
       <g aria-label="Button operation inset">
         <rect class="callout" x="62" y="620" width="538" height="105" rx="12"/>
         <text class="label" x="84" y="646">Button contacts</text>
-        <text class="small" x="84" y="672">Released: A and B are separate; GP13 is pulled high.</text>
-        <text class="small" x="84" y="698">Pressed: A joins B and GP13 reads low.</text>
+        <text class="small" x="84" y="672">Released: A and B are separate; GP13 is pulled low (0).</text>
+        <text class="small" x="84" y="698">Pressed: A joins B and GP13 reads high (1).</text>
         <line x1="430" y1="657" x2="430" y2="704" stroke="#2563eb" stroke-width="4"/>
-        <line x1="500" y1="657" x2="500" y2="704" stroke="#111827" stroke-width="4"/>
+        <line x1="500" y1="657" x2="500" y2="704" stroke="#dc2626" stroke-width="4"/>
         <line x1="430" y1="681" x2="500" y2="681" stroke="#16a34a" stroke-width="4" stroke-dasharray="12 8"/>
         <text class="tiny" x="465" y="718" text-anchor="middle">press joins A ↔ B</text>
       </g>
@@ -371,19 +371,19 @@
           fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
         <text x="644" y="646" style="font:700 13px Inter,sans-serif;fill:#9a3412">Before connecting USB</text>
         <text class="small" x="644" y="672">✓ Button spans the centre channel; each A/B pair crosses it.</text>
-        <text class="small" x="644" y="698">✓ 10 kΩ pull-up and common ground checked while USB is disconnected.</text>
+        <text class="small" x="644" y="698">✓ 10 kΩ pull-down and common ground checked while USB is disconnected.</text>
       </g>
     </svg>
     <figcaption>
-      Original course artwork informed by the official Freenove Button &amp; LED lesson. It matches <code>code/teacher-tests/03_button.py</code>, isolates the active-low GP13 button circuit, and uses native canonical component artwork with exact breadboard contacts.
+      Original course artwork informed by the official Freenove Button &amp; LED lesson. It matches <code>code/teacher-tests/03_button.py</code>, isolates the active-high GP13 button circuit, and uses native canonical component artwork with exact breadboard contacts.
     </figcaption>
     <section class="netlist" aria-labelledby="connection-list-title">
       <h2 id="connection-list-title">Exact connection list</h2>
       <table>
         <thead><tr><th>From</th><th>Through</th><th>To</th></tr></thead>
         <tbody>
-          <tr><td>Pico 3V3(OUT), physical pin 36</td><td>top 3.3 V rail and 10 kΩ pull-up resistor</td><td>button terminal A and GP13, physical pin 17</td></tr>
-          <tr><td>button terminal B</td><td>black jumper and labelled top GND rail</td><td>Pico GND, physical pin 38</td></tr>
+          <tr><td>button terminal A and GP13, physical pin 17</td><td>10 kΩ pull-down resistor and labelled top GND rail</td><td>Pico GND, physical pin 38 (released = 0)</td></tr>
+          <tr><td>Pico 3V3(OUT), physical pin 36</td><td>labelled top 3.3 V rail and red jumper</td><td>button terminal B (pressed joins B to A; GP13 = 1)</td></tr>
         </tbody>
       </table>
     </section>

@@ -20,6 +20,7 @@ kritischen Bauteilen ist zunächst ein Muster zu bestellen.
 | Raspberry Pi Pico 2 H | 38 | 38 | direkt passend |
 | Breadboard, 830 Kontakte | 38 | 38 | direkt passend |
 | Jumperkabel Stecker–Stecker, 40er-Band | 38 Bänder | 38 | direkt passend |
+| Jumperkabel Stecker–Buchse, 40er-Band | mindestens 7 Kabel je Kit + Reserve | 10 Bänder (400 Kabel) | zusätzlich anfragen |
 | rote 5-mm-LED | 38 + Reserve | 100 | direkt passend |
 | 6×6-mm-Taster, 4 Pins | 38 + Reserve | 50 | Muster prüfen |
 | lineares 10-kΩ-Potentiometer | 38 + Reserve | 40 | Muster prüfen |
@@ -64,6 +65,15 @@ HC-SR04-Echo-Spannungsteiler.
   Schaltungen auf dem Breadboard werden überwiegend Stecker–Stecker-Kabel
   benötigt.
 
+Zusätzlich **10 Bänder mit je 40 Stecker–Buchse-Kabeln (Male–Female),
+20–30 cm** anfragen. Pro Kit zehn einzelne Kabel einpacken: vier für den
+HC-SR04, drei für RGB `IN`, drei als Reserve. Module bleiben außerhalb des
+Breadboards; Buchsen kommen auf ihre Stiftkontakte, Stecker ins Board.
+Vor Lieferung prüfen, ob die RGB-Header bereits verlötet sind; andernfalls
+vor dem Workshop vorbereiten. Wenn Conrad nicht liefert, bei
+[BerryBase, SKU `DUPK-40-FM-20`](https://www.berrybase.de/40pin-jumper-dupont-kabel-male-female-trennbar/laenge-0-20-m)
+bestellen. Preis separat bestätigen lassen.
+
 ### 4. Rote 5-mm-LEDs
 
 - **Menge:** 100
@@ -100,10 +110,15 @@ die Kursschaltungen ausreichend.
 | 220 Ω | Vorwiderstand der gewöhnlichen LED | 100 | [TRU COMPONENTS, 100 Stück, Bestell-Nr. 1584857](https://www.conrad.de/de/p/tru-components-1584857-tc-cfr0w4j0221kit203-kohleschicht-widerstand-220-axial-bedrahtet-0207-0-25-w-5-100-st-bag-1584857.html) |
 | 1 kΩ | Transistor-Basis und oberer HC-SR04-Teilerwiderstand | 100 | [TRU COMPONENTS, Bestell-Nr. 1583972; 100 Stück bestellen](https://www.conrad.de/de/p/tru-components-1583972-tc-mf0w4ff1001a50203-metallschicht-widerstand-1-k-axial-bedrahtet-0207-0-25-w-1-1-st-1583972.html) |
 | 2 kΩ | unterer HC-SR04-Teilerwiderstand | 100 | [Yageo MF0207F2KH, Bestell-Nr. 1417622; 100 Stück bestellen](https://www.conrad.de/de/p/yageo-mf0207f2kh-mf0207fte52-2k-metallschicht-widerstand-2-k-axial-bedrahtet-0207-0-6-w-1-1-st-1417622.html) |
-| 10 kΩ | Pull-up des Tasters | 100 | [TRU COMPONENTS, 100 Stück, Bestell-Nr. 1583903](https://www.conrad.de/de/p/tru-components-1583903-tc-mf0w4ff1002kit203-metallschicht-widerstand-10-k-axial-bedrahtet-0207-0-25-w-1-100-st-1583903.html) |
+| 10 kΩ | Pull-down des Tasters | 100 | [TRU COMPONENTS, 100 Stück, Bestell-Nr. 1583903](https://www.conrad.de/de/p/tru-components-1583903-tc-mf0w4ff1002kit203-metallschicht-widerstand-10-k-axial-bedrahtet-0207-0-25-w-1-100-st-1583903.html) |
 
 **Nicht 2,2 kΩ statt 2 kΩ bestellen.** Die Kursunterlagen und die Berechnung
 des Echo-Spannungsteilers verwenden ausdrücklich 1 kΩ und 2 kΩ.
+
+Vorhandene Kits ohne 2 kΩ können für den unteren Teilerzweig **zwei 1 kΩ
+in Reihe** nutzen; oben bleibt ein separater 1 kΩ. Mit Buzzer benötigt
+jedes Kit vier 1-kΩ-Widerstände. Für diese Alternative **200 statt 100
+Stück 1 kΩ** bestellen. Die reguläre Liste enthält weiterhin 2 kΩ.
 
 ### 8. USB-Datenkabel
 

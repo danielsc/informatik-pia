@@ -9,12 +9,18 @@ Organise repeated code into functions and bring eight RGB pixels to life.
 **Hardware:** Freenove 8-RGB LED module, potentiometer<br>
 ## 1. Meet the RGB module
 
+Look at the physical module first: it has eight individually controllable
+RGB LEDs. Each can mix red, green, and blue, so the same component can show
+colours, a moving light, or an animation.
+
 Disconnect USB and follow the
 [8-RGB wiring table](WIRING_AND_SAFETY.md#freenove-8-rgb-led-module).
 
 Open the
 [scalable, accessible 8-RGB module diagram](../../diagrams/rgb8-module.html) and use
-the module header marked `IN`.
+the module header marked `IN`. Keep the module off the breadboard and use
+three male-to-female jumper leads: sockets on the module's male header pins,
+male ends in the breadboard. Check pin labels rather than wire order.
 
 ![Freenove square 8-RGB module IN header wired to GP16](../../diagrams/rgb8-module.png)
 
@@ -24,6 +30,22 @@ uses a custom library. Our code uses MicroPython's built-in `neopixel` module,
 so no extra file is required.
 
 Run [`code/day-3/01_neopixel_colours.py`](../../code/day-3/01_neopixel_colours.py).
+
+Create the hardware object before using `pixels`:
+
+```python
+from machine import Pin
+from neopixel import NeoPixel
+
+PIXEL_PIN = 16
+PIXEL_COUNT = 8
+pixels = NeoPixel(Pin(PIXEL_PIN), PIXEL_COUNT)
+```
+
+`pixels` is a `NeoPixel` object, not a normal list. It stores one RGB tuple
+per LED and lets you use indexes like a list: `pixels[0]` is the first LED,
+`pixels[7]` the last. `pixels.fill(colour)` changes all stored colours;
+`pixels.write()` sends them to the physical LEDs.
 
 An RGB colour is a tuple of red, green, and blue values:
 
@@ -80,13 +102,17 @@ for index in range(8):
 and `index` stores the current value. Those are exactly the valid pixel
 indexes.
 
-Now apply that loop to the hardware:
+With `pixels` created as above, fill its eight entries with dim blue, then
+send the colours to the module:
 
 ```python
-for index in range(8):
+for index in range(PIXEL_COUNT):
     pixels[index] = (0, 0, 20)
-    pixels.write()
+pixels.write()
 ```
+
+Expected result: all eight LEDs glow dim blue. Change one index to a dim red
+tuple and call `pixels.write()` again; exactly that LED should change.
 
 What error do you predict for `pixels[8]`?
 
@@ -127,6 +153,11 @@ A function is a promise: given suitable inputs, it performs one named job.
 Keep the RGB module on GP16. Add the potentiometer on GP26 using 3.3 V and GND.
 There is no ordinary LED in this build.
 
+Use the complete
+[NeoPixel-and-potentiometer diagram and connection table](../../diagrams/neopixel-and-potentiometer.html):
+
+![Eight RGB pixels connected by jumper cables with a GP26 potentiometer](../../diagrams/neopixel-and-potentiometer.png)
+
 Keep the three RGB connections from the Day 3 diagram, then add:
 
 | Potentiometer pin | Connection |
@@ -139,12 +170,12 @@ Stop the RGB test and disconnect USB before adding the potentiometer. Partner
 check the three new contacts, reconnect, and print raw ADC values before
 starting the Pixel Pet.
 
-Start from [`code/day-3/03_pixel_pet_starter.py`](../../code/day-3/03_pixel_pet_starter.py).
+Start from [`code/day-3/03_pixel_pet_1_starter.py`](../../code/day-3/03_pixel_pet_1_starter.py).
 The knob controls the pet's “energy”:
 
 - 0-32%: sleepy, slow blue pulse;
 - 33-65%: curious, green moving pixel;
-- 66-100%: excited, quick colourful sparkle.
+- 66-100%: excited, quick colour changes.
 
 Requirements:
 
@@ -156,7 +187,13 @@ Requirements:
 - the loop prints energy and state for debugging.
 
 The supplied `try`/`finally` block turns all pixels off when the program stops.
-You do not need to write that safety wrapper yourself.
+It is the cleanup pattern from Day 1; leave it in place.
+
+Use familiar loops for the animations: count with `range(6)` and set
+`blue = step * 3` for a sleepy fade (blue intensities 0, 3, 6, 9, 12, 15).
+Use `range(PIXEL_COUNT)` for a green
+chase, and visit a list of RGB tuples for excited colour changes.
+No three-argument `range()` or `%` operator is needed.
 
 ### Stretch ideas
 
