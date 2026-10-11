@@ -368,37 +368,25 @@
           data-obscures-holes="653,-138,959,-3"/>
       </g>
       <g id="circuit-connections" aria-label="Pixel-exact sensor wiring and Echo divider">
-        <polyline class="wire-red" points="767,41 767,60 767,60 767,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
-        <circle data-contact-marker="true" cx="767" cy="202.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
-        <polyline class="wire-red" points="767,283.5 767,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
-        <circle data-contact-marker="true" cx="767" cy="283.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-red" points="767,41 767,391.5" data-connection-kind="wire" data-breadboard-ends="end"/>
         <circle data-contact-marker="true" cx="767" cy="391.5" r="6" fill="#dc2626" stroke="#ffffff" stroke-width="2"/>
         <g aria-label="Female red jumper socket on module header; male end at breadboard">
           <rect x="760" y="23" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
           <rect x="764" y="26" width="6" height="5" fill="#dc2626"/>
         </g>
-        <polyline class="wire-yellow" points="793,41 793,60 793,60 793,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
-        <circle data-contact-marker="true" cx="793" cy="202.5" r="6" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
-        <polyline class="wire-yellow" points="793,283.5 793,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
-        <circle data-contact-marker="true" cx="793" cy="283.5" r="6" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-yellow" points="793,41 793,391.5" data-connection-kind="wire" data-breadboard-ends="end"/>
         <circle data-contact-marker="true" cx="793" cy="391.5" r="6" fill="#ca8a04" stroke="#ffffff" stroke-width="2"/>
         <g aria-label="Female yellow jumper socket on module header; male end at breadboard">
           <rect x="786" y="23" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
           <rect x="790" y="26" width="6" height="5" fill="#ca8a04"/>
         </g>
-        <polyline class="wire-input" points="819,41 819,60 819,60 819,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
-        <circle data-contact-marker="true" cx="819" cy="202.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
-        <polyline class="wire-input" points="819,283.5 819,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
-        <circle data-contact-marker="true" cx="819" cy="283.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-input" points="819,41 819,391.5" data-connection-kind="wire" data-breadboard-ends="end"/>
         <circle data-contact-marker="true" cx="819" cy="391.5" r="6" fill="#2563eb" stroke="#ffffff" stroke-width="2"/>
         <g aria-label="Female input jumper socket on module header; male end at breadboard">
           <rect x="812" y="23" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
           <rect x="816" y="26" width="6" height="5" fill="#2563eb"/>
         </g>
-        <polyline class="wire-black" points="845,41 845,60 845,60 845,202.5" data-connection-kind="wire" data-breadboard-ends="end"/>
-        <circle data-contact-marker="true" cx="845" cy="202.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
-        <polyline class="wire-black" points="845,283.5 845,391.5" data-connection-kind="wire" data-breadboard-ends="both"/>
-        <circle data-contact-marker="true" cx="845" cy="283.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
+        <polyline class="wire-black" points="845,41 845,391.5" data-connection-kind="wire" data-breadboard-ends="end"/>
         <circle data-contact-marker="true" cx="845" cy="391.5" r="6" fill="#111827" stroke="#ffffff" stroke-width="2"/>
         <g aria-label="Female black jumper socket on module header; male end at breadboard">
           <rect x="838" y="23" width="14" height="18" rx="2" fill="#1f2937" stroke="#64748b" stroke-width="1"/>
@@ -492,7 +480,7 @@
         <text class="label" x="42" y="-166">Modules stay OFF the breadboard.</text>
         <text class="small" x="42" y="-140">Female sockets fit the labelled module header.</text>
         <text class="small" x="42" y="-114">Male cable ends plug into the coloured hole dots.</text>
-        <text class="small" x="42" y="-88">Short jumpers join the upper and lower terminal strips.</text>
+        <text class="small" x="42" y="-88">Cables cross the channel directly; no extra contacts.</text>
         <text class="small" x="42" y="-62">Cables pass over rails; they do not contact them.</text>
         <text class="small" x="42" y="-36">Disconnect USB before wiring; one contact per hole.</text>
       </g>
@@ -510,16 +498,16 @@
           <tr>
             <td>Pico VBUS / 5 V, physical pin 40</td>
             <td>top 5 V rail and rail jumper to bottom 5 V rail</td>
-            <td>HC-SR04 VCC via strip jumper and female-to-male red cable</td>
+            <td>HC-SR04 VCC via lower terminal strip and continuous female-to-male red cable</td>
           </tr>
           <tr>
             <td>Pico GP19, physical pin 25</td>
-            <td>female-to-male yellow Trigger cable and strip jumper</td>
+            <td>yellow signal jumper to the lower terminal strip and continuous female-to-male Trigger cable</td>
             <td>HC-SR04 Trig</td>
           </tr>
           <tr>
             <td>HC-SR04 Echo</td>
-            <td>female-to-male Echo cable, strip jumper, then 1 kΩ resistor</td>
+            <td>continuous female-to-male Echo cable to the lower terminal strip, then 1 kΩ resistor</td>
             <td>divider junction and Pico GP18, physical pin 24</td>
           </tr>
           <tr>
@@ -528,7 +516,7 @@
             <td>bottom GND rail</td>
           </tr>
           <tr>
-            <td>HC-SR04 GND via female-to-male black cable and strip jumper</td>
+            <td>HC-SR04 GND via continuous female-to-male black cable and lower terminal strip</td>
             <td>bottom GND rail</td>
             <td>Pico GND, physical pin 13</td>
           </tr>

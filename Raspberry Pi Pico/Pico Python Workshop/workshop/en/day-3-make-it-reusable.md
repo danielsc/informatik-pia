@@ -189,8 +189,9 @@ Requirements:
 The supplied `try`/`finally` block turns all pixels off when the program stops.
 It is the cleanup pattern from Day 1; leave it in place.
 
-Use familiar loops for the animations: visit blue values in
-`[2, 5, 8, 11, 14]` for a sleepy fade, use `range(PIXEL_COUNT)` for a green
+Use familiar loops for the animations: count with `range(6)` and set
+`blue = step * 3` for a sleepy fade (blue intensities 0, 3, 6, 9, 12, 15).
+Use `range(PIXEL_COUNT)` for a green
 chase, and visit a list of RGB tuples for excited colour changes.
 No three-argument `range()` or `%` operator is needed.
 

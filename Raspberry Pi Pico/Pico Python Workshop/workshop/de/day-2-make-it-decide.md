@@ -240,7 +240,7 @@ sichere Ausschalten der LED. **Ihr schreibt das Spiel.**
 ### So funktioniert das Spiel
 
 Lasst den Taster los und wartet. Sobald die LED aufleuchtet, drückt ihr so
-schnell wie möglich. Drücken **vor** dem Aufleuchten ist ein **Fehlstart**:
+schnell wie möglich. Ein am Ende der zufälligen Wartezeit noch gedrückter Taster ist ein **Fehlstart**:
 Dieser Versuch zählt nicht, und ihr versucht es erneut. Spielt drei gültige
 Runden und vergleicht eure Reaktionszeiten. Die erste Version hat zwei
 Ergebniskategorien.
@@ -251,8 +251,8 @@ Bringt diese Ideen in die richtige Reihenfolge, bevor ihr Python schreibt:
 
 - wiederholen, bis die Ergebnisliste drei Werte enthält;
 - warten, bis der Taster losgelassen ist;
-- eine zufällige Zeit lang warten und dabei auf frühes Drücken prüfen;
-- bei frühem Drücken einen Fehlstart melden und den Versuch nicht werten;
+- eine zufällige Zeit lang warten;
+- danach den Taster prüfen; ist er noch gedrückt, einen Fehlstart ohne Ergebnis melden;
 - die LED einschalten und die Startzeit speichern;
 - warten, solange der Taster losgelassen ist;
 - die vergangene Zeit berechnen und die LED ausschalten;
@@ -264,6 +264,7 @@ Bringt diese Ideen in die richtige Reihenfolge, bevor ihr Python schreibt:
 Verwendet die vorgegebenen Werkzeuge:
 
 - `randint(1000, 3000)` wählt die Wartezeit in Millisekunden;
+- `sleep_ms(wait_ms)` wartet diese Zeit;
 - `sleep_ms(1)` wartet kurz zwischen den Prüfungen;
 - `ticks_ms()` speichert einen Zeitstempel;
 - `ticks_diff(end, start)` berechnet die vergangenen Millisekunden.
@@ -275,19 +276,17 @@ er losgelassen ist, und `1`, wenn er gedrückt ist. Verwendet eine
 `while`-Schleife, um auf das Loslassen zu warten, und eine weitere, um auf den
 Tastendruck zu warten.
 
-Prüft während der zufälligen Wartezeit immer wieder den Taster, statt die
-ganze Zeit am Stück zu schlafen. Dieses vorgegebene Timing-Muster verbindet
-zwei Bedingungen mit `and`:
+Haltet die zufällige Wartezeit einfach und prüft danach den Taster vor dem
+Einschalten der LED:
 
 ```python
-wait_started_ms = ticks_ms()
-while ticks_diff(ticks_ms(), wait_started_ms) < wait_ms and not button.value():
-    sleep_ms(1)
+sleep_ms(wait_ms)
 ```
 
-Es endet, wenn die Zeit abgelaufen **oder** der Taster gedrückt ist. Prüft
-danach mit `if button.value():` auf einen Fehlstart. LED, Reaktionsmessung
-und Ergebnis gehören in den `else`-Zweig, damit frühes Drücken nicht zählt.
+Prüft danach mit `if button.value():` auf einen Fehlstart. LED, Reaktionsmessung
+und Ergebnis gehören in den `else`-Zweig. Diese Grundversion erkennt einen
+beim Start gehaltenen Taster, aber keinen während der Wartezeit bereits
+losgelassenen Druck.
 
 ### Schritt 3: Fügt eine Entscheidung hinzu
 
@@ -335,7 +334,9 @@ Wählt erst eine Erweiterung, wenn die Grundversion funktioniert:
 Die optionale Datei
 [`code/day-2/03_reaction_game_3_extension.py`](../../code/day-2/03_reaction_game_3_extension.py)
 ergänzt nach der funktionierenden Grundversion fünf Runden, eine dritte
-Ergebniskategorie und einen Durchschnitt.
+Ergebniskategorie und einen Durchschnitt. Sie prüft außerdem während der
+Wartezeit auf Tastendrücke, auch wenn diese vor ihrem Ende losgelassen werden.
+Diese zusätzliche Logik ist optional.
 
 ### Checkliste für die Vorführung
 

@@ -21,9 +21,7 @@ try:
 
         wait_ms = randint(1000, 3000)
         print("Get ready...")
-        wait_started_ms = ticks_ms()
-        while ticks_diff(ticks_ms(), wait_started_ms) < wait_ms and not button.value():
-            sleep_ms(1)
+        sleep_ms(wait_ms)
 
         if button.value():
             print("False start! This round does not count.")

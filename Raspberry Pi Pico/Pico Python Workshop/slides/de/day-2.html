@@ -210,7 +210,7 @@ pressed = False
 print(waiting and not pressed)
         </code></pre>
         <div class="callout"><p>Die Antwort ist nur <code>True</code>, solange wir noch warten <strong>und</strong> der Taster nicht gedrückt ist. Ändert <code>pressed</code> zu <code>True</code>: Die gemeinsame Antwort wird <code>False</code>.</p></div>
-        <aside class="notes">and vor der überwachten Wartezeit im Reaktionsspiel erklären. Beide Bedingungen müssen gelten; sobald eine falsch wird, endet eine while-Schleife. Später beantwortet die vorgegebene Timing-API, ob die zufällige Wartezeit noch läuft.</aside>
+        <aside class="notes">Beide Bedingungen müssen gelten, damit and wahr ist. Mit diesen festen Werten üben. Die Grundversion des Reaktionsspiels wartet mit sleep und prüft danach den Taster, ohne kombinierte Zeitbedingung.</aside>
       </section>
 
       <section>
@@ -478,10 +478,10 @@ print(times[-1])
         <div class="grid-3">
           <div class="card"><h3>1 · Bereitmachen</h3><p>Taster loslassen. Die LED bleibt eine zufällige Zeit aus. Noch nicht drücken.</p></div>
           <div class="card"><h3>2 · Los!</h3><p>Sobald die LED leuchtet, so schnell wie möglich drücken. Gemessen wird vom Einschalten bis zum Druck.</p></div>
-          <div class="card"><h3>3 · Fehlstart</h3><p>Ein Druck vor dem Licht ist ein <code>False start!</code> Kein Ergebnis wird gespeichert. Loslassen und die Runde erneut versuchen.</p></div>
+          <div class="card"><h3>3 · Fehlstart</h3><p>Ist der Taster am Ende der Wartezeit noch gedrückt: <code>False start!</code> Kein Ergebnis speichern. Loslassen und erneut versuchen.</p></div>
         </div>
         <div class="callout success" style="margin-top:0.7em;"><p>Sammelt drei gültige Zeiten. Weniger Millisekunden bedeuten eine schnellere Reaktion. Sagt voraus, was bei einem Druck während der dunklen Wartezeit passiert.</p></div>
-        <aside class="notes">Spiel vor der Umsetzung erklären. Fairen Druck und Fehlstart zeigen. Frühe Tastendrücke müssen während der Wartezeit erkannt werden, statt als Nullzeit-Erfolg zu zählen. Nur gültige Runden zählen zu ROUNDS.</aside>
+        <aside class="notes">Spiel vor der Umsetzung erklären. Fairen Druck und einen bis zum Ende der Wartezeit gehaltenen frühen Druck zeigen. Die Grundversion prüft einmal vor dem Licht; ein bereits losgelassener Druck während der Wartezeit wird nicht erkannt. Nur gültige Runden zählen zu ROUNDS.</aside>
       </section>
 
       <section>
@@ -497,9 +497,9 @@ print(times[-1])
           <div class="card">
             <h3>Schritte zum Ordnen</h3>
             <ul>
-              <li>Wartet eine zufällige Zeit und prüft dabei auf frühen Druck.</li>
+              <li>Wartet eine zufällige Zeit.</li>
               <li>Wartet, bis der Taster losgelassen ist.</li>
-              <li>Bei frühem Druck: <code>False start!</code> melden und ohne Ergebnis erneut versuchen.</li>
+              <li>Danach Taster prüfen: Falls gehalten, <code>False start!</code> ohne Ergebnis melden.</li>
               <li>Schaltet die LED ein und speichert die Startzeit.</li>
             </ul>
           </div>
@@ -507,7 +507,7 @@ print(times[-1])
         <aside class="notes">
           Bleiben Sie konkret: Die Klasse ordnet die genauen Schritte aus den Kommentaren
           des Starters, statt einen vagen Ablauf zu erfinden. Erster Teil: loslassen,
-          überwacht warten, Fehlstart-Zweig, LED und Startzeit. Gültigen Zweig auf der
+          einfach warten, Fehlstart-Zweig, LED und Startzeit. Gültigen Zweig auf der
           nächsten Folie fortsetzen. Das vorgegebene Gerüst bleibt stehen.
         </aside>
       </section>
@@ -528,19 +528,16 @@ print(times[-1])
 
       <section>
         <p class="eyebrow">Timing-API-Rezept</p>
-        <h2>Warten — aber den Taster weiter prüfen</h2>
-        <p class="activity watch">Anschauen und besprechen · Die mit and verbundenen Bedingungen erklären</p>
+        <h2>Warten, dann vor dem Licht den Taster prüfen</h2>
+        <p class="activity watch">Anschauen und besprechen · Wartezeit und Startprüfung verfolgen</p>
         <pre><code class="language-python" data-trim>
 wait_ms = randint(1000, 3000)
-wait_started_ms = ticks_ms()
-while (
-    ticks_diff(ticks_ms(), wait_started_ms)
-    &lt; wait_ms and not button.value()
-):
-    sleep_ms(1)
+sleep_ms(wait_ms)
+if button.value():
+    print("False start! This round does not count.")
         </code></pre>
-        <div class="callout"><p>Warten, solange Zeit bleibt <strong>und</strong> kein Druck erfolgt. Danach <code>button.value()</code> prüfen: Fehlstart oder gültiger Start? Mit <code>ticks_ms()</code> und <code>ticks_diff(end_ms, start_ms)</code> einen gültigen Druck messen.</p></div>
-        <aside class="notes">Timing-Ausdruck als zwei mit and verbundene Bedingungen lesen. Ein einzelnes sleep_ms(wait_ms) übersieht frühe Tastendrücke. Vorgegebenes API-Rezept wiederverwenden; Fehlstart-Zweig und Spiellogik schreibt die Klasse selbst.</aside>
+        <div class="callout"><p>LED und Zeitmessung gehören in den <code>else</code>-Zweig. Ein gehaltener Taster zählt nicht. Mit <code>ticks_ms()</code> und <code>ticks_diff(end_ms, start_ms)</code> einen gültigen Druck messen.</p></div>
+        <aside class="notes">Die Grundversion wartet bewusst die ganze zufällige Zeit und prüft danach einmal vor dem Einschalten der LED. Ein bereits losgelassener Druck wird nicht erkannt; laufendes Prüfen gehört zur optionalen Erweiterung. Die Klasse schreibt den gültigen else-Zweig.</aside>
       </section>
 
       <section>
@@ -549,7 +546,7 @@ while (
         <p class="activity">In Thonny ausprobieren · Erst eine Runde, dann alle drei</p>
         <ol>
           <li>Innerhalb von <code>try:</code> <code>pass</code> löschen; <code>finally</code> behalten.</li>
-          <li>Eine Runde mit überwachter zufälliger Wartezeit schreiben.</li>
+          <li>Eine Runde mit zufälliger Wartezeit und anschließender Tasterprüfung schreiben.</li>
           <li>Bei Fehlstart <code>False start!</code> ausgeben; nur gültige Runden verwenden <code>scores.append(reaction_ms)</code>.</li>
           <li><code>if reaction_ms &lt; 350</code> → <code>Quick!</code>, sonst <code>Keep practising!</code> ergänzen.</li>
           <li>Runde mit <code>while len(scores) &lt; ROUNDS:</code> umschließen.</li>

@@ -18,8 +18,8 @@ try:
     #
     # 1. Repeat until scores contains ROUNDS results.
     # 2. Wait until the button is released.
-    # 3. Wait a random time, checking for an early press.
-    #    If pressed early, report a false start; do not add a score.
+    # 3. Wait a random time, then check whether the button is pressed.
+    #    If it is still pressed, report a false start; do not add a score.
     # 4. Turn on the LED and remember the start time.
     # 5. Wait until the button is pressed.
     # 6. Calculate reaction_ms and turn off the LED.

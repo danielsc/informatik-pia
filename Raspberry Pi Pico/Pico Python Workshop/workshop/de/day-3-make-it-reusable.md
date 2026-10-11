@@ -196,8 +196,9 @@ Anforderungen:
 Der vorgegebene `try`/`finally`-Block schaltet beim Programmende alle Pixel
 aus. Es ist das Aufräummuster von Tag 1; lasst es stehen.
 
-Nutzt bekannte Schleifen: Besucht die Blauwerte in `[2, 5, 8, 11, 14]`
-für langsames Pulsieren, verwendet `range(PIXEL_COUNT)` für das wandernde
+Nutzt bekannte Schleifen: Zählt mit `range(6)` und setzt `blue = step * 3`
+für langsames Pulsieren (Blauhelligkeiten 0, 3, 6, 9, 12, 15).
+Verwendet `range(PIXEL_COUNT)` für das wandernde
 grüne Pixel und durchlauft eine Liste von RGB-Tupeln für schnelle
 Farbwechsel. Weder `range()` mit drei Argumenten noch `%` sind nötig.
 

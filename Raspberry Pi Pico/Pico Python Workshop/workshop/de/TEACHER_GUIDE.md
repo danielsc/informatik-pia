@@ -153,8 +153,10 @@ Antworten, Sicherheitshinweise zur Schaltung und empfohlene Übergänge.
 Minimum: Die Lernenden programmieren eine zufällige Wartezeit, messen einen
 Tastendruck, klassifizieren ihn mit `if`/`else`, wiederholen dies mit `while`
 über drei Runden, hängen jeden Wert an und melden den schnellsten. Gute Arbeiten
-ergänzen `elif` oder einen Durchschnitt. Ein Tastendruck vor der LED ist ein
-Fehlstart und darf kein Ergebnis hinzufügen. Verlangen Sie
+ergänzen `elif` oder einen Durchschnitt. Nach der zufälligen Wartezeit einmal
+vor dem Licht prüfen: Ein gehaltener Taster ist ein Fehlstart und zählt nicht.
+Ein während der Wartezeit bereits losgelassener Druck wird in der Grundversion
+nicht erkannt. Verlangen Sie
 nicht, dass die Lernenden die bereitgestellte Hardware-Einrichtung oder die
 Aufräumhülle selbst reproduzieren.
 

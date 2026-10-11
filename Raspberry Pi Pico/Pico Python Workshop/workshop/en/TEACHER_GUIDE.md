@@ -137,8 +137,9 @@ safety reminders, and suggested transition points.
 
 Minimum: students write a random wait, measure one button press, classify it
 with `if`/`else`, repeat for three rounds with `while`, append each score, and
-report the fastest. A press before the LED is a false start and must not
-add a score. Strong work adds `elif` or an average. Do not require students to reproduce the supplied hardware setup or
+report the fastest. Check the button once after the random wait, before lighting
+the LED: a held button is a false start and must not add a score. A press released
+during the wait is not detected in the baseline. Strong work adds `elif` or an average. Do not require students to reproduce the supplied hardware setup or
 cleanup wrapper.
 
 Before releasing the starter, check that students can explain

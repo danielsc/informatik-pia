@@ -210,7 +210,7 @@ pressed = False
 print(waiting and not pressed)
         </code></pre>
         <div class="callout"><p>The answer is <code>True</code> only while we are still waiting <strong>and</strong> the button is not pressed. Change <code>pressed</code> to <code>True</code>: the combined answer becomes <code>False</code>.</p></div>
-        <aside class="notes">Teach and before the reaction game's monitored wait. Both conditions must hold; either becoming false ends a while loop. Later the supplied timing API answers whether the random delay is still running.</aside>
+        <aside class="notes">Both conditions must hold for and to be true. Practise with these fixed values. The baseline reaction game uses a simple sleep followed by a button check, not a combined timing condition.</aside>
       </section>
 
       <section>
@@ -477,10 +477,10 @@ print(times[-1])
         <div class="grid-3">
           <div class="card"><h3>1 · Get ready</h3><p>Release the button. The LED stays off for a random delay. Do not press yet.</p></div>
           <div class="card"><h3>2 · Go!</h3><p>When the LED lights, press as quickly as possible. Time runs from light-on to your press.</p></div>
-          <div class="card"><h3>3 · False start</h3><p>A press before the light is a <code>False start!</code> It adds no score. Release and try that round again.</p></div>
+          <div class="card"><h3>3 · False start</h3><p>If the button is still held when the wait ends, print <code>False start!</code> It adds no score. Release and try again.</p></div>
         </div>
         <div class="callout success" style="margin-top:0.7em;"><p>Collect three valid times. Lower milliseconds mean a faster reaction. Predict what happens if someone presses during the dark waiting period.</p></div>
-        <aside class="notes">Teach the game before implementation. Demonstrate a fair press and an early press. Early presses must be detected during the random wait, not accepted as a zero-time success. Only valid rounds count toward ROUNDS.</aside>
+        <aside class="notes">Teach the game before implementation. Demonstrate a fair press and an early press held until the wait ends. The baseline checks once before lighting the LED; a press released during the wait is not detected. Only valid rounds count toward ROUNDS.</aside>
       </section>
 
       <section>
@@ -496,16 +496,16 @@ print(times[-1])
           <div class="card">
             <h3>Steps to order</h3>
             <ul>
-              <li>Wait a random delay while checking for an early press.</li>
+              <li>Wait a random delay.</li>
               <li>Wait until the button is released.</li>
-              <li>If pressed early, report <code>False start!</code> and retry without a score.</li>
+              <li>Then check the button: if held, report <code>False start!</code> without a score.</li>
               <li>Turn on the LED and record the start time.</li>
             </ul>
           </div>
         </div>
         <aside class="notes">
           Keep this concrete: students should be ordering exact steps from the starter
-          comments, not inventing a vague process. First order: release, monitored delay,
+          comments, not inventing a vague process. First order: release, simple delay,
           early-press branch, LED and start time. Continue the valid branch on the next
           slide. Make sure everyone understands that
           the supplied wrapper stays in place.
@@ -528,19 +528,16 @@ print(times[-1])
 
       <section>
         <p class="eyebrow">Timing API recipe</p>
-        <h2>Wait—but keep checking the button</h2>
-        <p class="activity watch">Watch and discuss · Explain the two conditions joined by and</p>
+        <h2>Wait, then check before lighting the LED</h2>
+        <p class="activity watch">Watch and discuss · Trace the wait and the start check</p>
         <pre><code class="language-python" data-trim>
 wait_ms = randint(1000, 3000)
-wait_started_ms = ticks_ms()
-while (
-    ticks_diff(ticks_ms(), wait_started_ms)
-    &lt; wait_ms and not button.value()
-):
-    sleep_ms(1)
+sleep_ms(wait_ms)
+if button.value():
+    print("False start! This round does not count.")
         </code></pre>
-        <div class="callout"><p>Wait while time remains <strong>and</strong> no press occurs. Then check <code>button.value()</code>: early press or valid start? Use <code>ticks_ms()</code> and <code>ticks_diff(end_ms, start_ms)</code> to time a valid press.</p></div>
-        <aside class="notes">Read the timing expression as two taught conditions joined by and. A single sleep_ms(wait_ms) misses early presses. Reuse this supplied API recipe; students still own the early-press branch and game logic.</aside>
+        <div class="callout"><p>Put the LED and timing in the <code>else</code> branch. A held button earns no score. Use <code>ticks_ms()</code> and <code>ticks_diff(end_ms, start_ms)</code> to time a valid press.</p></div>
+        <aside class="notes">The baseline deliberately sleeps for the whole random wait, then checks once before turning on the LED. A press released during that wait is not detected; continuous checking belongs to the optional extension. Students write the valid-start else branch.</aside>
       </section>
 
       <section>
@@ -549,7 +546,7 @@ while (
         <p class="activity">Try in Thonny · Get one round working before you add all three</p>
         <ol>
           <li>Inside <code>try:</code>, delete <code>pass</code>; keep <code>finally</code>.</li>
-          <li>Write one round with the monitored random wait.</li>
+          <li>Write one round with a random wait, then check the button.</li>
           <li>On a false start print <code>False start!</code>; only valid rounds use <code>scores.append(reaction_ms)</code>.</li>
           <li>Add <code>if reaction_ms &lt; 350</code> → <code>Quick!</code>, else <code>Keep practising!</code>.</li>
           <li>Wrap the round in <code>while len(scores) &lt; ROUNDS:</code>.</li>

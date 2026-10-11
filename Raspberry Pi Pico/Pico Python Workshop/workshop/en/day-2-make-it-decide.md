@@ -223,8 +223,8 @@ cleanup. **You write the game.**
 ### How the game works
 
 Release the button and wait. When the LED lights, press as quickly as you can.
-Pressing **before** it lights is a **false start**: that attempt earns no score
-and you try again. Complete three valid rounds and compare your reaction times.
+Holding the button down when the random wait ends is a **false start**: that
+attempt earns no score and you try again. Complete three valid rounds and compare your reaction times.
 The first version uses two result categories.
 
 ### Step 1: write the plan as comments
@@ -233,8 +233,8 @@ Put these ideas in the correct order before writing Python:
 
 - repeat until the score list contains three results;
 - wait until the button is released;
-- wait a random amount of time, checking for an early press;
-- if pressed early, report a false start and do not time or score that attempt;
+- wait a random amount of time;
+- then check the button; if still pressed, report a false start without a score;
 - turn on the LED and remember the start time;
 - wait while the button is released;
 - calculate the elapsed time and turn off the LED;
@@ -246,6 +246,7 @@ Put these ideas in the correct order before writing Python:
 Use the supplied tools:
 
 - `randint(1000, 3000)` chooses the wait in milliseconds;
+- `sleep_ms(wait_ms)` performs that wait;
 - `sleep_ms(1)` pauses briefly between checks;
 - `ticks_ms()` records a clock reading;
 - `ticks_diff(end, start)` calculates elapsed milliseconds.
@@ -256,18 +257,15 @@ Remember that this active-high button reads `0` when released and `1` when
 pressed; use one `while` loop to wait for release and another to wait for the
 press.
 
-During the random wait, keep checking the button instead of sleeping for the
-whole delay. This supplied timing pattern combines two conditions with `and`:
+Keep the random wait simple, then check the button before lighting the LED:
 
 ```python
-wait_started_ms = ticks_ms()
-while ticks_diff(ticks_ms(), wait_started_ms) < wait_ms and not button.value():
-    sleep_ms(1)
+sleep_ms(wait_ms)
 ```
 
-It stops when time is up **or** the button is pressed. Then check
-`if button.value():` to report a false start. Put the LED, reaction timing,
-and score code in the `else` branch so an early press cannot earn a score.
+After the wait, check `if button.value():` to report a false start. Put the LED,
+reaction timing, and score code in the `else` branch. This baseline detects a
+button held at the start; a press released during the wait is not detected.
 
 ### Step 3: add a decision
 
@@ -313,7 +311,8 @@ Choose one only after the baseline works:
 The optional
 [`code/day-2/03_reaction_game_3_extension.py`](../../code/day-2/03_reaction_game_3_extension.py)
 adds five rounds, a third result category, and an average after the baseline
-works.
+works. It also monitors the random wait to detect presses released before the
+wait ends; this extra logic is optional.
 
 ### Demo checklist
 

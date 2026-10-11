@@ -128,16 +128,16 @@ wiring guide, and the rendered PNG.
 | 1 | 4 | PASS | Full landscape breadboard, canonical Pico, physical HC-SR04, resistor bodies, coloured jumpers, and rail distribution use the kit lesson's physical-computing visual language without copying its image. |
 | 2 | 4 | PASS | VBUS powers VCC; GP19 reaches Trig; Echo reaches GP18 only through the 1 kΩ divider leg; the 2 kΩ leg and sensor GND return to common ground. |
 | 3 | 4 | PASS | GP19 physical pin 25, GP18 physical pin 24, VBUS physical pin 40, and Pico GND physical pin 13 match the program and official pin order. |
-| 4 | 3 | PASS | All 32 checked breadboard contacts use distinct, exact, unobscured holes. Four female-to-male cables connect the off-board sensor to upper strips; four short jumpers bridge to the lower strips. The additional jumper step and longer protected-Echo perimeter route are minor buildability limitations. |
+| 4 | 3 | PASS | All 24 checked breadboard contacts use distinct, exact, unobscured holes. Four continuous female-to-male cables reach the lower terminal strips directly, without intermediate contacts or channel jumpers. The longer protected-Echo perimeter route remains a minor buildability limitation. |
 | 5 | 4 | PASS | Canonical unscaled HC-SR04 artwork is preserved; both resistors use the native 104 × 24 px component with a two-pitch body and one-pitch metal lead on each side. |
-| 6 | 4 | PASS | The sensor is visibly outside the breadboard; VCC/Trig/Echo/GND order and individual female sockets are preserved. Coloured male-end dots and channel jumpers distinguish the cables from directly inserted module pins. |
+| 6 | 4 | PASS | The sensor is visibly outside the breadboard; VCC/Trig/Echo/GND order and individual female sockets are preserved. Each continuous cable has one coloured male-end dot on the lower strip; passing over upper holes, rails, and the channel adds no contacts. |
 | 7 | 3 | PASS | Sensor, sockets, divider, signals, and ground use separated lanes without collisions. The taller off-board layout and native small sensor pin labels benefit from opening the scalable HTML when projected. |
 | 8 | 4 | PASS | The inset requires USB disconnection, identifies 5 V VCC, forbids direct Echo-to-GPIO wiring, and requires common ground and a partner check. |
 | 9 | 4 | PASS | Standalone responsive inline SVG includes title, description, ARIA labelling, print CSS, caption, and exact HTML connection table. |
 | 10 | 4 | PASS | Original vector artwork is identified as informed by the official Freenove lesson; no remote image, traced pixels, logo, canvas, or base64 content is used. |
 
-**Outcome:** PASS. Categories 4 and 7 score **3/4** for the additional jumper
-step and taller layout; all critical categories are **4/4**, with no
+**Outcome:** PASS. Categories 4 and 7 score **3/4** for the longer protected-Echo
+route and taller layout; all critical categories are **4/4**, with no
 automatic-fail condition.
 
 ### Routing and rail audit: `distance-sensor.html`
@@ -187,7 +187,7 @@ wiring guide, and the rendered PNG.
 | 1 | 4 | PASS | The widened landscape breadboard keeps the canonical left-aligned Pico and presents the sensor, buzzer, transistor, divider, rails, and jumpers at realistic relative scale. |
 | 2 | 4 | PASS | The complete sensor and buzzer nets coexist: GP19 Trigger, protected GP18 Echo, GP14 base drive, VBUS loads, and one common Pico ground. |
 | 3 | 4 | PASS | GP19/pin 25, GP18/pin 24, GP14/pin 19, VBUS/pin 40, GND/pin 13, and the onboard `LED` constant all agree with the program. |
-| 4 | 3 | PASS | All 47 checked contacts use distinct, exact, unobscured holes with colour-matched dots. The sensor is off-board on female-to-male cables, four channel jumpers retain the separated lower circuit, and GP14 uses the clear lower perimeter. |
+| 4 | 3 | PASS | All 39 checked contacts use distinct, exact, unobscured holes with colour-matched dots. Four continuous female-to-male sensor cables reach the lower strips directly, without channel jumpers or intermediate contacts; GP14 retains its longer lower-perimeter route. |
 | 5 | 4 | PASS | All components use canonical dimensions; every resistor has a two-pitch body plus one-pitch metal leads on both sides, with correct bands, polarity, pin order, and `E/B/C` labels. |
 | 6 | 4 | PASS | Sensor direction, module pin order, buzzer polarity, transistor orientation, and onboard-LED-only behavior are explicit. |
 | 7 | 3 | PASS | The widened board prevents component crowding and all routes are unambiguous; GP14 and protected Echo require longer perimeter routes, and native sensor labels are small when projected. |
@@ -202,7 +202,7 @@ critical categories are **4/4**, and no automatic-fail condition is present.
 
 | Category | Score | Evidence |
 |---|---:|---|
-| Conductor separation | **4/4** | The widened board, sensor cable/channel lanes, and lower-perimeter GP14 route produce zero conflicts across 23 routes and 43 segments, with no visual crossings or shared spans. |
+| Conductor separation | **4/4** | The widened board, continuous separated sensor cables, and lower-perimeter GP14 route produce zero conflicts across 19 routes and 31 segments, with no visual crossings or shared spans. |
 | Power-rail use | **4/4** | VBUS visibly powers the top and bottom 5 V rails; the used bottom GND rail is visibly sourced from Pico GND; the unused top negative rail is labelled unused. |
 | Rail-stripe geometry | **4/4** | The widened rails retain exact symmetric `13.50 px` stripe spacing with `0.00 px` error. |
 
@@ -274,7 +274,7 @@ the rendered PNG.
 | 1 | 4 | PASS | The full breadboard, canonical Pico, and native square eight-pixel module with mounting holes and coloured jumpers match the intended physical module setup. |
 | 2 | 4 | PASS | Module `IN S` reaches GP16, `IN V` reaches 3.3 V, and `IN G` reaches the common Pico ground; the OUT header remains unused. |
 | 3 | 4 | PASS | GP16 physical pin 21, 3V3 physical pin 36, and GND physical pin 13 match `PIXEL_PIN = 16` in the Day 3 code. |
-| 4 | 4 | PASS | All 19 declared breadboard contacts are exact, distinct, and unobscured. Three female sockets grip the off-board module's IN pins; male ends enter separate upper strips and three short jumpers bridge the channel. |
+| 4 | 4 | PASS | All 13 declared breadboard contacts are exact, distinct, and unobscured. Three female sockets grip the off-board module's IN pins; each cable runs continuously to its own lower-strip hole with one male-end dot and no channel jumper or intermediate contact. |
 | 5 | 4 | PASS | The canonical unscaled module preserves its square PCB, eight radial pixels, four mounting holes, and separate labelled IN/OUT S/V/G headers. |
 | 6 | 4 | PASS | The module is entirely off-board at canonical scale. The connected IN end has three visible female sockets; the inset and table explicitly reject OUT, and male contacts are distinctly marked on the breadboard. |
 | 7 | 4 | PASS | Three separated routes, foreground contact dots, module labels, and a text-supported legend remain clear at normal size. |
@@ -304,7 +304,7 @@ and the rendered PNG.
 | 1 | 4 | PASS | The widened physical breadboard contains the canonical Pico, buzzer, S8050, and three resistors; HC-SR04 and square 8-RGB module sit above it, off-board, at realistic native proportions. |
 | 2 | 4 | PASS | GP19 Trigger, divided GP18 Echo, GP14 transistor base drive, VBUS sensor/buzzer power, GP16 RGB data, separate 3.3 V RGB power, and common ground are complete. |
 | 3 | 4 | PASS | GP19/pin 25, GP18/pin 24, GP14/pin 19, GP16/pin 21, 3V3/pin 36, VBUS/pin 40, and GND/pin 13 match both Day 5 files. |
-| 4 | 3 | PASS | All 62 contacts are exact, distinct, and unobscured. Seven female-to-male cables and channel jumpers connect the off-board modules; the dense integrated build requires long separated perimeter routes for GP14, GP16, Echo, and RGB power. |
+| 4 | 3 | PASS | All 48 contacts are exact, distinct, and unobscured. Seven continuous female-to-male cables reach the lower strips from the off-board modules, without channel jumpers or intermediate contacts; the dense build retains long separated perimeter routes for GP14, GP16, Echo, and RGB power. |
 | 5 | 4 | PASS | All components use canonical dimensions; divider and base resistor bands, sensor order, buzzer polarity, transistor E/B/C, and RGB IN header are correct. |
 | 6 | 4 | PASS | Both modules stay off the breadboard on explicit female sockets and male cable ends. Sensor pin order, buzzer/transistor orientation, and RGB IN-versus-OUT direction remain explicit. |
 | 7 | 3 | PASS | The enlarged board prevents ambiguous crossings and all labels remain readable, but the complete three-subsystem circuit is necessarily denser than the Day 4 prototype. |
@@ -319,7 +319,7 @@ critical categories are **4/4**, and no automatic-fail condition is present.
 
 | Category | Score | Evidence |
 |---|---:|---|
-| Conductor separation | **4/4** | The checker reports zero overlaps or ambiguous crossings across all 32 declared routes and 73 segments. The 3.3 V route skirts the off-board instruction text rather than covering it. |
+| Conductor separation | **4/4** | The checker reports zero overlaps or ambiguous crossings across all 25 declared routes and 56 segments. Continuous module cables remain separated, and the 3.3 V route skirts the off-board instruction text rather than covering it. |
 | Power-rail use | **4/4** | VBUS visibly powers both labelled 5 V rails, Pico GND powers the common GND rail, and RGB V receives a separate labelled direct 3.3 V route. |
 | Rail-stripe geometry | **4/4** | The widened breadboard preserves exact `13.50 px` stripe spacing with `0.00 px` maximum error. |
 
@@ -335,7 +335,7 @@ The full-page Chromium PNG includes the complete circuit and connection table.
 | 1 | 4 | PASS | Full physical breadboard, USB-left canonical Pico, native rotary potentiometer, and square eight-pixel module use original canonical artwork. |
 | 2 | 4 | PASS | RGB IN S → GP16; IN V → 3.3 V; IN G → GND. Potentiometer outer pins → the same 3.3 V/GND rails; centre WIPER → GP26/ADC0. No ordinary LED is present. |
 | 3 | 4 | PASS | GP16/pin 21 and GP26/pin 31 match PIXEL_PIN and POTENTIOMETER_PIN in both Pixel Pet programs; 3V3/pin 36 and GND/pin 13 use the canonical Pico order. |
-| 4 | 3 | PASS | All 30 contacts are exact, distinct, visible, and dot-capped. Three female-to-male module cables and channel jumpers are explicit; the separate ADC perimeter route adds a longer wiring step. |
+| 4 | 3 | PASS | All 24 contacts are exact, distinct, visible, and dot-capped. Three continuous female-to-male module cables reach the lower strips without channel jumpers or intermediate contacts; the separate ADC perimeter route still adds a longer wiring step. |
 | 5 | 4 | PASS | Pico, 220 × 220 px RGB module, and 170 × 150 px potentiometer remain unscaled canonical instances with obstruction bounds. IN/OUT and 3V3/WIPER/GND names are preserved. |
 | 6 | 4 | PASS | The RGB module stays off-board, female sockets fit IN, and male ends enter marked holes. The potentiometer centre wiper and outer supply pins are distinguished in artwork, caption, and table. |
 | 7 | 3 | PASS | Power, ground, pixel data, and ADC routes are separated; the GP26 legend and label support colour. The taller layout and long ADC route benefit from the scalable HTML during projection. |
@@ -350,10 +350,46 @@ score **4/4**, with no automatic-fail condition.
 
 | Category | Score | Evidence |
 |---|---:|---|
-| Conductor separation | **4/4** | 18 routes and 34 segments have zero overlaps or ambiguous crossings. The ADC route clears the title, legend, instruction text, module body, and all connector endpoints. |
+| Conductor separation | **4/4** | 15 routes and 31 segments have zero overlaps or ambiguous crossings. Continuous module cables remain separated, and the ADC route clears the title, legend, instruction text, module body, and all connector endpoints. |
 | Power-rail use | **4/4** | Pico 3V3 powers the labelled top 3.3 V rail; a separate jumper powers the labelled bottom 3.3 V rail shared by module and knob. Pico GND visibly sources the common bottom GND rail. |
 | Rail-stripe geometry | **4/4** | All stripe-to-pin distances remain exactly `13.50 px`; maximum error is `0.00 px`. |
-| Breadboard endpoints | **4/4** | 30 contacts have `0.00 px` axis error, zero duplicate or obscured holes, and zero contact-dot errors. Cable metadata declares only male ends as breadboard contacts. |
+| Breadboard endpoints | **4/4** | 24 contacts have `0.00 px` axis error, zero duplicate or obscured holes, and zero contact-dot errors. Cable metadata declares only final male ends as breadboard contacts. |
+
+## Direct module-cable review: 2026-10-11
+
+This follow-up covers only `neopixel-and-potentiometer`, `distance-sensor`,
+`parking-assistant`, `proximity-alarm`, and `rgb8-module`. Their standalone
+HTML and full-page sibling PNGs were rendered in installed headless Chromium
+at 1600 px viewport width and visually inspected, including module sockets,
+channel crossings, final contact dots, protection parts, and connection tables.
+All five passed `check-diagram.py`, `check-breadboard-endpoints.py`,
+`check-routing-overlaps.py`, and `check-rail-stripes.py`.
+
+| Diagram | Continuous module cables | Breadboard contacts | Routes / segments | Endpoint / marker / routing result |
+|---|---:|---:|---:|---|
+| `neopixel-and-potentiometer.html` | 3 | 24 | 15 / 31 | 0.00 px error; no duplicate or obscured contacts, marker errors, or conflicts |
+| `distance-sensor.html` | 4 | 24 | 14 / 22 | 0.00 px error; no duplicate or obscured contacts, marker errors, or conflicts |
+| `parking-assistant.html` | 7 | 48 | 25 / 56 | 0.00 px error; no duplicate or obscured contacts, marker errors, or conflicts |
+| `proximity-alarm.html` | 4 | 39 | 19 / 31 | 0.00 px error; no duplicate or obscured contacts, marker errors, or conflicts |
+| `rgb8-module.html` | 3 | 13 | 8 / 17 | 0.00 px error; no duplicate or obscured contacts, marker errors, or conflicts |
+
+The centre channel separates electrical strips but does not obstruct insulated
+cables. Each module cable now reaches its original lower-strip destination
+continuously, with no upper-strip contact or extra channel jumper. Real
+disconnected conductor crossings still require clear separation; none was
+introduced. Socket orientation, one contact per hole, powered rails, the
+1 kΩ/2 kΩ Echo divider, GP14/S8050 driver, and 3.3 V-only RGB supply remain
+unchanged. Component and template geometry were not modified.
+An additional comparison against the pre-change diagrams confirmed identical
+wire-and-terminal-strip connectivity among all surviving endpoints and
+unchanged canonical component symbols.
+
+**Outcome:** PASS. The per-diagram quality scores above remain applicable:
+all critical categories and routing/rail categories score **4/4**; longer
+perimeter routes and small sensor labels keep buildability/readability at
+**3/4** where recorded. These are browser, geometry, and electrical-net checks,
+not live Pico hardware tests. Open the scalable HTML for small labels on the
+wider combined diagrams.
 
 ## Feedback-change verification: 2026-10-11
 
