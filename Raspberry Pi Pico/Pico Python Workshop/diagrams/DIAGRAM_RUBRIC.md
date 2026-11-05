@@ -52,7 +52,7 @@ This audit applies to every diagram below after the shared template correction.
 
 | Category | Score | Evidence |
 |---|---:|---|
-| Lower terminal-field visibility | **4/4** | Rows `f` through `j` render as five complete rows. The first row below the centre channel is no longer clipped; the Pico-covered `h` row remains hidden beneath the top-view board and pads. |
+| Lower terminal-field visibility | **4/4** | Rows `e` through `a` render top-to-bottom as five complete rows. The first row below the centre channel is no longer clipped; the Pico-covered `c` row remains hidden beneath the top-view board and pads. |
 | Power-rail row count | **4/4** | Each power bank renders exactly two complete hole rows. Its hole field begins at the upper stripe and ends at the lower stripe, so no partial third row is visible. |
 | Pico alignment and footprint | **4/4** | All 40 Pico pads retain `0.00 px` hole-alignment error, the Pico remains vertically centred, and the complete footprint retains `0.00 px` overflow. |
 
@@ -60,6 +60,28 @@ This audit applies to every diagram below after the shared template correction.
 and all existing electrical endpoints remain on complete, visible holes. The
 automated endpoint and rail checks enforce this row-visibility contract for
 future diagrams.
+
+### Workshop hardware orientation
+
+The shared template and all 13 standalone diagrams now use **a–j from bottom
+to top**, with **blue (−) above red (+)** in both rail banks. The connectivity
+diagram's numbered highlights, accessible description, and exact table follow
+the new lettering; both Day 1 lessons and decks use the same groups.
+
+| Category | Score | Evidence |
+|---|---:|---|
+| Physical-reference orientation | **4/4** | The rendered row lettering, rail stripes, signs, and supply labels match the stated workshop hardware orientation. |
+| Electrical correctness and pin accuracy | **4/4** | Top-rail wire endpoints and contact dots move together with their original rail. GPIOs, supply voltages, resistor values, component positions, and all other connections are unchanged. |
+| Contact placement and routing | **4/4** | All diagram endpoint and routing checks pass: exact hole centres, matching dots, no shared holes, no obscured contacts, and no new crossings. |
+| Rail geometry | **4/4** | Both banks retain two complete rows and symmetric 13.50 px stripe spacing. The rail checker also enforces blue above red. |
+
+**Outcome:** PASS after Chromium rendering and visual inspection. All ten
+per-diagram quality categories retain their recorded scores below, including
+the existing **3/4** presentation/buildability limitations on the more complex
+circuits. Component polarity, safety guidance, accessibility, and attribution
+are preserved. The sibling PNGs retain their original framing; the empty
+connectivity diagram is a connectivity explanation, not a component-placement
+plan.
 
 ## Audit: `button-and-led.html`
 
@@ -427,7 +449,7 @@ and `workshop/en/WIRING_AND_SAFETY.md`.
 | # | Score | Result | Evidence |
 |---:|---:|---|---|
 | 1 | 4 | PASS | The canonical landscape board dominates the image; physical hole pattern, cream body, rail banks, and centre channel retain the existing ordinary-LED diagram's visual language. |
-| 2 | 4 | PASS | Separate outlines enclose a21–e21, adjacent a22–e22, and f21–j21. No connection crosses the channel. Two complete top rail rows are distinct groups, separate from terminal strips and bottom rails. |
+| 2 | 4 | PASS | Separate outlines enclose f21–j21, adjacent f22–j22, and a21–e21. No connection crosses the channel. Two complete top rail rows are distinct groups, separate from terminal strips and bottom rails. |
 | 3 | N/A | Instructional exception | No Pico, GPIO pins, code constants, or supply connection is drawn. |
 | 4 | 4 | PASS | All holes remain visible; highlights surround rather than replace holes. The exact connectivity table agrees with the highlighted column coordinates and 43-hole rail rows. This is not a placement plan. |
 | 5 | N/A | Instructional exception | No components, protection parts, polarity, leads, or inserted contacts are depicted. |

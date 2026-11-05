@@ -24,7 +24,7 @@
   <figure>
     <svg viewBox="0 70 1900 580" role="img" aria-labelledby="diagram-title diagram-description">
       <title id="diagram-title">How a breadboard connects inside: five-hole strips and separate rail rows</title>
-      <desc id="diagram-description">An empty landscape breadboard shows rows a through j, two outer power-rail banks, and the centre channel. Transparent outlines reveal hidden metal, not jumper wires or inserted contacts. Marking 1 surrounds the five connected holes a21 through e21; the adjacent purple outlined strip a22 through e22 is a separate group. Marking 2 surrounds f21 through j21, which connect to each other but not to a21 through e21 across the channel. Marking 3 highlights the complete upper rail row as one connected group; the dashed outline around the next rail row identifies a different group. Rails are separate from all terminal strips and are unpowered. This template shows continuous rails; real boards may have splits. Check continuity only with all power disconnected.</desc>
+      <desc id="diagram-description">An empty landscape breadboard shows row letters a through j running bottom to top. Each power-rail bank has blue above red. Transparent outlines reveal hidden metal, not jumper wires or inserted contacts. Marking 1 surrounds the five connected holes f21 through j21; the adjacent purple outlined strip f22 through j22 is a separate group. Marking 2 surrounds a21 through e21, which connect to each other but not to f21 through j21 across the channel. Marking 3 highlights the complete upper blue rail row as one connected group; the dashed outline around the red rail row below identifies a different group. Rails are separate from all terminal strips and are unpowered. This template shows continuous rails; real boards may have splits. Check continuity only with all power disconnected.</desc>
       <defs>
         <pattern id="terminal-holes" width="26" height="27" patternUnits="userSpaceOnUse">
           <circle cx="13" cy="13.5" r="4.5" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
@@ -54,10 +54,10 @@
           fill="url(#breadboard)" stroke="#94a3b8" stroke-width="2"/>
         <rect id="top-power-rail-holes" data-breadboard-hole-field="true"
           x="78" y="108" width="1120" height="54" fill="url(#terminal-holes)"/>
-        <line id="top-rail-upper-stripe" x1="82" y1="108" x2="1198" y2="108" stroke="#ef4444" stroke-width="3"/>
-        <line id="top-rail-lower-stripe" x1="82" y1="162" x2="1198" y2="162" stroke="#3b82f6" stroke-width="3"/>
-        <text class="row" x="51" y="129" fill="#dc2626">+</text>
-        <text class="row" x="51" y="157" fill="#2563eb">−</text>
+        <line id="top-rail-upper-stripe" x1="82" y1="108" x2="1198" y2="108" stroke="#3b82f6" stroke-width="3"/>
+        <line id="top-rail-lower-stripe" x1="82" y1="162" x2="1198" y2="162" stroke="#ef4444" stroke-width="3"/>
+        <text class="row" x="51" y="129" style="fill:#2563eb">−</text>
+        <text class="row" x="51" y="157" style="fill:#dc2626">+</text>
         <rect id="top-terminal-holes" data-breadboard-hole-field="true"
           x="78" y="189" width="1120" height="135" fill="url(#terminal-holes)"/>
         <rect x="65" y="327" width="1150" height="30" rx="4" fill="#e7e5df" stroke="#cbd5e1"/>
@@ -65,24 +65,24 @@
         <text x="815" y="350" style="font-size:22px;font-weight:700">CENTRE CHANNEL</text>
         <rect id="bottom-terminal-holes" data-breadboard-hole-field="true"
           x="78" y="357" width="1120" height="129" fill="url(#terminal-holes)"/>
-        <g aria-label="Terminal row letters a through j">
-          <text class="row" x="51" y="211">a</text>
-          <text class="row" x="51" y="238">b</text>
-          <text class="row" x="51" y="265">c</text>
-          <text class="row" x="51" y="292">d</text>
-          <text class="row" x="51" y="319">e</text>
-          <text class="row" x="51" y="373">f</text>
-          <text class="row" x="51" y="400">g</text>
-          <text class="row" x="51" y="427">h</text>
-          <text class="row" x="51" y="454">i</text>
-          <text class="row" x="51" y="481">j</text>
+        <g aria-label="Terminal row letters a through j from bottom to top">
+          <text class="row" x="51" y="211">j</text>
+          <text class="row" x="51" y="238">i</text>
+          <text class="row" x="51" y="265">h</text>
+          <text class="row" x="51" y="292">g</text>
+          <text class="row" x="51" y="319">f</text>
+          <text class="row" x="51" y="373">e</text>
+          <text class="row" x="51" y="400">d</text>
+          <text class="row" x="51" y="427">c</text>
+          <text class="row" x="51" y="454">b</text>
+          <text class="row" x="51" y="481">a</text>
         </g>
         <rect id="bottom-power-rail-holes" data-breadboard-hole-field="true"
           x="78" y="513" width="1120" height="54" fill="url(#terminal-holes)"/>
         <line id="bottom-rail-upper-stripe" x1="82" y1="513" x2="1198" y2="513" stroke="#3b82f6" stroke-width="3"/>
         <line id="bottom-rail-lower-stripe" x1="82" y1="567" x2="1198" y2="567" stroke="#ef4444" stroke-width="3"/>
-        <text class="row" x="51" y="535" fill="#2563eb">−</text>
-        <text class="row" x="51" y="562" fill="#dc2626">+</text>
+        <text class="row" x="51" y="535" style="fill:#2563eb">−</text>
+        <text class="row" x="51" y="562" style="fill:#dc2626">+</text>
         <g class="column" text-anchor="middle" aria-label="Selected column numbers: 1, 21, 22, 43">
           <text x="91" y="589">1</text>
           <text x="611" y="589">21</text>
@@ -100,13 +100,13 @@
         <rect x="601" y="354" width="20" height="129" rx="9" fill="#b45309" fill-opacity="0.12" stroke="#b45309" stroke-width="3"/>
         <circle cx="611" cy="499" r="12" fill="#b45309"/>
         <text class="number board-number" x="611" y="499">2</text>
-        <rect x="82" y="113.5" width="1112" height="16" rx="7" fill="#b91c1c" fill-opacity="0.12" stroke="#b91c1c" stroke-width="3"/>
-        <rect x="82" y="140.5" width="1112" height="16" rx="7" fill="#1d4ed8" fill-opacity="0.08" stroke="#1d4ed8" stroke-width="3" stroke-dasharray="8 5"/>
-        <circle cx="1220" cy="121.5" r="14" fill="#b91c1c"/>
+        <rect x="82" y="113.5" width="1112" height="16" rx="7" fill="#1d4ed8" fill-opacity="0.12" stroke="#1d4ed8" stroke-width="3"/>
+        <rect x="82" y="140.5" width="1112" height="16" rx="7" fill="#b91c1c" fill-opacity="0.08" stroke="#b91c1c" stroke-width="3" stroke-dasharray="8 5"/>
+        <circle cx="1220" cy="121.5" r="14" fill="#1d4ed8"/>
         <text class="number board-number" x="1220" y="121.5">3</text>
       </g>
       <g aria-label="External numbered callouts">
-        <circle cx="1290" cy="123" r="20" fill="#b91c1c"/>
+        <circle cx="1290" cy="123" r="20" fill="#1d4ed8"/>
         <text class="number" x="1290" y="123">3</text>
         <text class="heading" x="1324" y="132">One rail row connects along</text>
         <text class="note" x="1324" y="172">Dashed row: a separate group.</text>
@@ -114,13 +114,13 @@
         <circle cx="1290" cy="269" r="20" fill="#0f766e"/>
         <text class="number" x="1290" y="269">1</text>
         <text class="heading" x="1324" y="278">Five holes connect vertically</text>
-        <text class="note" x="1324" y="318">a–e in one column form a strip.</text>
+        <text class="note" x="1324" y="318">f–j in one column form a strip.</text>
         <text class="note" x="1324" y="354">Next column: a separate strip.</text>
         <circle cx="1290" cy="415" r="20" fill="#b45309"/>
         <text class="number" x="1290" y="415">2</text>
         <text class="heading" x="1324" y="424">No connection across channel</text>
-        <text class="note" x="1324" y="464">f–j connect to each other,</text>
-        <text class="note" x="1324" y="500">not to a–e above.</text>
+        <text class="note" x="1324" y="464">a–e connect to each other,</text>
+        <text class="note" x="1324" y="500">not to f–j above.</text>
       </g>
       <g aria-label="Legend and power-off reminder">
         <rect x="1280" y="540" width="36" height="20" rx="5" fill="#0f766e" fill-opacity="0.12" stroke="#0f766e" stroke-width="3"/>
@@ -147,11 +147,11 @@
       <caption>Internal groups shown by the numbered markings</caption>
       <thead><tr><th scope="col">Marking</th><th scope="col">Internally connected</th><th scope="col">Separate from this group</th></tr></thead>
       <tbody>
-        <tr><th scope="row">1 — solid teal strip</th><td>a21, b21, c21, d21, e21</td><td>All holes in column 22; f21 through j21; every rail.</td></tr>
-        <tr><th scope="row">1 — adjacent dashed purple strip</th><td>a22, b22, c22, d22, e22</td><td>The teal strip a21 through e21, all other columns, the opposite terminal field, and every rail.</td></tr>
-        <tr><th scope="row">2 — solid amber strip</th><td>f21, g21, h21, i21, j21</td><td>a21 through e21 across the centre channel; adjacent columns; every rail.</td></tr>
-        <tr><th scope="row">3 — solid red rail outline</th><td>All 43 holes in the uppermost rail row of this template board.</td><td>The dashed blue rail row below it, both bottom rail rows, and every terminal strip.</td></tr>
-        <tr><th scope="row">3 — dashed blue rail outline</th><td>All 43 holes in the second top rail row of this template board.</td><td>The red rail row above it, both bottom rail rows, and every terminal strip.</td></tr>
+        <tr><th scope="row">1 — solid teal strip</th><td>f21, g21, h21, i21, j21</td><td>All holes in column 22; a21 through e21; every rail.</td></tr>
+        <tr><th scope="row">1 — adjacent dashed purple strip</th><td>f22, g22, h22, i22, j22</td><td>The teal strip f21 through j21, all other columns, the opposite terminal field, and every rail.</td></tr>
+        <tr><th scope="row">2 — solid amber strip</th><td>a21, b21, c21, d21, e21</td><td>f21 through j21 across the centre channel; adjacent columns; every rail.</td></tr>
+        <tr><th scope="row">3 — solid blue rail outline</th><td>All 43 holes in the uppermost rail row of this template board.</td><td>The dashed red rail row below it, both bottom rail rows, and every terminal strip.</td></tr>
+        <tr><th scope="row">3 — dashed red rail outline</th><td>All 43 holes in the second top rail row of this template board.</td><td>The blue rail row above it, both bottom rail rows, and every terminal strip.</td></tr>
         <tr><th scope="row">Unmarked groups</th><td>Each other column has one a–e strip and a separate f–j strip. Each bottom rail row is its own continuous group on this board.</td><td>Different columns, opposite terminal fields, and different rail rows are not joined internally.</td></tr>
       </tbody>
     </table>

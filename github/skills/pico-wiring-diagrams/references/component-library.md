@@ -33,6 +33,9 @@ gallery because every diagram must remain self-contained.
 The gallery also demonstrates the canonical breadboard appearance and jumper
 wire colours.
 
+The shared breadboard uses the workshop hardware's orientation: a–j runs
+bottom-to-top, and both power-rail banks have blue (−) above red (+).
+
 ## Canonical scale
 
 Every component must be instantiated at the native width and height declared

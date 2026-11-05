@@ -47,6 +47,7 @@ The template also fails if:
 | Breadboard centre | `346 px` |
 | Lower terminal rows | Five complete rows; no clipped row below the channel |
 | Power-rail rows | Exactly two complete rows per bank |
+| Printed board orientation | Letters run a–j bottom-to-top; blue (−) above red (+) in both rail banks |
 | Pico local bounds | `x=78`, `y=195`, `width=520`, `height=192` |
 | Green PCB bounds | `x=78`, `y=195`, `width=520`, `height=175` |
 | Pico translation | `55 px` |

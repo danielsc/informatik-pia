@@ -33,6 +33,10 @@ Jede a–e- oder f–j-Spalte ist eine eigene Fünfergruppe; über die Mittelrin
 besteht keine interne Verbindung. Jede Schienenreihe ist getrennt. Prüft
 mögliche Schienenunterbrechungen am echten Board bei getrennter USB-Verbindung.
 
+Richtet das Board wie im Workshop aus: Die Buchstaben laufen von **a unten
+bis j oben**. In jedem Schienenpaar liegt **Blau (−) über Rot (+)**.
+Die Markierungen ändern keine internen Verbindungen und liefern keine Spannung.
+
 Jeder farbige Punkt in einem Diagramm markiert die Mitte eines echten
 Breadboard-Lochs. Ein Kabel oder Bauteilbein endet in diesem Loch; zwei
 physische Kontakte teilen sich niemals ein Loch.

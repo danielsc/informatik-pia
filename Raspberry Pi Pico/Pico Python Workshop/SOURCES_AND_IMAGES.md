@@ -52,6 +52,12 @@ provided by schaerens.ch. A local copy is stored at
 `slides/assets/thonny-pico-interface.png` so the classroom deck does not depend
 on a network request for the image.
 
+The Day 1 component pictures, `slides/assets/led-red.svg` and
+`slides/assets/resistor-220.svg`, reuse the original course artwork from
+`github/skills/pico-wiring-diagrams/templates/components.html`. They show the
+LED's unequal legs and the 220 Ω resistor's red-red-brown-gold bands; they
+are illustrations, not third-party photographs.
+
 ## Visual reference index
 
 | Topic | Lesson | Schematic | Hardware image |

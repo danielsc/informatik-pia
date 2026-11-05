@@ -100,10 +100,12 @@ Seht euch das [markierte Vorlagen-Breadboard mit Verbindungstabelle](../../diagr
 
 ![Breadboard aus der Vorlage mit markierten Fünferstreifen, getrennten Seiten der Mittelrinne und verbundener Schienenreihe](../../diagrams/breadboard-connectivity.png)
 
-**1:** Die fünf Löcher a–e einer Spalte sind verbunden; die Nachbarspalte ist getrennt.
-**2:** f–j bilden eine eigene Gruppe, ohne Verbindung über die Mittelrinne.
+**1:** Die fünf Löcher f–j einer Spalte sind verbunden; die Nachbarspalte ist getrennt.
+**2:** a–e bilden eine eigene Gruppe, ohne Verbindung über die Mittelrinne.
 **3:** Löcher entlang einer Schienenreihe sind verbunden, getrennt von anderen Reihen.
-Die Markierungen zeigen verborgene Metallstreifen, keine zusätzlich benötigten Kabel. die Kontakte
+Die Markierungen zeigen verborgene Metallstreifen, keine zusätzlich benötigten Kabel.
+Die Buchstaben laufen von a unten bis j oben. In jedem Schienenpaar liegt Blau
+(−) über Rot (+), passend zum Workshop-Breadboard.
 
 Untersucht das Breadboard bei getrennter USB-Verbindung:
 

@@ -623,7 +623,7 @@
 
       <section>
         <p class="eyebrow">Unsere IDE</p>
-        <h2>Findet Files, Editor und Shell</h2>
+        <h2>Files, Editor und Shell (Kommandozeile)</h2>
         <p class="activity">Jetzt mitmachen · Öffnet Thonny und folgt den Schritten</p>
         <div class="thonny-layout">
           <img class="thonny-screenshot" src="../assets/thonny-pico-interface.png" alt="Echtes Thonny-Fenster mit verbundenem Raspberry Pi Pico. Files für diesen Computer und den Pico stehen links, der Python-Editor oben rechts, die Shell unten rechts; die Statusleiste zeigt MicroPython Raspberry Pi Pico.">
@@ -637,7 +637,7 @@
               <p>Schreibt, ändert und speichert ein vollständiges Programm.</p>
             </div>
             <div class="card">
-              <h3>Shell</h3>
+              <h3>Shell (Kommandozeile)</h3>
               <p>Probiert sofort eine Zeile aus und lest Ausgaben oder Fehler.</p>
             </div>
             <p class="tiny">Farben und Symbolleiste können anders aussehen, aber diese drei Bereiche haben dieselben Aufgaben.</p>
@@ -654,7 +654,7 @@
 
       <section>
         <p class="eyebrow">Interaktiver Modus</p>
-        <h2>Die Shell beantwortet sofort eine Zeile</h2>
+        <h2>Shell (Kommandozeile): eine Zeile sofort</h2>
         <p class="activity">In Thonny ausprobieren · Sagt voraus und tippt dann jede Zeile</p>
         <pre><code class="language-python" data-trim data-noescape>
 &gt;&gt;&gt; print("Hello, Pico!")
@@ -725,13 +725,18 @@ print(type(measurement))
       <section>
         <p class="eyebrow">Ausdrücke</p>
         <h2>Ein Ausdruck erzeugt einen Wert</h2>
-        <p class="activity">In Thonny ausprobieren · Sagt voraus, testet dann alle drei</p>
+        <p class="activity">In Thonny ausprobieren · Vorhersagen, dann jeden Ausdruck testen</p>
         <div class="grid-2">
           <div>
             <pre><code class="language-python" data-trim>
 2 + 3
+9 - 4
+3 * 4
 10 / 2
+0.5 + 0.25
 "Pi" + "co"
+"ha" * 3
+2 + 3 * 4
             </code></pre>
           </div>
           <div class="card">
@@ -744,12 +749,18 @@ print(type(measurement))
           </div>
         </div>
         <div class="callout warning fragment">
-          <p><strong>Vorhersage:</strong> Welches Ergebnis ist ein Float, welches ein String?</p>
+          <p><strong>Vorhersage:</strong> Welche Ergebnisse sind Floats oder Strings? Ergibt die letzte Zeile 14 oder 20?</p>
         </div>
         <aside class="notes">
-          Führen Sie die drei Beispiele in der Shell aus. 10 / 2 ergibt in Python 3
-          und MicroPython 5.0. “Pi” + “co” verbindet Strings. Behandeln Sie nicht
-          allgemein Arithmetik; Ziel sind Werte und Auswertung.
+          Die acht Beispiele einzeln vorhersagen lassen: Wert und Typ nennen,
+          dann die Zeile in der Shell (Kommandozeile) ausführen. Ergebnisse:
+          5 (int), 5 (int), 12 (int), 5.0 (float), 0.75 (float), "Pico" (str),
+          "hahaha" (str), 14 (int). + addiert Zahlen, verbindet aber Strings;
+          * multipliziert Zahlen, wiederholt aber einen String. Die Division /
+          ergibt einen Float, auch bei 10 / 2. Punktrechnung kommt vor
+          Strichrechnung: letzte Zeile mit (2 + 3) * 4 vergleichen, das 20 ergibt.
+          Ziel ist zu erkennen, wie Werte und Operatoren Ausdrücke bilden,
+          nicht alle Python-Operatoren auswendig zu lernen.
         </aside>
       </section>
 
@@ -809,7 +820,7 @@ NameError: name 'pritn' isn't defined
         <p class="activity">In Thonny ausprobieren · Tippen, speichern, vorhersagen, dann Run</p>
         <div class="grid-2">
           <div class="card">
-            <h3>Shell</h3>
+            <h3>Shell (Kommandozeile)</h3>
             <p>Führt eine Anweisung sofort aus.</p>
             <p>Ideal für ein kleines Experiment.</p>
           </div>
@@ -1029,16 +1040,16 @@ led.off()
         <h2>Welche Löcher sind schon verbunden?</h2>
         <p class="activity watch">Anschauen und besprechen · USB bleibt getrennt</p>
         <a href="../../diagrams/breadboard-connectivity.html" aria-label="Skalierbare Breadboard-Abbildung mit Verbindungserklärung öffnen">
-          <img src="../../diagrams/breadboard-connectivity.png" alt="Breadboard aus der Vorlage mit nummerierten Markierungen: 1 verbindet fünf Löcher a–e einer Spalte; 2 ist eine getrennte f–j-Gruppe jenseits der Mittelrinne; 3 markiert eine verbundene Schienenreihe, getrennt von den anderen Schienen" style="display:block;width:100%;height:310px;object-fit:contain;margin:0;">
+          <img src="../../diagrams/breadboard-connectivity.png" alt="Breadboard aus der Vorlage mit nummerierten Markierungen: 1 verbindet fünf Löcher f–j einer Spalte; 2 ist eine getrennte a–e-Gruppe jenseits der Mittelrinne; 3 markiert eine verbundene Schienenreihe, getrennt von den anderen Schienen" style="display:block;width:100%;height:310px;object-fit:contain;margin:0;">
         </a>
         <div class="callout" style="margin-top:0.4em;"><p><strong>1:</strong> fünf Löcher verbunden; nächste Spalte getrennt. <strong>2:</strong> keine interne Verbindung über die Rinne. <strong>3:</strong> jede Schienenreihe ist getrennt.</p></div>
         <p class="footer-note" style="font-size:0.5em;margin-top:0.5em;">Markierungen zeigen verborgenes Metall, keine Kabel. Schienenfarbe liefert keine Spannung; mögliche Unterbrechungen ohne Strom prüfen.</p>
-        <aside class="notes">Nummerierte Markierungen auf dem Vorlagen-Breadboard mit dem echten Board vergleichen. a–e senkrecht in einer Spalte verfolgen, dann f–j jenseits der Rinne: getrennte Metallstreifen. Nachbarspalten sind ebenfalls getrennt. Eine lange Schienenreihe verfolgen, nicht beide Reihen zusammen; auch obere und untere Schienen sind getrennt. Markierungen zeigen interne Verbindungen, keine Jumperkabel. Unterbrechungen variieren: echtes Board ansehen und Durchgang nur ohne Strom prüfen. Ein Widerstand muss unterschiedliche Gruppen verbinden. Noch kein Strom; 3.3 V und VBUS nicht verbinden.</aside>
+        <aside class="notes">Nummerierte Markierungen auf dem Vorlagen-Breadboard mit dem echten Board vergleichen. f–j senkrecht in einer Spalte verfolgen, dann a–e jenseits der Rinne: getrennte Metallstreifen. Nachbarspalten sind ebenfalls getrennt. Eine lange Schienenreihe verfolgen, nicht beide Reihen zusammen; auch obere und untere Schienen sind getrennt. Markierungen zeigen interne Verbindungen, keine Jumperkabel. Unterbrechungen variieren: echtes Board ansehen und Durchgang nur ohne Strom prüfen. Ein Widerstand muss unterschiedliche Gruppen verbinden. Noch kein Strom; 3.3 V und VBUS nicht verbinden.</aside>
       </section>
 
       <section>
         <p class="eyebrow">Sicherheitskontrolle</p>
-        <h2>Trennen → bauen → im Team prüfen → einschalten</h2>
+        <h2 style="font-size:1.35em;">Trennen → bauen → im Team prüfen → einschalten</h2>
         <p class="activity build">Aufbau vorbereiten · Programm mit Stop beenden und USB trennen</p>
         <div class="grid-2">
           <div class="card">
@@ -1051,10 +1062,12 @@ led.off()
           </div>
           <div class="card">
             <h3>Widerstand verwenden</h3>
+            <img src="../assets/resistor-220.svg" alt="220-Ohm-Widerstand mit beigem Körper, zwei Drahtanschlüssen und den Ringen Rot, Rot, Braun, Gold." style="display:block;width:208px;height:48px;margin:0 auto;">
             <p>GP15 muss über <strong>220 Ω</strong> zur gewöhnlichen LED führen.</p>
           </div>
           <div class="card">
             <h3>Ausrichtung prüfen</h3>
+            <img src="../assets/led-red.svg" alt="Rote LED mit gewölbtem Körper und flacher Kathodenseite; A ist das lange Anodenbein, K das kurze Kathodenbein." style="float:right;width:80px;height:116px;margin:0 0 0 12px;">
             <p>Langes Bein/Anode zum Widerstand; kurzes Bein/flache Kante zu GND.</p>
           </div>
         </div>

@@ -54,7 +54,7 @@ def hole_centres(field, origin, pitch):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Check symmetric power-rail stripe placement."
+        description="Check symmetric power-rail stripes and workshop rail colours."
     )
     parser.add_argument("diagram", type=Path)
     args = parser.parse_args()
@@ -82,6 +82,15 @@ def main():
                 raise ValueError(f"{bank.title()} rail must contain two hole rows")
             upper_y = number(document.stripes[f"{bank}-rail-upper-stripe"], "y1")
             lower_y = number(document.stripes[f"{bank}-rail-lower-stripe"], "y1")
+            if (
+                document.stripes[f"{bank}-rail-upper-stripe"].get("stroke")
+                != "#3b82f6"
+                or document.stripes[f"{bank}-rail-lower-stripe"].get("stroke")
+                != "#ef4444"
+            ):
+                raise ValueError(
+                    f"{bank.title()} rail must have blue above red to match the workshop board"
+                )
             field_y = number(
                 document.fields[f"{bank}-power-rail-holes"], "y"
             )
@@ -124,7 +133,7 @@ def main():
     if not math.isclose(maximum_error, 0, abs_tol=1e-9):
         print("FAIL: rail stripes do not frame the pins symmetrically.", file=sys.stderr)
         return 1
-    print("PASS: top and bottom rail stripes frame their pins identically.")
+    print("PASS: both rail banks have blue above red and frame their pins identically.")
     return 0
 
 

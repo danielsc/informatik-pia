@@ -724,13 +724,18 @@ print(type(measurement))
       <section>
         <p class="eyebrow">Expressions</p>
         <h2>An expression produces a value</h2>
-        <p class="activity">Try in Thonny · Predict, then test all three</p>
+        <p class="activity">Try in Thonny · Predict, then test each expression</p>
         <div class="grid-2">
           <div>
             <pre><code class="language-python" data-trim>
 2 + 3
+9 - 4
+3 * 4
 10 / 2
+0.5 + 0.25
 "Pi" + "co"
+"ha" * 3
+2 + 3 * 4
             </code></pre>
           </div>
           <div class="card">
@@ -743,12 +748,17 @@ print(type(measurement))
           </div>
         </div>
         <div class="callout warning fragment">
-          <p><strong>Predict:</strong> Which result is a float? Which is a string?</p>
+          <p><strong>Predict:</strong> Which results are floats or strings? Does the last line give 14 or 20?</p>
         </div>
         <aside class="notes">
-          Run the three examples in the Shell. 10 / 2 produces 5.0 in Python 3 and
-          MicroPython. “Pi” + “co” joins strings. Avoid broad arithmetic coverage;
-          the goal is values and evaluation.
+          Take the eight examples one at a time: predict the value and type, then
+          run the line in the Shell. Results: 5 (int), 5 (int), 12 (int),
+          5.0 (float), 0.75 (float), "Pico" (str), "hahaha" (str), 14 (int).
+          The + operator adds numbers but joins strings; * multiplies numbers
+          but repeats a string. Division / produces a float, even for 10 / 2.
+          Multiplication happens before addition: compare the last line with
+          (2 + 3) * 4, which gives 20. The goal is to see how values and
+          operators form expressions, not to memorise every Python operator.
         </aside>
       </section>
 
@@ -1027,11 +1037,11 @@ led.off()
         <h2>Which holes are already connected?</h2>
         <p class="activity watch">Watch and discuss · USB stays unplugged</p>
         <a href="../../diagrams/breadboard-connectivity.html" aria-label="Open the scalable breadboard connectivity diagram and explanation">
-          <img src="../../diagrams/breadboard-connectivity.png" alt="Template breadboard with numbered markings: 1 joins five holes a–e in one column; 2 is a separate f–j group across the centre channel; 3 marks a connected rail row, separate from the other rails" style="display:block;width:100%;height:310px;object-fit:contain;margin:0;">
+          <img src="../../diagrams/breadboard-connectivity.png" alt="Template breadboard with numbered markings: 1 joins five holes f–j in one column; 2 is a separate a–e group across the centre channel; 3 marks a connected rail row, separate from the other rails" style="display:block;width:100%;height:310px;object-fit:contain;margin:0;">
         </a>
         <div class="callout" style="margin-top:0.4em;"><p><strong>1:</strong> five holes share a strip; the next column is separate. <strong>2:</strong> no internal connection across the channel. <strong>3:</strong> each rail row is separate.</p></div>
         <p class="footer-note" style="font-size:0.5em;margin-top:0.5em;">Markings show hidden metal, not added wires. Rails are not powered by their colour; check for splits while unplugged.</p>
-        <aside class="notes">Use the template breadboard image and match its numbered markings to the real board. Trace a–e vertically in one column, then f–j across the channel: these are separate metal strips. Adjacent columns are separate too. Trace one long rail row, not both rows together; top and bottom rail banks are also separate. Markings represent hidden connections, not jumper cables. Rail splits vary: inspect the actual board and check continuity only while unplugged. A resistor must bridge different groups. No power yet; do not join 3.3 V and VBUS.</aside>
+        <aside class="notes">Use the template breadboard image and match its numbered markings to the real board. Trace f–j vertically in one column, then a–e across the channel: these are separate metal strips. Adjacent columns are separate too. Trace one long rail row, not both rows together; top and bottom rail banks are also separate. Markings represent hidden connections, not jumper cables. Rail splits vary: inspect the actual board and check continuity only while unplugged. A resistor must bridge different groups. No power yet; do not join 3.3 V and VBUS.</aside>
       </section>
 
       <section>
@@ -1049,10 +1059,12 @@ led.off()
           </div>
           <div class="card">
             <h3>Use the resistor</h3>
+            <img src="../assets/resistor-220.svg" alt="Axial 220 ohm resistor with a tan body, two wire leads, and red, red, brown, gold bands." style="display:block;width:208px;height:48px;margin:0 auto;">
             <p>GP15 must reach the ordinary LED through <strong>220 Ω</strong>.</p>
           </div>
           <div class="card">
             <h3>Check orientation</h3>
+            <img src="../assets/led-red.svg" alt="Red LED with a domed body and flat cathode edge; A is the long anode leg and K the short cathode leg." style="float:right;width:80px;height:116px;margin:0 0 0 12px;">
             <p>Long leg/anode toward the resistor; short leg/flat edge toward GND.</p>
           </div>
         </div>

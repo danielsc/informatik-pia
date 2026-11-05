@@ -98,10 +98,12 @@ Look at the [marked template breadboard and connectivity table](../../diagrams/b
 
 ![Template breadboard with highlighted five-hole strips, separate centre-channel sides, and a connected rail row](../../diagrams/breadboard-connectivity.png)
 
-**1:** the five holes a–e in one column are joined; the next column is separate.
-**2:** f–j form another group, not joined across the centre channel.
+**1:** the five holes f–j in one column are joined; the next column is separate.
+**2:** a–e form another group, not joined across the centre channel.
 **3:** holes along one rail row are joined, separately from other rail rows.
 These markings show hidden metal strips, not wires you need to add.
+The letters run from a at the bottom to j at the top. Each rail bank has blue
+(−) above red (+), matching the workshop breadboard.
 
 With USB disconnected, inspect the breadboard before placing components:
 

@@ -6,7 +6,7 @@ This applies to power rails and both terminal fields.
 
 Every displayed hole must also be complete. A hole-field clipping rectangle
 must not reveal a partial row at any edge. The lower terminal field therefore
-starts above the first complete `f` row, while each power-rail field is clipped
+starts above the first complete `e` row, while each power-rail field is clipped
 exactly between its upper and lower colour stripes.
 
 ## One physical contact per hole
