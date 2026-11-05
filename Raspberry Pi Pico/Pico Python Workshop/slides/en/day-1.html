@@ -351,7 +351,7 @@
 
     .thonny-layout {
       display: grid;
-      grid-template-columns: 560px minmax(0, 1fr);
+      grid-template-columns: 440px minmax(0, 1fr);
       gap: 0.7em;
       align-items: center;
     }
@@ -369,6 +369,16 @@
       gap: 0.45em;
     }
 
+    .reveal .connection-steps {
+      margin: 0 0 0.55em 1.1em;
+      font-size: 0.64em;
+    }
+
+    .thonny-parts .files-hint {
+      margin: 0;
+      font-size: 0.64em;
+    }
+
     .thonny-parts .card {
       padding: 0.4em 0.55em;
     }
@@ -379,6 +389,7 @@
     }
 
     .thonny-parts .card p {
+      margin: 0.35em 0 0;
       font-size: 0.52em;
       line-height: 1.35;
     }
@@ -621,28 +632,38 @@
 
       <section>
         <p class="eyebrow">Our IDE</p>
-        <h2>Find the Files, Editor, and Shell</h2>
-        <p class="activity">Do now · Open Thonny and follow along</p>
+        <h2>Get to know Thonny</h2>
+        <p class="activity">Do now · Follow the steps</p>
+        <ol class="connection-steps">
+          <li><strong>First connect the Pico to the computer with a USB cable.</strong></li>
+          <li>Open Thonny. Click the interpreter selector at the bottom right and choose <strong>MicroPython (Raspberry Pi Pico)</strong>. Leave the port set to <strong>automatic detection</strong>.</li>
+        </ol>
         <div class="thonny-layout">
           <img class="thonny-screenshot" src="../assets/thonny-pico-interface.png" alt="Real Thonny window connected to a Raspberry Pi Pico. Files on this computer and the Pico are on the left, the Python editor is upper right, the Shell is lower right, and the status bar says MicroPython Raspberry Pi Pico.">
           <div class="thonny-parts">
             <div class="card">
               <h3>Files</h3>
-              <p>Choose a saved program on this computer or the Pico.</p>
+              <p>Files on the computer and on the Pico.</p>
             </div>
             <div class="card">
               <h3>Editor</h3>
-              <p>Write, change, and save a complete program.</p>
+              <p>Write and edit your code here.</p>
             </div>
             <div class="card">
               <h3>Shell</h3>
-              <p>Try one line now and read program output or errors.</p>
+              <p>Read output and errors, or enter commands directly.</p>
             </div>
-            <p class="tiny">Your colours and toolbar may differ, but these three areas do the same jobs.</p>
+            <p class="files-hint"><strong>No files shown on the left?</strong> Choose <strong>View → Files</strong>.</p>
           </div>
         </div>
         <aside class="notes">
-          Point to the students' real Thonny window while naming each area. Do not
+          Have students connect the Pico by USB first, then select MicroPython
+          (Raspberry Pi Pico) in Thonny at the bottom right. Leave port selection
+          on automatic detection; do not select a specific USB port. The
+          teacher-prepared Pico already has MicroPython installed. Press Stop /
+          Restart backend if needed and check for the >>> prompt in the Shell.
+          Point to the students' real Thonny window while naming each area. Show
+          View → Files if the file browser is hidden. Do not
           discuss the advanced MQTT code shown in the screenshot; only identify Files,
           Editor, Shell, and the interpreter status. IDE means integrated development
           environment: one application to create, edit, save, run, and inspect programs.
@@ -922,14 +943,17 @@ led.on()
         </code></pre>
         <div class="callout warning">
           <p>
-            Today you may reuse this setup. Your job is to explain what it achieves,
-            not reproduce it from memory.
+            These lines are already in <code>01_hello_pico.py</code>; you do not
+            need to learn them by heart. Explain in your own words:
+            How does the code switch on the Pico’s onboard LED?
           </p>
         </div>
         <aside class="notes">
           Avoid teaching object-oriented vocabulary. “led is our useful name for the
           output” is enough. Demonstrate led.on() and led.off() in the Shell if the
-          connection is stable.
+          connection is stable. Expected explanation: import Pin, use led as the
+          name for the onboard LED output, then switch it on with led.on().
+          Keep the supplied cleanup in the complete program.
         </aside>
       </section>
 

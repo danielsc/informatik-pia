@@ -351,7 +351,7 @@
 
     .thonny-layout {
       display: grid;
-      grid-template-columns: 560px minmax(0, 1fr);
+      grid-template-columns: 440px minmax(0, 1fr);
       gap: 0.7em;
       align-items: center;
     }
@@ -369,6 +369,16 @@
       gap: 0.45em;
     }
 
+    .reveal .connection-steps {
+      margin: 0 0 0.55em 1.1em;
+      font-size: 0.64em;
+    }
+
+    .thonny-parts .files-hint {
+      margin: 0;
+      font-size: 0.64em;
+    }
+
     .thonny-parts .card {
       padding: 0.4em 0.55em;
     }
@@ -379,6 +389,7 @@
     }
 
     .thonny-parts .card p {
+      margin: 0.35em 0 0;
       font-size: 0.52em;
       line-height: 1.35;
     }
@@ -623,28 +634,38 @@
 
       <section>
         <p class="eyebrow">Unsere IDE</p>
-        <h2>Files, Editor und Shell (Kommandozeile)</h2>
-        <p class="activity">Jetzt mitmachen · Öffnet Thonny und folgt den Schritten</p>
+        <h2>Thonny kennenlernen</h2>
+        <p class="activity">Jetzt mitmachen · Folgt den Schritten</p>
+        <ol class="connection-steps">
+          <li><strong>Verbindet zuerst den Pico per USB-Kabel mit dem Computer.</strong></li>
+          <li>Öffnet Thonny. Klickt unten rechts auf die Interpreter-Auswahl und wählt <strong>MicroPython (Raspberry Pi Pico)</strong>. Lasst den Port <strong>automatisch erkennen</strong>.</li>
+        </ol>
         <div class="thonny-layout">
           <img class="thonny-screenshot" src="../assets/thonny-pico-interface.png" alt="Echtes Thonny-Fenster mit verbundenem Raspberry Pi Pico. Files für diesen Computer und den Pico stehen links, der Python-Editor oben rechts, die Shell unten rechts; die Statusleiste zeigt MicroPython Raspberry Pi Pico.">
           <div class="thonny-parts">
             <div class="card">
-              <h3>Files</h3>
-              <p>Wählt ein gespeichertes Programm auf diesem Computer oder dem Pico.</p>
+              <h3>Files (Dateien)</h3>
+              <p>Dateien auf dem Computer und auf dem Pico.</p>
             </div>
             <div class="card">
               <h3>Editor</h3>
-              <p>Schreibt, ändert und speichert ein vollständiges Programm.</p>
+              <p>Hier schreibt und bearbeitet ihr euren Code.</p>
             </div>
             <div class="card">
               <h3>Shell (Kommandozeile)</h3>
-              <p>Probiert sofort eine Zeile aus und lest Ausgaben oder Fehler.</p>
+              <p>Hier seht ihr Ausgaben und Fehler und könnt Befehle direkt eingeben.</p>
             </div>
-            <p class="tiny">Farben und Symbolleiste können anders aussehen, aber diese drei Bereiche haben dieselben Aufgaben.</p>
+            <p class="files-hint"><strong>Links werden keine Dateien angezeigt?</strong> Wählt <strong>Ansicht → Dateien</strong>.</p>
           </div>
         </div>
         <aside class="notes">
-          Zeigen Sie beim Benennen auf das echte Thonny-Fenster. Besprechen Sie nicht
+          Lassen Sie zuerst den Pico per USB verbinden, dann unten rechts in Thonny
+          MicroPython (Raspberry Pi Pico) auswählen. Den Port automatisch erkennen
+          lassen, keinen bestimmten USB-Port auswählen. Auf dem
+          vorbereiteten Pico ist MicroPython bereits installiert. Bei Bedarf Stop /
+          Restart backend drücken und auf die Eingabeaufforderung >>> in der Shell
+          achten. Zeigen Sie beim Benennen auf das echte Thonny-Fenster. Blenden Sie
+          bei Bedarf über Ansicht → Dateien die Dateiansicht ein. Besprechen Sie nicht
           den fortgeschrittenen MQTT-Code im Bild, sondern nur Files, Editor, Shell und
           den Interpreterstatus. IDE bedeutet integrierte Entwicklungsumgebung: eine
           Anwendung zum Erstellen, Bearbeiten, Speichern, Ausführen und Prüfen von
@@ -925,14 +946,17 @@ led.on()
         </code></pre>
         <div class="callout warning">
           <p>
-            Heute dürft ihr diese Einrichtung wiederverwenden. Erklärt ihre Wirkung;
-            ihr müsst sie nicht auswendig schreiben.
+            Diese Zeilen stehen schon in <code>01_hello_pico.py</code>; ihr müsst
+            sie nicht auswendig lernen. Erklärt mit eigenen Worten:
+            Wie schaltet der Code die eingebaute LED des Pico ein?
           </p>
         </div>
         <aside class="notes">
           Vermeiden Sie objektorientierte Fachbegriffe. „led ist unser nützlicher Name
           für den Ausgang“ genügt. Zeigen Sie bei stabiler Verbindung led.on() und
-          led.off() in der Shell.
+          led.off() in der Shell. Erwartete Erklärung: Pin importieren, mit led
+          den Ausgang für die eingebaute LED benennen und sie mit led.on()
+          einschalten. Das vorgegebene Aufräumen im vollständigen Programm beibehalten.
         </aside>
       </section>
 
