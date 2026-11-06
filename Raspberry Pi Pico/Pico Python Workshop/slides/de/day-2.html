@@ -268,8 +268,8 @@ else:
         <p class="activity">Schaltung testen · Erst nach der Teamkontrolle wieder verbinden</p>
         <div class="grid-2">
           <div class="card">
-            <h3>Öffnen und ausführen</h3>
-            <p><a href="../../code/day-2/01_button_decisions.py"><code>01_button_decisions.py</code></a></p>
+            <h3>Herunterladen und starten</h3>
+            <p><a href="../../code/day-2/01_button_decisions.py" download="01_button_decisions.py"><code>01_button_decisions.py</code></a></p>
             <pre><code class="language-python" data-trim>
 pressed = button.value()
 
@@ -295,6 +295,10 @@ else:
           vorherigen Folie verbinden. pressed speichert den Integer 0 oder 1:
           In if pressed wirkt 0 wie falsch und 1 wie wahr. Das Programm druckt Zahlen,
           nicht True oder False.
+          Dateinamen anklicken, nach Downloads herunterladen und in Thonny links
+          in der Dateiansicht des Computers doppelt anklicken. MicroPython
+          (Raspberry Pi Pico) wählen und den grünen Play-Button erst nach der
+          Schaltungsprüfung anklicken. Kein Klonen nötig.
         </aside>
       </section>
 
@@ -335,7 +339,7 @@ else:
         <div class="grid-2">
           <div class="card">
             <h3>Ausführen</h3>
-            <p><a href="../../code/day-2/02_potentiometer_led.py"><code>02_potentiometer_led.py</code></a></p>
+            <p><a href="../../code/day-2/02_potentiometer_led.py" download="02_potentiometer_led.py"><code>02_potentiometer_led.py</code></a></p>
             <pre><code class="language-python" data-trim>
 raw_value = knob.read_u16()
 percent = int(raw_value / 65535 * 100)
@@ -491,7 +495,7 @@ print(times[-1])
         <div class="grid-2">
           <div class="card">
             <h3>Öffnen</h3>
-            <p><a href="../../code/day-2/03_reaction_game_1_starter.py"><code>03_reaction_game_1_starter.py</code></a></p>
+            <p><a href="../../code/day-2/03_reaction_game_1_starter.py" download="03_reaction_game_1_starter.py"><code>03_reaction_game_1_starter.py</code></a></p>
             <p>Importe, Pin-Einrichtung, <code>scores = []</code> und sicheres Ausschalten der LED sind vorgegeben.</p>
           </div>
           <div class="card">
@@ -575,7 +579,7 @@ if button.value():
             <h3>Nützliche Prüfungen bei Fehlern</h3>
             <ol>
               <li>Geht die LED nie an, gebt <code>wait_ms</code> aus und prüft, ob das Programm noch wartet.</li>
-              <li>Erkennt das Spiel keinen Tastendruck, testet den Taster erneut mit <code>01_button_decisions.py</code>.</li>
+              <li>Erkennt das Spiel keinen Tastendruck, testet den Taster erneut mit <a href="../../code/day-2/01_button_decisions.py" download="01_button_decisions.py"><code>01_button_decisions.py</code></a>.</li>
               <li>Wirkt ein Ergebnis unmöglich, gebt für eine Runde <code>start_ms</code> und <code>reaction_ms</code> aus.</li>
             </ol>
           </div>
@@ -596,6 +600,34 @@ if button.value():
         <aside class="notes">
           Erwartete Bedingung: 200 &lt;= reaction_ms &lt; 500 oder gleichwertig mit and.
           Achten Sie auf klare Grenzwertaussagen: 200 gehört dazu, 500 nicht.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Referenz- und optionale Downloads</p>
+        <h2>Zuerst das eigene Spiel mit drei Runden</h2>
+        <p class="activity watch">Vergleich mit der Lehrkraft · Erweiterung erst nach der Grundversion</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Lösung · nur als Referenz</h3>
+            <p><a href="../../code/day-2/03_reaction_game_2_solution.py" download="03_reaction_game_2_solution.py"><code>03_reaction_game_2_solution.py</code></a></p>
+            <p>Fertiges Spiel mit drei Runden: für Demonstration, gemeinsamen Neustart oder Vergleich mit eurem funktionierenden Starter.</p>
+          </div>
+          <div class="card">
+            <h3>Optionale Erweiterung</h3>
+            <p><a href="../../code/day-2/03_reaction_game_3_extension.py" download="03_reaction_game_3_extension.py"><code>03_reaction_game_3_extension.py</code></a></p>
+            <p>Fünf Runden, laufende Fehlstartprüfung während der Wartezeit und ein Durchschnitt. Dieselbe geprüfte Schaltung an GP13/GP15 verwenden.</p>
+          </div>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Nach Downloads herunterladen, in Thonny links in der Dateiansicht des Computers öffnen, mit MicroPython und grünem Play-Button ausführen. Euren Starter behalten; dies sind eigene Dateien.</p></div>
+        <aside class="notes">
+          Normalerweise arbeitet die Klasse im Starter mit drei Runden. Dieser Anhang
+          folgt dem Abschlussticket und gehört nicht zu den Mindestanforderungen.
+          Die Lösung dient Demonstration, gemeinsamem Neustart oder abschließendem Vergleich.
+          Die Erweiterung prüft die ganze zufällige Wartezeit auf Fehlstarts, nicht
+          nur deren Ende, und ergänzt fünf Runden und einen Durchschnitt.
+          Änderungen vor dem Einsatz erklären. Beide Dateien laufen eigenständig;
+          keine weitere Hilfsdatei und kein Klonen nötig.
         </aside>
       </section>
 

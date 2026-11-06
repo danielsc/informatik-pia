@@ -68,10 +68,10 @@ systematischem Debugging ist oft wertvoller als ein makelloser Vortrag.
 
 | Workshop | Ungefähre TEALS-Zuordnung | Bewusster Schwerpunkt |
 |---|---|---|
-| Tag 1 | Unit 1: Introduction to Python | Interpreter, Skripte, Strings, Zahlen, Tupel, `None`, Variablen, Kommentare, Fehler, Aufräumen |
+| Tag 1 | Unit 1: Introduction to Python | Interpreter, Skripte, Strings, Zahlen, Variablen, Kommentare, Fehler, Aufräumen |
 | Tag 2 | Unit 2: Data Types and Conditionals | Typumwandlung, boolesche Werte, Vergleiche, Bedingungen, Listen, `while` |
-| Tag 3 | Units 3 and 4: Functions; Nested Loops and Lists | Imports, Abstraktion, Parameter, Rückgabewerte, `for`, `range`, Indizes |
-| Tag 4 | Unit 6 und Vorbereitung auf Unit 8 | Dictionaries als Konfiguration, Zerlegung, Anforderungen, Testen |
+| Tag 3 | Units 3 and 4: Functions; Nested Loops and Lists | RGB-Tupel, Imports, Abstraktion, Parameter, Rückgabewerte, `for`, `range`, Indizes |
+| Tag 4 | Unit 6 und Vorbereitung auf Unit 8 | `None` für fehlende Messungen, Dictionaries als Konfiguration, Zerlegung, Anforderungen, Testen |
 | Tag 5 | Unit 8: Final Project | Integration, Umfang, schrittweise Umsetzung, Testnachweise |
 
 ## Lernvoraussetzungen
@@ -84,16 +84,18 @@ bereits gelernt.
 
 | Bevor die Lernenden Folgendes einsetzen sollen ... | Zuerst vermitteln und üben |
 |---|---|
-| Variablen im Signal von Tag 1 | Werte, Typen einschließlich Tupel und `None`, Zuweisung und das Ändern eines Werts |
+| Variablen im Signal von Tag 1 | Strings, Integer, Floats, Zuweisung und das Ändern eines Werts |
 | erstes `try`/`finally`-Programm | Aufgabe in `try`; Aufräumen in `finally` nach Ende, Fehler oder Ctrl+C |
 | erster Breadboard-Aufbau | Fünferstreifen, Mittelkanal, versorgte und eventuell geteilte Schienen |
 | Bedingungen in der Challenge von Tag 2 | boolesche Ausdrücke, anschließend `if`/`elif`/`else` |
 | Listen im Reaktionsspiel | Erstellen, Index 0, `append`, `len` und `min` |
 | `while` im Reaktionsspiel | eine sichtbare Bedingung, die sich von wahr zu falsch ändert |
 | selbst definierte Funktionen an Tag 3 | Aufrufe, Argumente, Parameter und `return` |
+| RGB-Farbwerte an Tag 3 | Tupel als geordnete Gruppe einführen: Rot, Grün, Blau |
 | `for` und `range` an Tag 3 | 0-7 ausgeben, bevor diese Indizes für Pixel verwendet werden |
 | verschachtelte Schleifen in Animationen | ein kleines Zwei-mal-zwei-Beispiel auf Papier nachvollziehen |
 | Dictionaries an Tag 4 | ein flaches Dictionary erstellen, darauf zugreifen und es aktualisieren |
+| fehlende Abstandsmessungen an Tag 4 | `None` als keine brauchbare Messung einführen, nicht als null |
 | integrierte Logik an Tag 5 | für jede Hardware-Schicht erneut einen bekannten funktionierenden Test ausführen |
 
 Die TEALS-Abfolge behandelt in Unit 1 die Grundlagen, in Unit 2 boolesche
@@ -147,6 +149,20 @@ die die Absicht erklären. Präsentieren Sie
 [`slides/day-1.html`](../../slides/de/day-1.html), bevor Sie die Laborphase
 starten. Die Präsentationsnotizen enthalten Fragen, Demonstrationen, erwartete
 Antworten, Sicherheitshinweise zur Schaltung und empfohlene Übergänge.
+
+Behalten Sie die Picos während der ersten Python-Übungen bei sich. Nutzen Sie
+Thonnys **Lokales Python 3** (eingebautes Python) für Shell, Typen, Ausdrücke,
+Fehler, gespeicherte Skripte und das Verfolgen des reinen Text-Countdowns.
+Teilen Sie die Platinen erst bei „Was ist der Raspberry Pi Pico?“ aus.
+Stellen Sie die Platine ohne USB vor, verbinden Sie danach USB und wechseln Sie
+zu **MicroPython (Raspberry Pi Pico)** mit **automatischer Port-Erkennung**.
+Leiten Sie den ersten Pico-Durchlauf ausdrücklich an: `01_hello_pico.py` nach
+Downloads herunterladen, links in der Dateiansicht des Computers öffnen,
+MicroPython prüfen und den grünen Play-Button anklicken.
+Das vorgegebene Aufräumen mit `try`/`finally` vor diesem ersten Durchlauf kurz
+erklären. Zuerst Text und Licht beobachten; danach `Pin` und `led.on()`/`led.off()`
+besprechen. Das vorgegebene Aufräumen beim Bearbeiten des Programms beibehalten.
+`machine.Pin`-Beispiele dürfen nicht mit lokalem Python ausgeführt werden.
 
 ### Tag 2: Reaktionszeit-Challenge
 

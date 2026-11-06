@@ -268,8 +268,8 @@ else:
         <p class="activity">Test the circuit · Reconnect only after the partner check</p>
         <div class="grid-2">
           <div class="card">
-            <h3>Open and run</h3>
-            <p><a href="../../code/day-2/01_button_decisions.py"><code>01_button_decisions.py</code></a></p>
+            <h3>Download and run</h3>
+            <p><a href="../../code/day-2/01_button_decisions.py" download="01_button_decisions.py"><code>01_button_decisions.py</code></a></p>
             <pre><code class="language-python" data-trim>
 pressed = button.value()
 
@@ -294,6 +294,9 @@ else:
           connect the branch they see on screen to the active-high truth table from the
           previous slide. pressed stores the integer 0 or 1: 0 acts false and 1 acts true
           in if pressed. The program prints numbers, not True or False.
+          Click the filename to download, save in Downloads, then double-click the
+          file in Thonny's left computer Files pane. Select MicroPython (Raspberry Pi Pico)
+          and click the green play button only after the circuit check. No clone is needed.
         </aside>
       </section>
 
@@ -334,7 +337,7 @@ else:
         <div class="grid-2">
           <div class="card">
             <h3>Run</h3>
-            <p><a href="../../code/day-2/02_potentiometer_led.py"><code>02_potentiometer_led.py</code></a></p>
+            <p><a href="../../code/day-2/02_potentiometer_led.py" download="02_potentiometer_led.py"><code>02_potentiometer_led.py</code></a></p>
             <pre><code class="language-python" data-trim>
 raw_value = knob.read_u16()
 percent = int(raw_value / 65535 * 100)
@@ -490,7 +493,7 @@ print(times[-1])
         <div class="grid-2">
           <div class="card">
             <h3>Open</h3>
-            <p><a href="../../code/day-2/03_reaction_game_1_starter.py"><code>03_reaction_game_1_starter.py</code></a></p>
+            <p><a href="../../code/day-2/03_reaction_game_1_starter.py" download="03_reaction_game_1_starter.py"><code>03_reaction_game_1_starter.py</code></a></p>
             <p>The imports, pin setup, <code>scores = []</code>, and LED cleanup are already supplied.</p>
           </div>
           <div class="card">
@@ -575,7 +578,7 @@ if button.value():
             <h3>Useful checks if something looks wrong</h3>
             <ol>
               <li>If the LED never turns on, print <code>wait_ms</code> and confirm the program is still waiting.</li>
-              <li>If the game never notices a press, test the button again with <code>01_button_decisions.py</code>.</li>
+              <li>If the game never notices a press, test the button again with <a href="../../code/day-2/01_button_decisions.py" download="01_button_decisions.py"><code>01_button_decisions.py</code></a>.</li>
               <li>If a result looks impossible, print <code>start_ms</code> and <code>reaction_ms</code> for one round.</li>
             </ol>
           </div>
@@ -596,6 +599,33 @@ if button.value():
         <aside class="notes">
           Expected condition: 200 &lt;= reaction_ms &lt; 500, or the equivalent with and.
           Listen for clear boundary language: 200 is included, 500 is not.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Reference and optional downloads</p>
+        <h2>Finish your three-round game first</h2>
+        <p class="activity watch">Teacher-led comparison · Extension only after the baseline works</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Solution · reference only</h3>
+            <p><a href="../../code/day-2/03_reaction_game_2_solution.py" download="03_reaction_game_2_solution.py"><code>03_reaction_game_2_solution.py</code></a></p>
+            <p>Complete three-round game for demonstration, recovery, or comparison with your own working starter.</p>
+          </div>
+          <div class="card">
+            <h3>Optional extension</h3>
+            <p><a href="../../code/day-2/03_reaction_game_3_extension.py" download="03_reaction_game_3_extension.py"><code>03_reaction_game_3_extension.py</code></a></p>
+            <p>Five rounds, continuous false-start checks during the wait, and an average. Use the same checked GP13/GP15 circuit.</p>
+          </div>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Download to Downloads, open from Thonny's left computer Files pane, then use MicroPython and the green play button. Keep your own starter; these are separate files.</p></div>
+        <aside class="notes">
+          Keep the three-round starter as the normal student workflow. This appendix
+          follows the exit ticket and is not required for baseline success.
+          The solution is for teacher demonstration, recovery, or final comparison.
+          The extension checks throughout the random wait, not just at its end,
+          and adds five rounds and an average. Explain those changes before use.
+          Both files run independently; no helper download or repository clone is needed.
         </aside>
       </section>
 

@@ -29,6 +29,18 @@ The official
 uses a custom library. Our code uses MicroPython's built-in `neopixel` module,
 so no extra file is required.
 
+Here is another Python type: a **tuple** groups values in a fixed order.
+We use three values for one RGB colour, in the order red, green, blue:
+
+```python
+RED = (30, 0, 0)
+GREEN = (0, 30, 0)
+BLUE = (0, 0, 30)
+```
+
+In `GREEN`, red is `0`, green is `30`, and blue is `0`.
+Keep values low; `255, 255, 255` is unnecessarily bright.
+
 Run [`code/day-3/01_neopixel_colours.py`](../../code/day-3/01_neopixel_colours.py).
 
 Create the hardware object before using `pixels`:
@@ -47,15 +59,6 @@ per LED and lets you use indexes like a list: `pixels[0]` is the first LED,
 `pixels[7]` the last. `pixels.fill(colour)` changes all stored colours;
 `pixels.write()` sends them to the physical LEDs.
 
-An RGB colour is a tuple of red, green, and blue values:
-
-```python
-RED = (30, 0, 0)
-GREEN = (0, 30, 0)
-BLUE = (0, 0, 30)
-```
-
-Keep values low; `255, 255, 255` is unnecessarily bright.
 The first program repeats the same fill-write-print-sleep pattern for each
 colour. Leave that repetition visible for now; the next sections show how
 functions and loops improve it.

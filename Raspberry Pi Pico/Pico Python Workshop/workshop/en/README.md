@@ -18,6 +18,14 @@ Not every supplied kit contains these.
 **Teacher presentations:** [open the hosted slide website][slides-site] — no
 repository clone is required.
 
+**Download programs from the slides:** click a linked filename and save it to
+**Downloads**. In Thonny's **Files pane on the left**, open Downloads on your
+computer and double-click the `.py` file. Select the interpreter shown in the
+activity, then use the **green play button** after any required circuit check.
+Examples and starters are linked where needed. Solutions and the optional
+extension are separately labelled references, not the normal starting files.
+No clone or ZIP is needed.
+
 Hardware activities use the
 [Freenove FNK0063 Python documentation][freenove].
 
@@ -38,7 +46,10 @@ Hardware activities use the
 
 1. Read the [shared wiring and safety reference](WIRING_AND_SAFETY.md), then
    build only from the rendered diagram in the current day's lesson.
-2. Open Thonny and select **MicroPython (Raspberry Pi Pico)** at the lower right.
+2. On Day 1, start in Thonny with **Local Python 3** (built-in Python), without
+   a Pico. Only after the teacher introduces and hands out the boards, connect
+   USB and select **MicroPython (Raspberry Pi Pico)** at the lower right.
+   Leave the port on **automatic detection** for Pico work.
 3. Work in pairs: one **driver** types and one **navigator** checks the circuit
    and explains the code. Swap roles every 20 minutes.
 4. Copy the matching program from [`code/`](../../code/) to your own folder.
@@ -62,10 +73,10 @@ Each idea is taught before a challenge requires students to use it:
 
 | Day | New student-owned ideas | Earlier ideas practised again |
 |---|---|---|
-| 1 | values, types including tuple and `None`, variables, assignment, scripts, errors, `try`/`finally` cleanup | none |
+| 1 | strings, integers, floats, variables, assignment, scripts, errors, `try`/`finally` cleanup | none |
 | 2 | casting, Booleans, comparisons, `if`/`elif`/`else`, lists, `while` | variables and debugging |
-| 3 | function calls, parameters, `return`, `for`, `range`, indexes, nested loops | conditionals and lists |
-| 4 | dictionaries, sensor functions, timeouts | `None`, functions, loops, and conditionals |
+| 3 | RGB tuples, function calls, parameters, `return`, `for`, `range`, indexes, nested loops | conditionals and lists |
+| 4 | `None` for missing measurements, dictionaries, sensor functions, timeouts | functions, loops, and conditionals |
 | 5 | requirements, integration, boundary tests, state configuration | all earlier ideas |
 
 Library-specific setup such as `Pin`, `PWM`, `NeoPixel`, and

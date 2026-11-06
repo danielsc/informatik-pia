@@ -215,8 +215,8 @@ show_colour(GREEN)
           </code></pre>
           <div>
             <div class="card">
-              <h3>Workshop RGB tuple</h3>
-              <p><code>(red, green, blue)</code> is one grouped colour value for this workshop.</p>
+              <h3>A new type: tuple</h3>
+              <p>A tuple groups values in a fixed order. Here, <code>(red, green, blue)</code> describes one colour.</p>
             </div>
             <div class="card" style="margin-top: 0.6em;">
               <h3>Parameter and argument</h3>
@@ -226,8 +226,9 @@ show_colour(GREEN)
         </div>
         <div class="callout warning"><p>Keep RGB numbers low, such as <code>30</code>, so the pixels are bright enough to see without glare.</p></div>
         <aside class="notes">
-          Explicitly introduce the tuple here because TEALS does not assume students
-          already know tuple vocabulary. Treat it as one grouped colour packet.
+          Introduce tuples for the first time here, not as a Day 1 recap.
+          Treat (0, 30, 0) as one colour packet: red 0, green 30, blue 0.
+          Students need the grouping and order, not indexing or immutability rules yet.
         </aside>
       </section>
 
@@ -377,7 +378,7 @@ for lap in range(2):
             </tbody>
           </table>
         </div>
-        <div class="callout"><p>This is the same pattern you will see at the end of <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a>, just with a smaller trace.</p></div>
+        <div class="callout"><p>This is the same pattern you will see at the end of <a href="../../code/day-3/02_pixel_functions.py" download="02_pixel_functions.py"><code>02_pixel_functions.py</code></a>, just with a smaller trace.</p></div>
         <aside class="notes">
           This directly mirrors TEALS 4.03 nested loop tracing. Have students narrate
           step 2 to step 3 carefully: the inner loop restarts only after lap changes.
@@ -422,8 +423,8 @@ for lap in range(2):
         <div class="grid-2">
           <div>
             <div class="card">
-              <h3>Run</h3>
-              <p><a href="../../code/day-3/01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a></p>
+              <h3>Download and run</h3>
+              <p><a href="../../code/day-3/01_neopixel_colours.py" download="01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a></p>
               <ol class="tight">
                 <li>Reconnect only after the partner check.</li>
                 <li>Watch for red, green, blue, amber, then off.</li>
@@ -444,13 +445,16 @@ AMBER = (20, 10, 0)
         <aside class="notes">
           Tie the seen colours to the tuples. If nothing lights, students stop, unplug,
           and re-check IN versus OUT, GP16, 3.3 V, and GND.
+          Click the filename to download to Downloads, then open it from Thonny's
+          left computer Files pane. Select MicroPython (Raspberry Pi Pico) and use
+          the green play button after the circuit check. No repository clone is needed.
         </aside>
       </section>
 
       <section>
         <p class="eyebrow">See reuse in working code</p>
         <h2>Three functions, three jobs</h2>
-        <p class="activity">Try in Thonny · Run <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a>, then find these functions</p>
+        <p class="activity">Try in Thonny · Run <a href="../../code/day-3/02_pixel_functions.py" download="02_pixel_functions.py"><code>02_pixel_functions.py</code></a>, then find these functions</p>
           <pre><code class="language-python" data-trim>
 def show_colour(colour):
     pixels.fill(colour)
@@ -469,7 +473,7 @@ def level_to_colour(percent):
       <section>
         <p class="eyebrow">Read the reusable jobs</p>
         <h2>What goes in—and what comes back?</h2>
-        <p class="activity">Try in Thonny · Keep 02_pixel_functions.py open</p>
+        <p class="activity">Try in Thonny · Keep <a href="../../code/day-3/02_pixel_functions.py" download="02_pixel_functions.py"><code>02_pixel_functions.py</code></a> open</p>
         <div class="grid-2">
             <div class="card">
               <h3>Find and explain</h3>
@@ -485,7 +489,7 @@ def level_to_colour(percent):
               <p>Returning a colour is more reusable than printing a colour because later code can still use the value.</p>
           </div>
         </div>
-        <div class="callout"><p>Open <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a> and match each function name to its one job.</p></div>
+        <div class="callout"><p>Open <a href="../../code/day-3/02_pixel_functions.py" download="02_pixel_functions.py"><code>02_pixel_functions.py</code></a> and match each function name to its one job.</p></div>
         <aside class="notes">
           Keep the prompt concrete. Students are reading a finished example to prepare
           for the starter, not editing this file into something new.
@@ -539,7 +543,7 @@ def level_to_colour(percent):
       <section>
         <p class="eyebrow">Open the starter</p>
         <h2>First read the knob and choose a state</h2>
-        <p class="activity">Test the circuit · Open <a href="../../code/day-3/03_pixel_pet_1_starter.py"><code>03_pixel_pet_1_starter.py</code></a></p>
+        <p class="activity">Test the circuit · Open <a href="../../code/day-3/03_pixel_pet_1_starter.py" download="03_pixel_pet_1_starter.py"><code>03_pixel_pet_1_starter.py</code></a></p>
         <div class="grid-2">
           <div class="card">
             <h3>Already supplied</h3>
@@ -629,6 +633,25 @@ return energy
         <aside class="notes">
           Expected answer: return energy. Collect one answer per student. Finish with
           shutdown and unplugging, even if some pairs are still debugging.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Reference download · Pixel Pet</p>
+        <h2>Compare one function at a time</h2>
+        <p class="activity watch">Teacher-led reference · Keep your own starter</p>
+        <div class="card">
+          <h3>Complete solution</h3>
+          <p><a href="../../code/day-3/03_pixel_pet_2_solution.py" download="03_pixel_pet_2_solution.py"><code>03_pixel_pet_2_solution.py</code></a></p>
+          <p>For demonstration, recovery, or comparison after your own state selection and animations work. Compare one function, not the whole file at once.</p>
+          <p>Uses the complete RGB + potentiometer circuit, not the RGB-only test circuit.</p>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Download to Downloads and open from Thonny's left computer Files pane. Run only on the checked combined circuit, with MicroPython. Keep the pixel cleanup.</p></div>
+        <aside class="notes">
+          This reference follows the exit ticket and is not the normal student launch.
+          Students build in 03_pixel_pet_1_starter.py. Release the solution only
+          for demonstration, recovery, or a focused comparison after their own work.
+          The complete file runs independently; it does not import the earlier examples.
         </aside>
       </section>
 

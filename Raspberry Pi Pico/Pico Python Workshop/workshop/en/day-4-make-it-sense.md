@@ -79,7 +79,8 @@ Try a soft object and an angled object. Why do readings change?
 
 ## 2. Represent “no measurement”
 
-`measure_distance_cm()` returns either a float or `None`.
+`measure_distance_cm()` returns either a float or `None`. `None` is a special
+Python value meaning “no usable measurement” here, not the number zero.
 
 ```python
 distance = measure_distance_cm()

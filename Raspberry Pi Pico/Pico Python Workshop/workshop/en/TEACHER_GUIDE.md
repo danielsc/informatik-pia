@@ -58,10 +58,10 @@ debugging is often more valuable than a polished lecture.
 
 | Workshop | Approximate TEALS alignment | Deliberate emphasis |
 |---|---|---|
-| Day 1 | Unit 1: Introduction to Python | interpreter, scripts, strings, numbers, tuples, `None`, variables, comments, errors, cleanup |
+| Day 1 | Unit 1: Introduction to Python | interpreter, scripts, strings, numbers, variables, comments, errors, cleanup |
 | Day 2 | Unit 2: Data Types and Conditionals | casting, Booleans, comparisons, conditionals, lists, `while` |
-| Day 3 | Units 3 and 4: Functions; Nested Loops and Lists | imports, abstraction, parameters, returns, `for`, `range`, indexes |
-| Day 4 | Unit 6 and Unit 8 preparation | dictionaries as configuration, decomposition, requirements, testing |
+| Day 3 | Units 3 and 4: Functions; Nested Loops and Lists | RGB tuples, imports, abstraction, parameters, returns, `for`, `range`, indexes |
+| Day 4 | Unit 6 and Unit 8 preparation | `None` for missing measurements, dictionaries as configuration, decomposition, requirements, testing |
 | Day 5 | Unit 8: Final Project | integration, scope, iterative implementation, test evidence |
 
 ## Concept gates
@@ -73,16 +73,18 @@ scaffolding as already learned.
 
 | Before students are asked to use... | Teach and practise first |
 |---|---|
-| variables in the Day 1 signal | values, types including tuple and `None`, assignment, and changing one value |
+| variables in the Day 1 signal | strings, integers, floats, assignment, and changing one value |
 | first `try`/`finally` program | activity in `try`; cleanup in `finally` on completion, error, or Ctrl+C |
 | first breadboard build | five-hole strips, centre-channel separation, powered and possibly split rails |
 | conditions in the Day 2 challenge | Boolean expressions followed by `if`/`elif`/`else` |
 | lists in the reaction game | creation, index 0, `append`, `len`, and `min` |
 | `while` in the reaction game | a visible condition that changes from true to false |
 | user-defined functions on Day 3 | calls, arguments, parameters, and `return` |
+| RGB colour values on Day 3 | introduce a tuple as one ordered group: red, green, blue |
 | `for` and `range` on Day 3 | print 0-7 before using those indexes on pixels |
 | nested loops in animations | trace a tiny two-by-two example on paper |
 | dictionaries on Day 4 | create, access, and update one flat dictionary |
+| missing distance readings on Day 4 | introduce `None` as no usable measurement, not zero |
 | integrated Day 5 logic | rerun one known-working test for each hardware layer |
 
 The TEALS progression teaches Unit 1 fundamentals, Unit 2
@@ -132,6 +134,19 @@ pattern. Strong work adds an external LED and comments that explain intent.
 Present [`slides/day-1.html`](../../slides/en/day-1.html) before launching the lab. Its
 speaker notes include questions, demonstrations, expected answers, circuit
 safety reminders, and suggested transition points.
+
+Keep the Picos with the teacher during the opening Python exercises. Use
+Thonny's **Local Python 3** (built-in Python) for Shell work, types, expressions,
+errors, saved scripts, and the text-only countdown trace. Hand out the boards
+only at “What is the Raspberry Pi Pico?”. Introduce the board while unplugged,
+then connect USB and switch to **MicroPython (Raspberry Pi Pico)** with
+**automatic port detection**. Guide the first Pico run explicitly: download
+`01_hello_pico.py` to Downloads, open it from the computer's left Files pane,
+check the MicroPython interpreter, and click the green play button.
+Briefly explain the supplied `try`/`finally` cleanup before that first run.
+Observe text and light first; then unpack `Pin` and `led.on()`/`led.off()`.
+Keep the supplied cleanup when students edit the program.
+Do not run `machine.Pin` examples in local Python.
 
 ### Day 2: Reaction-Time Challenge
 

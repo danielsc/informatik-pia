@@ -130,11 +130,11 @@ distance_cm = pulse_us * 0.0343 / 2
         <h2>Measure before you trust</h2>
         <p class="activity">Test the circuit · Instructor checks, then connect USB</p>
         <div class="grid-2">
-          <div class="card"><h3>Run</h3><p><a href="../../code/day-4/01_distance_sensor.py"><code>01_distance_sensor.py</code></a></p><p>Measure a flat target at 10, 20, 40, 60, and 100 cm.</p></div>
+          <div class="card"><h3>Download and run</h3><p><a href="../../code/day-4/01_distance_sensor.py" download="01_distance_sensor.py"><code>01_distance_sensor.py</code></a></p><p>Measure a flat target at 10, 20, 40, 60, and 100 cm.</p></div>
           <div class="card"><h3>Compare</h3><p>Take three readings at each position. Record how far each reading is from the ruler distance.</p></div>
         </div>
         <div class="callout warning" style="margin-top:0.7em;"><p>Then try a soft target and an angled target. Describe what changes; do not “fix” the code yet.</p></div>
-        <aside class="notes">Students gather evidence first. Soft and angled surfaces may return weak or redirected echoes. This prepares the need for an invalid state.</aside>
+        <aside class="notes">Students gather evidence first. Soft and angled surfaces may return weak or redirected echoes. This prepares the need for an invalid state. Click the filename to download to Downloads, open from Thonny's left computer Files pane, select MicroPython (Raspberry Pi Pico), and click the green play button after the instructor's circuit check. No repository clone is needed.</aside>
       </section>
 
       <section>
@@ -250,7 +250,7 @@ if pulse_us < 0:
         <h2>Start short and quiet</h2>
         <p class="activity">Test the circuit · Partner-check E/B/C, then connect USB</p>
         <div class="grid-2">
-          <div class="card"><h3>Run</h3><p><a href="../../code/day-4/02_buzzer_test.py"><code>02_buzzer_test.py</code></a></p></div>
+          <div class="card"><h3>Run</h3><p><a href="../../code/day-4/02_buzzer_test.py" download="02_buzzer_test.py"><code>02_buzzer_test.py</code></a></p></div>
           <div class="card"><h3>Observe</h3><p>Three brief tones: 1200 Hz, 1600 Hz, and 2000 Hz.</p></div>
         </div>
         <div class="callout warning" style="margin-top: 0.7em;"><p>Keep the buzzer away from ears. Visual-only participation is always acceptable.</p></div>
@@ -360,9 +360,9 @@ pause = ZONE_CONFIG["caution"]["pause_ms"]
           <li>Keep the verified sensor and Echo divider in place.</li>
           <li>Add the buzzer, transistor, and 1 kΩ base resistor from the combined diagram.</li>
           <li>Check 5 V, common GND, divider junction, and transistor <code>E/B/C</code>.</li>
-          <li>Reconnect and rerun the distance test.</li>
-          <li>Rerun the buzzer test.</li>
-          <li>Only then open <a href="../../code/day-4/03_proximity_alarm.py"><code>03_proximity_alarm.py</code></a>.</li>
+          <li>Reconnect and rerun the <a href="../../code/day-4/01_distance_sensor.py" download="01_distance_sensor.py">distance test</a>.</li>
+          <li>Rerun the <a href="../../code/day-4/02_buzzer_test.py" download="02_buzzer_test.py">buzzer test</a>.</li>
+          <li>Only then download and open the complete example <a href="../../code/day-4/03_proximity_alarm.py" download="03_proximity_alarm.py"><code>03_proximity_alarm.py</code></a>.</li>
         </ol>
         <aside class="notes">
           If either component test fails, stop and repair that layer. Do not use the

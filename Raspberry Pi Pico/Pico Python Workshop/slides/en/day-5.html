@@ -173,12 +173,15 @@
         <ol>
           <li>Keep the Day 4 HC-SR04 and Echo divider; do not rebuild them.</li>
           <li>Check VBUS, GND, GP19 Trigger, and protected GP18 Echo.</li>
-          <li>Reconnect and run <a href="../../code/day-4/01_distance_sensor.py"><code>01_distance_sensor.py</code></a>.</li>
+          <li>Reconnect and run <a href="../../code/day-4/01_distance_sensor.py" download="01_distance_sensor.py"><code>01_distance_sensor.py</code></a>.</li>
           <li>Confirm a flat target produces believable distances and no echo produces <code>None</code>.</li>
         </ol>
         <aside class="notes">
           No new sensor layer today. Keep the HC-SR04 off-board with male–female jumpers.
           Retest before adding RGB. Record any problem before changing a wire.
+          Reuse the earlier downloaded test or click its filename to download it again.
+          Open from Downloads in Thonny's left computer Files pane, select MicroPython
+          (Raspberry Pi Pico), and click the green play button after the circuit check.
         </aside>
       </section>
 
@@ -189,7 +192,7 @@
         <ol>
           <li>Stop the sensor test and unplug USB.</li>
           <li>Keep the passive buzzer, S8050, and 1 kΩ base resistor on GP14. Check E/B/C; add nothing.</li>
-          <li>Reconnect and run <a href="../../code/day-4/02_buzzer_test.py"><code>02_buzzer_test.py</code></a>.</li>
+          <li>Reconnect and run <a href="../../code/day-4/02_buzzer_test.py" download="02_buzzer_test.py"><code>02_buzzer_test.py</code></a>.</li>
           <li>Rerun the distance test to prove the sensor still works.</li>
         </ol>
         <aside class="notes">
@@ -205,7 +208,7 @@
         <ol>
           <li>Stop and unplug. Keep the RGB module off-board; use male–female jumpers, <code>IN S</code> to GP16.</li>
           <li>Connect <code>IN V</code> to 3.3 V and <code>IN G</code> to common GND.</li>
-          <li>Partner + instructor check while unplugged; then reconnect and run <a href="../../code/day-3/01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a>.</li>
+          <li>Partner + instructor check while unplugged; then reconnect and run <a href="../../code/day-3/01_neopixel_colours.py" download="01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a>.</li>
           <li>Rerun sensor and buzzer tests once more.</li>
         </ol>
         <aside class="notes">
@@ -345,7 +348,7 @@ while True:
       <section>
         <p class="eyebrow">Starter file</p>
         <h2>Know what is supplied and what is yours</h2>
-        <p class="activity">Try in Thonny · Open <a href="../../code/day-5/parking_assistant_1_starter.py"><code>parking_assistant_1_starter.py</code></a></p>
+        <p class="activity">Try in Thonny · Open <a href="../../code/day-5/parking_assistant_1_starter.py" download="parking_assistant_1_starter.py"><code>parking_assistant_1_starter.py</code></a></p>
         <div class="grid-2">
           <div class="card">
             <h3>Already supplied</h3>
@@ -446,6 +449,26 @@ while True:
         <aside class="notes">
           Collect individual responses. End with complete shutdown and component
           inventory.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Reference download · Parking assistant</p>
+        <h2>Your starter first, the reference later</h2>
+        <p class="activity watch">Teacher-led reference · Demonstration, recovery, or final comparison</p>
+        <div class="card">
+          <h3>Complete solution</h3>
+          <p><a href="../../code/day-5/parking_assistant_2_solution.py" download="parking_assistant_2_solution.py"><code>parking_assistant_2_solution.py</code></a></p>
+          <p>Compare measurement, classification, RGB output, and sound with your own tested functions. Do not replace your starter with this file as the normal workflow.</p>
+          <p>Uses the complete sensor + transistor-driven buzzer + RGB circuit.</p>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Download to Downloads and open from Thonny's left computer Files pane. Run only after the complete circuit check, with MicroPython. Preserve the RGB/PWM cleanup.</p></div>
+        <aside class="notes">
+          This reference follows the final reflection and is not the project launch.
+          Use only for teacher demonstration, recovery, or comparison after students
+          have implemented and tested their own parking_assistant_1_starter.py.
+          The reference and starter are self-contained; the earlier colour, distance,
+          and buzzer programs are separate component tests, not imported helper files.
         </aside>
       </section>
 

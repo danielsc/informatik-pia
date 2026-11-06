@@ -30,6 +30,19 @@ Die offizielle
 verwendet eine eigene Bibliothek. Unser Code nutzt das eingebaute
 MicroPython-Modul `neopixel`; ihr braucht also keine zusätzliche Datei.
 
+Hier kommt ein weiterer Python-Typ: Ein **Tupel** bündelt Werte in fester
+Reihenfolge. Für eine RGB-Farbe nutzen wir drei Werte in der Reihenfolge
+Rot, Grün, Blau:
+
+```python
+RED = (30, 0, 0)
+GREEN = (0, 30, 0)
+BLUE = (0, 0, 30)
+```
+
+Bei `GREEN` ist Rot `0`, Grün `30` und Blau `0`.
+Haltet die Werte niedrig; `255, 255, 255` ist unnötig hell.
+
 Führt [`code/day-3/01_neopixel_colours.py`](../../code/day-3/01_neopixel_colours.py) aus.
 
 Erzeugt das Hardwareobjekt, bevor ihr `pixels` verwendet:
@@ -48,15 +61,6 @@ RGB-Tupel pro LED und erlaubt Indizes wie eine Liste: `pixels[0]` ist die
 erste LED, `pixels[7]` die letzte. `pixels.fill(colour)` ändert alle
 gespeicherten Farben; `pixels.write()` sendet sie an die echten LEDs.
 
-Eine RGB-Farbe ist ein Tupel aus Rot-, Grün- und Blauwert:
-
-```python
-RED = (30, 0, 0)
-GREEN = (0, 30, 0)
-BLUE = (0, 0, 30)
-```
-
-Haltet die Werte niedrig; `255, 255, 255` ist unnötig hell.
 Das erste Programm wiederholt für jede Farbe dasselbe Muster aus Füllen,
 Anzeigen, Ausgeben und Warten. Lasst diese Wiederholung vorerst stehen. In den
 nächsten Abschnitten verbessert ihr sie mit Funktionen und Schleifen.

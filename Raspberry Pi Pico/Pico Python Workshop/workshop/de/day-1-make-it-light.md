@@ -5,20 +5,20 @@
 Am Ende des Tages sendet euer Code eine geheime Nachricht mit Licht.
 
 **Python:** Interpreter, Skript, `print`, Strings, Integer, Floats, Variablen,
-Zuweisung, Tupel, `None`, Kommentare, Importe, Fehler, `try`/`finally`<br>
+Zuweisung, Kommentare, Importe, Fehler, `try`/`finally`<br>
 **Hardware:** eingebaute LED, externe LED, GPIO-Ausgang<br>
 ## 1. Lernt den Interpreter kennen
+
+Beginnt ohne Pico. Öffnet Thonny und wählt unten rechts **Lokales Python 3**
+(Thonnys eingebautes Python), nicht MicroPython. Bei englischer Oberfläche
+heißt es **Local Python 3**. Diese ersten Beispiele laufen auf eurem Computer.
+Fehlt die Dateiansicht, wählt **Ansicht → Dateien**.
 
 Gebt in Thonnys Shell jeweils eine Zeile ein:
 
 ```python
 print("Hello, Pico!")
 2 + 3
-type("hello")
-type(42)
-type(0.5)
-type((0, 0, 20))
-type(None)
 ```
 
 Besprecht:
@@ -26,13 +26,17 @@ Besprecht:
 - Ein String ist Text in Anführungszeichen.
 - Ein Integer ist eine ganze Zahl.
 - Ein Float enthält eine Dezimalstelle.
-- Ein Tupel ist eine geordnete Gruppe von Werten mit Kommas und meist
-  Klammern: `(0, 0, 20)`. Seine Elemente lassen sich nicht ersetzen. An Tag 3
-  stehen diese drei Werte für die Helligkeit von Rot, Grün und Blau.
-- `None` ist ein besonderer Wert für „kein Wert“ oder „kein Ergebnis“.
-  Er ist nicht `0`, `False` oder ein leerer String und hat den Typ `NoneType`.
 - Ein Ausdruck erzeugt einen Wert.
 - Ein Interpreter führt Code aus.
+
+Nachdem ihr diese Typen besprochen habt, fragt ihr Python mit `type(...)`,
+welchen Typ ein Wert hat:
+
+```python
+type("hello")
+type(42)
+type(0.5)
+```
 
 Erzeugt absichtlich drei Fehler. Lest jeweils die letzte Zeile der
 Fehlermeldung:
@@ -45,12 +49,72 @@ pritn("misspelled name")
 
 Fehler liefern Informationen. Sie bedeuten nicht, dass ihr gescheitert seid.
 
+### Ein Skript auf dem Computer ausführen
+
+1. Klickt auf <a href="../../code/day-1/00_first_script.py" download="00_first_script.py"><code>00_first_script.py</code></a>,
+   um die Datei nach **Downloads** herunterzuladen. Fragt der Browser nach
+   dem Speicherort, wählt **Downloads** und behaltet den Dateinamen mit `.py` bei.
+2. Öffnet in Thonny **links unter Dateien** den Ordner **Downloads** auf eurem
+   Computer. Fehlt die Dateiansicht, wählt **Ansicht → Dateien**; bei englischer
+   Oberfläche **View → Files**. Öffnet **`00_first_script.py`** mit einem
+   Doppelklick im Editor.
+3. Lasst **Lokales Python 3** ausgewählt. Sagt die Ausgabe voraus und klickt
+   dann auf den **grünen Play-Button (Run)**. Die Ausgabe erscheint in der Shell.
+
+Im Editor seht ihr jetzt ein **Skript**: Anweisungen, die in einer `.py`-Datei
+gespeichert sind. Python führt sie von oben nach unten aus. Klickt erneut auf
+den grünen Play-Button, um die ganze Abfolge zu wiederholen:
+
+```python
+print("Three...")
+print("Two...")
+print("One...")
+print("Hello, physical world!")
+```
+
+Ersetzt nun den Inhalt derselben Datei durch das folgende Beispiel, um Pausen
+einzubauen. Sagt die Reihenfolge der Meldungen und die Pausen voraus, wählt
+**Datei → Speichern** und klickt dann auf den **grünen Play-Button (Run)**:
+
+```python
+from time import sleep
+
+print("Three...")
+sleep(1)
+print("Two...")
+sleep(1)
+print("One...")
+```
+
+Mit `import` nutzen wir fertige Werkzeuge. Python bündelt diese in **Modulen**.
+`from time import sleep` stellt die Pausenfunktion `sleep` aus dem Modul `time`
+bereit, Pythons Werkzeugkasten für Zeitaufgaben. Der Import pausiert das
+Programm noch nicht; `sleep(1)` wartet eine Sekunde. Ihr braucht weder Pico
+noch Verkabelung.
+
 ## 2. Euer erstes Programm mit sichtbarer Wirkung
 
-Öffnet [`code/day-1/01_hello_pico.py`](../../code/day-1/01_hello_pico.py).
+Wartet, bis eure Lehrkraft die Picos austeilt und die Platine vorstellt. Der
+Pico ist eine Mikrocontroller-Platine, die Python mit **MicroPython** ausführt
+und Sensoren auslesen sowie elektronische Bauteile steuern kann.
 
-Sagt vor dem Ausführen voraus, in welcher Reihenfolge die Meldungen erscheinen
-und die LED ihren Zustand ändert. Ändert danach die Wörter und die Wartezeit.
+Verbindet den Pico per USB und wechselt dann in Thonny von **Lokalem Python 3**
+zu **MicroPython (Raspberry Pi Pico)**. Lasst den Port **automatisch erkennen**.
+Prüft, ob `>>>` in der Shell erscheint; Code läuft jetzt auf dem Pico, nicht
+mehr auf eurem Computer. Die eingebaute LED braucht keine externe Verkabelung.
+
+1. Klickt auf <a href="../../code/day-1/01_hello_pico.py" download="01_hello_pico.py"><code>01_hello_pico.py</code></a>,
+   um die Datei nach **Downloads** herunterzuladen. Fragt der Browser nach
+   dem Speicherort, wählt **Downloads**.
+2. Öffnet in Thonny **links unter Dateien** den Ordner **Downloads auf eurem
+   Computer** und klickt **`01_hello_pico.py`** doppelt an. Lasst die Datei auf
+   dem Computer, nicht auf dem Pico. Prüft den Namen im Editor-Tab: Dies ist
+   eine andere Datei als `00_first_script.py`.
+3. Prüft vor dem Ausführen, ob **MicroPython (Raspberry Pi Pico)** ausgewählt
+   ist. Der vorgegebene `try`-Block führt die Abfolge aus; `finally` schaltet
+   die LED am Ende, bei einem Fehler oder bei Stop aus. Lasst beide Blöcke stehen.
+4. Sagt die Reihenfolge der Meldungen und LED-Wechsel voraus und klickt dann
+   auf den **grünen Play-Button (Run)**. Beobachtet Shell und eingebaute LED gemeinsam.
 
 ```python
 from machine import Pin
@@ -58,16 +122,25 @@ from time import sleep
 
 led = Pin("LED", Pin.OUT)
 
-print("Three...")
-led.on()
-sleep(1)
-print("Two...")
-led.off()
-sleep(1)
-print("One...")
-led.on()
-print("Hello, physical world!")
+try:
+    print("Three...")
+    led.on()
+    sleep(1)
+
+    print("Two...")
+    led.off()
+    sleep(1)
+
+    print("One...")
+    led.on()
+    print("Hello, physical world!")
+    sleep(1)
+finally:
+    led.off()
 ```
+
+Führt es erneut aus und vergleicht Vorhersage und Beobachtung. Ändert dann die
+Wörter und die Wartezeit, speichert und klickt wieder auf den grünen Play-Button.
 
 `Pin("LED", Pin.OUT)` erzeugt ein Ausgangsobjekt. Der Aufruf `led.on()` ändert
 eine Spannung und damit die reale Welt.

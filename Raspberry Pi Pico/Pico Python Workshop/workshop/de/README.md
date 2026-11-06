@@ -19,6 +19,14 @@ zwei 1 kΩ in Reihe). Nicht jedes gelieferte Kit enthält diese Teile.
 **Präsentationen für Lehrkräfte:** [öffnet die veröffentlichte
 Folien-Website][slides-site] — das Repository muss nicht geklont werden.
 
+**Programme aus den Folien herunterladen:** Dateinamen anklicken und nach
+**Downloads** herunterladen. In Thonny **links unter Dateien** den Downloads-Ordner
+des Computers öffnen und die `.py`-Datei doppelt anklicken. Den Interpreter der
+Aktivität wählen und den **grünen Play-Button** erst nach einer nötigen
+Schaltungsprüfung anklicken. Beispiele und Starter stehen bei der passenden
+Aktivität. Lösungen und die optionale Erweiterung sind eigene, klar markierte
+Referenzen, nicht die normalen Startdateien. Kein Klonen und kein ZIP nötig.
+
 Die Hardware-Aktivitäten verwenden die
 [Python-Dokumentation zum Freenove FNK0063][freenove].
 
@@ -40,7 +48,10 @@ Die Hardware-Aktivitäten verwenden die
 1. Lest die [gemeinsame Referenz zu Verkabelung und
    Sicherheit](WIRING_AND_SAFETY.md) und baut ausschließlich nach dem
    gerenderten Diagramm in der Lektion des jeweiligen Tages.
-2. Öffnet Thonny und wählt unten rechts **MicroPython (Raspberry Pi Pico)**.
+2. Startet an Tag 1 in Thonny mit **Lokalem Python 3** (eingebautes Python),
+   ohne Pico. Erst nachdem die Lehrkraft die Platinen vorstellt und austeilt,
+   verbindet ihr USB und wählt unten rechts **MicroPython (Raspberry Pi Pico)**.
+   Lasst den Port bei der Arbeit mit dem Pico **automatisch erkennen**.
 3. Arbeitet zu zweit: Eine Person als **Driver** tippt, die andere als
    **Navigator** prüft die Schaltung und erklärt den Code. Tauscht die Rollen
    alle 20 Minuten.
@@ -68,10 +79,10 @@ muss:
 
 | Tag | Neue, von den Lernenden selbst eingesetzte Konzepte | Erneut geübte frühere Konzepte |
 |---|---|---|
-| 1 | Werte, Typen einschließlich Tupel und `None`, Variablen, Zuweisung, Skripte, Fehler, Aufräumen mit `try`/`finally` | keine |
+| 1 | Strings, Integer, Floats, Variablen, Zuweisung, Skripte, Fehler, Aufräumen mit `try`/`finally` | keine |
 | 2 | Typumwandlung, boolesche Werte, Vergleiche, `if`/`elif`/`else`, Listen, `while` | Variablen und Debugging |
-| 3 | Funktionsaufrufe, Parameter, `return`, `for`, `range`, Indizes, verschachtelte Schleifen | Bedingungen und Listen |
-| 4 | Dictionaries, Sensorfunktionen, Timeouts | `None`, Funktionen, Schleifen und Bedingungen |
+| 3 | RGB-Tupel, Funktionsaufrufe, Parameter, `return`, `for`, `range`, Indizes, verschachtelte Schleifen | Bedingungen und Listen |
+| 4 | `None` für fehlende Messungen, Dictionaries, Sensorfunktionen, Timeouts | Funktionen, Schleifen und Bedingungen |
 | 5 | Anforderungen, Integration, Grenzwerttests, Zustandskonfiguration | alle bisherigen Konzepte |
 
 Bibliotheksspezifische Einrichtung wie `Pin`, `PWM`, `NeoPixel` und

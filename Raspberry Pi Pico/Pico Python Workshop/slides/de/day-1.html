@@ -398,11 +398,6 @@
       font-size: 0.64em;
     }
 
-    .thonny-parts .files-hint {
-      margin: 0;
-      font-size: 0.64em;
-    }
-
     .thonny-parts .card {
       padding: 0.4em 0.55em;
     }
@@ -416,6 +411,99 @@
       margin: 0.35em 0 0;
       font-size: 0.52em;
       line-height: 1.35;
+    }
+
+    .thonny-script-guide {
+      width: 440px;
+      max-width: 100%;
+      margin: 0 auto;
+    }
+
+    .thonny-annotated {
+      position: relative;
+    }
+
+    .thonny-annotated .thonny-screenshot {
+      margin: 0;
+    }
+
+    .thonny-highlight {
+      position: absolute;
+      border: 3px solid var(--cyan);
+      border-radius: 0.2em;
+      pointer-events: none;
+    }
+
+    .thonny-highlight.files {
+      left: 0.7%;
+      top: 13.1%;
+      width: 20.1%;
+      height: 46%;
+    }
+
+    .thonny-highlight.run {
+      left: 16%;
+      top: 6.7%;
+      width: 4.6%;
+      height: 5.2%;
+      border-color: var(--pico);
+    }
+
+    .thonny-highlight span {
+      position: absolute;
+      top: 0;
+      right: 0;
+      transform: translate(60%, -60%);
+      display: grid;
+      place-items: center;
+      width: 1.5em;
+      height: 1.5em;
+      border: 2px solid white;
+      border-radius: 50%;
+      background: var(--cyan);
+      color: white;
+      font-size: 0.6em;
+      font-weight: 800;
+    }
+
+    .thonny-highlight.files span {
+      right: auto;
+      left: 0;
+      transform: translate(-60%, -60%);
+    }
+
+    .thonny-highlight.run span {
+      top: 50%;
+      right: auto;
+      left: calc(100% + 0.3em);
+      transform: translateY(-50%);
+      background: var(--pico);
+    }
+
+    .thonny-script-guide figcaption {
+      margin-top: 0.5em;
+      font-size: 0.58em;
+      line-height: 1.35;
+    }
+
+    .pico-first-run .card p,
+    .pico-first-run .card li {
+      font-size: 0.64em;
+    }
+
+    .pico-first-run .card p {
+      margin: 0.65em 0 0;
+    }
+
+    .pico-first-run pre {
+      margin: 0;
+      font-size: 0.58em;
+    }
+
+    .pico-first-run pre code {
+      max-height: none;
+      padding: 0.65em 0.8em;
+      line-height: 1.15;
     }
 
     .label {
@@ -560,10 +648,10 @@
           <span>S öffnet die Notizen · F startet den Vollbildmodus</span>
         </div>
         <aside class="notes">
-          Zeigen Sie einen Pico, bevor Code erscheint. Fragen Sie: „Wie könnten hier
-          eingegebene Wörter dieses winzige Licht verändern?“ Sammeln Sie Vermutungen,
-          ohne schon aufzulösen. Der praktische Teil beginnt später; zuerst wird das
-          dafür nötige Python ausdrücklich erklärt.
+          Nutzen Sie das Bild als Ausblick, aber verteilen Sie noch keine Picos.
+          Zuerst lernt die Klasse Python mit Thonnys lokalem Python-Interpreter
+          auf dem Computer. Die Platinen werden erst bei der Pico-Einführung
+          ausgeteilt, direkt vor dem Wechsel zu MicroPython und zur eingebauten LED.
         </aside>
       </section>
 
@@ -633,62 +721,7 @@
         <p class="lede">Versteht zuerst die Werkzeuge. Steuert dann damit Hardware.</p>
         <aside class="notes">
           Dieser Abschnitt überträgt die Lernfolge aus TEALS Unit 1, Lektionen
-          1.01–1.02, auf Thonny und MicroPython.
-        </aside>
-      </section>
-
-      <section>
-        <p class="eyebrow">Eure Hardware kennenlernen</p>
-        <h2>Was ist der Raspberry Pi Pico?</h2>
-        <p class="activity watch">Anschauen und besprechen · USB bleibt noch getrennt</p>
-        <div class="pico-intro">
-          <img src="../assets/raspberry-pi-pico-pinout.png" alt="Raspberry-Pi-Pico-Platine mit beschrifteten Pins, USB-Anschluss oben, eingebauter LED und zwei seitlichen Reihen von Anschlusspins.">
-          <div class="pico-facts">
-            <div class="card">
-              <h3>Ein winziger Computer für Elektronik</h3>
-              <p>Der Pico ist eine <strong>Mikrocontroller-Platine</strong>: ein kleiner Computer, der euer Programm ausführt und damit elektronische Bauteile steuert.</p>
-            </div>
-            <div class="card">
-              <h3>Wir programmieren ihn in Python</h3>
-              <p>Wir schreiben Code in Thonny. Der Pico führt ihn mit <strong>MicroPython</strong> aus, einer Python-Version für Mikrocontroller.</p>
-            </div>
-            <div class="card">
-              <h3>Er kann messen und steuern</h3>
-              <p>Über seine Anschlusspins kann er Taster und Sensoren auslesen, LEDs steuern und Töne erzeugen. Heute: ein Licht ein- und ausschalten.</p>
-            </div>
-          </div>
-        </div>
-        <aside class="notes">
-          Zeigen Sie einen nicht angeschlossenen Pico und vergleichen Sie ihn mit
-          dem Bild. Zeigen Sie USB-Anschluss, eingebaute LED und Anschlusspins;
-          die Pin-Bezeichnungen müssen nicht auswendig gelernt werden. Auf der
-          Platine sitzt ein Mikrocontroller-Chip, der das Programm ausführt.
-          Anders als ein Desktop-Computer ist er zum Steuern von Elektronik
-          gedacht, nicht zum Ausführen von Desktop-Anwendungen. MicroPython ist
-          auf den vorbereiteten Platinen bereits installiert. Taster, Sensoren
-          und Töne folgen später; heute beginnt die Klasse mit der eingebauten
-          LED, die keine externe Verkabelung braucht. Externe Bauteile benötigen
-          eine passende sichere Schaltung, keine beliebigen direkten Verbindungen.
-          USB bleibt bis zur Thonny-Einrichtung getrennt.
-        </aside>
-      </section>
-
-      <section>
-        <p class="eyebrow">Ein Computersystem</p>
-        <h2>Eingabe → Verarbeitung → Ausgabe</h2>
-        <p class="activity watch">Anschauen und besprechen · Thonny bleibt noch geschlossen</p>
-        <div class="flow">
-          <div class="flow-box">Euer Code<br><span class="tiny">Eingabe</span></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box">MicroPython<br><span class="tiny">Verarbeitung</span></div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box">Text + Licht<br><span class="tiny">Ausgabe</span></div>
-        </div>
-        <p class="big-question">Was ist an einer physischen Ausgabe anders?</p>
-        <aside class="notes">
-          Erwartete Antwort: Sie verändert etwas außerhalb des Bildschirms. Stellen Sie
-          klar: Die Tastatur ist eine Eingabe für Thonny; die heutige Hardware dient nur
-          als Ausgabe.
+          1.01–1.02, auf Thonnys lokale Python-Umgebung. Noch kein Pico nötig.
         </aside>
       </section>
 
@@ -697,15 +730,15 @@
         <h2>Thonny kennenlernen</h2>
         <p class="activity">Jetzt mitmachen · Folgt den Schritten</p>
         <ol class="connection-steps">
-          <li><strong>Verbindet zuerst den Pico per USB-Kabel mit dem Computer.</strong></li>
-          <li>Öffnet Thonny. Klickt unten rechts auf die Interpreter-Auswahl und wählt <strong>MicroPython (Raspberry Pi Pico)</strong>. Lasst den Port <strong>automatisch erkennen</strong>.</li>
+          <li><strong>Öffnet Thonny. Ihr braucht noch keinen Pico.</strong></li>
+          <li>Wählt unten rechts <strong>Lokales Python 3</strong> (Thonnys eingebautes Python), nicht MicroPython. Euer Code läuft auf dem Computer.</li>
         </ol>
         <div class="thonny-layout">
-          <img class="thonny-screenshot" src="../assets/thonny-pico-interface.png" alt="Echtes Thonny-Fenster mit verbundenem Raspberry Pi Pico. Files für diesen Computer und den Pico stehen links, der Python-Editor oben rechts, die Shell unten rechts; die Statusleiste zeigt MicroPython Raspberry Pi Pico.">
+          <img class="thonny-screenshot" src="../assets/thonny-pico-interface.png" alt="Thonny-Fenster mit Files links, Editor über der Shell rechts und Interpreter-Auswahl unten rechts. Das Beispiel zeigt einen verbundenen Pico; wählt vorerst stattdessen lokales Python 3.">
           <div class="thonny-parts">
             <div class="card">
               <h3>Files (Dateien)</h3>
-              <p>Dateien auf dem Computer und auf dem Pico.</p>
+              <p>Findet und speichert Python-Dateien auf eurem Computer.</p>
             </div>
             <div class="card">
               <h3>Editor</h3>
@@ -715,21 +748,23 @@
               <h3>Shell (Kommandozeile)</h3>
               <p>Hier seht ihr Ausgaben und Fehler und könnt Befehle direkt eingeben.</p>
             </div>
-            <p class="files-hint"><strong>Links werden keine Dateien angezeigt?</strong> Wählt <strong>Ansicht → Dateien</strong>.</p>
+            <p class="tiny"><strong>Links fehlen die Dateien?</strong> Wählt <strong>Ansicht → Dateien</strong>.</p>
           </div>
         </div>
         <aside class="notes">
-          Lassen Sie zuerst den Pico per USB verbinden, dann unten rechts in Thonny
-          MicroPython (Raspberry Pi Pico) auswählen. Den Port automatisch erkennen
-          lassen, keinen bestimmten USB-Port auswählen. Auf dem
-          vorbereiteten Pico ist MicroPython bereits installiert. Bei Bedarf Stop /
-          Restart backend drücken und auf die Eingabeaufforderung >>> in der Shell
-          achten. Zeigen Sie beim Benennen auf das echte Thonny-Fenster. Blenden Sie
-          bei Bedarf über Ansicht → Dateien die Dateiansicht ein. Besprechen Sie nicht
-          den fortgeschrittenen MQTT-Code im Bild, sondern nur Files, Editor, Shell und
-          den Interpreterstatus. IDE bedeutet integrierte Entwicklungsumgebung: eine
+          Die Picos bleiben bei der Lehrkraft. Lokales Python 3 mit dem in Thonny
+          enthaltenen Python auswählen; die Anzeige kann eine Versionsnummer
+          enthalten. Bei englischer Oberfläche heißt es Local Python 3. Prüfen
+          Sie die Eingabeaufforderung >>> in der Shell. Zeigen Sie Files, Editor
+          und Shell im echten Fenster mit lokalem Python. Bei Bedarf Ansicht →
+          Dateien einschalten. IDE bedeutet integrierte Entwicklungsumgebung: eine
           Anwendung zum Erstellen, Bearbeiten, Speichern, Ausführen und Prüfen von
-          Programmen. Prüfen Sie „MicroPython (Raspberry Pi Pico)“ im Interpreterfeld.
+          Programmen. Das Bild dient nur zum Finden der drei Bereiche. Es zeigt
+          eine Pico-Verbindung und fortgeschrittenen MQTT-Code; beides ist noch
+          nicht nötig. Die Klasse wählt lokales Python 3 und übernimmt nicht die
+          Interpreter-Einstellung aus dem Bild.
+          Alle Beispiele bis zur Pico-Einführung laufen auf dem
+          Computer. Noch keine Hardwaredateien öffnen oder MicroPython auswählen.
         </aside>
       </section>
 
@@ -742,8 +777,6 @@
 <span class="fragment">Hello, Pico!</span>
 &gt;&gt;&gt; 2 + 3
 <span class="fragment">5</span>
-&gt;&gt;&gt; type(0.5)
-<span class="fragment">&lt;class 'float'&gt;</span>
         </code></pre>
         <div class="callout">
           <p>
@@ -784,23 +817,6 @@
           Lassen Sie bei Beispielen 1, 2 oder 3 Finger für String, Integer oder Float
           zeigen. Anführungszeichen machen "42" zu Text. Casting folgt erst an Tag 2.
         </aside>
-      </section>
-
-      <section>
-        <p class="eyebrow">Zwei weitere Arten von Werten</p>
-        <h2>Eine Gruppe von Werten — oder noch kein Wert</h2>
-        <p class="activity">In Thonny ausprobieren · Vorhersagen, dann jeden Typ prüfen</p>
-        <div class="grid-2">
-          <div class="card"><h3><code>tuple</code></h3><p><code>(0, 30, 0)</code> bündelt Werte in fester Reihenfolge. Später nutzen wir ein Tupel für Rot, Grün und Blau. Seine Elemente lassen sich nicht direkt ändern.</p></div>
-          <div class="card"><h3><code>None</code></h3><p>Ein besonderer Wert für „noch kein Wert“ oder „kein brauchbares Ergebnis“. Er ist weder null noch der Text <code>"None"</code>.</p></div>
-        </div>
-        <pre><code class="language-python" data-trim>
-colour = (0, 30, 0)
-measurement = None
-print(type(colour))
-print(type(measurement))
-        </code></pre>
-        <aside class="notes">Erwartet tuple und NoneType. Ein Tupel ist eine geordnete Gruppe; None bezeichnet das Fehlen eines Werts, keine Zahl. Noch keine Indizes oder Sensorprogramme verwenden. An Tag 3 und 4 wieder aufgreifen.</aside>
       </section>
 
       <section>
@@ -853,7 +869,7 @@ print(type(measurement))
 &gt;&gt;&gt; pritn("Hello")
 Traceback (most recent call last):
   File "&lt;stdin&gt;", line 1
-NameError: name 'pritn' isn't defined
+NameError: name 'pritn' is not defined
         </code></pre>
         <div class="grid-3">
           <div class="card fragment">
@@ -881,6 +897,8 @@ NameError: name 'pritn' isn't defined
           nur eine Änderung klarere Hinweise liefert. Zeigen Sie bei Bedarf ein fehlendes
           Anführungszeichen. Nutzen Sie 10 / 0 nicht als ersten Fehler; der Tippfehler
           lässt sich leichter beheben.
+          Lokales Python kann einen anderen Dateinamen oder einen „Did you mean“-Hinweis
+          anzeigen; entscheidend sind NameError und der falsch geschriebene Name.
         </aside>
       </section>
 
@@ -897,94 +915,206 @@ NameError: name 'pritn' isn't defined
 
       <section>
         <p class="eyebrow">Skriptmodus</p>
-        <h2>Der Editor speichert eine Abfolge</h2>
-        <p class="activity">In Thonny ausprobieren · Tippen, speichern, vorhersagen, dann Run</p>
+        <h2>Euer erstes Skript öffnen und ausführen</h2>
+        <p class="activity">In Thonny ausprobieren · Herunterladen, öffnen, vorhersagen, dann Run</p>
         <div class="grid-2">
           <div class="card">
-            <h3>Shell (Kommandozeile)</h3>
-            <p>Führt eine Anweisung sofort aus.</p>
-            <p>Ideal für ein kleines Experiment.</p>
+            <h3>Herunterladen → öffnen → starten</h3>
+            <ol>
+              <li>Klickt auf <a href="../../code/day-1/00_first_script.py" download="00_first_script.py"><code>00_first_script.py</code></a>, um die Datei nach <strong>Downloads</strong> herunterzuladen.</li>
+              <li>Öffnet in Thonny <strong>links unter Dateien</strong> den Ordner <strong>Downloads</strong>. Doppelklick auf <code>00_first_script.py</code>.</li>
+              <li>Lasst <strong>Lokales Python 3</strong> ausgewählt. Sagt die Ausgabe voraus und klickt dann auf den <strong>grünen Play-Button (Run)</strong>.</li>
+            </ol>
           </div>
-          <div class="card">
-            <h3>Skript</h3>
-            <p>Speichert Anweisungen in einer <code>.py</code>-Datei.</p>
-            <p>Läuft von oben nach unten.</p>
-          </div>
-        </div>
-        <pre><code class="language-python" data-trim data-line-numbers>
-print("Three...")
-print("Two...")
-print("One...")
-print("Hello, physical world!")
-        </code></pre>
-        <div class="callout">
-          <p>Das Programm enthält die Anweisungen. Die Ausgabe entsteht beim Ausführen.</p>
+          <figure class="thonny-script-guide">
+            <div class="thonny-annotated">
+              <img class="thonny-screenshot" src="../assets/thonny-pico-interface.png" alt="Thonny-Fenster mit Rahmen 2 um die Dateiansicht des Computers oben links und Rahmen 3 um den grünen Play-Button in der oberen Werkzeugleiste.">
+              <span class="thonny-highlight files" aria-hidden="true"><span>2</span></span>
+              <span class="thonny-highlight run" aria-hidden="true"><span>3</span></span>
+            </div>
+            <figcaption><strong>2 · Dateien auf eurem Computer</strong><br><strong>3 · Grüner Play-Button (Run)</strong><br>Das Skript öffnet sich im Editor; die Ausgabe erscheint in der Shell.</figcaption>
+          </figure>
         </div>
         <aside class="notes">
-          Lassen Sie zuerst auf das Programm und dann auf die Ausgabe zeigen. Führen Sie
-          das Skript aus und vergleichen Sie die Reihenfolge in Shell und Editor.
+          Vor dem Unterricht Downloads als Download-Ordner im Browser einstellen.
+          Der Link löst den Download aus; den Speicherort bestimmt der Browser.
+          Falls ein Speicherdialog erscheint, Downloads wählen und .py beibehalten.
+          Den Klick auf den Dateinamen vorführen und dann zu Thonny wechseln.
+          Fehlt links die Dateiansicht, Ansicht → Dateien wählen; bei englischer
+          Oberfläche View → Files. In der Dateiliste des Computers zu Downloads
+          navigieren und 00_first_script.py doppelt anklicken.
+          Den Dateinamen im Editor-Tab zeigen.
+          Schritte 2 und 3 den nummerierten Rahmen im Bild zuordnen: nur die
+          Dateiliste des Computers oben links, dann der grüne Play-Button oben.
+          Das Bild zeigt die Bedienelemente; Ordner und Code sind nicht das
+          Schülerbeispiel. Downloads und das heruntergeladene Skript live vorführen.
+          Lokales Python 3 beibehalten; ein Pico ist noch nicht nötig.
+          Die vier Ausgabezeilen vorhersagen, dann den grünen Play-Button zeigen
+          und anklicken (Run current script). Die Reihenfolge in Shell und Editor
+          vergleichen. Ein weiterer Klick führt die ganze gespeicherte Abfolge erneut aus.
+          Auf das Programm und dann auf die Ausgabe zeigen lassen.
         </aside>
-      </section>
-
-      <section>
-        <p class="eyebrow">Programme sicher beenden</p>
-        <h2><code>try</code> führt aus; <code>finally</code> räumt auf</h2>
-        <p class="activity watch">Anschauen und besprechen · Normales Ende, dann Stop verfolgen</p>
-        <pre><code class="language-python" data-trim>
-from machine import Pin
-from time import sleep
-
-led = Pin("LED", Pin.OUT)
-try:
-    led.on()
-    sleep(1)
-finally:
-    led.off()
-        </code></pre>
-        <div class="callout success"><p>Der eingerückte <code>try</code>-Block führt die Aufgabe aus. <code>finally</code> schaltet den Ausgang aus: am Ende, bei einem unterbrechenden Fehler oder bei Stop / <code>Ctrl+C</code>. Lasst dieses Aufräumen in jedem Hardwareprogramm stehen.</p></div>
-        <aside class="notes">try/finally vor dem ersten vorgegebenen Hardwareprogramm einführen. Das ist Aufräumen, nicht try/except oder Fehlerbehandlung: Ein Fehler kann danach weiterhin angezeigt werden. Bei getrennter Stromversorgung kann der Block nicht laufen. Beide eingerückten Blöcke erklären; das Gerüst wird wiederverwendet, nicht auswendig gelernt.</aside>
       </section>
 
       <section>
         <p class="eyebrow">Zeile für Zeile lesen</p>
         <h2>Verfolgt den Ablauf vor Run</h2>
-        <p class="activity watch">Anschauen · Zeigt auf jede Zeile; noch nicht ausführen</p>
-        <pre><code class="language-python" data-trim data-line-numbers="1-3|5|6|7|8|9">
-from machine import Pin
+        <p class="activity">In Thonny ausprobieren · Skript ändern, vorhersagen, speichern, dann Run</p>
+        <pre><code class="language-python" data-trim data-line-numbers="1|3|4|5|6|7">
 from time import sleep
-led = Pin("LED", Pin.OUT)
 
-print("Light on")
-led.on()
+print("Three...")
 sleep(1)
-led.off()
-print("Finished")
+print("Two...")
+sleep(1)
+print("One...")
         </code></pre>
-        <div class="grid-3">
-          <div class="card fragment">
-            <h3>Bildschirm</h3>
-            <p>Welche Wörter erscheinen?</p>
-          </div>
-          <div class="card fragment">
-            <h3>Pico</h3>
-            <p>Wann ist die LED an?</p>
-          </div>
-          <div class="card fragment">
-            <h3>Zeit</h3>
-            <p>Wo wartet das Programm?</p>
+        <div class="callout">
+          <p><strong>Mit <code>import</code> nutzen wir fertige Werkzeuge.</strong> <code>from time import sleep</code> stellt die Pausenfunktion <code>sleep</code> aus Pythons Modul <code>time</code> bereit (einem Werkzeugkasten für Zeitaufgaben). <code>sleep(1)</code> wartet eine Sekunde.</p>
+        </div>
+        <div class="callout warning fragment">
+          <p><strong>Vorhersage:</strong> Welche Wörter erscheinen, in welcher Reihenfolge und mit welchen Pausen?</p>
+        </div>
+        <aside class="notes">
+          Jede Zeile mit lokalem Python 3 verfolgen. Mit dem hervorgehobenen Import
+          beginnen: Python bündelt fertige Werkzeuge in Modulen. Hier ist time
+          das Modul und sleep die Funktion, die wir nutzen möchten. Der Import
+          stellt sleep bereit; er pausiert das Programm noch nicht. sleep(1)
+          wartet eine Sekunde. Den Inhalt von 00_first_script.py durch dieses
+          vollständige Beispiel ersetzen. Die Klasse sagt Three..., Two..., One...
+          und die beiden Pausen voraus, wählt Datei → Speichern und klickt dann auf
+          den grünen Play-Button, um das Programm auf dem Computer auszuführen.
+          Kein machine-Modul und keine LED nötig. Picos erst auf der nächsten Folie verteilen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Eure Hardware kennenlernen</p>
+        <h2>Was ist der Raspberry Pi Pico?</h2>
+        <p class="activity watch">Anschauen und besprechen · USB bleibt noch getrennt</p>
+        <div class="pico-intro">
+          <img src="../assets/raspberry-pi-pico-pinout.png" alt="Raspberry-Pi-Pico-Platine mit beschrifteten Pins, USB-Anschluss oben, eingebauter LED und zwei seitlichen Reihen von Anschlusspins.">
+          <div class="pico-facts">
+            <div class="card">
+              <h3>Ein winziger Computer für Elektronik</h3>
+              <p>Der Pico ist eine <strong>Mikrocontroller-Platine</strong>: ein kleiner Computer, der euer Programm ausführt und damit elektronische Bauteile steuert.</p>
+            </div>
+            <div class="card">
+              <h3>Wir programmieren ihn in Python</h3>
+              <p>Wir schreiben Code in Thonny. Der Pico führt ihn mit <strong>MicroPython</strong> aus, einer Python-Version für Mikrocontroller.</p>
+            </div>
+            <div class="card">
+              <h3>Er kann messen und steuern</h3>
+              <p>Über seine Anschlusspins kann er Taster und Sensoren auslesen, LEDs steuern und Töne erzeugen. Heute: ein Licht ein- und ausschalten.</p>
+            </div>
           </div>
         </div>
         <aside class="notes">
-          Nutzen Sie Reveals Zeilenmarkierungen zum Verfolgen. Die Klasse beschreibt jede
-          Zeile. from/import und die Pin-Einrichtung sind heute vorgegeben. Ihre Aufgabe
-          muss erkannt, aber der Code nicht auswendig gelernt werden.
+          Teilen Sie jetzt die Picos aus, nicht früher. Zeigen Sie einen nicht
+          angeschlossenen Pico und vergleichen Sie ihn mit
+          dem Bild. Zeigen Sie USB-Anschluss, eingebaute LED und Anschlusspins;
+          die Pin-Bezeichnungen müssen nicht auswendig gelernt werden. Auf der
+          Platine sitzt ein Mikrocontroller-Chip, der das Programm ausführt.
+          Anders als ein Desktop-Computer ist er zum Steuern von Elektronik
+          gedacht, nicht zum Ausführen von Desktop-Anwendungen. MicroPython ist
+          auf den vorbereiteten Platinen bereits installiert. Taster, Sensoren
+          und Töne folgen später; heute beginnt die Klasse mit der eingebauten
+          LED, die keine externe Verkabelung braucht. Externe Bauteile benötigen
+          eine passende sichere Schaltung, keine beliebigen direkten Verbindungen.
+          USB bleibt bis zur nächsten Folie getrennt.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Vom Computer zum Pico</p>
+        <h2>Den Pico in Thonny verbinden</h2>
+        <p class="activity">Gemeinsam ausprobieren · USB verbinden und Interpreter wechseln</p>
+        <ol class="connection-steps">
+          <li><strong>Verbindet den Pico per USB-Kabel mit dem Computer.</strong></li>
+          <li>Wechselt unten rechts in Thonny von <strong>Lokalem Python 3</strong> zu <strong>MicroPython (Raspberry Pi Pico)</strong>. Lasst den Port <strong>automatisch erkennen</strong>.</li>
+          <li>Prüft, ob <code>&gt;&gt;&gt;</code> in der Shell erscheint. Programme laufen jetzt auf dem Pico.</li>
+        </ol>
+        <div class="thonny-layout">
+          <img class="thonny-screenshot" src="../assets/thonny-pico-interface.png" alt="Thonny mit verbundenem Pico: Computer- und Pico-Dateien links, Editor über der Shell und MicroPython-Interpreter unten rechts.">
+          <div class="thonny-parts">
+            <div class="card"><h3>Dateien auf zwei Geräten</h3><p>Files zeigt jetzt Computer und Pico. Lasst die Kursdateien auf dem Computer; Run überträgt das offene Programm auf den Pico.</p></div>
+            <div class="card"><h3>Gleicher Editor, anderer Computer</h3><p>Die Shell spricht jetzt mit MicroPython auf dem Pico, nicht mehr mit lokalem Python auf eurem Computer.</p></div>
+          </div>
+        </div>
+        <aside class="notes">
+          Die Platinen wurden gerade ausgeteilt; MicroPython ist bereits installiert.
+          Erst USB verbinden, dann Interpreter wechseln. Die automatische
+          Port-Erkennung beibehalten, keinen USB-Port manuell auswählen. Bei Bedarf
+          Stop / Restart backend drücken, bis >>> erscheint. Das Bild dient nur
+          zum Finden der Bereiche und der Interpreter-Auswahl; den fortgeschrittenen
+          MQTT-Code nicht besprechen. Vor dem ersten machine.Pin-Beispiel prüfen,
+          ob alle Teams verbunden sind. Die eingebaute LED braucht keine externe
+          Verkabelung.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Euer erstes Pico-Programm</p>
+        <h2>Herunterladen, starten, LED beobachten</h2>
+        <p class="activity">In Thonny ausprobieren · Herunterladen, öffnen, grünen Play-Button anklicken</p>
+        <div class="grid-2 pico-first-run">
+          <div class="card">
+            <ol>
+              <li>Klickt auf <a href="../../code/day-1/01_hello_pico.py" download="01_hello_pico.py"><code>01_hello_pico.py</code></a>, um die Datei nach <strong>Downloads</strong> herunterzuladen.</li>
+              <li>Öffnet <strong>links unter Dateien</strong> den Ordner <strong>Downloads auf eurem Computer</strong>. Doppelklick auf <code>01_hello_pico.py</code>.</li>
+              <li>USB verbunden, <strong>MicroPython (Raspberry Pi Pico)</strong> ausgewählt? Klickt auf den <strong>grünen Play-Button (Run)</strong>.</li>
+            </ol>
+            <p><strong>Sicherheitszeilen behalten:</strong> <code>try</code> führt die Abfolge aus; <code>finally</code> schaltet die LED aus, auch bei Fehlern oder Stop.</p>
+            <p><strong>Beobachtet:</strong> die Wörter in der Shell und die eingebaute LED. Was verändert sich?</p>
+          </div>
+          <pre><code class="language-python" data-trim>
+from machine import Pin
+from time import sleep
+
+led = Pin("LED", Pin.OUT)
+
+try:
+    print("Three...")
+    led.on()
+    sleep(1)
+
+    print("Two...")
+    led.off()
+    sleep(1)
+
+    print("One...")
+    led.on()
+    print("Hello, physical world!")
+    sleep(1)
+finally:
+    led.off()
+          </code></pre>
+        </div>
+        <aside class="notes">
+          Erster Hardware-Durchlauf vor den ausführlichen Code-Erklärungen.
+          Wie beim Computer-Skript herunterladen: Link anklicken, in Downloads
+          speichern und dann in Thonnys Dateiansicht des Computers öffnen.
+          Fragt der Browser nach dem Speicherort, Downloads wählen. Fehlt die
+          Dateiansicht, Ansicht → Dateien wählen, auf Englisch View → Files.
+          Nicht die Dateiliste des Pico wählen und nicht als main.py speichern;
+          die Datei bleibt auf dem Computer, Run überträgt das Programm zum Pico.
+          Im Editor-Tab muss 01_hello_pico.py stehen, nicht 00_first_script.py.
+          USB, MicroPython und automatische Port-Erkennung prüfen.
+          Der Code rechts entspricht der vollständigen heruntergeladenen Datei.
+          Vor dem ersten Klick auf Run try und finally in der heruntergeladenen
+          Datei zeigen: Die eingerückte Abfolge läuft, danach räumt led.off()
+          am Ende, bei einem Fehler oder bei Stop auf. Beibehalten, nicht auswendig lernen.
+          Text und Licht vorhersagen, grünen Play-Button anklicken und den Countdown
+          samt LED-Wechseln gemeinsam beobachten. Am Ende ist die LED aus.
+          Keine externe Verkabelung nötig. Leuchtet nichts, zuerst Interpreter
+          und geöffneten Dateinamen prüfen, bevor Code geändert wird.
         </aside>
       </section>
 
       <section>
         <p class="eyebrow">Hardware-Begriffe</p>
         <h2>Drei Zeilen verbinden Python mit dem Pico</h2>
-        <p class="activity">Gemeinsam ausprobieren · <code>01_hello_pico.py</code> öffnen und mit Run ausführen</p>
+        <p class="activity watch">Besprechen · Erklärt das gerade ausgeführte Programm</p>
         <div class="grid-3">
           <div class="card">
             <h3><code>Pin</code></h3>
@@ -1007,8 +1137,8 @@ led.on()
         <div class="callout warning">
           <p>
             Diese Zeilen stehen schon in <code>01_hello_pico.py</code>; ihr müsst
-            sie nicht auswendig lernen. Erklärt mit eigenen Worten:
-            Wie schaltet der Code die eingebaute LED des Pico ein?
+            sie nicht auswendig lernen. Denkt an das gerade ausgeführte Programm:
+            Was hat sich auf dem Bildschirm verändert und was am Pico?
           </p>
         </div>
         <aside class="notes">
@@ -1016,7 +1146,10 @@ led.on()
           für den Ausgang“ genügt. Zeigen Sie bei stabiler Verbindung led.on() und
           led.off() in der Shell. Erwartete Erklärung: Pin importieren, mit led
           den Ausgang für die eingebaute LED benennen und sie mit led.on()
-          einschalten. Das vorgegebene Aufräumen im vollständigen Programm beibehalten.
+          einschalten. Vergleichen Sie die beiden beobachteten Ausgaben:
+          print zeigt Meldungen in der Shell; led.on() und led.off() verändern
+          die physische LED. Das Programm enthält die Anweisungen; Text und Licht
+          sind seine Ausgaben. Das vorgegebene Aufräumen im vollständigen Programm beibehalten.
         </aside>
       </section>
 
@@ -1052,7 +1185,7 @@ off_time = 0.35
         <p class="eyebrow">Warum Namen wichtig sind</p>
         <h2>Eine Änderung kann jede Verwendung beeinflussen</h2>
         <p class="activity">
-          In Thonny ausprobieren · Öffnet <code>02_variable_blink.py</code> und führt es einmal mit Run aus
+          In Thonny ausprobieren · <a href="../../code/day-1/02_variable_blink.py" download="02_variable_blink.py"><code>02_variable_blink.py</code></a> herunterladen, öffnen, dann Run
         </p>
         <div class="grid-2">
           <pre><code class="language-python" data-trim>
@@ -1242,8 +1375,8 @@ led.off()
         <div class="callout fragment" style="margin-top: 0.65em;">
           <p>
             <strong>Wenn die externe LED dunkel bleibt:</strong> Führt zuerst die
-            funktionierende Datei für die eingebaute LED aus. Klappt das, startet den
-            vorgegebenen GP15-EIN/AUS-Test. Leuchtet die LED weiterhin nicht, drückt
+            <a href="../../code/day-1/01_hello_pico.py" download="01_hello_pico.py">Datei für die eingebaute LED</a> aus. Klappt das, ladet den
+            <a href="../../code/teacher-tests/02_external_led.py" download="02_external_led.py">GP15-EIN/AUS-Test</a> herunter und führt ihn aus. Leuchtet die LED weiterhin nicht, drückt
             Stop, trennt USB und vergleicht die Schaltung mit dem Diagramm.
           </p>
         </div>
@@ -1284,12 +1417,13 @@ led.off()
         <div class="callout warning" style="margin-top: 0.6em;">
           <p>
             Beginnt mit
-            <a href="../../code/day-1/03_secret_signal_1_starter.py"><code>03_secret_signal_1_starter.py</code></a>.
+            <a href="../../code/day-1/03_secret_signal_1_starter.py" download="03_secret_signal_1_starter.py"><code>03_secret_signal_1_starter.py</code></a>.
             Öffnet die Lösung erst, wenn euer eigenes Signal funktioniert.
           </p>
         </div>
         <aside class="notes">
-          Halten Sie Lösungsdateien verborgen oder unter Ihrer Kontrolle. Für den
+          Geben Sie die Referenz am Ende des Foliensatzes nur gezielt frei;
+          die Klasse beginnt mit diesem Starter, nicht mit der Lösung. Für den
           Mindesterfolg genügt die eingebaute LED; stärkere Arbeiten übertragen dieselbe
           Logik auf die geprüfte GP15-Schaltung. Die Wiederholung an Tag 1 ist beabsichtigt;
           Schleifen folgen an Tag 3.
@@ -1333,6 +1467,24 @@ led.off()
           Erwartete Unterscheidung: physisches Licht gegenüber Text in der Shell.
           Sammeln Sie eine Antwort von jeder Person, nicht nur jedem Team. Zum Abschluss:
           Stop drücken, LEDs ausschalten, USB trennen und Bauteile zählen.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Referenz-Download · Geheimes Lichtsignal</p>
+        <h2>Erst das eigene Signal, dann vergleichen</h2>
+        <p class="activity watch">Referenz mit der Lehrkraft · Nicht die Startdatei</p>
+        <div class="card">
+          <h3>Vollständige Lösung</h3>
+          <p><a href="../../code/day-1/03_secret_signal_2_solution.py" download="03_secret_signal_2_solution.py"><code>03_secret_signal_2_solution.py</code></a></p>
+          <p>Für eine Demonstration, einen gemeinsamen Neustart oder den Vergleich nach eurem eigenen funktionierenden Signal. Vergleicht Zeitvariablen und Signalgruppen; arbeitet in eurem Starter weiter.</p>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Dateinamen anklicken, nach Downloads herunterladen und in Thonny links in der Dateiansicht des Computers öffnen. Nur mit MicroPython und passender geprüfter Schaltung ausführen.</p></div>
+        <aside class="notes">
+          Diese Referenz steht bewusst nach dem Abschlussticket, nicht beim normalen
+          Einstieg. Nur für Demonstration, gemeinsamen Neustart oder Vergleich nach
+          dem eigenen funktionierenden Signal freigeben. Die Klasse verwendet
+          normalerweise 03_secret_signal_1_starter.py. Kein Klonen und kein ZIP nötig.
         </aside>
       </section>
 

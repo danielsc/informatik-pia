@@ -209,8 +209,8 @@ show_colour(GREEN)
           </code></pre>
           <div>
             <div class="card">
-              <h3>RGB-Tupel im Workshop</h3>
-              <p><code>(red, green, blue)</code> ist in diesem Workshop ein gebündelter Farbwert.</p>
+              <h3>Ein neuer Typ: Tupel</h3>
+              <p>Ein Tupel bündelt Werte in fester Reihenfolge. Hier beschreibt <code>(red, green, blue)</code> eine Farbe.</p>
             </div>
             <div class="card" style="margin-top: 0.6em;">
               <h3>Parameter und Argument</h3>
@@ -220,7 +220,9 @@ show_colour(GREEN)
         </div>
         <div class="callout warning"><p>Haltet RGB-Werte niedrig, zum Beispiel <code>30</code>. So sind die Pixel sichtbar, ohne zu blenden.</p></div>
         <aside class="notes">
-          Führt das Tupel ausdrücklich als gebündeltes Farbpaket ein; Vorkenntnisse werden nicht vorausgesetzt.
+          Tupel hier zum ersten Mal einführen, nicht als Wiederholung von Tag 1.
+          (0, 30, 0) als Farbpaket lesen: Rot 0, Grün 30, Blau 0.
+          Zunächst genügen Bündelung und Reihenfolge, ohne Indizes oder Regeln zur Unveränderlichkeit.
         </aside>
       </section>
 
@@ -365,7 +367,7 @@ for lap in range(2):
             </tbody>
           </table>
         </div>
-        <div class="callout"><p>Dasselbe Muster seht ihr am Ende von <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a>, hier nur als kürzeres Beispiel.</p></div>
+        <div class="callout"><p>Dasselbe Muster seht ihr am Ende von <a href="../../code/day-3/02_pixel_functions.py" download="02_pixel_functions.py"><code>02_pixel_functions.py</code></a>, hier nur als kürzeres Beispiel.</p></div>
         <aside class="notes">
           Wie beim Verfolgen verschachtelter Schleifen in TEALS 4.03. Lasst Schritt 2 zu 3 genau erklären: Die innere Schleife beginnt erst nach dem Wechsel von lap neu.
         </aside>
@@ -404,8 +406,8 @@ for lap in range(2):
         <div class="grid-2">
           <div>
             <div class="card">
-              <h3>Ausführen</h3>
-              <p><a href="../../code/day-3/01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a></p>
+              <h3>Herunterladen und starten</h3>
+              <p><a href="../../code/day-3/01_neopixel_colours.py" download="01_neopixel_colours.py"><code>01_neopixel_colours.py</code></a></p>
               <ol class="tight">
                 <li>Verbindet USB erst nach der Kontrolle zu zweit.</li>
                 <li>Achtet auf Rot, Grün, Blau, Amber und danach Aus.</li>
@@ -425,13 +427,17 @@ AMBER = (20, 10, 0)
         <div class="callout success"><p>Ein RGB-Tupel bündelt eine Farbe als <code>(red, green, blue)</code>. Amber mischt Rot und Grün. Stoppt den Test und trennt USB vor dem nächsten Aufbau.</p></div>
         <aside class="notes">
           Verbindet Farben und Tupel. Leuchtet nichts, stoppen, USB trennen und IN/OUT, GP16, 3.3 V sowie GND prüfen.
+          Dateinamen anklicken, nach Downloads herunterladen und in Thonny links
+          in der Dateiansicht des Computers öffnen. MicroPython (Raspberry Pi Pico)
+          wählen und nach der Schaltungsprüfung den grünen Play-Button nutzen.
+          Das Repository muss nicht geklont werden.
         </aside>
       </section>
 
       <section>
         <p class="eyebrow">Wiederverwendung im fertigen Code</p>
         <h2>Drei Funktionen, drei Aufgaben</h2>
-        <p class="activity">In Thonny ausprobieren · <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a> ausführen, Funktionen finden</p>
+        <p class="activity">In Thonny ausprobieren · <a href="../../code/day-3/02_pixel_functions.py" download="02_pixel_functions.py"><code>02_pixel_functions.py</code></a> ausführen, Funktionen finden</p>
           <pre><code class="language-python" data-trim>
 def show_colour(colour):
     pixels.fill(colour)
@@ -450,7 +456,7 @@ def level_to_colour(percent):
       <section>
         <p class="eyebrow">Wiederverwendbare Aufgaben lesen</p>
         <h2>Was geht hinein — und was kommt zurück?</h2>
-        <p class="activity">In Thonny ausprobieren · 02_pixel_functions.py offen lassen</p>
+        <p class="activity">In Thonny ausprobieren · <a href="../../code/day-3/02_pixel_functions.py" download="02_pixel_functions.py"><code>02_pixel_functions.py</code></a> offen lassen</p>
         <div class="grid-2">
             <div class="card">
               <h3>Findet und erklärt</h3>
@@ -466,7 +472,7 @@ def level_to_colour(percent):
               <p>Eine zurückgegebene Farbe ist besser wiederverwendbar, weil späterer Code den Wert nutzen kann.</p>
           </div>
         </div>
-        <div class="callout"><p>Öffnet <a href="../../code/day-3/02_pixel_functions.py"><code>02_pixel_functions.py</code></a> und ordnet jedem Funktionsnamen seine Aufgabe zu.</p></div>
+        <div class="callout"><p>Öffnet <a href="../../code/day-3/02_pixel_functions.py" download="02_pixel_functions.py"><code>02_pixel_functions.py</code></a> und ordnet jedem Funktionsnamen seine Aufgabe zu.</p></div>
         <aside class="notes">
           Die Klasse liest ein fertiges Beispiel als Vorbereitung auf den Starter und verändert diese Datei nicht zu einem neuen Projekt.
         </aside>
@@ -516,7 +522,7 @@ def level_to_colour(percent):
       <section>
         <p class="eyebrow">Starter öffnen</p>
         <h2>Lest zuerst den Drehknopf und wählt einen Zustand</h2>
-        <p class="activity">Schaltung testen · Öffnet <a href="../../code/day-3/03_pixel_pet_1_starter.py"><code>03_pixel_pet_1_starter.py</code></a></p>
+        <p class="activity">Schaltung testen · Öffnet <a href="../../code/day-3/03_pixel_pet_1_starter.py" download="03_pixel_pet_1_starter.py"><code>03_pixel_pet_1_starter.py</code></a></p>
         <div class="grid-2">
           <div class="card">
             <h3>Bereits vorgegeben</h3>
@@ -599,6 +605,26 @@ return energy
         <div class="footer"><span>Tag 3 geschafft</span><span>Programm stoppen · Pixel aus · USB trennen · Modul und Drehknopf zurückgeben</span></div>
         <aside class="notes">
           Erwartete Antwort: return energy. Sammelt eine Antwort pro Person ein. Beendet mit Stoppen und Trennen von USB.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Referenz-Download · Pixel Pet</p>
+        <h2>Eine Funktion nach der anderen vergleichen</h2>
+        <p class="activity watch">Referenz mit der Lehrkraft · Eigenen Starter behalten</p>
+        <div class="card">
+          <h3>Vollständige Lösung</h3>
+          <p><a href="../../code/day-3/03_pixel_pet_2_solution.py" download="03_pixel_pet_2_solution.py"><code>03_pixel_pet_2_solution.py</code></a></p>
+          <p>Für Demonstration, gemeinsamen Neustart oder Vergleich nach eigener funktionierender Zustandswahl und Animation. Eine Funktion vergleichen, nicht die ganze Datei auf einmal.</p>
+          <p>Benötigt die vollständige RGB- und Potentiometer-Schaltung, nicht nur den RGB-Testaufbau.</p>
+        </div>
+        <div class="callout warning" style="margin-top: 0.7em;"><p>Nach Downloads herunterladen und in Thonny links in der Dateiansicht des Computers öffnen. Nur an der geprüften Gesamtschaltung mit MicroPython ausführen. Aufräumen der Pixel beibehalten.</p></div>
+        <aside class="notes">
+          Diese Referenz folgt der Abschlussfrage und ist nicht der normale Einstieg.
+          Die Klasse arbeitet in 03_pixel_pet_1_starter.py. Lösung nur für
+          Demonstration, gemeinsamen Neustart oder gezielten Vergleich nach eigener
+          Arbeit freigeben. Die vollständige Datei läuft eigenständig und importiert
+          keine früheren Beispiele.
         </aside>
       </section>
 

@@ -86,6 +86,8 @@ sich die Messwerte?
 ## 2. „Keine Messung“ darstellen
 
 `measure_distance_cm()` gibt entweder eine Gleitkommazahl oder `None` zurück.
+`None` ist ein besonderer Python-Wert und bedeutet hier „keine brauchbare
+Messung“, nicht die Zahl null.
 
 ```python
 distance = measure_distance_cm()

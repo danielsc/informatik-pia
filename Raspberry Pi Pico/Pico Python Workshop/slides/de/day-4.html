@@ -120,11 +120,11 @@ distance_cm = pulse_us * 0.0343 / 2
         <h2>Messt, bevor ihr vertraut</h2>
         <p class="activity">Schaltung testen · Erst Prüfung durch Lehrkraft, dann USB verbinden</p>
         <div class="grid-2">
-          <div class="card"><h3>Ausführen</h3><p><a href="../../code/day-4/01_distance_sensor.py"><code>01_distance_sensor.py</code></a></p><p>Messt einen flachen Gegenstand bei 10, 20, 40, 60 und 100 cm.</p></div>
+          <div class="card"><h3>Herunterladen und starten</h3><p><a href="../../code/day-4/01_distance_sensor.py" download="01_distance_sensor.py"><code>01_distance_sensor.py</code></a></p><p>Messt einen flachen Gegenstand bei 10, 20, 40, 60 und 100 cm.</p></div>
           <div class="card"><h3>Vergleichen</h3><p>Nehmt an jeder Position drei Messwerte auf. Notiert die Abweichung vom Abstand am Lineal.</p></div>
         </div>
         <div class="callout warning" style="margin-top:0.7em;"><p>Probiert danach einen weichen und einen schrägen Gegenstand. Beschreibt die Änderungen; „repariert“ den Code noch nicht.</p></div>
-        <aside class="notes">Zuerst Messwerte sammeln. Weiche und schräge Flächen können schwache oder umgelenkte Echos liefern. Das bereitet den ungültigen Zustand vor.</aside>
+        <aside class="notes">Zuerst Messwerte sammeln. Weiche und schräge Flächen können schwache oder umgelenkte Echos liefern. Das bereitet den ungültigen Zustand vor. Dateinamen anklicken, nach Downloads herunterladen, in Thonny links in der Dateiansicht des Computers öffnen, MicroPython (Raspberry Pi Pico) wählen und den grünen Play-Button erst nach der Schaltungsprüfung durch die Lehrkraft anklicken. Kein Klonen nötig.</aside>
       </section>
 
       <section>
@@ -231,7 +231,7 @@ if pulse_us < 0:
         <h2>Beginnt kurz und leise</h2>
         <p class="activity">Schaltung testen · E/B/C zu zweit prüfen, dann USB verbinden</p>
         <div class="grid-2">
-          <div class="card"><h3>Ausführen</h3><p><a href="../../code/day-4/02_buzzer_test.py"><code>02_buzzer_test.py</code></a></p></div>
+          <div class="card"><h3>Ausführen</h3><p><a href="../../code/day-4/02_buzzer_test.py" download="02_buzzer_test.py"><code>02_buzzer_test.py</code></a></p></div>
           <div class="card"><h3>Beobachten</h3><p>Drei kurze Töne: 1200 Hz, 1600 Hz und 2000 Hz.</p></div>
         </div>
         <div class="callout warning" style="margin-top: 0.7em;"><p>Haltet den Buzzer von Ohren fern. Eine Teilnahme nur mit visuellen Signalen ist immer möglich.</p></div>
@@ -334,9 +334,9 @@ pause = ZONE_CONFIG["caution"]["pause_ms"]
           <li>Lasst den geprüften Sensor und Echo-Spannungsteiler liegen.</li>
           <li>Ergänzt Buzzer, Transistor und 1-kΩ-Basiswiderstand nach dem kombinierten Schaltplan.</li>
           <li>Prüft 5 V, gemeinsame Masse, Spannungsteiler-Knotenpunkt und Transistor <code>E/B/C</code>.</li>
-          <li>Verbindet USB wieder und führt den Entfernungstest erneut aus.</li>
-          <li>Führt den Buzzer-Test erneut aus.</li>
-          <li>Öffnet erst danach <a href="../../code/day-4/03_proximity_alarm.py"><code>03_proximity_alarm.py</code></a>.</li>
+          <li>Verbindet USB wieder und führt den <a href="../../code/day-4/01_distance_sensor.py" download="01_distance_sensor.py">Entfernungstest</a> erneut aus.</li>
+          <li>Führt den <a href="../../code/day-4/02_buzzer_test.py" download="02_buzzer_test.py">Buzzer-Test</a> erneut aus.</li>
+          <li>Ladet erst danach das vollständige Beispiel <a href="../../code/day-4/03_proximity_alarm.py" download="03_proximity_alarm.py"><code>03_proximity_alarm.py</code></a> herunter und öffnet es.</li>
         </ol>
         <aside class="notes">
           Fällt ein Komponententest aus, stoppt und repariert diese Schicht. Das kombinierte Programm dient nicht zur Diagnose zweier ungeprüfter Schaltungen.

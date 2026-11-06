@@ -5,20 +5,19 @@
 By the end of today, your code will send a secret message using light.
 
 **Python:** interpreter, script, `print`, strings, integers, floats, variables,
-assignment, tuples, `None`, comments, imports, errors, `try`/`finally`<br>
+assignment, comments, imports, errors, `try`/`finally`<br>
 **Hardware:** onboard LED, external LED, GPIO output<br>
 ## 1. Meet the interpreter
+
+Start without a Pico. Open Thonny and select **Local Python 3** (Thonny's
+built-in Python) at the bottom right, not MicroPython. These first examples
+run on your computer. If the file browser is hidden, choose **View → Files**.
 
 In Thonny's Shell, type one line at a time:
 
 ```python
 print("Hello, Pico!")
 2 + 3
-type("hello")
-type(42)
-type(0.5)
-type((0, 0, 20))
-type(None)
 ```
 
 Discuss:
@@ -26,13 +25,17 @@ Discuss:
 - A string is text in quotes.
 - An integer is a whole number.
 - A float contains a decimal point.
-- A tuple is an ordered group of values, written with commas and usually
-  parentheses: `(0, 0, 20)`. Its items cannot be replaced. On Day 3, these
-  three values will mean red, green, and blue brightness.
-- `None` is a special value meaning “no value” or “no result”. It is not `0`,
-  `False`, or an empty string. It has its own type, `NoneType`.
 - An expression produces a value.
 - An interpreter runs code.
+
+After discussing these types, use `type(...)` to ask Python which type a value
+has:
+
+```python
+type("hello")
+type(42)
+type(0.5)
+```
 
 Make three intentional errors. Read the final line of each error message:
 
@@ -44,12 +47,70 @@ pritn("misspelled name")
 
 Errors are information, not failure.
 
+### Run a script on the computer
+
+1. Click <a href="../../code/day-1/00_first_script.py" download="00_first_script.py"><code>00_first_script.py</code></a>
+   to download it to **Downloads**. If the browser asks where to save it,
+   choose **Downloads** and keep the `.py` filename.
+2. In Thonny's **Files pane on the left**, navigate to the **Downloads**
+   folder on your computer. If the pane is hidden, choose **View → Files**.
+   Double-click **`00_first_script.py`** to open it in the editor.
+3. Keep **Local Python 3** selected. Predict the output, then click the
+   **green play button (Run)**. The output appears in the Shell.
+
+The editor now shows a **script**: instructions saved in a `.py` file.
+Python runs them from top to bottom. Click the green play button again to
+repeat the whole sequence:
+
+```python
+print("Three...")
+print("Two...")
+print("One...")
+print("Hello, physical world!")
+```
+
+Now replace the contents of that same file with the example below to add
+pauses. Predict the message order and pauses, choose **File → Save**, then
+click the **green play button (Run)**:
+
+```python
+from time import sleep
+
+print("Three...")
+sleep(1)
+print("Two...")
+sleep(1)
+print("One...")
+```
+
+`import` lets us use ready-made tools. Python groups these tools in **modules**.
+`from time import sleep` makes the pause function `sleep` available from the
+`time` module, Python's toolbox for time-related tasks. The import does not
+pause the program; `sleep(1)` pauses for one second. No Pico or wiring is needed.
+
 ## 2. Your first physical program
 
-Open [`code/day-1/01_hello_pico.py`](../../code/day-1/01_hello_pico.py).
+Wait until your teacher hands out the Picos and introduces the board. The Pico
+is a microcontroller board that runs Python using **MicroPython** and can
+read sensors and control electronic components.
 
-Before running it, predict the order of the printed messages and LED changes.
-Then change the words and delay.
+Connect the Pico by USB, then switch Thonny's interpreter from **Local Python 3**
+to **MicroPython (Raspberry Pi Pico)**. Leave the port on **automatic detection**.
+Check for `>>>` in the Shell; code now runs on the Pico, not on your computer.
+The onboard LED needs no external wiring.
+
+1. Click <a href="../../code/day-1/01_hello_pico.py" download="01_hello_pico.py"><code>01_hello_pico.py</code></a>
+   to download it to **Downloads**. If the browser asks where to save it,
+   choose **Downloads**.
+2. In Thonny's **Files pane on the left**, open **Downloads on your computer**
+   and double-click **`01_hello_pico.py`**. Keep the file on the computer, not
+   on the Pico. Check its name on the editor tab: this is a different file
+   from `00_first_script.py`.
+3. Before running it, check **MicroPython (Raspberry Pi Pico)** is selected.
+   The supplied `try` block runs the sequence; `finally` switches the LED off
+   at the end, on an error, or when you press Stop. Keep both blocks.
+4. Predict the order of the printed messages and LED changes, then click the
+   **green play button (Run)**. Watch the Shell and the onboard LED together.
 
 ```python
 from machine import Pin
@@ -57,16 +118,25 @@ from time import sleep
 
 led = Pin("LED", Pin.OUT)
 
-print("Three...")
-led.on()
-sleep(1)
-print("Two...")
-led.off()
-sleep(1)
-print("One...")
-led.on()
-print("Hello, physical world!")
+try:
+    print("Three...")
+    led.on()
+    sleep(1)
+
+    print("Two...")
+    led.off()
+    sleep(1)
+
+    print("One...")
+    led.on()
+    print("Hello, physical world!")
+    sleep(1)
+finally:
+    led.off()
 ```
+
+Run it again to compare what you predicted with what happened. Then change
+the words and delay, save, and click the green play button again.
 
 `Pin("LED", Pin.OUT)` creates an output object. Calling `led.on()` changes a
 voltage, which changes the real world.
