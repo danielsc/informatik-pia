@@ -349,6 +349,30 @@
       font-weight: 900;
     }
 
+    .pico-intro {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 1em;
+      align-items: center;
+    }
+
+    .pico-intro img {
+      display: block;
+      width: 100%;
+      height: 450px;
+      margin: 0;
+      object-fit: contain;
+    }
+
+    .pico-intro .pico-facts {
+      display: grid;
+      gap: 0.5em;
+    }
+
+    .pico-facts .card p {
+      margin: 0.25em 0 0;
+    }
+
     .thonny-layout {
       display: grid;
       grid-template-columns: 440px minmax(0, 1fr);
@@ -609,6 +633,40 @@
         <aside class="notes">
           This section adapts the teaching progression in TEALS Unit 1 lessons
           1.01–1.02 to Thonny and MicroPython.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Meet your hardware</p>
+        <h2>What is the Raspberry Pi Pico?</h2>
+        <p class="activity watch">Watch and discuss · Keep USB unplugged for now</p>
+        <div class="pico-intro">
+          <img src="../assets/raspberry-pi-pico-pinout.png" alt="Raspberry Pi Pico board with labelled pins, a USB connector at the top, an onboard LED, and two rows of connection pins along the sides.">
+          <div class="pico-facts">
+            <div class="card">
+              <h3>A tiny computer for electronics</h3>
+              <p>The Pico is a <strong>microcontroller board</strong>: a small computer that runs your program to control electronic components.</p>
+            </div>
+            <div class="card">
+              <h3>We program it in Python</h3>
+              <p>We write code in Thonny. The Pico runs it using <strong>MicroPython</strong>, a version of Python for microcontrollers.</p>
+            </div>
+            <div class="card">
+              <h3>It can sense and act</h3>
+              <p>Through its connection pins, it can read buttons and sensors, control LEDs, and make sounds. Today: switch a light on and off.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Hold up an unplugged Pico and compare it with the picture. Point out the
+          USB connector, onboard LED, and connection pins; students do not need to
+          memorise the pin labels. The board contains a microcontroller chip that
+          runs the program. Unlike a desktop computer, it is designed to control
+          electronics rather than run desktop applications. MicroPython is already
+          installed on the prepared boards. Buttons, sensors, and sound come later;
+          today starts with the onboard LED, which needs no external wiring.
+          External components need the appropriate safe circuit, not arbitrary
+          direct connections. Keep USB disconnected until the Thonny setup slide.
         </aside>
       </section>
 

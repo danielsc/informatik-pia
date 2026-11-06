@@ -58,6 +58,10 @@ The Day 1 component pictures, `slides/assets/led-red.svg` and
 LED's unequal legs and the 220 Ω resistor's red-red-brown-gold bands; they
 are illustrations, not third-party photographs.
 
+The Day 1 Pico introduction uses the user-supplied pinout illustration stored
+unchanged at `slides/assets/raspberry-pi-pico-pinout.png`. Its original source
+and licence were not supplied; no additional reuse licence is asserted here.
+
 ## Visual reference index
 
 | Topic | Lesson | Schematic | Hardware image |

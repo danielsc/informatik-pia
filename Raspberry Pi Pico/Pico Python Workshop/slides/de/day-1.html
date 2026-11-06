@@ -349,6 +349,30 @@
       font-weight: 900;
     }
 
+    .pico-intro {
+      display: grid;
+      grid-template-columns: 320px minmax(0, 1fr);
+      gap: 1em;
+      align-items: center;
+    }
+
+    .pico-intro img {
+      display: block;
+      width: 100%;
+      height: 450px;
+      margin: 0;
+      object-fit: contain;
+    }
+
+    .pico-intro .pico-facts {
+      display: grid;
+      gap: 0.5em;
+    }
+
+    .pico-facts .card p {
+      margin: 0.25em 0 0;
+    }
+
     .thonny-layout {
       display: grid;
       grid-template-columns: 440px minmax(0, 1fr);
@@ -610,6 +634,42 @@
         <aside class="notes">
           Dieser Abschnitt überträgt die Lernfolge aus TEALS Unit 1, Lektionen
           1.01–1.02, auf Thonny und MicroPython.
+        </aside>
+      </section>
+
+      <section>
+        <p class="eyebrow">Eure Hardware kennenlernen</p>
+        <h2>Was ist der Raspberry Pi Pico?</h2>
+        <p class="activity watch">Anschauen und besprechen · USB bleibt noch getrennt</p>
+        <div class="pico-intro">
+          <img src="../assets/raspberry-pi-pico-pinout.png" alt="Raspberry-Pi-Pico-Platine mit beschrifteten Pins, USB-Anschluss oben, eingebauter LED und zwei seitlichen Reihen von Anschlusspins.">
+          <div class="pico-facts">
+            <div class="card">
+              <h3>Ein winziger Computer für Elektronik</h3>
+              <p>Der Pico ist eine <strong>Mikrocontroller-Platine</strong>: ein kleiner Computer, der euer Programm ausführt und damit elektronische Bauteile steuert.</p>
+            </div>
+            <div class="card">
+              <h3>Wir programmieren ihn in Python</h3>
+              <p>Wir schreiben Code in Thonny. Der Pico führt ihn mit <strong>MicroPython</strong> aus, einer Python-Version für Mikrocontroller.</p>
+            </div>
+            <div class="card">
+              <h3>Er kann messen und steuern</h3>
+              <p>Über seine Anschlusspins kann er Taster und Sensoren auslesen, LEDs steuern und Töne erzeugen. Heute: ein Licht ein- und ausschalten.</p>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">
+          Zeigen Sie einen nicht angeschlossenen Pico und vergleichen Sie ihn mit
+          dem Bild. Zeigen Sie USB-Anschluss, eingebaute LED und Anschlusspins;
+          die Pin-Bezeichnungen müssen nicht auswendig gelernt werden. Auf der
+          Platine sitzt ein Mikrocontroller-Chip, der das Programm ausführt.
+          Anders als ein Desktop-Computer ist er zum Steuern von Elektronik
+          gedacht, nicht zum Ausführen von Desktop-Anwendungen. MicroPython ist
+          auf den vorbereiteten Platinen bereits installiert. Taster, Sensoren
+          und Töne folgen später; heute beginnt die Klasse mit der eingebauten
+          LED, die keine externe Verkabelung braucht. Externe Bauteile benötigen
+          eine passende sichere Schaltung, keine beliebigen direkten Verbindungen.
+          USB bleibt bis zur Thonny-Einrichtung getrennt.
         </aside>
       </section>
 
