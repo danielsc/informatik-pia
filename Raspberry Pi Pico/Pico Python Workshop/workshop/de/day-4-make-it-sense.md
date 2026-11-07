@@ -208,7 +208,13 @@ Schreibt vier User Stories:
 Schreibt danach Testfälle mit genauen Entfernungen, erwarteten Farben und
 erwartetem Ton. Grenzwerte wie genau 25 cm sind besonders wichtig.
 
-## Abschlussfrage
+## Abschlussticket
+
+Öffnet den [Test mit fünf Fragen](../../slides/exit-ticket.html?day=4&lang=de).
+Wählt pro Frage eine Antwort und verbessert Fehler mithilfe der Hinweise.
+Notiert nach fünf richtigen Antworten das Passwort für die Präsentation von Tag 5.
+
+Besprecht anschließend:
 
 Warum gehört ein Timeout zum korrekten Verhalten und ist nicht nur ein
 optionaler Zusatz?

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-workshop-day="4">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../workshop-slides.css">
 </head>
 <body>
+  <noscript><p class="checkpoint-shell">JavaScript is required for the quiz and password entry.</p></noscript>
   <div class="reveal">
     <div class="slides">
       <section class="title-slide">
@@ -453,15 +454,24 @@ alert_once(zone)
         </aside>
       </section>
 
-      <section>
+      <section class="checkpoint-slide">
         <p class="eyebrow">Exit ticket</p>
-        <h2>Why is a timeout required?</h2>
-        <div class="callout" style="margin: 1.1em 0;"><p>Explain what the program should do when no echo returns, and why returning <code>None</code> is better than returning <code>0</code>.</p></div>
+        <h2>Earn your password for Day 5</h2>
+        <p class="activity">Try in the browser · Everyone answers all five questions</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Five questions about today's ideas</h3>
+            <p>Missing measurements, Echo protection, dictionaries, and alarm states.</p>
+            <p style="margin-top: 0.7em;">Choose one answer per question. If you miss one, use the hint and try again.</p>
+          </div>
+          <div class="card">
+            <h3><a href="../exit-ticket.html?day=4&amp;lang=en">Open the five-question test</a></h3>
+            <p>Five correct answers reveal the password. Write it down and enter it to open Day 5.</p>
+          </div>
+        </div>
         <div class="footer"><span>Day 4 complete</span><span>Stop outputs · unplug USB · keep verified layers labelled</span></div>
         <aside class="notes">
-          A secure answer says the timeout prevents an endless wait, lets the program
-          continue, and represents the failed reading as None rather than a false
-          zero-distance danger.
+          Have every student complete the quiz, not just one person per pair. Allow retries and ask students to explain corrected answers. The test checks understanding, not memorised hardware setup. The code does not unlock the next presentation automatically; students must enter it. Teacher codes are in the teacher guide. Finish with safe shutdown and a component inventory.
         </aside>
       </section>
 
@@ -470,6 +480,7 @@ alert_once(zone)
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script src="../workshop-checkpoints.js"></script>
   <script src="../workshop-slides.js"></script>
 </body>
 </html>

@@ -195,5 +195,11 @@ sound. Boundary values such as exactly 25 cm are especially important.
 
 ## Exit ticket
 
+Open the [five-question test](../../slides/exit-ticket.html?day=4&lang=en).
+Choose one answer per question and use the hints to correct mistakes.
+After five correct answers, write down the password for the Day 5 presentation.
+
+Discuss afterwards:
+
 Why is a timeout part of correct behaviour rather than merely an optional
 extra?

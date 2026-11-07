@@ -1,0 +1,224 @@
+html[data-workshop-day="2"]:not(.workshop-unlocked) .reveal,
+html[data-workshop-day="3"]:not(.workshop-unlocked) .reveal,
+html[data-workshop-day="4"]:not(.workshop-unlocked) .reveal,
+html[data-workshop-day="5"]:not(.workshop-unlocked) .reveal {
+  display: none !important;
+}
+
+.reveal .checkpoint-slide .footer {
+  position: static;
+  margin-top: 1.2em;
+}
+
+.checkpoint-page,
+body:has(.checkpoint-gate) {
+  margin: 0;
+  overflow: auto;
+  background: #f0fdfa;
+  color: #111827;
+}
+
+.checkpoint-shell {
+  box-sizing: border-box;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 22px 30px 36px;
+  color: #111827;
+  font: 20px/1.4 ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+}
+
+.checkpoint-shell *,
+.checkpoint-shell *::before,
+.checkpoint-shell *::after {
+  box-sizing: border-box;
+}
+
+.checkpoint-shell h1 {
+  margin: 16px 0 8px;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.checkpoint-shell h2 {
+  font-size: 28px;
+}
+
+.checkpoint-shell a {
+  color: #065f46;
+}
+
+.checkpoint-shell :focus-visible {
+  outline: 3px solid #0891b2;
+  outline-offset: 4px;
+}
+
+.checkpoint-shell h1:focus {
+  outline: none;
+}
+
+.checkpoint-overview,
+.checkpoint-review {
+  display: inline-block;
+  font-size: 17px;
+}
+
+.checkpoint-progress {
+  margin: 6px 0;
+  color: #065f46;
+  font-weight: 800;
+}
+
+.checkpoint-intro {
+  margin: 6px 0 18px;
+  font-size: 17px;
+  color: #475569;
+}
+
+.checkpoint-form fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.checkpoint-form legend {
+  padding: 0;
+  font-size: 24px;
+  line-height: 1.3;
+  font-weight: 750;
+}
+
+.checkpoint-shell pre {
+  margin: 14px 0;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: #1f2937;
+  color: #ffffff;
+  padding: 14px 18px;
+  font: 18px/1.35 "SFMono-Regular", Consolas, monospace;
+  text-align: left;
+}
+
+.checkpoint-answers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.checkpoint-answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px;
+  border: 2px solid #cbd5e1;
+  border-radius: 12px;
+  background: #ffffff;
+  cursor: pointer;
+}
+
+.checkpoint-answer:has(input:checked) {
+  border-color: #087f5b;
+  background: #ecfdf5;
+}
+
+.checkpoint-answer input {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 4px 0 0;
+  accent-color: #087f5b;
+}
+
+.checkpoint-form fieldset:disabled .checkpoint-answer {
+  cursor: default;
+}
+
+.checkpoint-feedback {
+  min-height: 1.4em;
+  margin: 14px 0;
+  color: #9a3412;
+  font-weight: 650;
+}
+
+.checkpoint-success {
+  color: #065f46;
+  font-weight: 750;
+}
+
+.checkpoint-shell .checkpoint-button {
+  display: inline-block;
+  border: 2px solid #065f46;
+  border-radius: 10px;
+  background: #087f5b;
+  color: #ffffff;
+  padding: 11px 20px;
+  font: inherit;
+  font-weight: 750;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.checkpoint-button:hover {
+  background: #065f46;
+}
+
+.checkpoint-gate {
+  max-width: 780px;
+  padding-top: 64px;
+}
+
+.checkpoint-gate label {
+  display: block;
+  margin: 24px 0 8px;
+  font-weight: 750;
+}
+
+.checkpoint-password {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  border: 2px solid #64748b;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #111827;
+  padding: 10px 14px;
+  font: inherit;
+}
+
+.checkpoint-result {
+  margin: 24px 0;
+  border: 2px solid #99f6e4;
+  border-radius: 16px;
+  background: #ffffff;
+  padding: 24px;
+}
+
+.checkpoint-code {
+  display: inline-block;
+  border: 2px dashed #087f5b;
+  border-radius: 10px;
+  padding: 12px 24px;
+  color: #065f46;
+  font: 800 36px/1.2 "SFMono-Regular", Consolas, monospace;
+  letter-spacing: 0.12em;
+  user-select: all;
+}
+
+@media (max-width: 650px) {
+  .checkpoint-shell {
+    padding: 18px;
+    font-size: 18px;
+  }
+
+  .checkpoint-answers {
+    grid-template-columns: 1fr;
+  }
+
+  .checkpoint-form legend {
+    font-size: 22px;
+  }
+}

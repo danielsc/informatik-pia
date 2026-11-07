@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-workshop-day="4">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../workshop-slides.css">
 </head>
 <body>
+  <noscript><p class="checkpoint-shell">Für den Test und die Passworteingabe muss JavaScript eingeschaltet sein.</p></noscript>
   <div class="reveal">
     <div class="slides">
       <section class="title-slide">
@@ -423,13 +424,24 @@ alert_once(zone)
         </aside>
       </section>
 
-      <section>
-        <p class="eyebrow">Abschlussfrage</p>
-        <h2>Warum ist ein Timeout nötig?</h2>
-        <div class="callout" style="margin: 1.1em 0;"><p>Erklärt, was das Programm ohne Echo tun soll und warum die Rückgabe von <code>None</code> besser ist als die Rückgabe von <code>0</code>.</p></div>
-        <div class="footer"><span>Tag 4 geschafft</span><span>Ausgaben stoppen · USB trennen · geprüfte Schichten beschriftet lassen</span></div>
+      <section class="checkpoint-slide">
+        <p class="eyebrow">Abschlussticket</p>
+        <h2>Holt euch das Passwort für Tag 5</h2>
+        <p class="activity">Im Browser bearbeiten · Jede Person beantwortet alle fünf Fragen</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Fünf Fragen zu den heutigen Themen</h3>
+            <p>Fehlende Messungen, Echo-Schutz, Dictionaries und Alarmzustände.</p>
+            <p style="margin-top: 0.7em;">Wählt pro Frage eine Antwort. Liegt ihr daneben, nutzt den Hinweis und versucht es erneut.</p>
+          </div>
+          <div class="card">
+            <h3><a href="../exit-ticket.html?day=4&amp;lang=de">Test mit fünf Fragen öffnen</a></h3>
+            <p>Fünf richtige Antworten zeigen euch das Passwort. Notiert es und gebt es ein, um Tag 5 zu öffnen.</p>
+          </div>
+        </div>
+        <div class="footer"><span>Tag 4 abgeschlossen</span><span>Ausgänge stoppen · USB trennen · geprüfte Schichten beschriftet lassen</span></div>
         <aside class="notes">
-          Eine gute Antwort: Der Timeout verhindert endloses Warten, lässt das Programm weiterlaufen und stellt eine fehlgeschlagene Messung mit None statt einer falschen Entfernung null dar.
+          Jede Person bearbeitet den Test selbst, nicht nur eine Person pro Team. Erlauben Sie neue Versuche und lassen Sie korrigierte Antworten erklären. Der Test prüft Verständnis, nicht auswendig gelernte Hardware-Einrichtung. Der Code schaltet die nächste Präsentation nicht automatisch frei; die Lernenden geben ihn selbst ein. Lehrkraft-Codes stehen im Leitfaden. Mit sicherem Abschalten und Zählen der Bauteile beenden.
         </aside>
       </section>
 
@@ -438,6 +450,7 @@ alert_once(zone)
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script src="../workshop-checkpoints.js"></script>
   <script src="../workshop-slides.js"></script>
 </body>
 </html>

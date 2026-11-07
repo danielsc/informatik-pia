@@ -10,6 +10,7 @@ off_time = 0.35
 print(message)
 
 print("Flash 1")
+# A short flash starts our signal
 led.on()
 sleep(on_time)
 led.off()

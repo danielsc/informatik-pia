@@ -221,7 +221,13 @@ Farbwechsel. Weder `range()` mit drei Argumenten noch `%` sind nötig.
 - Erklärt, warum eure Funktionen leichter zu testen sind als eine lange
   Schleife.
 
-## Abschlussfrage
+## Abschlussticket
+
+Öffnet den [Test mit fünf Fragen](../../slides/exit-ticket.html?day=3&lang=de).
+Wählt pro Frage eine Antwort und verbessert Fehler mithilfe der Hinweise.
+Notiert nach fünf richtigen Antworten das Passwort für die Präsentation von Tag 4.
+
+Besprecht anschließend:
 
 Was ist der Unterschied zwischen:
 

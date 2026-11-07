@@ -141,7 +141,20 @@ the words and delay, save, and click the green play button again.
 `Pin("LED", Pin.OUT)` creates an output object. Calling `led.on()` changes a
 voltage, which changes the real world.
 
-## 3. Variables are labelled storage
+## 3. Variables give values names
+
+A **variable** is a name for a value. Your program can use that name later,
+and you can give the same variable a new value.
+
+A small example assigns a value and then uses the variable:
+
+```python
+message = "Team Comet"
+print(message)
+```
+
+The Shell shows `Team Comet`, not the word `message`: `print(message)` uses
+the variable's value.
 
 Run [`code/day-1/02_variable_blink.py`](../../code/day-1/02_variable_blink.py).
 
@@ -153,12 +166,38 @@ on_time = 0.15
 off_time = 0.35
 ```
 
+In `on_time = 0.15`, `on_time` is the variable name and `0.15` is its value.
+The `=` assigns the value; it does not ask whether two things are equal.
+Each of the three flash blocks uses `sleep(on_time)` for its ON pause.
+Change the single assignment to `on_time = 1.5`: all three ON pauses now last
+1.5 seconds. Do not edit the three `sleep(on_time)` calls.
+The OFF pauses still last 0.35 seconds because `off_time` has not changed.
+The name stays the same; its value changes everywhere it is used.
+
 Which change affects text, and which changes affect timing? Why are the timing
 values floats rather than strings?
 
 The file repeats three similar blocks of code on purpose. Do not worry about
 shortening them yet. On Day 3, you will learn loops and functions that remove
 this kind of repetition.
+
+### Comments are notes for people
+
+A **comment** is a note in the code for people reading it. Start it with `#`;
+it continues to the end of that line. Python ignores the comment.
+
+Find this part of the `02_variable_blink.py` file you just ran:
+
+```python
+# A short flash starts our signal
+led.on()
+sleep(on_time)
+led.off()
+```
+
+The first line explains the flash's purpose; it does not print anything.
+The other three lines switch the LED on, wait, and switch it off.
+Would changing only the words after `#` change the LED pattern?
 
 ## 4. Build an external LED
 
@@ -262,6 +301,12 @@ Morse-code initials.
 - Can you explain the difference between the program and the output?
 
 ## Exit ticket
+
+Open the [five-question test](../../slides/exit-ticket.html?day=1&lang=en).
+Choose one answer per question and use the hints to correct mistakes.
+After five correct answers, write down the password for the Day 2 presentation.
+
+Discuss afterwards:
 
 Complete this sentence: “When Python runs `led.on()`, the output is ___, and
 when Python runs `print()`, the output is ___.”

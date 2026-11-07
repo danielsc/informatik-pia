@@ -137,7 +137,14 @@ Each pair has three minutes:
 5. Describe one bug and the evidence used to fix it.
 6. Name the next improvement.
 
-## Reflection
+## Exit ticket and reflection
+
+Open the [five-question test](../../slides/exit-ticket.html?day=5&lang=en).
+Choose one answer per question and use the hints to correct mistakes.
+After five correct answers, write down the workshop completion code and show
+your teacher. There is no further day to unlock.
+
+Discuss afterwards:
 
 - Which programming idea became clearer because you could see or hear it?
 - Which bug was in code, which was in wiring, and which was an assumption?

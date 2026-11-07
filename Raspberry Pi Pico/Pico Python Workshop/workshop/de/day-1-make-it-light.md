@@ -145,7 +145,20 @@ Wörter und die Wartezeit, speichert und klickt wieder auf den grünen Play-Butt
 `Pin("LED", Pin.OUT)` erzeugt ein Ausgangsobjekt. Der Aufruf `led.on()` ändert
 eine Spannung und damit die reale Welt.
 
-## 3. Variablen sind beschriftete Speicherplätze
+## 3. Variablen geben Werten Namen
+
+Eine **Variable** ist ein Name für einen Wert. Euer Programm kann diesen Namen
+später verwenden, und ihr könnt derselben Variable einen neuen Wert geben.
+
+Ein kurzes Beispiel weist einen Wert zu und verwendet dann die Variable:
+
+```python
+message = "Team Comet"
+print(message)
+```
+
+Die Shell zeigt `Team Comet`, nicht das Wort `message`: `print(message)` nutzt
+den Wert der Variable.
 
 Führt [`code/day-1/02_variable_blink.py`](../../code/day-1/02_variable_blink.py)
 aus.
@@ -158,12 +171,39 @@ on_time = 0.15
 off_time = 0.35
 ```
 
+In `on_time = 0.15` ist `on_time` der Variablenname und `0.15` sein Wert.
+Das `=` weist den Wert zu; es fragt nicht, ob zwei Dinge gleich sind.
+Jeder der drei Lichtsignal-Blöcke nutzt `sleep(on_time)` für seine EIN-Pause.
+Ändert die einzige Zuweisung zu `on_time = 1.5`: Alle drei EIN-Pausen dauern
+jetzt 1.5 Sekunden. Bearbeitet die drei Aufrufe von `sleep(on_time)` nicht.
+Die AUS-Pausen bleiben bei 0.35 Sekunden, weil `off_time` unverändert ist.
+Der Name bleibt gleich; sein Wert ändert sich an allen Verwendungsstellen.
+
 Welche Änderung beeinflusst den Text und welche beeinflussen das Timing? Warum
 sind die Zeitwerte Floats und keine Strings?
 
 Die Datei wiederholt absichtlich drei ähnliche Codeblöcke. Ihr müsst sie noch
 nicht kürzen. An Tag 3 lernt ihr Schleifen und Funktionen kennen, mit denen ihr
 solche Wiederholungen vermeidet.
+
+### Kommentare sind Notizen für Menschen
+
+Ein **Kommentar** ist eine Notiz im Code für die Menschen, die ihn lesen.
+Beginnt ihn mit `#`; er reicht bis zum Ende dieser Zeile.
+Python ignoriert den Kommentar.
+
+Findet diese Stelle in der gerade ausgeführten Datei `02_variable_blink.py`:
+
+```python
+# A short flash starts our signal
+led.on()
+sleep(on_time)
+led.off()
+```
+
+Die erste Zeile erklärt den Zweck des Lichtsignals; sie gibt keinen Text aus.
+Die drei anderen Zeilen schalten die LED ein, warten und schalten sie wieder aus.
+Würden andere Wörter nach `#` das Lichtmuster ändern?
 
 ## 4. Baut eine externe LED
 
@@ -272,6 +312,12 @@ Morsecode-Initialen.
 - Könnt ihr den Unterschied zwischen Programm und Ausgabe erklären?
 
 ## Abschlussticket
+
+Öffnet den [Test mit fünf Fragen](../../slides/exit-ticket.html?day=1&lang=de).
+Wählt pro Frage eine Antwort und verbessert Fehler mithilfe der Hinweise.
+Notiert nach fünf richtigen Antworten das Passwort für die Präsentation von Tag 2.
+
+Besprecht anschließend:
 
 Vervollständigt den Satz: „Wenn Python `led.on()` ausführt, ist die Ausgabe
 ___, und wenn Python `print()` ausführt, ist die Ausgabe ___.“

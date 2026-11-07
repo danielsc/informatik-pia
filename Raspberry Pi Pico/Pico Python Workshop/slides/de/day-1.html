@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-workshop-day="1">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -631,6 +631,7 @@
   </style>
 </head>
 <body>
+  <noscript><p class="checkpoint-shell">Für den Test und die Passworteingabe muss JavaScript eingeschaltet sein.</p></noscript>
   <div class="reveal">
     <div class="slides">
       <section class="title-slide">
@@ -1155,90 +1156,130 @@ led.on()
 
       <section>
         <p class="eyebrow">Variablen</p>
-        <h2>Ein nützlicher Name, der auf einen Wert verweist</h2>
-        <p class="activity watch">Besprechen · Findet vor dem Ausführen Namen und Werte</p>
+        <h2>Variablen: Namen für Werte</h2>
+        <p class="activity watch">Besprechen · Sagt die Ausgabe von <code>print(message)</code> voraus</p>
+        <div class="callout">
+          <p>Eine <strong>Variable</strong> ist ein Name für einen Wert. Euer Programm kann diesen Namen später verwenden. Ihr könnt derselben Variable einen neuen Wert geben.</p>
+        </div>
         <pre><code class="language-python" data-trim>
 message = "Team Comet"
-on_time = 0.15
-off_time = 0.35
+print(message)
         </code></pre>
         <div class="grid-2">
           <div class="card">
-            <h3>Links von <code>=</code></h3>
-            <p>Der Variablenname.</p>
+            <h3>Mit <code>=</code> einen Wert zuweisen</h3>
+            <p><code>message</code> ist der Variablenname. <code>"Team Comet"</code> ist der Wert, den wir ihr zuweisen.</p>
           </div>
           <div class="card">
-            <h3>Rechts von <code>=</code></h3>
-            <p>Der unter diesem Namen gespeicherte Wert.</p>
+            <h3>Die Variable verwenden</h3>
+            <p><code>print(message)</code> nutzt ihren Wert. Die Shell zeigt <code>Team Comet</code>, nicht das Wort <code>message</code>.</p>
           </div>
         </div>
-        <p class="big-question fragment">
-          Welche Variable ändert den Text? Welche Variablen ändern die Zeit?
-        </p>
         <aside class="notes">
-          Sagen Sie ausdrücklich: = bedeutet heute Zuweisung, nicht „ist gleich“ wie in
-          Mathematik. Der Vergleich == folgt an Tag 2. Teams bestimmen den Typ jedes Werts.
+          Den Begriff Variable einführen, bevor die Klasse Beispiele zuordnet.
+          Eine Variable gibt einem Wert einen Namen, damit das Programm ihn wieder
+          verwenden kann. message = "Team Comet" lesen als „Gib der Variable message
+          den Wert Team Comet“: Name links, Wert rechts. = weist einen Wert zu und stellt
+          keine Gleichheitsfrage. Der Vergleich == folgt an Tag 2.
+          Beide Zeilen nacheinander verfolgen. Die erste weist einen String zu;
+          die zweite verwendet die Variable. Python liest den Wert von message
+          und gibt Team Comet aus, nicht den Variablennamen.
+          Fragen, was passiert, wenn die erste Zeile stattdessen "Team Rocket" zuweist.
+          Erwartete Ausgabe: Team Rocket. Der Name bleibt gleich; sein Wert ändert sich.
+          Dieses kurze Beispiel braucht weder Hardwareeinrichtung noch Download.
+          Die nächste Folie überträgt die Idee auf einen Pausenwert in 02_variable_blink.py.
         </aside>
       </section>
 
       <section>
         <p class="eyebrow">Warum Namen wichtig sind</p>
-        <h2>Eine Änderung kann jede Verwendung beeinflussen</h2>
+        <h2>Ein Wert, drei Verwendungen</h2>
         <p class="activity">
           In Thonny ausprobieren · <a href="../../code/day-1/02_variable_blink.py" download="02_variable_blink.py"><code>02_variable_blink.py</code></a> herunterladen, öffnen, dann Run
         </p>
-        <div class="grid-2">
-          <pre><code class="language-python" data-trim>
+        <pre><code class="language-python" data-trim>
 on_time = 0.15
-
+off_time = 0.35
+        </code></pre>
+        <div class="grid-3">
+          <div class="card">
+            <h3>Erstes Lichtsignal</h3>
+            <pre><code class="language-python" data-trim>
 led.on()
 sleep(on_time)
 led.off()
-          </code></pre>
-          <div>
-            <div class="card">
-              <h3>Experiment</h3>
-              <p>Ändert <code>0.15</code> zu <code>1.5</code>.</p>
-            </div>
-            <div class="callout warning fragment" style="margin-top: 0.6em;">
-              <p><strong>Vorhersage:</strong> Was ändert sich, was bleibt gleich?</p>
-            </div>
+sleep(off_time)
+            </code></pre>
+          </div>
+          <div class="card">
+            <h3>Zweites Lichtsignal</h3>
+            <pre><code class="language-python" data-trim>
+led.on()
+sleep(on_time)
+led.off()
+sleep(off_time)
+            </code></pre>
+          </div>
+          <div class="card">
+            <h3>Drittes Lichtsignal</h3>
+            <pre><code class="language-python" data-trim>
+led.on()
+sleep(on_time)
+led.off()
+sleep(off_time)
+            </code></pre>
           </div>
         </div>
-        <p class="fragment">
-          <code>sleep(on_time)</code> nutzt den in <code>on_time</code> gespeicherten Wert.
-          Ändert ihn einmal und alle drei EIN-Pausen ändern sich.
-        </p>
+        <div class="callout warning" style="margin-top: 0.6em;">
+          <p>Ändert nur <code>on_time = 0.15</code> zu <code>on_time = 1.5</code>. <strong>Vorhersage:</strong> Welche Pausen ändern sich? Welche bleiben gleich?</p>
+        </div>
         <aside class="notes">
-          Zuerst wird die unveränderte Datei ausgeführt. Dann wird nur on_time von 0.15
-          auf 1.5 geändert, vorausgesagt und erneut ausgeführt. Fragen Sie, was sich
-          geändert hat und was nicht. 1.5 ist ein Float, kein String.
+          Zuerst die unveränderte Datei ausführen. Die drei Karten zeigen die
+          aufeinanderfolgenden Lichtsignal-Blöcke aus 02_variable_blink.py zum
+          Vergleich nebeneinander; die Datei gibt dazwischen auch Meldungen aus.
+          Karten von links nach rechts lesen: Die Lichtsignale laufen nicht gleichzeitig.
+          Alle drei Aufrufe von sleep(on_time) zur einzigen Zuweisung oben verfolgen.
+          Nur diese Zuweisung von 0.15 auf 1.5 ändern, vorhersagen und erneut ausführen.
+          Alle drei EIN-Pausen dauern dann 1.5 Sekunden; die drei AUS-Pausen bleiben
+          bei 0.35 Sekunden, weil off_time unverändert ist. sleep-Aufrufe nicht bearbeiten.
+          1.5 ist ein Float, kein String. Die Wiederholung ist beabsichtigt;
+          Schleifen werden an Tag 3 eingeführt.
         </aside>
       </section>
 
       <section>
         <p class="eyebrow">Kommentare</p>
-        <h2>Notizen für Menschen, von Python ignoriert</h2>
-        <p class="activity watch">Besprechen · Welcher Kommentar hilft Lesenden mehr?</p>
+        <h2>Ein Kommentar ist eine Notiz im Code</h2>
+        <p class="activity watch">Besprechen · Findet diese Stelle in <a href="../../code/day-1/02_variable_blink.py" download="02_variable_blink.py"><code>02_variable_blink.py</code></a></p>
+        <div class="callout">
+          <p>Beginnt einen Kommentar mit <code>#</code>. Er reicht bis zum Ende dieser Zeile. Python ignoriert den Kommentar.</p>
+        </div>
         <pre><code class="language-python" data-trim>
-# First group: three short flashes
+# A short flash starts our signal
 led.on()
-sleep(short_flash)
+sleep(on_time)
 led.off()
         </code></pre>
         <div class="grid-2">
           <div class="card">
-            <h3>Nützlicher Kommentar</h3>
-            <p>Erklärt die Absicht: Was bedeutet dieser Block?</p>
+            <h3>Eine Notiz für Menschen</h3>
+            <p>Die Zeile mit <code>#</code> erklärt den Zweck des Lichtsignals. Sie gibt keinen Text aus.</p>
           </div>
           <div class="card">
-            <h3>Nicht nützlich</h3>
-            <p><code># turn LED on</code> wiederholt nur <code>led.on()</code>.</p>
+            <h3>Anweisungen für Python</h3>
+            <p>Die drei anderen Zeilen schalten die LED ein, warten und schalten sie wieder aus.</p>
           </div>
         </div>
         <aside class="notes">
-          Die Kommentare sind aus TEALS-Lektion 1.04 übertragen. input() wird bewusst
-          verschoben, weil das physische Projekt von Tag 1 es nicht benötigt.
+          Die bereits geöffnete 02_variable_blink.py aus der vorigen Aktivität nutzen.
+          Kommentar direkt nach print("Flash 1") finden; der Ausschnitt entspricht
+          dieser Datei. Auf # zeigen: Es beginnt eine Notiz, die am Zeilenende endet.
+          Python ignoriert die Notiz und führt dann die drei LED-Anweisungen darunter aus.
+          Mit print("Flash 1") vergleichen: print zeigt Text in der Shell,
+          der Kommentar nicht. Fragen, ob nur andere Wörter nach # das Lichtmuster
+          ändern. Erwartete Antwort: nein. Ein hilfreicher Kommentar erklärt den
+          Zweck, hier die Rolle des Lichtsignals als Anfang der Nachricht.
+          Die Kommentare sind aus TEALS-Lektion 1.04 übertragen. input() bleibt verschoben.
         </aside>
       </section>
 
@@ -1341,7 +1382,7 @@ led.off()
         </div>
         <div class="callout success">
           <p>
-            Ändert im kopierten Programm nur
+            Ändert in einer Kopie von <a href="../../code/day-1/02_variable_blink.py" download="02_variable_blink.py"><code>02_variable_blink.py</code></a> nur
             <code>Pin("LED", Pin.OUT)</code> zu <code>Pin(15, Pin.OUT)</code>.
           </p>
         </div>
@@ -1351,6 +1392,7 @@ led.off()
           technische Strom fließt durch Widerstand und richtig ausgerichtete LED. AUS
           bringt GP15 nahe GND; der nötige Spannungsunterschied fehlt. Fragen Sie,
           warum der Widerstand nötig bleibt und was eine umgedrehte LED bewirkt.
+          Eine Kopie von 02_variable_blink.py verwenden; das Original für die eingebaute LED behalten.
         </aside>
       </section>
 
@@ -1391,9 +1433,9 @@ led.off()
 
       <section class="section-slide">
         <span class="section-number">04</span>
-        <p class="eyebrow">Teil 4 · Eure Challenge</p>
-        <h2>Geheime Signalmaschine</h2>
-        <p class="lede">Wendet jetzt das Gelernte an. Die Challenge gehört euch; die Einrichtung ist vorgegeben.</p>
+        <p class="eyebrow">Teil 4 · Euer Projekt</p>
+        <h2>Sendet eine geheime Nachricht</h2>
+        <p class="lede">In der Startdatei blinkt die LED bereits einmal kurz. Macht daraus eure eigene Nachricht aus kurzen und langen Lichtsignalen.</p>
         <aside class="notes">
           Wechseln Sie zur Anleitung und Starterdatei. Dieser praktische Teil entspricht
           dem Projekt aus TEALS Unit 1, angepasst an eine physische Ausgabe.
@@ -1449,24 +1491,24 @@ led.off()
         </aside>
       </section>
 
-      <section>
+      <section class="checkpoint-slide">
         <p class="eyebrow">Abschlussticket</p>
-        <h2>Vervollständigt die Erklärung</h2>
-        <div class="callout" style="margin: 1.2em 0;">
-          <p style="font-size: 1em;">
-            „Wenn Python <code>led.on()</code> ausführt, ist die Ausgabe ________,
-            und wenn Python <code>print()</code> ausführt, ist die Ausgabe ________.“
-          </p>
+        <h2>Holt euch das Passwort für Tag 2</h2>
+        <p class="activity">Im Browser bearbeiten · Jede Person beantwortet alle fünf Fragen</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Fünf Fragen zu den heutigen Themen</h3>
+            <p>Variablen, Kommentare, sichere LED-Schaltungen und Programme auf dem Pico.</p>
+            <p style="margin-top: 0.7em;">Wählt pro Frage eine Antwort. Liegt ihr daneben, nutzt den Hinweis und versucht es erneut.</p>
+          </div>
+          <div class="card">
+            <h3><a href="../exit-ticket.html?day=1&amp;lang=de">Test mit fünf Fragen öffnen</a></h3>
+            <p>Fünf richtige Antworten zeigen euch das Passwort. Notiert es und gebt es ein, um Tag 2 zu öffnen.</p>
+          </div>
         </div>
-        <p class="big-question fragment">Welcher Hinweis hat heute eure Vorstellung davon verändert, wie Code funktioniert?</p>
-        <div class="footer">
-          <span>Tag 1 abgeschlossen</span>
-          <span>Programm mit Stop beenden · USB trennen · Bauteile zurückgeben</span>
-        </div>
+        <div class="footer"><span>Tag 1 abgeschlossen</span><span>Programm stoppen · USB trennen · Bauteile zurückgeben</span></div>
         <aside class="notes">
-          Erwartete Unterscheidung: physisches Licht gegenüber Text in der Shell.
-          Sammeln Sie eine Antwort von jeder Person, nicht nur jedem Team. Zum Abschluss:
-          Stop drücken, LEDs ausschalten, USB trennen und Bauteile zählen.
+          Jede Person bearbeitet den Test selbst, nicht nur eine Person pro Team. Erlauben Sie neue Versuche und lassen Sie korrigierte Antworten erklären. Der Test prüft Verständnis, nicht auswendig gelernte Hardware-Einrichtung. Der Code schaltet die nächste Präsentation nicht automatisch frei; die Lernenden geben ihn selbst ein. Lehrkraft-Codes stehen im Leitfaden. Mit sicherem Abschalten und Zählen der Bauteile beenden.
         </aside>
       </section>
 
@@ -1494,6 +1536,7 @@ led.off()
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script src="../workshop-checkpoints.js"></script>
   <script src="../workshop-slides.js"></script>
 </body>
 </html>

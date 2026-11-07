@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-workshop-day="1">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -631,6 +631,7 @@
   </style>
 </head>
 <body>
+  <noscript><p class="checkpoint-shell">JavaScript is required for the quiz and password entry.</p></noscript>
   <div class="reveal">
     <div class="slides">
       <section class="title-slide">
@@ -1146,90 +1147,130 @@ led.on()
 
       <section>
         <p class="eyebrow">Variables</p>
-        <h2>A useful name that refers to a value</h2>
-        <p class="activity watch">Discuss · Identify names and values before running</p>
+        <h2>Variables: names for values</h2>
+        <p class="activity watch">Discuss · Predict what <code>print(message)</code> displays</p>
+        <div class="callout">
+          <p>A <strong>variable</strong> is a name for a value. Your program can use that name later. You can give the same variable a new value.</p>
+        </div>
         <pre><code class="language-python" data-trim>
 message = "Team Comet"
-on_time = 0.15
-off_time = 0.35
+print(message)
         </code></pre>
         <div class="grid-2">
           <div class="card">
-            <h3>Left of <code>=</code></h3>
-            <p>The variable name.</p>
+            <h3>Give it a value with <code>=</code></h3>
+            <p><code>message</code> is the variable name. <code>"Team Comet"</code> is the value we assign to it.</p>
           </div>
           <div class="card">
-            <h3>Right of <code>=</code></h3>
-            <p>The value stored under that name.</p>
+            <h3>Use the variable</h3>
+            <p><code>print(message)</code> uses its value. The Shell shows <code>Team Comet</code>, not the word <code>message</code>.</p>
           </div>
         </div>
-        <p class="big-question fragment">
-          Which variable changes text? Which variables change time?
-        </p>
         <aside class="notes">
-          State explicitly: = means assignment today, not “is equal to” as in maths.
-          Comparison == is taught on Day 2. Have pairs identify each value’s type.
+          Introduce the word variable before asking students to identify examples.
+          A variable gives a value a name so the program can use it again.
+          Read message = "Team Comet" as “give the variable message the value Team Comet”:
+          name on the left, value on the right. = assigns a value; it is not an
+          equality question. Comparison == comes on Day 2.
+          Trace the two lines in order. The first assigns a string; the second
+          uses the variable. Python looks up message and prints its value,
+          Team Comet, rather than printing the variable's name.
+          Ask what happens if the first line assigns "Team Rocket" instead.
+          Expected output: Team Rocket. The name stays the same; its value changes.
+          This small example needs no hardware setup or download. The next slide
+          applies the same idea to a pause value in 02_variable_blink.py.
         </aside>
       </section>
 
       <section>
         <p class="eyebrow">Why names matter</p>
-        <h2>One edit can change every use</h2>
+        <h2>One value, three uses</h2>
         <p class="activity">
           Try in Thonny · Download <a href="../../code/day-1/02_variable_blink.py" download="02_variable_blink.py"><code>02_variable_blink.py</code></a>, open it, then Run
         </p>
-        <div class="grid-2">
-          <pre><code class="language-python" data-trim>
+        <pre><code class="language-python" data-trim>
 on_time = 0.15
-
+off_time = 0.35
+        </code></pre>
+        <div class="grid-3">
+          <div class="card">
+            <h3>First flash</h3>
+            <pre><code class="language-python" data-trim>
 led.on()
 sleep(on_time)
 led.off()
-          </code></pre>
-          <div>
-            <div class="card">
-              <h3>Experiment</h3>
-              <p>Change <code>0.15</code> to <code>1.5</code>.</p>
-            </div>
-            <div class="callout warning fragment" style="margin-top: 0.6em;">
-              <p><strong>Predict:</strong> What changes? What stays unchanged?</p>
-            </div>
+sleep(off_time)
+            </code></pre>
+          </div>
+          <div class="card">
+            <h3>Second flash</h3>
+            <pre><code class="language-python" data-trim>
+led.on()
+sleep(on_time)
+led.off()
+sleep(off_time)
+            </code></pre>
+          </div>
+          <div class="card">
+            <h3>Third flash</h3>
+            <pre><code class="language-python" data-trim>
+led.on()
+sleep(on_time)
+led.off()
+sleep(off_time)
+            </code></pre>
           </div>
         </div>
-        <p class="fragment">
-          <code>sleep(on_time)</code> uses the value stored in <code>on_time</code>.
-          Change that value once, and all three ON pauses change.
-        </p>
+        <div class="callout warning" style="margin-top: 0.6em;">
+          <p>Change only <code>on_time = 0.15</code> to <code>on_time = 1.5</code>. <strong>Predict:</strong> Which pauses change? Which stay the same?</p>
+        </div>
         <aside class="notes">
-          Students run the unmodified file first. Then they change only on_time from
-          0.15 to 1.5, predict, and rerun. Ask what changed and what did not. Point
-          out that 1.5 is a float, not a string.
+          Students run the unmodified file first. The three cards are consecutive
+          flash blocks from 02_variable_blink.py, shown side by side to make reuse
+          visible; the file also prints messages between them.
+          Read the cards from left to right, not as simultaneous flashes.
+          Trace all three sleep(on_time) calls back to the single assignment above.
+          Students change only that assignment from 0.15 to 1.5, predict, and rerun.
+          All three ON pauses become 1.5 seconds; all three OFF pauses remain
+          0.35 seconds because off_time has not changed. Do not edit the sleep calls.
+          Point out that 1.5 is a float, not a string. Repetition is deliberate;
+          loops are introduced on Day 3.
         </aside>
       </section>
 
       <section>
         <p class="eyebrow">Comments</p>
-        <h2>Notes for humans, ignored by Python</h2>
-        <p class="activity watch">Discuss · Which comment helps a reader more?</p>
+        <h2>A comment is a note in your code</h2>
+        <p class="activity watch">Discuss · Find this in <a href="../../code/day-1/02_variable_blink.py" download="02_variable_blink.py"><code>02_variable_blink.py</code></a></p>
+        <div class="callout">
+          <p>Start a comment with <code>#</code>. It continues to the end of that line. Python ignores the comment.</p>
+        </div>
         <pre><code class="language-python" data-trim>
-# First group: three short flashes
+# A short flash starts our signal
 led.on()
-sleep(short_flash)
+sleep(on_time)
 led.off()
         </code></pre>
         <div class="grid-2">
           <div class="card">
-            <h3>Useful comment</h3>
-            <p>Explains the intention: what does this block mean?</p>
+            <h3>A note for people</h3>
+            <p>The line starting with <code>#</code> explains what the flash is for. It does not print anything.</p>
           </div>
           <div class="card">
-            <h3>Not useful</h3>
-            <p><code># turn LED on</code> merely repeats <code>led.on()</code>.</p>
+            <h3>Instructions for Python</h3>
+            <p>The other three lines switch the LED on, wait, and switch it off.</p>
           </div>
         </div>
         <aside class="notes">
-          Comments are adapted from TEALS lesson 1.04, but input() is deliberately
-          postponed because the Day 1 physical project does not require it.
+          Keep the already-open 02_variable_blink.py from the previous activity.
+          Find the comment just after print("Flash 1"); the excerpt matches that file.
+          Point to # and explain that it starts a note which ends at the end of the
+          line. Python ignores the note, then runs the three LED instructions below.
+          Contrast the comment with print("Flash 1"): print shows text in the Shell;
+          the comment does not. Ask whether changing only the words after # changes
+          the LED pattern. Expected answer: no. A useful comment explains purpose,
+          as this one explains the flash's role in the signal.
+          Comments are adapted from TEALS lesson 1.04. input() remains postponed.
         </aside>
       </section>
 
@@ -1331,7 +1372,7 @@ led.off()
         </div>
         <div class="callout success">
           <p>
-            In the copied program, change only
+            In a copy of <a href="../../code/day-1/02_variable_blink.py" download="02_variable_blink.py"><code>02_variable_blink.py</code></a>, change only
             <code>Pin("LED", Pin.OUT)</code> to <code>Pin(15, Pin.OUT)</code>.
           </p>
         </div>
@@ -1341,6 +1382,7 @@ led.off()
           flows through the resistor and correctly oriented LED. OFF brings GP15
           close to GND, so there is no useful voltage difference. Ask why the
           resistor is still necessary and what a reversed LED would do.
+          Use a copy of 02_variable_blink.py; keep the original for the onboard LED.
         </aside>
       </section>
 
@@ -1382,9 +1424,9 @@ led.off()
 
       <section class="section-slide">
         <span class="section-number">04</span>
-        <p class="eyebrow">Part 4 · Your challenge</p>
-        <h2>Secret Signal Machine</h2>
-        <p class="lede">Now apply the teaching. The challenge is yours; the setup is supplied.</p>
+        <p class="eyebrow">Part 4 · Your project</p>
+        <h2>Send a secret message</h2>
+        <p class="lede">The starter file already flashes the LED once. Turn that into your own message using short and long flashes.</p>
         <aside class="notes">
           Transition to the student lesson and starter file. This is the lab portion,
           analogous to the TEALS Unit 1 project but adapted to a physical output.
@@ -1440,24 +1482,24 @@ led.off()
         </aside>
       </section>
 
-      <section>
+      <section class="checkpoint-slide">
         <p class="eyebrow">Exit ticket</p>
-        <h2>Complete the explanation</h2>
-        <div class="callout" style="margin: 1.2em 0;">
-          <p style="font-size: 1em;">
-            “When Python runs <code>led.on()</code>, the output is ________,
-            and when Python runs <code>print()</code>, the output is ________.”
-          </p>
+        <h2>Earn your password for Day 2</h2>
+        <p class="activity">Try in the browser · Everyone answers all five questions</p>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Five questions about today's ideas</h3>
+            <p>Variables, comments, safe LED wiring, and running code on the Pico.</p>
+            <p style="margin-top: 0.7em;">Choose one answer per question. If you miss one, use the hint and try again.</p>
+          </div>
+          <div class="card">
+            <h3><a href="../exit-ticket.html?day=1&amp;lang=en">Open the five-question test</a></h3>
+            <p>Five correct answers reveal the password. Write it down and enter it to open Day 2.</p>
+          </div>
         </div>
-        <p class="big-question fragment">What evidence today changed how you think code works?</p>
-        <div class="footer">
-          <span>Day 1 complete</span>
-          <span>Stop program · unplug USB · return components</span>
-        </div>
+        <div class="footer"><span>Day 1 complete</span><span>Stop program · unplug USB · return components</span></div>
         <aside class="notes">
-          Expected distinction: physical light versus text in the Shell. Collect a
-          response from every student, not only each pair. End with shutdown: stop,
-          ensure LEDs are off, unplug USB, and inventory components.
+          Have every student complete the quiz, not just one person per pair. Allow retries and ask students to explain corrected answers. The test checks understanding, not memorised hardware setup. The code does not unlock the next presentation automatically; students must enter it. Teacher codes are in the teacher guide. Finish with safe shutdown and a component inventory.
         </aside>
       </section>
 
@@ -1485,6 +1527,7 @@ led.off()
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/highlight/highlight.js"></script>
+  <script src="../workshop-checkpoints.js"></script>
   <script src="../workshop-slides.js"></script>
 </body>
 </html>

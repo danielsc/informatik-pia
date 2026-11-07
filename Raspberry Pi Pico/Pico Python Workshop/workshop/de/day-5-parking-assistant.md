@@ -147,7 +147,14 @@ Jedes Paar hat drei Minuten:
 5. Beschreibt einen Fehler und den Nachweis, mit dem ihr ihn behoben habt.
 6. Nennt die nächste Verbesserung.
 
-## Reflexion
+## Abschlussticket und Reflexion
+
+Öffnet den [Test mit fünf Fragen](../../slides/exit-ticket.html?day=5&lang=de).
+Wählt pro Frage eine Antwort und verbessert Fehler mithilfe der Hinweise.
+Notiert nach fünf richtigen Antworten den Workshop-Abschlusscode und zeigt
+ihn eurer Lehrkraft. Es gibt keinen weiteren Tag zum Freischalten.
+
+Besprecht anschließend:
 
 - Welches Programmierkonzept wurde klarer, weil ihr es sehen oder hören
   konntet?

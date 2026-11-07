@@ -19,6 +19,12 @@ zwei 1 kΩ in Reihe). Nicht jedes gelieferte Kit enthält diese Teile.
 **Präsentationen für Lehrkräfte:** [öffnet die veröffentlichte
 Folien-Website][slides-site] — das Repository muss nicht geklont werden.
 
+**Die nächste Präsentation freischalten:** Tag 1 ist offen. Bearbeitet am Ende
+jedes Tages das Abschlussticket mit fünf Fragen, verbessert Fehler mithilfe der
+Hinweise und notiert das angezeigte Passwort. Gebt es ein, um die Präsentation
+des nächsten Tages zu öffnen. An Tag 5 gibt es stattdessen einen Abschlusscode.
+Arbeitsblätter, Downloads und Schaltbilder bleiben ohne Passwort zugänglich.
+
 **Programme aus den Folien herunterladen:** Dateinamen anklicken und nach
 **Downloads** herunterladen. In Thonny **links unter Dateien** den Downloads-Ordner
 des Computers öffnen und die `.py`-Datei doppelt anklicken. Den Interpreter der
@@ -110,7 +116,7 @@ Bis Freitag solltet ihr:
 
 | Ort | Zweck |
 |---|---|
-| [Veröffentlichte Folien][slides-site] | jeden Foliensatz direkt im Browser öffnen und präsentieren |
+| [Veröffentlichte Folien][slides-site] | Präsentationen im Browser; Tag 2–5 benötigen das Passwort aus dem vorigen Abschlussticket |
 | [Leitfaden für Lehrkräfte](TEACHER_GUIDE.md) | Vorbereitung, Zeitplanung, Bewertung, Differenzierung und Antworten |
 | [`slides/`](../../slides/de/) | Reveal.js-Foliensätze, Präsentationsnotizen, gemeinsame Stile und Gestaltungsprinzipien |
 | [`diagrams/`](../../diagrams/) | genaue HTML-/SVG-Schaltbilder und ihre PNG-Vorschauen |

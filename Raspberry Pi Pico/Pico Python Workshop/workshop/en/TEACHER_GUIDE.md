@@ -115,15 +115,36 @@ Use these prompts while circulating:
 - Is this a code problem, wiring problem, or measurement problem?
 - What is the smallest test that could distinguish those possibilities?
 
-Daily exit tickets:
+### Exit tickets and day passwords
 
-| Day | Prompt                                                                |
-| --- | --------------------------------------------------------------------- |
-| 1   | Draw arrows showing how one variable changes an LED pattern.          |
-| 2   | Write one Boolean expression that describes a fast reaction.          |
-| 3   | Explain the difference between a parameter and a return value.        |
-| 4   | Give one reason a distance reading may be invalid.                    |
-| 5   | Name one test your product passes and one improvement you would make. |
+Reserve about ten minutes for the five-question multiple-choice test linked
+from each day's final classroom slide. Each student answers all five
+questions. Mistakes produce hints and can be corrected; ask the student to
+explain the corrected idea before moving on. There is no timer or attempt
+limit. The code appears only after all five answers are correct.
+
+| Test | Concepts checked | Code awarded |
+|---|---|---|
+| Day 1 | variables, comments, LED protection, Pico interpreter | `COMET` opens Day 2 |
+| Day 2 | comparisons, button input, boundaries, lists, `while` | `BUTTON` opens Day 3 |
+| Day 3 | parameters, returns, RGB, indexes, nested loops | `PIXEL` opens Day 4 |
+| Day 4 | `None`, Echo divider, dictionaries, alarm states | `ECHO` opens Day 5 |
+| Day 5 | requirements, isolated tests, boundaries, invalid input, cleanup | `MAKER` is the completion code |
+
+Have students write down the code. Day 1 is open; presentations for Days 2–5
+require manual password entry, even through direct links. Completing a quiz
+does not automatically unlock another presentation. For teacher presentation,
+enter the appropriate code above. The same codes work in both languages;
+letter case and surrounding spaces are ignored. A successful entry is
+remembered per day for the current browser tab's session. A new browser session
+needs the code again; reloading a quiz restarts its questions.
+
+Only the presentations are gated. Labs, programs, and diagrams stay open.
+This is deliberately a lightweight learning checkpoint, not security or proof
+of individual attainment: static source contains the codes and answers, and
+students can share them. No accounts or results are collected. Use observation
+and students' explanations to check understanding. Keep oral reflection after
+the Day 5 test, then stop outputs, unplug USB, and inventory the kit.
 
 ## Daily project checkpoints
 

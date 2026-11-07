@@ -129,15 +129,41 @@ Stellen Sie beim Herumgehen diese Fragen:
 - Ist dies ein Code-, Verkabelungs- oder Messproblem?
 - Welcher kleinste Test könnte diese Möglichkeiten unterscheiden?
 
-Tägliche Exit-Tickets:
+### Abschlusstickets und Tagespasswörter
 
-| Tag | Frage |
-| --- | --- |
-| 1 | Zeichnet Pfeile, die zeigen, wie eine Variable ein LED-Muster verändert. |
-| 2 | Schreibt einen booleschen Ausdruck, der eine schnelle Reaktion beschreibt. |
-| 3 | Erklärt den Unterschied zwischen einem Parameter und einem Rückgabewert. |
-| 4 | Nennt einen Grund, weshalb eine Abstandsmessung ungültig sein kann. |
-| 5 | Nennt einen bestandenen Produkttest und eine Verbesserung, die ihr vornehmen würdet. |
+Planen Sie etwa zehn Minuten für den Multiple-Choice-Test mit fünf Fragen ein,
+den die letzte Unterrichtsfolie jedes Tages verlinkt. Jede Person beantwortet
+alle fünf Fragen. Nach Fehlern gibt es Hinweise und neue Versuche; lassen Sie
+die korrigierte Idee vor dem Weitergehen erklären. Es gibt weder Zeitlimit
+noch eine begrenzte Zahl von Versuchen. Der Code erscheint erst nach fünf
+richtigen Antworten.
+
+| Test | Geprüfte Konzepte | Ausgegebener Code |
+|---|---|---|
+| Tag 1 | Variablen, Kommentare, LED-Schutz, Pico-Interpreter | `COMET` öffnet Tag 2 |
+| Tag 2 | Vergleiche, Tastereingabe, Grenzwerte, Listen, `while` | `BUTTON` öffnet Tag 3 |
+| Tag 3 | Parameter, Rückgabewerte, RGB, Indizes, verschachtelte Schleifen | `PIXEL` öffnet Tag 4 |
+| Tag 4 | `None`, Echo-Spannungsteiler, Dictionaries, Alarmzustände | `ECHO` öffnet Tag 5 |
+| Tag 5 | Anforderungen, einzelne Tests, Grenzwerte, ungültige Eingaben, Aufräumen | `MAKER` ist der Abschlusscode |
+
+Die Lernenden notieren den Code. Tag 1 ist offen; die Präsentationen für
+Tag 2–5 verlangen auch bei direkten Links die manuelle Passworteingabe.
+Ein bestandener Test schaltet keine weitere Präsentation automatisch frei.
+Für die Lehrkraft-Präsentation geben Sie den passenden Code aus der Tabelle
+ein. In beiden Sprachen gelten dieselben Codes; Groß-/Kleinschreibung und
+Leerzeichen am Anfang und Ende spielen keine Rolle. Der Browser merkt sich
+eine richtige Eingabe pro Tag während der aktuellen Tab-Sitzung. Eine neue
+Browser-Sitzung fragt erneut; das Neuladen eines Tests beginnt seine Fragen
+von vorn.
+
+Nur die Präsentationen sind gesperrt. Arbeitsblätter, Programme und
+Schaltbilder bleiben offen. Dies ist bewusst eine einfache Lernhürde, kein
+Zugriffsschutz und kein individueller Leistungsnachweis: Im statischen
+Quelltext stehen Codes und Antworten, und die Lernenden können sie teilen.
+Es werden keine Konten angelegt und keine Ergebnisse gesammelt. Prüfen Sie
+Verständnis durch Beobachtung und Erklärungen. Behalten Sie nach dem Test von
+Tag 5 eine mündliche Reflexion bei; anschließend Ausgänge stoppen, USB trennen
+und Bauteile zählen.
 
 ## Kontrollpunkte der Tagesprojekte
 

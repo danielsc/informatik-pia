@@ -349,6 +349,12 @@ Diese zusätzliche Logik ist optional.
 
 ## Abschlussticket
 
+Öffnet den [Test mit fünf Fragen](../../slides/exit-ticket.html?day=2&lang=de).
+Wählt pro Frage eine Antwort und verbessert Fehler mithilfe der Hinweise.
+Notiert nach fünf richtigen Antworten das Passwort für die Präsentation von Tag 3.
+
+Besprecht anschließend:
+
 Schreibt eine Bedingung, die wahr ist, wenn `reaction_ms` mindestens 200 und
 kleiner als 500 ist. Beschreibt anschließend, welche Werte genau auf den beiden
 Grenzen liegen.

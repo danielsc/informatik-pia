@@ -325,5 +325,11 @@ wait ends; this extra logic is optional.
 
 ## Exit ticket
 
+Open the [five-question test](../../slides/exit-ticket.html?day=2&lang=en).
+Choose one answer per question and use the hints to correct mistakes.
+After five correct answers, write down the password for the Day 3 presentation.
+
+Discuss afterwards:
+
 Write a condition that is true when `reaction_ms` is at least 200 and below
 500. Then describe what values lie exactly on each boundary.

@@ -1,3 +1,5 @@
+@import url("./workshop-checkpoints.css");
+
 .days-overview-link {
   position: fixed;
   z-index: 100;

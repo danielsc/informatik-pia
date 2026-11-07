@@ -18,6 +18,12 @@ Not every supplied kit contains these.
 **Teacher presentations:** [open the hosted slide website][slides-site] — no
 repository clone is required.
 
+**Unlock the next presentation:** Day 1 is open. Finish the five-question exit
+ticket at the end of each day, correct mistakes using its hints, and write down
+the password it reveals. Enter that password to open the next day's
+presentation. Day 5 gives a completion code instead. Labs, downloads, and
+diagrams remain accessible without a password.
+
 **Download programs from the slides:** click a linked filename and save it to
 **Downloads**. In Thonny's **Files pane on the left**, open Downloads on your
 computer and double-click the `.py` file. Select the interpreter shown in the
@@ -103,7 +109,7 @@ By Friday, you should be able to:
 
 | Location | Purpose |
 |---|---|
-| [Hosted slides][slides-site] | open and present any daily deck directly in a browser |
+| [Hosted slides][slides-site] | presentations in a browser; Days 2–5 require the previous exit-ticket password |
 | [Teacher guide](TEACHER_GUIDE.md) | preparation, pacing, assessment, differentiation, and answers |
 | [`slides/`](../../slides/en/) | Reveal.js source decks, presenter notes, shared styles, and authoring principles |
 | [`diagrams/`](../../diagrams/) | exact HTML/SVG wiring diagrams and their PNG previews |

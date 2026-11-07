@@ -76,6 +76,49 @@ http://localhost:8000/Raspberry%20Pi%20Pico/Pico%20Python%20Workshop/en/
 Add `?print-pdf` to the URL and use the browser's print dialog to create a PDF
 handout.
 
+## Exit tickets and passwords · Abschlusstickets und Passwörter
+
+Each final classroom slide links to a five-question multiple-choice test.
+Students choose one answer per question, receive hints after mistakes, and can
+retry without a time limit. All five answers must be correct before the test
+reveals the next day's password. Day 5 reveals a completion code instead.
+Have each student answer and explain corrections, rather than one person
+clicking for the whole pair.
+
+Day 1 is open. Days 2–5 require the previous day's password, including when
+opened through a saved link, a slide hash, or a legacy redirect. Finishing the
+test does **not** enter the password automatically. A successful manual entry
+is remembered for that day in the current browser tab's session, in either
+language. Passwords ignore letter case and surrounding spaces. A new browser
+session needs the password again; quiz answers are not saved on reload.
+JavaScript must be enabled. Labs, Python downloads, and diagrams are not gated.
+
+This is a simple classroom learning checkpoint, **not access security**:
+passwords and answers are visible in the static source. Teacher presentation
+codes are documented in the [English teacher guide](../workshop/en/TEACHER_GUIDE.md#exit-tickets-and-day-passwords)
+and [German teacher guide](../workshop/de/TEACHER_GUIDE.md#abschlusstickets-und-tagespasswörter).
+The shared questions, hints, and codes live in `workshop-checkpoints.js`;
+`exit-ticket.html?day=1&lang=en` selects a day and language. Serve these pages
+over HTTP, as above.
+
+Jede letzte Unterrichtsfolie verlinkt einen Multiple-Choice-Test mit fünf
+Fragen. Pro Frage ist eine Antwort richtig. Nach Fehlern gibt es Hinweise und
+beliebig viele neue Versuche ohne Zeitlimit. Erst nach fünf richtigen Antworten
+erscheint das Passwort für den nächsten Tag, an Tag 5 stattdessen ein
+Abschlusscode. Jede Person antwortet selbst und erklärt Korrekturen.
+
+Tag 1 ist offen. Tag 2–5 fragen auch bei gespeicherten Links, direkten
+Folienlinks und alten Weiterleitungsadressen nach dem Passwort des Vortags.
+Der Test trägt das Passwort **nicht automatisch** ein. Nach richtiger Eingabe
+merkt sich der Browser die Freigabe für diesen Tag während der aktuellen
+Tab-Sitzung, auch sprachübergreifend. Groß-/Kleinschreibung und Leerzeichen am
+Anfang und Ende spielen keine Rolle. In einer neuen Browser-Sitzung wird
+erneut gefragt; Testantworten werden beim Neuladen nicht gespeichert.
+JavaScript muss eingeschaltet sein. Arbeitsblätter, Python-Downloads und
+Schaltbilder bleiben frei. Dies ist eine einfache Lernhürde, **kein
+Zugriffsschutz**; Antworten und Passwörter stehen im statischen Quelltext.
+Die Lehrkraft-Codes stehen in den oben verlinkten Leitfäden.
+
 ## Program downloads · Programme herunterladen
 
 Every program used in the decks has a direct filename download link at its

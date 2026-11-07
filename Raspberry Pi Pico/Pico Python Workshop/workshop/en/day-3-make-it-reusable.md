@@ -213,6 +213,12 @@ No three-argument `range()` or `%` operator is needed.
 
 ## Exit ticket
 
+Open the [five-question test](../../slides/exit-ticket.html?day=3&lang=en).
+Choose one answer per question and use the hints to correct mistakes.
+After five correct answers, write down the password for the Day 4 presentation.
+
+Discuss afterwards:
+
 What is the difference between:
 
 ```python
